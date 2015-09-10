@@ -19,7 +19,7 @@
             <nav class="">
                 <div class="nav-bar">
                     <div class="module left">
-                        <a href="index.html">
+                        <a href="/">
                             <img class="logo logo-light" alt="Foundry" src="img/logo-beoi-white.png">
                             <img class="logo logo-dark" alt="Foundry" src="img/logo-beoi.png">
                         </a>
@@ -83,7 +83,7 @@
                                     Concours d'initiation à l'informatique par la résolution de challenges simples et ludiques. Le concours se déroule dans les écoles, de la 5e primaire à la fin du secondaire.
                                 </p>
                                 <div class="text-center">
-                                    <a class="btn btn-lg mb0" href="#">En savoir plus</a>
+                                    <a class="btn btn-lg mb0" href="/bebras-fr.html">En savoir plus</a>
                                 </div>
                             </div>
                             <!--end of feature-->
@@ -148,7 +148,7 @@
                                         </div>
                                     
                                         <div class="col-sm-3 text-right">
-                                            <a class="btn btn-sm mt8" href="#">Plus d'info</a>
+                                            <a class="btn btn-sm mt8" href="/bebras-fr.html">Plus d'info</a>
                                         </div>
                                     </div>
                                     <hr class="fade-half mb0">
@@ -272,19 +272,19 @@
             if(typeof(Storage) !== "undefined") {
                 localStorage.setItem("lang", "fr");
             } 
-            document.location.href = "file:///Users/dle/Developer/be-oi.be-static/fr.html"
+            document.location.href = document.domain+"/fr.html"
         }); 
         $("#choose_nl").click(function() {
             if(typeof(Storage) !== "undefined") {
                 localStorage.setItem("lang", "nl");
             } 
-            document.location.href = "file:///Users/dle/Developer/be-oi.be-static/nl.html"
+            document.location.href = document.domain+"/nl.html"
         }); 
         if (localStorage.getItem("lang") == "fr") {
             $("#lang_modal").remove();
         }
         else if (localStorage.getItem("lang") == "nl") {
-            window.location.replace("file:///Users/dle/Developer/be-oi.be-static/nl.html");
+            window.location.replace(document.domain+"/nl.html");
             $("#lang_modal").remove();
         }
         </script>
