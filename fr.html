@@ -272,19 +272,19 @@
             if(typeof(Storage) !== "undefined") {
                 localStorage.setItem("lang", "fr");
             } 
-            document.location.href = document.domain+"/fr.html"
+            document.location.href = "/fr.html"
         }); 
         $("#choose_nl").click(function() {
             if(typeof(Storage) !== "undefined") {
                 localStorage.setItem("lang", "nl");
             } 
-            document.location.href = document.domain+"/nl.html"
+            document.location.href = "/nl.html"
         }); 
         if (localStorage.getItem("lang") == "fr") {
             $("#lang_modal").remove();
         }
         else if (localStorage.getItem("lang") == "nl") {
-            window.location.replace(document.domain+"/nl.html");
+            window.location.replace("/nl.html");
             $("#lang_modal").remove();
         }
         </script>
