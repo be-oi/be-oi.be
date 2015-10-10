@@ -1,0 +1,45 @@
+---
+fr:
+  main_slogan_part1: Concours belges de logique et de programmation
+  main_slogan_part2: pour élèves du primaire et du secondaire
+  bebras_desc: >
+    Concours d'initiation à l'informatique par la résolution de challenges simples et ludiques.
+    Le concours se déroule dans les écoles, de la 5e primaire à la fin du secondaire.
+  beoi_desc: >
+    Concours de raisonnement informatique et d'initiation à la programmation. Destiné au 
+    secondaire, il ouvre à chacun une porte vers les concours de programmation plus avancés. 
+  becp_desc: >
+    Concours d'algorithmique permettant de sélectionner la délégation belge pour la prochaine
+    Olympiade Internationale d'Informatique.
+
+  more_info: Plus d'info
+  official_website: Site Web
+
+  Calendar: Calendrier
+
+  calendar_abstract: Dates des épreuves des concours. Les dates des stages seront annoncées sur chacun des sites de concours.
+  calendar_bebras1_title: "Bebras : Concours principal"
+  calendar_bebras1_desc: Concours organisé par l'enseignant dans son école lors d'une heure de cours pendant la semaine Bebras.
+  calendar_beoi1_title: "beOI : éliminatoires"
+  calendar_beoi1_desc: Épreuve de sélection organisée dans les onze centres régionaux et composée de trois niveaux.
+  calendar_bebras2_title: "Bebras : The masters"
+  calendar_bebras2_desc: Compétition pour le titre de maître de sa catégorie.
+  calendar_beoi2_title: "beOI : Finale"
+  calendar_beoi2_desc: Epreuve finale centralisée de programmation sur papier.
+  calendar_becp_title: "beCP : Sélection pour l'IOI"
+  calendar_becp_desc: Concours de sélection de la délégation belge à l'IOI.
+  calendar_ioi_title: Olympiade Internationale d'Informatique (IOI)
+  calendar_ioi_desc: Kazan, Russie.
+
+  Jan: jan
+  Feb: fév
+  Mar: mars
+  Apr: avr
+  May: mai
+  Jun: juin
+  Jul: juil
+  Aug: aoû
+  Sep: sep
+  Oct: oct
+  Nov: nov
+  Dec: dec

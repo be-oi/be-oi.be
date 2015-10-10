@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title><%= current_page.data.title || "beOI" %></title>
+    <%= favicon_tag 'img/favicon.png' %>
+    <meta name="viewport" content="width=device-width, initial-scale=0.9">
+    <%= stylesheet_link_tag "bootstrap.min", "themify-icons", "flexslider", "lightbox.min", "theme", "custom" %>
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400%7CRaleway:100,400,300,500,600,700%7COpen+Sans:400,500,600' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Comfortaa:700' rel='stylesheet' type='text/css'>
+  </head>
+  <body>
+    <div class="nav-container">
+      <a id="top"></a>
+      <nav class="">
+        <div class="nav-bar">
+          <div class="module left">
+            <a href="/">
+              <img class="logo logo-light" alt="beOI" src="/img/logo-beoi-white.png">
+              <img class="logo logo-dark" alt="beOI" src="/img/logo-beoi.png">
+            </a>
+          </div>
+          <div class="module widget-handle mobile-toggle right visible-sm visible-xs">
+            <i class="ti-menu"></i>
+          </div>
+          <div class="module-group right">
+            <div class="module left">
+              <ul class="menu">
+                <li >
+                  <a href="#">
+                    Home
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <!--end of menu module-->
+            <div class="module widget-handle language left">
+              <ul class="menu">
+                <li class="has-dropdown">
+                  <a href="#"><%= I18n.locale %></a>
+                  <ul>
+                    <li>
+                      <a href="/fr.html" id="to_fr">Français</a>
+                      <a href="/nl.html" id="to_nl">Nederlands</a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!--end of module group-->
+        </div>
+      </nav>
+    </div>
+
+    <div class="main-container">
+      <%= yield %>
+    </div>
+    <%= javascript_include_tag "jquery.min", "bootstrap.min", "flexslider.min", "smooth-scroll.min", "parallax", "scripts" %>
+    </script>
+  </body>
+</html>
