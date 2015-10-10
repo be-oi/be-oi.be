@@ -90,5 +90,16 @@ activate :s3_sync do |s3_sync|
   s3_sync.after_build                = false # do not chain after the build step
 end
 
-default_caching_policy max_age:30
-caching_policy 'text/html', max_age: 5, must_revalidate: true
+caching_policy 'text/html; charset=utf-8',                            max_age: 0,        must_revalidate: true
+caching_policy 'text/html',                                           max_age: 0,        must_revalidate: true
+caching_policy 'image/png',                                           max_age: 31536000, public: true
+caching_policy 'image/jpeg',                                          max_age: 31536000, public: true
+caching_policy 'image/gif',                                           max_age: 31536000, public: true
+caching_policy 'image/svg+xml',                                       max_age: 31536000, public: true
+caching_policy 'text/css',                                            max_age: 31536000, public: true
+caching_policy 'application/javascript',                              max_age: 31536000, public: true
+caching_policy 'application/vnd.ms-fontobject',                       max_age: 31536000, public: true
+caching_policy 'application/font-woff',                               max_age: 31536000, public: true
+caching_policy 'application/font-woff2',                              max_age: 31536000, public: true
+caching_policy 'application/vnd.oasis.opendocument.formula-template', max_age: 31536000, public: true
+default_caching_policy                                                max_age: 60
