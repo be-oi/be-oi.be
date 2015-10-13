@@ -21,7 +21,8 @@
           </div>
           <p><%= t(:bebras_desc) %></p>
           <div class="text-center">
-            <a class="btn mb0" href="/bebras-fr.html"><%= t(:more_info) %></a>
+            <%= link_to t(:more_info), 'bebras.html', :class => "btn mb0" %>
+            <!-- <a class="btn mb0" href="/bebras-fr.html"><%= t(:more_info) %></a> -->
           </div>
         </div>
         <!--end of feature-->
@@ -79,7 +80,12 @@
               </div>
             
               <div class="col-sm-3 text-right">
-                <a class="btn btn-sm mt8" href="/bebras-fr.html"><%= t(:more_info) %></a>
+              	<%= link_to t(:more_info), 'bebras.html', :class => "btn btn-sm mt8" %>
+              	<!--
+                <% content_tag :a, :class => "btn btn-sm mt8", :href => "bebras.html" do %> 
+                <%= t(:more_info) %>
+                <% end %> 
+                -->
               </div>
             </div>
             <hr class="fade-half mb0">
