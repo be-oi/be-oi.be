@@ -25,7 +25,7 @@ fr:
   calendar_bebras1_title: "Bebras : Concours principal"
   calendar_bebras1_desc: Concours organisé par l'enseignant dans son école lors d'une heure de cours pendant la semaine Bebras.
   calendar_beoi1_title: "beOI : éliminatoires"
-  calendar_beoi1_desc: Épreuve de sélection organisée dans les onze centres régionaux et composée de trois niveaux.
+  calendar_beoi1_desc: Épreuve de sélection, composée de trois niveaux, organisée dans les écoles et onze centres régionaux.
   calendar_bebras2_title: "Bebras : The masters"
   calendar_bebras2_desc: Compétition pour le titre de maître de sa catégorie pour les participants francophones.
   calendar_beoi2_title: "beOI : Finale"
@@ -33,7 +33,7 @@ fr:
   calendar_becp_title: "beCP : Sélection pour l'IOI"
   calendar_becp_desc: Concours de sélection de la délégation belge à l'IOI. Bruxelles.
   calendar_ioi_title: Olympiade Internationale d'Informatique (IOI)
-  calendar_ioi_desc: Kazan, Russie.
+  calendar_ioi_desc: Téhéran, Iran.
 
   Jan: jan
   Feb: fév
