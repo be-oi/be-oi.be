@@ -8,7 +8,6 @@ interface Props {
   id: string;
   image: string;
   imageAlt: string;
-  level: string;
   title: string;
   tagline: string;
   description: string;
@@ -21,7 +20,6 @@ const {
   id,
   image,
   imageAlt,
-  level,
   title,
   tagline,
   description,
@@ -29,13 +27,6 @@ const {
   accent = 'primary',
   reverse = false,
 } = Astro.props;
-
-const levelClasses = {
-  primary: 'bg-primary-container/30 text-on-primary-container',
-  secondary: 'bg-secondary-container/30 text-on-secondary-container',
-  tertiary: 'bg-tertiary-container/30 text-on-tertiary-container',
-  error: 'bg-error-container/30 text-on-error-container',
-} as const;
 
 const taglineClasses = {
   primary: 'text-primary',
@@ -65,11 +56,6 @@ const taglineClasses = {
     </div>
 
     <div class="w-full lg:w-3/5">
-      <div class="mb-sm">
-        <span class:list={['font-label text-label-md px-3 py-1 rounded-full', levelClasses[accent]]}>
-          {level}
-        </span>
-      </div>
       <h2 class="font-headline text-headline-lg text-on-surface mb-xs">{title}</h2>
       <p class:list={['font-bold mb-md', taglineClasses[accent]]}>{tagline}</p>
       <p class="text-body-lg font-body text-on-surface-variant mb-md max-w-2xl">
@@ -77,9 +63,9 @@ const taglineClasses = {
       </p>
       <div class="flex flex-wrap gap-sm">
         {tags.map((tag) => (
-          <span class="inline-flex items-center gap-xs px-3 py-1.5 rounded-full border border-outline-variant bg-surface-container-lowest text-on-surface-variant">
-            <span class="font-label text-label-md text-primary uppercase tracking-wide">{tag.label}</span>
-            <span class="text-body-md font-body text-on-surface">{tag.value}</span>
+          <span class="inline-flex items-baseline gap-xs px-3 py-1.5 rounded-full border border-outline-variant bg-surface-container-lowest text-on-surface-variant">
+            <span class="font-label text-label-md leading-none text-primary uppercase tracking-wide">{tag.label}</span>
+            <span class="font-body text-sm leading-none text-on-surface">{tag.value}</span>
           </span>
         ))}
       </div>

@@ -9,20 +9,19 @@ const steps = [
     id: 'step-initial',
     image: '/img/steps/step0-initial.png',
     imageAlt: 'Pixel-art adventurer at a campsite with a cat, backpack, and wooden sword',
-    level: 'Level 0',
-    title: 'Initial / Logic round',
-    shortTitle: 'Logic Challenges',
-    teaser: ['Logic puzzles', 'No coding'],
+    title: 'First contact',
+    shortTitle: 'First contact',
+    teaser: ['Logic puzzles', 'No coding yet'],
     canvasTop: '15.625%',
     canvasWidth: '100%',
-    tagline: 'Just for fun',
+    tagline: 'No coding yet — just logic',
     description:
-      'A light-hearted introduction to logical reasoning. No programming required — just brain power! Perfect for younger students and anyone curious about problem-solving.',
+      'This is the former qualification round (before 2027). A light-hearted first touch with computational thinking through logic puzzles. No programming required yet — just brain power! Perfect for younger students and anyone curious about problem-solving.',
     tags: [
-      { label: 'Duration', value: '~45 min' },
-      { label: 'Timing', value: 'Oct – Nov' },
-      { label: 'Format', value: 'Online / school' },
-      { label: 'Code', value: 'Not required' },
+      { label: 'Duration', value: '45 min' },
+      { label: 'Timing', value: 'end-Nov' },
+      { label: 'Format', value: 'School / Home' },
+      { label: 'Code', value: 'None' },
     ],
     accent: 'primary' as const,
   },
@@ -30,20 +29,19 @@ const steps = [
     id: 'step-qualif',
     image: '/img/steps/step1-qualif.png',
     imageAlt: 'Pixel-art adventurer progressing along a grassy path with signposts',
-    level: 'Level 1',
     title: 'Qualification Rounds',
     shortTitle: 'Qualification Rounds',
     teaser: ['Basic programming.', 'Short online rounds.'],
     canvasTop: '15.625%',
     canvasWidth: '100%',
-    tagline: 'Find the problem-solvers',
+    tagline: 'Three rounds, one pass — learn as you go',
     description:
-      'Short online contests that identify strong problem-solvers across Belgium. Multiple rounds give everyone a fair chance to qualify for the next stages.',
+      'Three independent online rounds you can take whenever you want. Each one simply checks basic concepts for your age group — knowledge you will need in the next stages. Passing a single round is enough to qualify. Use every round as a chance to learn.',
     tags: [
       { label: 'Duration', value: '40 min each' },
-      { label: 'Timing', value: 'Dec – Feb' },
-      { label: 'Format', value: 'Online' },
-      { label: 'Rounds', value: 'Several' },
+      { label: 'Timing', value: 'Dec, Jan, Feb' },
+      { label: 'Format', value: 'School / Home' },
+      { label: 'Code', value: 'Blockly, Scratch, Python' },
     ],
     accent: 'secondary' as const,
   },
@@ -51,20 +49,19 @@ const steps = [
     id: 'step-quarter',
     image: '/img/steps/step2-quarter.png',
     imageAlt: 'Pixel-art adventurer with pith helmet exploring a rocky clearing',
-    level: 'Level 2',
     title: 'Quarter-final',
     shortTitle: 'Quarter-final',
     teaser: ['First coding stage.'],
     canvasTop: '11.875%',
     canvasWidth: '100%',
-    tagline: 'Skills check',
+    tagline: 'Where coding starts to matter',
     description:
-      'A longer contest focused on fundamental programming skills and algorithmic thinking. This is where coding really starts to matter.',
+      'First actual contest on basic programming challenges. This is where coding really starts to matter.',
     tags: [
-      { label: 'Duration', value: '~2 hours' },
+      { label: 'Duration', value: '2 hours' },
       { label: 'Timing', value: 'March' },
-      { label: 'Format', value: 'Online' },
-      { label: 'Focus', value: 'Fundamentals' },
+      { label: 'Format', value: 'School / Regional centers' },
+      { label: 'Code', value: 'Blockly, Scratch, Python, Java, C++' },
     ],
     accent: 'secondary' as const,
   },
@@ -72,15 +69,14 @@ const steps = [
     id: 'step-semi',
     image: '/img/steps/step3-semi.png',
     imageAlt: 'Pixel-art armored knight with sword on a rocky island',
-    level: 'Level 3',
     title: 'Semi-final',
     shortTitle: 'Semi-final',
     teaser: ['On-site contest.'],
     canvasTop: '4%',
     canvasWidth: '100%',
-    tagline: 'Regional centers',
+    tagline: 'Be among the best in your age group',
     description:
-      'An in-person contest at regional centers across Belgium. Advanced problems test data structures, algorithms, and careful implementation under time pressure.',
+      'An in-person contest in a trusted school or at regional centers across Belgium. Advanced problems test data structures, algorithms, and careful implementation under time pressure. Just be among the best in your age group.',
     tags: [
       { label: 'Duration', value: '~3 hours' },
       { label: 'Timing', value: 'April' },
@@ -93,15 +89,14 @@ const steps = [
     id: 'step-final',
     image: '/img/steps/step4-final.png',
     imageAlt: 'Pixel-art knight with glowing sword on a volcanic lava island',
-    level: 'Level 4',
     title: 'Final',
     shortTitle: 'Final',
     teaser: ['National contest.', 'Hardest problems.'],
     canvasTop: '22%',
     canvasWidth: '100%',
-    tagline: 'The culmination',
+    tagline: 'Compete for the national title',
     description:
-      'The ultimate national contest with mid-level to very hard problems. The best young informaticians in Belgium compete for the national titles.',
+      'The ultimate national contest with mid-level to very hard problems. Compete with the best Belgian competitors for the national title in your age group.',
     tags: [
       { label: 'Duration', value: '~4–5 hours' },
       { label: 'Timing', value: 'May' },
@@ -114,20 +109,19 @@ const steps = [
     id: 'step-intern',
     image: '/img/steps/step5-intern.png',
     imageAlt: 'Pixel-art rocket launching from Earth toward international contests',
-    level: 'Ultimate',
     title: 'International selection',
     shortTitle: 'International Contests',
     teaser: ['Represent Belgium in the world'],
     canvasTop: '25%',
     canvasWidth: '80%',
-    tagline: 'World stage',
+    tagline: 'Represent Belgium on the world stage',
     description:
-      'Top contestants are invited to training camps and selected to represent Belgium at international olympiads such as IOI and EGOI.',
+      'Top contestants, based on several contests and training over several years, may be selected to represent Belgium at international olympiads such as WEOI, EJOI, EGOI, and IOI.',
     tags: [
       { label: 'Duration', value: 'Training camps' },
       { label: 'Timing', value: 'Summer' },
       { label: 'Format', value: 'Selection + camps' },
-      { label: 'Goal', value: 'IOI / EGOI' },
+      { label: 'Goal', value: 'WEOI → IOI' },
     ],
     accent: 'error' as const,
   },
@@ -156,7 +150,7 @@ const steps = [
     </section>
 
     <!-- Horizontal timeline -->
-    <section aria-label="Contest journey timeline" class="relative mb-xl">
+    <section aria-label="Contest journey timeline" class="relative mb-xl max-w-[900px] mx-auto w-full">
       <!--
         Explicit equal 1fr columns for every step; fixed tracks for the gaps
         (after start, after qualif, after final). Subgrid keeps label tops aligned.
@@ -211,7 +205,6 @@ const steps = [
           id={step.id}
           image={step.image}
           imageAlt={step.imageAlt}
-          level={step.level}
           title={step.title}
           tagline={step.tagline}
           description={step.description}
