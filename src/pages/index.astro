@@ -1,0 +1,35 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="beOI – Belgian Olympiad in Informatics">
+  <script is:inline>
+    function browser_langs() {
+      if (window.navigator.languages != undefined) return window.navigator.languages;
+      if (window.navigator.language != undefined) return [window.navigator.language];
+      if (window.navigator.browserLanguage != undefined) return [window.navigator.browserLanguage];
+      return [];
+    }
+    function fr_or_nl() {
+      var languages = browser_langs();
+      for (var i = 0; i < languages.length; i++) {
+        if (languages[i].substr(0, 2) == "fr") return "fr";
+        if (languages[i].substr(0, 2) == "nl") return "nl";
+      }
+      return undefined;
+    }
+    switch (fr_or_nl()) {
+      case "fr": document.location.href = "/fr/"; break;
+      case "nl": document.location.href = "/nl/"; break;
+    }
+  </script>
+
+  <main>
+    <h1>beOI</h1>
+    <p>Belgian Olympiad in Informatics / Olympiade belge d'informatique / Belgische olympiade in de informatica</p>
+    <p>
+      <a href="/fr/">Continuer en français</a>
+      &nbsp;|&nbsp;
+      <a href="/nl/">Ga verder in het Nederlands</a>
+    </p>
+  </main>
+</BaseLayout>
