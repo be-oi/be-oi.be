@@ -1,8 +1,5 @@
 ---
-interface Tag {
-  label: string;
-  value: string;
-}
+import type { StepAccent, StepTag } from '../data/contest-steps';
 
 interface Props {
   id: string;
@@ -11,8 +8,9 @@ interface Props {
   title: string;
   tagline: string;
   description: string;
-  tags: Tag[];
-  accent?: 'primary' | 'secondary' | 'tertiary' | 'error';
+  tags: StepTag[];
+  detailsHtml?: string;
+  accent?: StepAccent;
   reverse?: boolean;
 }
 
@@ -24,6 +22,7 @@ const {
   tagline,
   description,
   tags,
+  detailsHtml = '',
   accent = 'primary',
   reverse = false,
 } = Astro.props;
@@ -49,8 +48,11 @@ const tagIcons: Record<string, string> = {
 function iconFor(label: string) {
   return tagIcons[label] ?? 'label';
 }
+
+const toggleId = `details-${id}`;
+const hasDetails = detailsHtml.trim().length > 0;
 ---
-<section id={id} class="scroll-mt-28 py-lg border-t-2 border-outline-variant/40">
+<section id={id} class="group/step scroll-mt-28 py-lg border-t-2 border-outline-variant/40">
   <div
     class:list={[
       'flex flex-col lg:flex-row items-center gap-lg',
@@ -76,7 +78,7 @@ function iconFor(label: string) {
       <p class="text-body-lg font-body text-on-surface-variant mb-md max-w-2xl">
         {description}
       </p>
-      <div class="flex flex-wrap gap-sm">
+      <div class="flex flex-wrap gap-sm mb-md">
         {tags.map((tag) => (
           <span
             class="inline-flex items-center gap-xs px-3 py-1.5 rounded-full border border-outline-variant bg-surface-container-lowest text-on-surface-variant"
@@ -93,6 +95,56 @@ function iconFor(label: string) {
           </span>
         ))}
       </div>
+
+      {hasDetails && (
+        <label
+          for={toggleId}
+          class="inline-flex items-center gap-xs cursor-pointer font-label text-label-md text-primary border-2 border-primary/30 bg-primary/5 hover:bg-primary/10 px-4 py-2 rounded-full transition-colors select-none"
+        >
+          <input id={toggleId} type="checkbox" class="peer sr-only" />
+          <span class="inline-flex items-center gap-xs peer-checked:hidden">
+            Show more details
+            <span class="material-symbols-outlined text-[1.125rem] leading-none" aria-hidden="true">
+              expand_more
+            </span>
+          </span>
+          <span class="hidden items-center gap-xs peer-checked:inline-flex">
+            Hide details
+            <span class="material-symbols-outlined text-[1.125rem] leading-none" aria-hidden="true">
+              expand_less
+            </span>
+          </span>
+        </label>
+      )}
     </div>
   </div>
+
+  {hasDetails && (
+    <div class="step-details-html hidden group-has-[input:checked]/step:block w-full mt-lg pt-md border-t border-outline-variant/50">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-md lg:gap-lg" set:html={detailsHtml} />
+    </div>
+  )}
 </section>
+
+<style>
+  .step-details-html :global(section) {
+    margin: 0;
+  }
+
+  .step-details-html :global(h3) {
+    font-family: var(--font-headline);
+    font-size: var(--text-headline-md);
+    line-height: var(--text-headline-md--line-height);
+    font-weight: 700;
+    color: var(--color-on-surface);
+    margin: 0 0 0.25rem;
+  }
+
+  .step-details-html :global(p) {
+    font-family: var(--font-body);
+    font-size: var(--text-body-md);
+    line-height: 1.6;
+    color: var(--color-on-surface-variant);
+    margin: 0;
+  }
+</style>
