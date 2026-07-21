@@ -147,4 +147,18 @@ const hasDetails = detailsHtml.trim().length > 0;
     color: var(--color-on-surface-variant);
     margin: 0;
   }
+
+  .step-details-html :global(p + p) {
+    margin-top: 0.5rem;
+  }
+
+  .step-details-html :global(a) {
+    color: var(--color-primary);
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+  }
+
+  .step-details-html :global(a:hover) {
+    text-decoration-thickness: 2px;
+  }
 </style>

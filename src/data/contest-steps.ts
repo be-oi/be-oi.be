@@ -1,9 +1,14 @@
+import commonAudienceDetails from './contest-step-details/common-audience.html?raw';
 import stepInitialDetails from './contest-step-details/step-initial.html?raw';
 import stepQualifDetails from './contest-step-details/step-qualif.html?raw';
 import stepQuarterDetails from './contest-step-details/step-quarter.html?raw';
 import stepSemiDetails from './contest-step-details/step-semi.html?raw';
 import stepFinalDetails from './contest-step-details/step-final.html?raw';
 import stepInternDetails from './contest-step-details/step-intern.html?raw';
+
+function withAudience(detailsHtml: string) {
+  return `${commonAudienceDetails}\n${detailsHtml}`;
+}
 
 export type StepAccent = 'primary' | 'secondary' | 'tertiary' | 'error';
 
@@ -49,7 +54,7 @@ export const contestSteps: ContestStep[] = [
       { label: 'Location', value: 'School / Home' },
       { label: 'Code', value: 'None' },
     ],
-    detailsHtml: stepInitialDetails,
+    detailsHtml: withAudience(stepInitialDetails),
     accent: 'primary',
   },
   {
@@ -68,9 +73,9 @@ export const contestSteps: ContestStep[] = [
       { label: 'Duration', value: '40 min each' },
       { label: 'Timing', value: 'Dec, Jan, Feb' },
       { label: 'Location', value: 'School / Home' },
-      { label: 'Code', value: 'Blockly, Scratch, Python' },
+      { label: 'Code', value: 'Blockly, Python' },
     ],
-    detailsHtml: stepQualifDetails,
+    detailsHtml: withAudience(stepQualifDetails),
     accent: 'secondary',
   },
   {
@@ -89,7 +94,7 @@ export const contestSteps: ContestStep[] = [
       { label: 'Duration', value: '2 hours' },
       { label: 'Timing', value: 'March' },
       { label: 'Location', value: 'School / Home' },
-      { label: 'Code', value: 'Blockly, Scratch, Python, Java, C++' },
+      { label: 'Code', value: 'Blockly, Python, Java, C++' },
     ],
     detailsHtml: stepQuarterDetails,
     accent: 'secondary',
@@ -110,7 +115,7 @@ export const contestSteps: ContestStep[] = [
       { label: 'Duration', value: '3 hours' },
       { label: 'Timing', value: 'April' },
       { label: 'Location', value: 'School / Regional centers' },
-      { label: 'Code', value: 'Blockly, Scratch, Python, Java, C++' },
+      { label: 'Code', value: 'Blockly, Python, Java, C++' },
     ],
     detailsHtml: stepSemiDetails,
     accent: 'tertiary',
