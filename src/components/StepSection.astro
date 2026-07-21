@@ -34,6 +34,21 @@ const taglineClasses = {
   tertiary: 'text-tertiary',
   error: 'text-error',
 } as const;
+
+const tagIcons: Record<string, string> = {
+  Duration: 'schedule',
+  Timing: 'calendar_month',
+  Location: 'location_on',
+  Code: 'code',
+  Format: 'tune',
+  Goal: 'emoji_events',
+  Rounds: 'replay',
+  Focus: 'psychology',
+};
+
+function iconFor(label: string) {
+  return tagIcons[label] ?? 'label';
+}
 ---
 <section id={id} class="scroll-mt-28 py-lg border-t-2 border-outline-variant/40">
   <div
@@ -63,8 +78,17 @@ const taglineClasses = {
       </p>
       <div class="flex flex-wrap gap-sm">
         {tags.map((tag) => (
-          <span class="inline-flex items-baseline gap-xs px-3 py-1.5 rounded-full border border-outline-variant bg-surface-container-lowest text-on-surface-variant">
-            <span class="font-label text-label-md leading-none text-primary uppercase tracking-wide">{tag.label}</span>
+          <span
+            class="inline-flex items-center gap-xs px-3 py-1.5 rounded-full border border-outline-variant bg-surface-container-lowest text-on-surface-variant"
+            title={tag.label}
+          >
+            <span
+              class="material-symbols-outlined text-primary text-[1.125rem] leading-none"
+              aria-hidden="true"
+            >
+              {iconFor(tag.label)}
+            </span>
+            <span class="sr-only">{tag.label}: </span>
             <span class="font-body text-sm leading-none text-on-surface">{tag.value}</span>
           </span>
         ))}
