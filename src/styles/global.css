@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+html {
+  scroll-behavior: smooth;
+}
 @theme {
   /* Colors from sampledesign.html */
   --color-outline: #71787f;
