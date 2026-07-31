@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 import StepSection from '../../components/StepSection.astro';
+import MailingListForm from '../../components/MailingListForm.astro';
 import { contestSteps } from '../../data/contest-steps';
 ---
 <BaseLayout title="beOI 2027 – A new contest structure" lang="en">
@@ -75,6 +76,8 @@ import { contestSteps } from '../../data/contest-steps';
         })}
       </div>
     </section>
+
+    <MailingListForm lang="en" />
 
     <!-- Full-width step sections -->
     <div class="flex flex-col">

@@ -1,0 +1,105 @@
+---
+interface Props {
+  lang: string;
+}
+
+const { lang } = Astro.props;
+const formId = 'newsletter-form';
+const actionUrl = 'https://bvduaeykw6ah6ni7xoykyi3wt40ntdrx.lambda-url.eu-central-1.on.aws/';
+---
+
+<section aria-label="Mailing list signup" class="mb-xl max-w-2xl mx-auto text-center">
+  <h2 class="font-headline text-headline-md text-on-surface mb-sm">
+    Stay informed about the next olympiad
+  </h2>
+  <p class="font-body text-body-md text-on-surface-variant mb-md">
+    Get an email when registration opens.
+  </p>
+
+  <form
+    id={formId}
+    action={actionUrl}
+    method="post"
+    class="flex flex-col sm:flex-row gap-sm items-stretch sm:items-center justify-center"
+  >
+    <label for={`${formId}-email`} class="sr-only">Email address</label>
+    <input
+      id={`${formId}-email`}
+      type="email"
+      name="email"
+      required
+      autocomplete="email"
+      placeholder="Email address"
+      class="flex-1 min-w-0 px-4 py-2.5 rounded-full border-2 border-outline-variant/60 bg-surface-container-lowest font-body text-body-md text-on-surface placeholder:text-on-surface-variant/60 focus:outline-none focus:border-primary"
+    />
+    <input type="hidden" name="lang" value={lang} />
+    <div class="absolute left-[-5000px]" aria-hidden="true">
+      <input type="text" name="nottobefilled" tabindex="-1" value="" autocomplete="off" />
+    </div>
+    <button
+      type="submit"
+      class="shrink-0 font-label text-label-md text-on-primary bg-primary hover:bg-primary/90 px-5 py-2.5 rounded-full border-2 border-primary transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+    >
+      Keep me informed
+    </button>
+  </form>
+
+  <div class="mt-md space-y-xs font-body text-body-md font-medium" aria-live="polite">
+    <p id="form-already" class="hidden text-tertiary">
+      It looks like you're already subscribed.
+    </p>
+    <p id="form-success" class="hidden text-secondary">
+      Thanks. We'll let you know when registration opens.
+    </p>
+    <p id="form-failure" class="hidden text-error">
+      Couldn't add you to the list. If this persists, contact us (info@be-oi.be).
+    </p>
+  </div>
+</section>
+
+<script is:inline>
+  (function () {
+    var form = document.getElementById('newsletter-form');
+    if (!form) return;
+
+    var already = document.getElementById('form-already');
+    var success = document.getElementById('form-success');
+    var failure = document.getElementById('form-failure');
+    var button = form.querySelector('button[type="submit"]');
+
+    function hideAlerts() {
+      already.classList.add('hidden');
+      success.classList.add('hidden');
+      failure.classList.add('hidden');
+    }
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      hideAlerts();
+
+      if (button) button.disabled = true;
+
+      var body = new URLSearchParams(new FormData(form));
+
+      fetch(form.action, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: body.toString(),
+      })
+        .then(function (res) {
+          if (!res.ok) throw new Error('Request failed');
+          return res.json();
+        })
+        .then(function (response) {
+          if (response.data) success.classList.remove('hidden');
+          if (response.message === 'E-mail already exists.') already.classList.remove('hidden');
+        })
+        .catch(function () {
+          failure.classList.remove('hidden');
+        })
+        .finally(function () {
+          if (button) button.disabled = false;
+        });
+    });
+  })();
+</script>
