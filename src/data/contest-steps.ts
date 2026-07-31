@@ -68,7 +68,7 @@ export const contestSteps: ContestStep[] = [
     canvasWidth: '100%',
     tagline: 'Three rounds, one pass — learn as you go',
     description:
-      'Three independent online rounds you can take whenever you want. Each one simply checks basic concepts for your age group — knowledge you will need in the next stages. Passing a single round is enough to qualify. Use every round as a chance to learn.',
+      'Three independent online rounds you can take whenever you want, one a month. Each one simply checks basic concepts for your age group — knowledge you will need in the next stages. Passing a single round is enough to qualify. Use every round as a chance to learn. No ranking-based selection, but rather a target score that must be achieved in order to advance in the competition.',
     tags: [
       { label: 'Duration', value: '40 min each' },
       { label: 'Timing', value: 'Dec, Jan, Feb' },
@@ -87,13 +87,13 @@ export const contestSteps: ContestStep[] = [
     teaser: ['First coding stage.'],
     canvasTop: '11.875%',
     canvasWidth: '100%',
-    tagline: 'Where coding starts to matter',
+    tagline: 'Where coding occupies centre stage',
     description:
-      'First actual contest on basic programming challenges. This is where coding really starts to matter.',
+      'First actual contest on basic programming challenges. This is where coding really starts to matter. A real look into the world of competitive programming.',
     tags: [
       { label: 'Duration', value: '2 hours' },
       { label: 'Timing', value: 'March' },
-      { label: 'Location', value: 'School / Home' },
+      { label: 'Location', value: 'School / Regional centers' },
       { label: 'Code', value: 'Blockly, Python, Java, C++' },
     ],
     detailsHtml: stepQuarterDetails,
@@ -110,7 +110,7 @@ export const contestSteps: ContestStep[] = [
     canvasWidth: '100%',
     tagline: 'Be among the best in your age group',
     description:
-      'An in-person contest in a trusted school or at regional centers across Belgium. Advanced problems test data structures, algorithms, and careful implementation under time pressure. Just be among the best in your age group.',
+      'An in-person contest in a trusted school or at regional centers across Belgium. Advanced problems test data structures, algorithms, and careful implementation under time pressure. Stand out with your problem-solving and programming skills.',
     tags: [
       { label: 'Duration', value: '3 hours' },
       { label: 'Timing', value: 'April' },
@@ -131,7 +131,7 @@ export const contestSteps: ContestStep[] = [
     canvasWidth: '100%',
     tagline: 'Compete for the national title',
     description:
-      'The ultimate national contest with mid-level to very hard problems. Compete with the best Belgian competitors for the national title in your age group.',
+      'The ultimate national contest with mid-level to very hard problems. Compete with the best Belgian competitors for the national title in your age group and make your way to the national pool with the aim of representing Belgium in international competitions.',
     tags: [
       { label: 'Duration', value: '2x 3 hours' },
       { label: 'Timing', value: 'May' },
