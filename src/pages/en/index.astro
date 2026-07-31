@@ -94,6 +94,21 @@ import { contestSteps } from '../../data/contest-steps';
       ))}
     </div>
   </main>
-
+  <div class="row mb24">
+    <form id="newsletter-form" class="halves form-newsletter" action="https://bvduaeykw6ah6ni7xoykyi3wt40ntdrx.lambda-url.eu-central-1.on.aws/" >
+    <input type="text" name="email" required  placeholder="Adresse e-mail" />
+    <input type="hidden" name="lang" value="fr" />
+  
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="nottobefilled" tabindex="-1" value=""></div>
+  
+    <button type="submit" class="btn-white mb0" >Tenez-moi informé</button>
+    </form>
+  </div>
+  
+  <div class="row mb24">
+    <p class="alert-warning" style="color: #d88519; font-weight: bold; display:none;" id="form-already">Il semble que vous soyez déjà inscrit.</p>
+    <p class="alert-success" style="color: #60b963; font-weight: bold; display:none;" id="form-success">Merci. Nous vous informerons de l'ouverture des inscriptions.</p>
+    <p class="alert-danger" style="color: #c64444; font-weight: bold; display:none;" id="form-failure">Erreur d'ajout à la liste. Si ce problème persiste, contactez-nous (info@be-oi.be).</p>
+  </div>
   <Footer />
 </BaseLayout>
