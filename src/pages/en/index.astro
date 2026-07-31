@@ -94,23 +94,86 @@ import { contestSteps } from '../../data/contest-steps';
       ))}
     </div>
   </main>
-  <section>
-    <div class="row mb24">
-      <form id="newsletter-form" class="halves form-newsletter" action="https://bvduaeykw6ah6ni7xoykyi3wt40ntdrx.lambda-url.eu-central-1.on.aws/" >
-      <input type="text" name="email" required  placeholder="Adresse e-mail" />
-      <input type="hidden" name="lang" value="fr" />
-    
-      <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="nottobefilled" tabindex="-1" value=""></div>
-    
-      <button type="submit" class="btn-white mb0" >Tenez-moi informé</button>
-      </form>
-    </div>
-    
-    <div class="row mb24">
-      <p class="alert-warning" style="color: #d88519; font-weight: bold; display:none;" id="form-already">Il semble que vous soyez déjà inscrit.</p>
-      <p class="alert-success" style="color: #60b963; font-weight: bold; display:none;" id="form-success">Merci. Nous vous informerons de l'ouverture des inscriptions.</p>
-      <p class="alert-danger" style="color: #c64444; font-weight: bold; display:none;" id="form-failure">Erreur d'ajout à la liste. Si ce problème persiste, contactez-nous (info@be-oi.be).</p>
-    </div>
-  <section>
+  <section
+      id="newsletter"
+      class="scroll-mt-28 py-lg border-t-2 border-outline-variant/40"
+  >
+      <div class="max-w-4xl mx-auto">
+  
+          <div class="text-center mb-lg">
+              <h2 class="font-headline text-headline-lg text-on-surface mb-xs">
+                  Restez informé
+              </h2>
+              <p class="text-body-lg text-on-surface-variant">
+                  Recevez un message dès l'ouverture des inscriptions et lors des
+                  annonces importantes concernant la beOI.
+              </p>
+          </div>
+  
+          <div
+              class="bg-surface-container-low border-2 border-outline-variant rounded-2xl p-lg stamp-shadow"
+          >
+              <form
+                  id="newsletter-form"
+                  action="https://bvduaeykw6ah6ni7xoykyi3wt40ntdrx.lambda-url.eu-central-1.on.aws/"
+                  class="flex flex-col md:flex-row gap-md"
+              >
+                  <input
+                      type="email"
+                      name="email"
+                      required
+                      placeholder="Adresse e-mail"
+                      class="flex-1 px-4 py-3 rounded-xl border border-outline-variant bg-surface-container-lowest text-on-surface focus:outline-none focus:border-primary"
+                  >
+  
+                  <input type="hidden" name="lang" value="fr">
+  
+                  <div
+                      style="position:absolute;left:-5000px"
+                      aria-hidden="true"
+                  >
+                      <input
+                          type="text"
+                          name="nottobefilled"
+                          tabindex="-1"
+                          value=""
+                      >
+                  </div>
+  
+                  <button
+                      type="submit"
+                      class="px-6 py-3 rounded-xl bg-primary text-white font-label hover:opacity-90 transition-colors"
+                  >
+                      Tenez-moi informé
+                  </button>
+              </form>
+  
+              <div class="mt-md">
+                  <p
+                      id="form-already"
+                      class="hidden font-bold text-[#d88519]"
+                  >
+                      Il semble que vous soyez déjà inscrit.
+                  </p>
+  
+                  <p
+                      id="form-success"
+                      class="hidden font-bold text-[#60b963]"
+                  >
+                      Merci. Nous vous informerons de l'ouverture des inscriptions.
+                  </p>
+  
+                  <p
+                      id="form-failure"
+                      class="hidden font-bold text-[#c64444]"
+                  >
+                      Erreur d'ajout à la liste. Si ce problème persiste,
+                      contactez-nous (info@be-oi.be).
+                  </p>
+              </div>
+          </div>
+  
+      </div>
+  </section>
   <Footer />
 </BaseLayout>
