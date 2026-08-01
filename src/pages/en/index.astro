@@ -113,35 +113,41 @@ import { contestSteps } from '../../data/contest-steps';
               class="bg-surface-container-low border-2 border-outline-variant rounded-2xl p-lg stamp-shadow"
           >
               <form
-                  id="newsletter-form"
-                  class="flex flex-col md:flex-row gap-md"
-                  action="https://bvduaeykw6ah6ni7xoykyi3wt40ntdrx.lambda-url.eu-central-1.on.aws/"
-                  method="POST"
-              >
-                  <input
-                      type="email"
-                      name="email"
-                      required
-                      placeholder="E-mail address"
-                      class="flex-1 px-4 py-3 rounded-xl border border-outline-variant bg-surface-container-lowest text-on-surface focus:outline-none focus:border-primary"
-                  >
-  
-                  <input type="hidden" name="lang" value="en">
-  
-                  <div
-                      style="position:absolute;left:-5000px"
-                      aria-hidden="true"
-                  >
-                      
-                  </div>
-  
-                  <button
-                      type="submit"
-                      class="px-6 py-3 rounded-xl bg-primary text-white font-label hover:opacity-90 transition-colors"
-                  >
-                      Keep me informed
-                  </button>
-              </form>
+    id="newsletter-form"
+    action="https://bvduaeykw6ah6ni7xoykyi3wt40ntdrx.lambda-url.eu-central-1.on.aws/"
+    method="POST"
+    class="flex flex-col md:flex-row gap-md"
+>
+    <input
+        type="email"
+        name="email"
+        required
+        placeholder="E-mail address"
+        class="flex-1 px-4 py-3 rounded-xl border border-outline-variant bg-surface-container-lowest text-on-surface focus:outline-none focus:border-primary"
+    >
+
+    <input type="hidden" name="lang" value="en">
+
+    <div
+        style="position:absolute;left:-5000px"
+        aria-hidden="true"
+    >
+        <input
+            type="text"
+            name="nottobefilled"
+            tabindex="-1"
+            value=""
+        >
+    </div>
+
+    <button
+        type="submit"
+        class="px-6 py-3 rounded-xl bg-primary text-white font-label hover:opacity-90 transition-colors"
+    >
+        Keep me informed
+    </button>
+</form>
+
   
               <div class="mt-md">
                   <p
