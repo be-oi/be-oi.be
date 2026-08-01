@@ -110,11 +110,11 @@ export const contestSteps: ContestStep[] = [
     canvasWidth: '100%',
     tagline: 'Be among the best in your age group',
     description:
-      'An in-person contest in a trusted school or at regional centers across Belgium. Advanced problems test data structures, algorithms, and careful implementation under time pressure. Stand out with your problem-solving and programming skills.',
+      'An in-person contest at regional centers across Belgium. Advanced problems test data structures, algorithms, and careful implementation under time pressure. Stand out with your problem-solving and programming skills.',
     tags: [
       { label: 'Duration', value: '3 hours' },
       { label: 'Timing', value: 'April' },
-      { label: 'Location', value: 'School / Regional centers' },
+      { label: 'Location', value: 'Regional centers' },
       { label: 'Code', value: 'Blockly, Python, Java, C++' },
     ],
     detailsHtml: stepSemiDetails,
