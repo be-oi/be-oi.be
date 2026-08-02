@@ -7,9 +7,9 @@ html {
   /* Colors from sampledesign.html */
   --color-outline: #71787f;
   --color-inverse-on-surface: #f8f0e1;
-  --color-primary: #1c648e;
+  --color-primary: #2e6882;
   --color-on-secondary-fixed-variant: #25502b;
-  --color-tertiary: #8d4f11;
+  --color-tertiary: #2e6882;
   --color-secondary-fixed-dim: #a2d2a2;
   --color-surface-container-low: #fbf3e4;
   --color-surface-bright: #fff8ef;
@@ -32,7 +32,7 @@ html {
   --color-on-primary-fixed-variant: #004b70;
   --color-secondary-fixed: #beefbd;
   --color-on-error-container: #93000a;
-  --color-background: #fff8ef;
+  --color-background: #ececec;
   --color-on-primary-container: #00496d;
   --color-on-primary: #ffffff;
   --color-on-tertiary-container: #6b3800;
@@ -44,7 +44,7 @@ html {
   --color-secondary: #3d6841;
   --color-error-container: #ffdad6;
   --color-on-tertiary: #ffffff;
-  --color-tertiary-container: #f0a15d;
+  --color-tertiary-container: #90ccf4;
   --color-surface-container-high: #efe7d9;
   --color-primary-container: #7cb9e8;
   --color-on-secondary: #ffffff;
