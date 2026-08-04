@@ -38,7 +38,7 @@ const taglineClasses = {
   error: 'text-error',
 } as const;
 
-const tagIcons: Record<string, IconName> = {
+const tagIcons: Partial<Record<string, IconName>> = {
   Duration: 'schedule',
   Timing: 'calendar_month',
   Location: 'location_on',
@@ -48,10 +48,6 @@ const tagIcons: Record<string, IconName> = {
   Rounds: 'replay',
   Focus: 'psychology',
 };
-
-function iconFor(label: string): IconName {
-  return tagIcons[label] ?? 'label';
-}
 
 const toggleId = `details-${id}`;
 const hasDetails = detailsHtml.trim().length > 0;
@@ -83,16 +79,19 @@ const hasDetails = detailsHtml.trim().length > 0;
         {description}
       </p>
       <div class="flex flex-wrap gap-sm mb-md">
-        {tags.map((tag) => (
-          <span
-            class="inline-flex items-center gap-xs px-3 py-1.5 rounded-full border border-outline-variant bg-surface-container-lowest text-on-surface-variant"
-            title={tag.label}
-          >
-            <Icon name={iconFor(tag.label)} class="text-primary text-[1.125rem]" />
-            <span class="sr-only">{tag.label}: </span>
-            <span class="font-body text-sm leading-none text-on-surface">{tag.value}</span>
-          </span>
-        ))}
+        {tags.map((tag) => {
+          const icon = tagIcons[tag.label];
+          return (
+            <span
+              class="inline-flex items-center gap-xs px-3 py-1.5 rounded-full border border-outline-variant bg-surface-container-lowest text-on-surface-variant"
+              title={tag.label}
+            >
+              {icon && <Icon name={icon} class="text-primary text-[1.125rem]" />}
+              <span class="sr-only">{tag.label}: </span>
+              <span class="font-body text-sm leading-none text-on-surface">{tag.value}</span>
+            </span>
+          );
+        })}
       </div>
 
       {hasDetails && (

@@ -45,14 +45,15 @@ export const contestSteps: ContestStep[] = [
     teaser: ['Logic puzzles', 'No coding yet'],
     canvasTop: '15.625%',
     canvasWidth: '100%',
-    tagline: 'No coding yet — Just for fun',
+    tagline: 'No coding yet — entirely optional',
     description:
-      'This is the former qualification round (before 2027), without the programming tasks. A light-hearted first touch with computational thinking through logic puzzles. No programming required yet — just brain power! It is just for fun and does not count toward qualifying. Perfect for younger students and anyone curious about problem-solving.',
+      'This is the former qualification round (before 2027), without the programming tasks. A light-hearted first touch with computational thinking through logic puzzles — no programming, just brain power. Entirely optional: you may skip it; scores never decide who advances. Perfect for younger students and anyone curious about problem-solving.',
     tags: [
       { label: 'Duration', value: '45 min' },
       { label: 'Timing', value: 'end-Nov' },
       { label: 'Location', value: 'School / Home' },
       { label: 'Code', value: 'None' },
+      { label: 'Status', value: 'Optional' },
     ],
     detailsHtml: withAudience(stepInitialDetails),
     accent: 'primary',
