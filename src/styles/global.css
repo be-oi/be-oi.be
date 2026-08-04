@@ -90,10 +90,6 @@ html {
   --radius-xl: 3rem;
 }
 
-.material-symbols-outlined {
-  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
-}
-
 .craft-paper {
   background-image:
     radial-gradient(#d9d1c3 0.5px, transparent 0.5px),

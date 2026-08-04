@@ -1,5 +1,9 @@
 ---
+import Icon from './Icon.astro';
 import type { StepAccent, StepTag } from '../data/contest-steps';
+import type { ComponentProps } from 'astro/types';
+
+type IconName = ComponentProps<typeof Icon>['name'];
 
 interface Props {
   id: string;
@@ -34,7 +38,7 @@ const taglineClasses = {
   error: 'text-error',
 } as const;
 
-const tagIcons: Record<string, string> = {
+const tagIcons: Record<string, IconName> = {
   Duration: 'schedule',
   Timing: 'calendar_month',
   Location: 'location_on',
@@ -45,7 +49,7 @@ const tagIcons: Record<string, string> = {
   Focus: 'psychology',
 };
 
-function iconFor(label: string) {
+function iconFor(label: string): IconName {
   return tagIcons[label] ?? 'label';
 }
 
@@ -84,12 +88,7 @@ const hasDetails = detailsHtml.trim().length > 0;
             class="inline-flex items-center gap-xs px-3 py-1.5 rounded-full border border-outline-variant bg-surface-container-lowest text-on-surface-variant"
             title={tag.label}
           >
-            <span
-              class="material-symbols-outlined text-primary text-[1.125rem] leading-none"
-              aria-hidden="true"
-            >
-              {iconFor(tag.label)}
-            </span>
+            <Icon name={iconFor(tag.label)} class="text-primary text-[1.125rem]" />
             <span class="sr-only">{tag.label}: </span>
             <span class="font-body text-sm leading-none text-on-surface">{tag.value}</span>
           </span>
@@ -104,15 +103,11 @@ const hasDetails = detailsHtml.trim().length > 0;
           <input id={toggleId} type="checkbox" class="peer sr-only" />
           <span class="inline-flex items-center gap-xs peer-checked:hidden">
             Show more details
-            <span class="material-symbols-outlined text-[1.125rem] leading-none" aria-hidden="true">
-              expand_more
-            </span>
+            <Icon name="expand_more" class="text-[1.125rem]" />
           </span>
           <span class="hidden items-center gap-xs peer-checked:inline-flex">
             Hide details
-            <span class="material-symbols-outlined text-[1.125rem] leading-none" aria-hidden="true">
-              expand_less
-            </span>
+            <Icon name="expand_less" class="text-[1.125rem]" />
           </span>
         </label>
       )}

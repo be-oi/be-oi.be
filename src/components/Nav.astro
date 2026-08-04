@@ -1,4 +1,6 @@
 ---
+import Icon from './Icon.astro';
+
 interface Props {
   activeHref?: string;
 }
@@ -45,10 +47,10 @@ const links = [
     <div class="flex items-center gap-sm">
       <button
         type="button"
-        class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors"
+        class="text-on-surface-variant hover:text-primary transition-colors text-2xl leading-none"
         aria-label="Change language"
       >
-        language
+        <Icon name="language" />
       </button>
     </div>
   </div>
