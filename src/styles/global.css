@@ -31,7 +31,7 @@ html {
 
   --color-on-background: #232323;
   --color-surface-dim: #d8d8d8;
-  --color-on-surface: #232323;
+  --color-on-surface: #ffffff;
 
   --color-on-secondary-fixed: #002108;
   --color-secondary-container: #bbecba;
@@ -72,7 +72,7 @@ html {
 
   --color-error: #ba1a1a;
 
-  --color-surface-container: #bad2db;
+  --color-surface-container: #406e86;
   --color-surface: #ECECEC;
 
   /* Fonts */
