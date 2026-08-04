@@ -31,7 +31,7 @@ html {
 
   --color-on-background: #232323;
   --color-surface-dim: #d8d8d8;
-  --color-on-surface: #ffffff;
+  --color-on-surface: #232323;
 
   --color-on-secondary-fixed: #002108;
   --color-secondary-container: #bbecba;
@@ -74,6 +74,8 @@ html {
 
   --color-surface-container: #406e86;
   --color-surface: #ECECEC;
+
+  --color-footer-text: #ffffff;
 
   /* Fonts */
   --font-headline: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
