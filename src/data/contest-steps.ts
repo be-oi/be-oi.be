@@ -72,7 +72,7 @@ export const contestSteps: ContestStep[] = [
     tags: [
       { label: 'Duration', value: '40 min each' },
       { label: 'Timing', value: 'Dec, Jan, Feb' },
-      { label: 'Location', value: 'School / Home' },
+      { label: 'Location', value: 'School or Home' },
       { label: 'Code', value: 'Blockly, Python' },
     ],
     detailsHtml: withAudience(stepQualifDetails),
