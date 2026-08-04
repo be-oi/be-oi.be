@@ -1,4 +1,28 @@
 ---
+import { execSync } from 'node:child_process';
+
+// Evaluated at build/dev time so it stays visible locally and on CI.
+const builtAt = new Date();
+// UTC so CI and local timestamps stay comparable.
+const buildDate = builtAt.toISOString().replace('T', ' ').slice(0, 16) + ' UTC';
+
+function resolveCommitSha(): string {
+  const fromEnv = process.env.GITHUB_SHA || process.env.COMMIT_SHA;
+  if (fromEnv) return fromEnv.slice(0, 7);
+  try {
+    return execSync('git rev-parse --short HEAD', {
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'ignore'],
+    }).trim();
+  } catch {
+    return '';
+  }
+}
+
+const commitSha = resolveCommitSha();
+const buildLabel = commitSha
+  ? `Built ${buildDate} · ${commitSha}`
+  : `Built ${buildDate}`;
 ---
 <footer class="bg-surface-container border-t-2 border-outline-variant mt-xl">
   <div class="w-full px-margin py-lg max-w-7xl mx-auto flex flex-col gap-md">
@@ -15,5 +39,11 @@
       </p>
       <p>BTW/TVA BE 0849.738.707</p>
     </div>
+    <p
+      class="text-[0.7rem] font-body text-on-surface-variant/40 tracking-wide"
+      title={builtAt.toISOString()}
+    >
+      {buildLabel}
+    </p>
   </div>
 </footer>
