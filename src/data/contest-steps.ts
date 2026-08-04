@@ -69,7 +69,7 @@ export const contestSteps: ContestStep[] = [
     canvasWidth: '100%',
     tagline: 'Three rounds, one pass — learn as you go',
     description:
-      'Three independent online rounds you can take whenever you want, one a month. Each one simply checks basic concepts for your age group — knowledge you will need in the next stages. Passing a single round is enough to qualify. Use every round as a chance to learn. No ranking-based selection, but rather a target score that must be achieved in order to advance in the competition.',
+      'Three independent online rounds you can take whenever you want, one per month. Each one simply checks basic concepts for your age group — knowledge you will need in the next stages. Passing a single round is enough to qualify. Use every round as a chance to learn. No ranking-based selection, but rather a target score that must be achieved in order to advance in the competition.',
     tags: [
       { label: 'Duration', value: '40 min each' },
       { label: 'Timing', value: 'Dec, Jan, Feb' },
