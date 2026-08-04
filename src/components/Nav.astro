@@ -15,17 +15,17 @@ const links = [
   { href: '#hall-of-fame', label: 'Hall of Fame' },
 ];
 ---
-<nav class="fixed top-0 left-0 w-full z-50 bg-background/80 backdrop-blur-sm border-b-2 border-outline-variant">
+<nav class="fixed top-0 left-0 w-full z-50 bg-outline-variant/80 backdrop-blur-sm border-b-2 border-outline-variant">
   <div class="flex justify-between items-center w-full px-margin py-sm max-w-7xl mx-auto">
     <a href="/en/" class="flex items-center gap-sm shrink-0">
       <img
-        src="/img/logo-beoi.png"
+        src="/img/logo-beoi-white.png"
         alt="beOI"
         class="h-10 w-10 object-contain"
         width="40"
         height="40"
       />
-      <span class="font-headline text-headline-md text-primary tracking-tight hidden sm:inline">beOI</span>
+      <span class="font-headline text-headline-md text-footer-text tracking-tight hidden sm:inline">beOI</span>
     </a>
 
     <div class="hidden md:flex items-center gap-gutter">
@@ -35,8 +35,8 @@ const links = [
           class:list={[
             'font-label text-label-md transition-colors',
             link.href === activeHref
-              ? 'text-primary border-b-2 border-primary pb-1'
-              : 'text-on-surface-variant hover:text-primary',
+              ? 'text-footer-text border-b-2 border-primary pb-1'
+              : 'text-footer-text hover:underline',
           ]}
         >
           {link.label}
