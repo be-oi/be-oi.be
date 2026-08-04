@@ -69,7 +69,7 @@ export const contestSteps: ContestStep[] = [
     canvasWidth: '100%',
     tagline: 'Three rounds, one pass — learn as you go',
     description:
-      'Three independent online rounds you can take whenever you want, one per month. Each one simply checks basic concepts for your age group — knowledge you will need in the next stages. Passing a single round is enough to qualify. Use every round as a chance to learn. No ranking-based selection, but rather a target score that must be achieved in order to advance in the competition.',
+      'Three independent online rounds you can take whenever you want, one per month. Each one simply checks basic concepts for your age group — knowledge you will need in the next stages. Passing a single round is enough to qualify. Use every round as a chance to learn. There is no ranking: you need a target score to advance.',
     tags: [
       { label: 'Duration', value: '40 min each' },
       { label: 'Timing', value: 'Dec, Jan, Feb' },
@@ -88,9 +88,9 @@ export const contestSteps: ContestStep[] = [
     teaser: ['First coding stage.'],
     canvasTop: '11.875%',
     canvasWidth: '100%',
-    tagline: 'Where coding occupies centre stage',
+    tagline: 'Where coding starts to matter',
     description:
-      'First actual contest on basic programming challenges. This is where coding really starts to matter. A real look into the world of competitive programming.',
+      'First actual contest on basic programming challenges. This is where coding really starts to matter. A first real taste of competitive programming.',
     tags: [
       { label: 'Duration', value: '2 hours' },
       { label: 'Timing', value: 'March' },
@@ -155,7 +155,7 @@ export const contestSteps: ContestStep[] = [
     description:
       'Top contestants, based on several contests and training over several years, may be selected to represent Belgium at international olympiads such as WEOI, EJOI, EGOI, and IOI.',
     tags: [
-      { label: 'Timing', value: 'Around the Summer' },
+      { label: 'Timing', value: 'Around summer' },
       { label: 'Location', value: 'Around the world' },
       { label: 'Code', value: 'C++' },
     ],
