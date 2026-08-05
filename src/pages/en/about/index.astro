@@ -2,16 +2,179 @@
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Nav from '../../../components/Nav.astro';
 import Footer from '../../../components/Footer.astro';
+import {
+  administrators,
+  logoSrc,
+  members,
+  supporters,
+} from '../../../data/about';
 ---
 <BaseLayout title="About us – beOI" lang="en">
   <Nav lang="en" />
 
   <main class="pt-32 pb-xl px-margin max-w-7xl mx-auto">
-    <section class="max-w-2xl">
-      <h1 class="font-headline text-headline-xl text-on-surface mb-md">About us</h1>
+    <!-- Hero -->
+    <section class="mb-xl max-w-3xl">
+      <h1 class="font-headline text-headline-xl text-on-surface mb-md">
+        About beOI
+      </h1>
       <p class="text-body-lg font-body text-on-surface-variant">
-        Information about the beOI association will appear here.
+        The Belgian Olympiad in Informatics is organised by the non-profit association beOI.
+        It is only possible thanks to the support of its members, its sponsors, and the time
+        devoted by its volunteers.
       </p>
+    </section>
+
+    <!-- Support -->
+    <section id="sponsors" class="scroll-mt-36 py-lg border-t-2 border-outline-variant/40">
+      <div class="max-w-3xl mb-lg">
+        <h2 class="font-headline text-headline-lg text-on-surface mb-sm">
+          Support
+        </h2>
+        <p class="text-body-md font-body text-on-surface-variant">
+          We are grateful for the support of the Flemish Government and the Fédération
+          Wallonie-Bruxelles, which helps us fund training and offer prizes to participants.
+        </p>
+      </div>
+
+      {/* Solid white so logos with white image backgrounds blend in (no floating rectangles). */}
+      <div class="bg-white mb-lg px-md py-lg sm:px-lg">
+        <ul class="flex flex-wrap items-center justify-center gap-x-xl gap-y-md list-none p-0 m-0">
+          {supporters.map((s) => (
+            <li>
+              <a
+                href={s.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex items-center justify-center h-20 sm:h-24 transition-opacity hover:opacity-70"
+              >
+                <img
+                  src={logoSrc(s.image)}
+                  alt={s.name}
+                  class="max-h-full max-w-[220px] w-auto object-contain"
+                />
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="text-center max-w-2xl mx-auto">
+        <p class="text-body-md font-body text-on-surface-variant mb-md">
+          Interested in becoming a sponsor for this edition, or in offering a prize?
+        </p>
+        <a
+          href="mailto:sponsors@be-oi.be"
+          class="inline-block font-label text-label-md tracking-wide px-6 py-3 bg-primary text-on-primary border-2 border-primary hover:bg-primary-container hover:text-on-primary-container transition-colors"
+        >
+          Want to sponsor us? Contact us
+        </a>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="scroll-mt-36 py-lg border-t-2 border-outline-variant/40">
+      <div class="grid gap-lg lg:grid-cols-2 lg:items-start">
+        <div>
+          <h2 class="font-headline text-headline-lg text-on-surface mb-sm">
+            Contact details
+          </h2>
+          <p class="text-body-md font-body text-on-surface-variant">
+            Feel free to contact us with any questions about the association or our activities.
+          </p>
+        </div>
+        <div class="bg-surface-container-low border-2 border-outline-variant/40 p-md font-body text-body-md text-on-surface">
+          <p class="font-headline text-headline-md mb-sm">beOI ASBL/VZW</p>
+          <p class="text-on-surface-variant leading-relaxed mb-md">
+            Celestijnenlaan 200A bus 4078<br />
+            3001 Leuven<br />
+            Belgium
+          </p>
+          <dl class="space-y-2 text-on-surface-variant">
+            <div class="flex flex-wrap gap-x-2">
+              <dt class="font-semibold text-on-surface">Email:</dt>
+              <dd>
+                <a href="mailto:info@be-oi.be" class="text-primary hover:underline">
+                  info@be-oi.be
+                </a>
+              </dd>
+            </div>
+            <div class="flex flex-wrap gap-x-2">
+              <dt class="font-semibold text-on-surface">BCE number:</dt>
+              <dd>0849.738.707</dd>
+            </div>
+            <div class="flex flex-wrap gap-x-2">
+              <dt class="font-semibold text-on-surface">IBAN:</dt>
+              <dd>BE79 0016 8388 4533</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <!-- Members -->
+    <section id="members" class="scroll-mt-36 py-lg border-t-2 border-outline-variant/40">
+      <div class="max-w-3xl mb-lg">
+        <h2 class="font-headline text-headline-lg text-on-surface mb-sm">
+          Members
+        </h2>
+        <p class="text-body-md font-body text-on-surface-variant">
+          beOI brings together higher-education institutions across Belgium that support
+          informatics education and the contest.
+        </p>
+      </div>
+
+      {/* Continuous white panel: logos with white backgrounds no longer show as separate tiles. */}
+      <div class="bg-white mb-lg px-sm py-md sm:px-md">
+        <ul class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-sm gap-y-md list-none p-0 m-0">
+          {members.map((m) => (
+            <li>
+              <a
+                href={m.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex items-center justify-center h-24 px-sm transition-opacity hover:opacity-70"
+                title={m.name}
+              >
+                <img
+                  src={logoSrc(m.image)}
+                  alt={m.name}
+                  class="max-h-16 max-w-full w-auto object-contain"
+                />
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="text-center">
+        <a
+          href="mailto:info@be-oi.be"
+          class="inline-block font-label text-label-md tracking-wide px-6 py-3 bg-primary text-on-primary border-2 border-primary hover:bg-primary-container hover:text-on-primary-container transition-colors"
+        >
+          Become a member? Contact us
+        </a>
+      </div>
+    </section>
+
+    <!-- Board -->
+    <section id="board" class="scroll-mt-36 py-lg border-t-2 border-outline-variant/40">
+      <div class="max-w-3xl">
+        <h2 class="font-headline text-headline-lg text-on-surface mb-sm">
+          Board of directors
+        </h2>
+        <p class="text-body-md font-body text-on-surface-variant mb-md">
+          The following volunteers currently administer the non-profit association:
+        </p>
+        <ul class="list-none p-0 m-0 space-y-2 font-body text-body-md text-on-surface">
+          {administrators.map((name) => (
+            <li class="flex items-center gap-sm">
+              <span class="w-1.5 h-1.5 rounded-full bg-primary shrink-0" aria-hidden="true" />
+              {name}
+            </li>
+          ))}
+        </ul>
+      </div>
     </section>
   </main>
   <Footer />
