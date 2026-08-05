@@ -43,7 +43,7 @@ export const contestSteps: ContestStep[] = [
     title: 'Brain Teaser Round',
     shortTitle: 'Brain Teaser Round',
     teaser: ['Logic puzzles', 'No coding yet'],
-    canvasTop: '15.625%',
+    canvasTop: '19.625%',
     canvasWidth: '100%',
     tagline: 'No coding yet — entirely optional',
     description:
@@ -65,7 +65,7 @@ export const contestSteps: ContestStep[] = [
     title: 'Qualification Rounds',
     shortTitle: 'Qualification Rounds',
     teaser: ['Basic programming.', 'Short online rounds.'],
-    canvasTop: '15.625%',
+    canvasTop: '22.625%',
     canvasWidth: '100%',
     tagline: 'Three rounds, one pass — learn as you go',
     description:
