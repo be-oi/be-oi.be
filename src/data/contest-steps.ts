@@ -10,7 +10,7 @@ function withAudience(detailsHtml: string) {
   return `${commonAudienceDetails}\n${detailsHtml}`;
 }
 
-export type StepAccent = 'primary' | 'secondary' | 'tertiary' | 'error';
+export type StepAccent = 'primary' | 'secondary' | 'tertiary';
 
 export interface StepTag {
   label: string;
@@ -160,6 +160,6 @@ export const contestSteps: ContestStep[] = [
       { label: 'Code', value: 'C++' },
     ],
     detailsHtml: stepInternDetails,
-    accent: 'error',
+    accent: 'primary',
   },
 ];

@@ -15,7 +15,7 @@ const links = [
   { href: '#hall-of-fame', label: 'Hall of Fame' },
 ];
 ---
-<nav class="fixed top-0 left-0 w-full z-50 bg-surface-container backdrop-blur-sm border-b-2 border-outline-variant">
+<nav class="fixed top-0 left-0 w-full z-50 bg-chrome backdrop-blur-sm border-b-2 border-on-chrome/20">
   <div class="flex justify-between items-center w-full px-margin py-sm max-w-7xl mx-auto">
     <a href="/en/" class="flex items-center gap-sm shrink-0">
       <img
@@ -25,7 +25,7 @@ const links = [
         width="40"
         height="40"
       />
-      <span class="font-headline text-headline-md text-footer-text tracking-tight hidden sm:inline">beOI</span>
+      <span class="font-headline text-headline-md text-on-chrome tracking-tight hidden sm:inline">beOI</span>
     </a>
 
     <div class="hidden md:flex items-center gap-gutter">
@@ -35,8 +35,8 @@ const links = [
           class:list={[
             'font-label text-label-md transition-colors',
             link.href === activeHref
-              ? 'text-footer-text border-b-2 border-footer-text pb-1'
-              : 'text-footer-text hover:underline',
+              ? 'text-on-chrome border-b-2 border-on-chrome pb-1'
+              : 'text-on-chrome hover:underline',
           ]}
         >
           {link.label}
@@ -47,7 +47,7 @@ const links = [
     <div class="flex items-center gap-sm">
       <button
         type="button"
-        class="text-footer-text border-b-2 border-transparent hover:border-footer-text text-2xl leading-none"
+        class="text-on-chrome border-b-2 border-transparent hover:border-on-chrome text-2xl leading-none"
         aria-label="Change language"
       >
         <Icon name="language" />

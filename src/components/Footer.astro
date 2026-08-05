@@ -24,10 +24,10 @@ const buildLabel = commitSha
   ? `Built ${buildDate} · ${commitSha}`
   : `Built ${buildDate}`;
 ---
-<footer class="bg-surface-container border-t-2 border-outline-variant mt-xl">
+<footer class="bg-chrome border-t-2 border-on-chrome/20 mt-xl">
   <div class="w-full px-margin py-lg max-w-7xl mx-auto flex flex-col gap-md">
-    <div class="font-headline text-headline-md text-footer-text">beOI</div>
-    <div class="text-sm font-body text-footer-text leading-relaxed space-y-1 max-w-3xl">
+    <div class="font-headline text-headline-md text-on-chrome">beOI</div>
+    <div class="text-sm font-body text-on-chrome leading-relaxed space-y-1 max-w-3xl">
       <p>
         Belgische Informatica-olympiade - Olympiade belge d’Informatique (beOI) ASBL/VZW
       </p>
@@ -40,7 +40,7 @@ const buildLabel = commitSha
       <p>BTW/TVA BE 0849.738.707</p>
     </div>
     <p
-      class="text-[0.7rem] font-body text-on-surface-variant/40 tracking-wide"
+      class="text-[0.7rem] font-body text-on-chrome/50 tracking-wide"
       title={builtAt.toISOString()}
     >
       {buildLabel}
