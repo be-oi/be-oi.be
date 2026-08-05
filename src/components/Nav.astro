@@ -2,22 +2,41 @@
 import Icon from './Icon.astro';
 
 interface Props {
-  activeHref?: string;
+  /** Locale prefix for links, e.g. "en". Defaults to "en". */
+  lang?: string;
 }
 
-const { activeHref = '#' } = Astro.props;
+const { lang = 'en' } = Astro.props;
+const base = `/${lang}`;
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
 
-const links = [
-  { href: '#contest', label: 'The Contest' },
-  { href: '#preparation', label: 'Preparation' },
-  { href: '#calendar', label: 'Calendar' },
-  { href: '#rules', label: 'Rules' },
-  { href: '#hall-of-fame', label: 'Hall of Fame' },
+const mainLinks = [
+  { href: `${base}/contest`, label: 'The beOI Contest', match: `${base}/contest` },
+  { href: `${base}/contest/rules`, label: 'Rules', match: `${base}/contest/rules` },
+  { href: `${base}/contest/faq`, label: 'FAQ', match: `${base}/contest/faq` },
+  {
+    href: `${base}/competitive-programming`,
+    label: 'Competitive programming',
+    match: `${base}/competitive-programming`,
+  },
+  { href: `${base}/hall-of-fame`, label: 'Hall of Fame', match: `${base}/hall-of-fame` },
+  { href: `${base}/about`, label: 'About us', match: `${base}/about` },
 ];
+
+function isMainActive(match: string) {
+  if (!(path === match || path.startsWith(`${match}/`))) return false;
+  // Prefer a more specific main-link match (e.g. FAQ/Rules over Contest).
+  return !mainLinks.some(
+    (link) =>
+      link.match !== match &&
+      link.match.startsWith(`${match}/`) &&
+      (path === link.match || path.startsWith(`${link.match}/`)),
+  );
+}
 ---
 <nav class="fixed top-0 left-0 w-full z-50 bg-chrome backdrop-blur-sm border-b-2 border-on-chrome/20">
   <div class="flex justify-between items-center w-full px-margin py-sm max-w-7xl mx-auto">
-    <a href="/en/" class="flex items-center gap-sm shrink-0">
+    <a href={`${base}/contest/`} class="flex items-center gap-sm shrink-0">
       <img
         src="/img/logo-beoi-white.png"
         alt="beOI"
@@ -29,12 +48,12 @@ const links = [
     </a>
 
     <div class="hidden md:flex items-center gap-gutter">
-      {links.map((link) => (
+      {mainLinks.map((link) => (
         <a
-          href={link.href}
+          href={`${link.href}/`}
           class:list={[
             'font-label text-label-md transition-colors',
-            link.href === activeHref
+            isMainActive(link.match)
               ? 'text-on-chrome border-b-2 border-on-chrome pb-1'
               : 'text-on-chrome hover:underline',
           ]}
