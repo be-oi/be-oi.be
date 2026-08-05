@@ -59,6 +59,8 @@ To stop the server, press `Ctrl+C` in the terminal.
 | Language picker (root page) | `src/pages/index.astro` |
 | French pages | `src/pages/fr/` |
 | Dutch pages | `src/pages/nl/` |
+| Contest step images (on the site) | `public/img/steps/` |
+| Contest step image masters (not deployed) | `image-sources/steps/` |
 
 When you add a new page, create it in **both** `fr/` and `nl/` so the two languages stay in sync (for example `src/pages/fr/about.astro` and `src/pages/nl/about.astro`).
 

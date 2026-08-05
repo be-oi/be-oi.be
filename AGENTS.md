@@ -34,11 +34,19 @@ src/
     index.astro           # language picker (/)
     fr/                   # French routes (/fr/...)
     nl/                   # Dutch routes (/nl/...)
-public/                   # static assets copied as-is (if present)
+public/                   # static assets copied as-is into dist/ (served as-is)
+  img/steps/              # web-sized contest roadmap illustrations
+image-sources/            # high-res / masters for assets (not deployed)
+  steps/                  # sources for public/img/steps/ (regenerate site PNGs from these)
 dist/                     # build output (gitignored)
 .github/workflows/
   deploy.yml              # build + S3 sync
 ```
+
+### Contest step images
+
+- **Deployed files**: `public/img/steps/stepN-*.png` (paths referenced from `src/data/contest-steps.ts`).
+- **Masters**: `image-sources/steps/` — keep higher-resolution or pre-export sources here so web-sized variants can be regenerated later. Do **not** put masters under `public/` (they would ship with the site).
 
 ## i18n conventions
 
