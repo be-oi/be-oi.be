@@ -1,19 +1,22 @@
 ---
+import { mailingListStrings } from '../data/ui-i18n';
+
 interface Props {
   lang: string;
 }
 
 const { lang } = Astro.props;
+const t = mailingListStrings(lang);
 const formId = 'newsletter-form';
 const actionUrl = 'https://bvduaeykw6ah6ni7xoykyi3wt40ntdrx.lambda-url.eu-central-1.on.aws/';
 ---
 
-<section id="newsletter" aria-label="Mailing list signup" class="mb-xl max-w-2xl mx-auto text-center scroll-mt-28">
+<section id="newsletter" aria-label={t.sectionAria} class="mb-xl max-w-2xl mx-auto text-center scroll-mt-28">
   <h2 class="font-headline text-headline-md text-on-surface mb-sm">
-    Stay informed about the next olympiad
+    {t.heading}
   </h2>
   <p class="font-body text-body-md text-on-surface-variant mb-md">
-    Get an email when registration opens.
+    {t.intro}
   </p>
 
   <form
@@ -22,14 +25,14 @@ const actionUrl = 'https://bvduaeykw6ah6ni7xoykyi3wt40ntdrx.lambda-url.eu-centra
     method="post"
     class="flex flex-col sm:flex-row gap-sm items-stretch sm:items-center justify-center"
   >
-    <label for={`${formId}-email`} class="sr-only">Email address</label>
+    <label for={`${formId}-email`} class="sr-only">{t.emailLabel}</label>
     <input
       id={`${formId}-email`}
       type="email"
       name="email"
       required
       autocomplete="email"
-      placeholder="Email address"
+      placeholder={t.emailPlaceholder}
       class="flex-1 min-w-0 px-4 py-2.5 rounded-full border-2 border-outline-variant/60 bg-surface-container-lowest font-body text-body-md text-on-surface placeholder:text-on-surface-variant/60 focus:outline-none focus:border-primary"
     />
     <input type="hidden" name="lang" value={lang} />
@@ -40,19 +43,19 @@ const actionUrl = 'https://bvduaeykw6ah6ni7xoykyi3wt40ntdrx.lambda-url.eu-centra
       type="submit"
       class="shrink-0 font-label text-label-md text-on-primary bg-primary hover:bg-primary/90 px-5 py-2.5 rounded-full border-2 border-primary transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
     >
-      Keep me informed
+      {t.submit}
     </button>
   </form>
 
   <div class="mt-md space-y-xs font-body text-body-md font-medium" aria-live="polite">
     <p id="form-already" class="hidden text-tertiary">
-      It looks like you're already subscribed.
+      {t.already}
     </p>
     <p id="form-success" class="hidden text-secondary">
-      Thanks. We'll let you know when registration opens.
+      {t.success}
     </p>
     <p id="form-failure" class="hidden text-error">
-      Couldn't add you to the list. If this persists, contact us (info@be-oi.be).
+      {t.failure}
     </p>
   </div>
 </section>

@@ -1,5 +1,6 @@
 ---
 import Icon from './Icon.astro';
+import { navStrings } from '../data/ui-i18n';
 
 interface Props {
   /** Locale prefix for links, e.g. "en". Defaults to "en". */
@@ -9,18 +10,19 @@ interface Props {
 const { lang = 'en' } = Astro.props;
 const base = `/${lang}`;
 const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const t = navStrings(lang);
 
 const mainLinks = [
-  { href: `${base}/contest`, label: 'The beOI Contest', match: `${base}/contest` },
-  { href: `${base}/contest/rules`, label: 'Rules', match: `${base}/contest/rules` },
-  { href: `${base}/contest/faq`, label: 'FAQ', match: `${base}/contest/faq` },
+  { href: `${base}/contest`, label: t.contest, match: `${base}/contest` },
+  { href: `${base}/contest/rules`, label: t.rules, match: `${base}/contest/rules` },
+  { href: `${base}/contest/faq`, label: t.faq, match: `${base}/contest/faq` },
   {
     href: `${base}/competitive-programming`,
-    label: 'Competitive programming',
+    label: t.competitiveProgramming,
     match: `${base}/competitive-programming`,
   },
-  { href: `${base}/hall-of-fame`, label: 'Hall of Fame', match: `${base}/hall-of-fame` },
-  { href: `${base}/about`, label: 'About us', match: `${base}/about` },
+  { href: `${base}/hall-of-fame`, label: t.hallOfFame, match: `${base}/hall-of-fame` },
+  { href: `${base}/about`, label: t.about, match: `${base}/about` },
 ];
 
 function isMainActive(match: string) {
@@ -67,7 +69,7 @@ function isMainActive(match: string) {
       <button
         type="button"
         class="text-on-chrome border-b-2 border-transparent hover:border-on-chrome text-2xl leading-none"
-        aria-label="Change language"
+        aria-label={t.changeLanguage}
       >
         <Icon name="language" />
       </button>
@@ -75,7 +77,9 @@ function isMainActive(match: string) {
         type="button"
         id="nav-menu-toggle"
         class="md:hidden text-on-chrome border-b-2 border-transparent hover:border-on-chrome text-2xl leading-none"
-        aria-label="Open menu"
+        aria-label={t.openMenu}
+        data-label-open={t.openMenu}
+        data-label-close={t.closeMenu}
         aria-expanded="false"
         aria-controls="nav-mobile-panel"
       >
@@ -120,10 +124,12 @@ function isMainActive(match: string) {
 
     const menuIcon = toggle.querySelector('[data-icon="menu"]');
     const closeIcon = toggle.querySelector('[data-icon="close"]');
+    const labelOpen = toggle.getAttribute('data-label-open') || 'Open menu';
+    const labelClose = toggle.getAttribute('data-label-close') || 'Close menu';
 
     function setOpen(open) {
       toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      toggle.setAttribute('aria-label', open ? labelClose : labelOpen);
       panel.classList.toggle('hidden', !open);
       if (open) {
         panel.removeAttribute('hidden');
