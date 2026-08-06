@@ -1,12 +1,45 @@
 ---
 import '../styles/global.css';
+import {
+  contentLocales,
+  localizePath,
+  stripLocalePrefix,
+  xDefaultLocale,
+} from '../data/i18n';
 
 interface Props {
   title?: string;
+  description?: string;
   lang?: string;
+  /** Open Graph / Twitter image path (site-relative) or absolute URL. */
+  image?: string;
+  /** Locales with a real (non-redirect) version of this page. Defaults to contentLocales. */
+  alternateLocales?: readonly string[];
 }
 
-const { title = 'beOI', lang = 'en' } = Astro.props;
+const defaultDescription =
+  'Belgian Olympiad in Informatics (beOI) — a free national contest that takes students aged 10–18 from logic puzzles to competitive programming and international olympiads.';
+
+const {
+  title = 'beOI',
+  description = defaultDescription,
+  lang = 'en',
+  image = '/img/logo-beoi.png',
+  alternateLocales = contentLocales,
+} = Astro.props;
+
+const site = Astro.site ?? new URL('https://www.be-oi.be');
+const pathname = Astro.url.pathname;
+const canonicalPath = pathname.endsWith('/') || pathname.includes('.') ? pathname : `${pathname}/`;
+const canonicalURL = new URL(canonicalPath, site).href;
+
+const pathWithoutLocale = stripLocalePrefix(pathname);
+const ogImageURL = image.startsWith('http')
+  ? image
+  : new URL(image.startsWith('/') ? image : `/${image}`, site).href;
+
+// Always include this page’s lang and the x-default target among alternates.
+const uniqueLocales = [...new Set<string>([...alternateLocales, lang, xDefaultLocale])];
 ---
 <!doctype html>
 <html lang={lang}>
@@ -15,6 +48,40 @@ const { title = 'beOI', lang = 'en' } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <link rel="canonical" href={canonicalURL} />
+    {uniqueLocales.map((locale) => (
+      <link
+        rel="alternate"
+        hreflang={locale}
+        href={new URL(localizePath(locale, pathWithoutLocale), site).href}
+      />
+    ))}
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href={new URL(localizePath(xDefaultLocale, pathWithoutLocale), site).href}
+    />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="beOI" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={ogImageURL} />
+    <meta property="og:locale" content={lang === 'en' ? 'en_BE' : lang === 'nl' ? 'nl_BE' : 'fr_BE'} />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageURL} />
+
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link

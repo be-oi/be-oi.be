@@ -36,10 +36,12 @@ src/
     fr/                   # French routes (/fr/...)
     nl/                   # Dutch routes (/nl/...)
 public/                   # static assets copied as-is into dist/ (served as-is)
+  favicon.ico             # browser tab icon (+ PNG sizes, apple-touch-icon)
+  robots.txt              # crawl policy + sitemap pointer
   img/steps/              # web-sized contest roadmap illustrations
 image-sources/            # high-res / masters for assets (not deployed)
   steps/                  # sources for public/img/steps/ (regenerate site PNGs from these)
-dist/                     # build output (gitignored)
+dist/                     # build output (gitignored); also sitemap-*.xml from @astrojs/sitemap
 .github/workflows/
   deploy.yml              # build + S3 sync
 ```
@@ -51,10 +53,11 @@ dist/                     # build output (gitignored)
 
 ## i18n conventions
 
-- Astro i18n is configured in `astro.config.mjs` with `locales: ['fr', 'nl']` and `prefixDefaultLocale: true`.
-- Locale pages live under `src/pages/fr/` and `src/pages/nl/`.
-- When adding or renaming a page, update **both** locales so URLs stay parallel (e.g. `/fr/faq/` and `/nl/faq/`).
-- Set `lang` on `BaseLayout` to `"fr"` or `"nl"` for locale pages.
+- Astro i18n is configured in `astro.config.mjs` with `locales: ['fr', 'nl', 'en']` and `prefixDefaultLocale: true`.
+- Locale pages live under `src/pages/fr/`, `src/pages/nl/`, and `src/pages/en/`.
+- When adding or renaming a page, update **all** content locales so URLs stay parallel (e.g. `/fr/faq/` and `/nl/faq/`).
+- Set `lang` on `BaseLayout` to `"fr"`, `"nl"`, or `"en"` for locale pages; pass a page-specific `description` for SEO.
+- Head metadata (description, Open Graph, Twitter, canonical, hreflang, favicon) is emitted by `BaseLayout`. Hreflang only lists locales in `contentLocales` (`src/data/i18n.ts`) until translations ship — add a locale there and in the sitemap filter when real pages exist.
 - Prefer keeping copy in the page files (or future shared content modules) rather than hard-coding only one language.
 
 ## Coding conventions
