@@ -73,6 +73,18 @@ const actionUrl = 'https://bvduaeykw6ah6ni7xoykyi3wt40ntdrx.lambda-url.eu-centra
       failure.classList.add('hidden');
     }
 
+    function show(el) {
+      el.classList.remove('hidden');
+    }
+
+    // Listmonk/Lambda: 409 Conflict and messages mentioning already exists/subscribed.
+    function isAlreadySubscribed(status, response) {
+      if (status === 409) return true;
+      var message = response && response.message;
+      if (typeof message !== 'string') return false;
+      return /already\s*(exists|subscribed)/i.test(message);
+    }
+
     form.addEventListener('submit', function (event) {
       event.preventDefault();
       hideAlerts();
@@ -87,15 +99,31 @@ const actionUrl = 'https://bvduaeykw6ah6ni7xoykyi3wt40ntdrx.lambda-url.eu-centra
         body: body.toString(),
       })
         .then(function (res) {
-          if (!res.ok) throw new Error('Request failed');
-          return res.json();
+          return res.json().then(
+            function (response) {
+              return { res: res, response: response };
+            },
+            function () {
+              return { res: res, response: null };
+            },
+          );
         })
-        .then(function (response) {
-          if (response.data) success.classList.remove('hidden');
-          if (response.message === 'E-mail already exists.') already.classList.remove('hidden');
+        .then(function (result) {
+          var res = result.res;
+          var response = result.response;
+
+          if (isAlreadySubscribed(res.status, response)) {
+            show(already);
+            return;
+          }
+          if (res.ok && response && response.data) {
+            show(success);
+            return;
+          }
+          show(failure);
         })
         .catch(function () {
-          failure.classList.remove('hidden');
+          show(failure);
         })
         .finally(function () {
           if (button) button.disabled = false;
