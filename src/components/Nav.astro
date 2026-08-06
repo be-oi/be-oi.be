@@ -13,7 +13,8 @@ const path = Astro.url.pathname.replace(/\/$/, '') || '/';
 const t = navStrings(lang);
 
 const mainLinks = [
-  { href: `${base}/contest`, label: t.contest, match: `${base}/contest` },
+  // Contest overview is the locale home (`/en/`); only exact path is active.
+  { href: base, label: t.contest, match: base, exact: true },
   { href: `${base}/contest/rules`, label: t.rules, match: `${base}/contest/rules` },
   { href: `${base}/contest/faq`, label: t.faq, match: `${base}/contest/faq` },
   {
@@ -25,7 +26,8 @@ const mainLinks = [
   { href: `${base}/about`, label: t.about, match: `${base}/about` },
 ];
 
-function isMainActive(match: string) {
+function isMainActive(match: string, exact = false) {
+  if (exact) return path === match;
   if (!(path === match || path.startsWith(`${match}/`))) return false;
   // Prefer a more specific main-link match (e.g. FAQ/Rules over Contest).
   return !mainLinks.some(
@@ -38,7 +40,7 @@ function isMainActive(match: string) {
 ---
 <nav class="fixed top-0 left-0 w-full z-50 bg-chrome backdrop-blur-sm border-b-2 border-on-chrome/20">
   <div class="flex justify-between items-center w-full px-margin py-sm max-w-7xl mx-auto">
-    <a href={`${base}/contest/`} class="flex items-center gap-sm shrink-0">
+    <a href={`${base}/`} class="flex items-center gap-sm shrink-0">
       <img
         src="/img/logo-beoi-white.png"
         alt="beOI"
@@ -55,7 +57,7 @@ function isMainActive(match: string) {
           href={`${link.href}/`}
           class:list={[
             'font-label text-label-md transition-colors',
-            isMainActive(link.match)
+            isMainActive(link.match, link.exact)
               ? 'text-on-chrome border-b-2 border-on-chrome pb-1'
               : 'text-on-chrome hover:underline',
           ]}
@@ -104,7 +106,7 @@ function isMainActive(match: string) {
           href={`${link.href}/`}
           class:list={[
             'font-label text-label-md py-sm transition-colors',
-            isMainActive(link.match)
+            isMainActive(link.match, link.exact)
               ? 'text-on-chrome border-l-2 border-on-chrome pl-sm'
               : 'text-on-chrome/90 hover:text-on-chrome pl-sm border-l-2 border-transparent',
           ]}
