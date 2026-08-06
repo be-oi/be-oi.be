@@ -2,16 +2,204 @@
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Nav from '../../../components/Nav.astro';
 import Footer from '../../../components/Footer.astro';
+import Icon from '../../../components/Icon.astro';
+
+// Heading scale shared across the page so levels stay distinct.
+const titlePage = 'font-headline text-headline-xl text-on-surface';
+const titleSection = 'font-headline text-headline-lg text-on-surface';
+const titleSubsection = 'font-headline text-headline-md text-on-surface';
+
+const olympiads = [
+  { abbr: 'IOI', name: 'International Olympiad in Informatics' },
+  { abbr: 'EGOI', name: 'European Girls’ Olympiad in Informatics' },
+  { abbr: 'WEOI', name: 'Western European Olympiad in Informatics' },
+  { abbr: 'EJOI', name: 'European Junior Olympiad in Informatics' },
+];
+
+const journey = [
+  {
+    icon: 'code' as const,
+    title: 'Join the pool',
+    body: 'Show motivation and skill to enter the continuous beCP training group of contestants.',
+    href: '#join',
+  },
+  {
+    icon: 'psychology' as const,
+    title: 'Train year-round',
+    body: 'Camps, courses, and coaching help you progress in competitive programming over time.',
+    href: '#training',
+  },
+  {
+    icon: 'emoji_events' as const,
+    title: 'Belgian selection',
+    body: 'Performance in training and selection contests feeds into who can represent Belgium.',
+    href: '#selection',
+  },
+  {
+    icon: 'language' as const,
+    title: 'International olympiads',
+    body: 'Selected contestants may join Belgian delegations at IOI, EGOI, WEOI, and EJOI.',
+    href: '#selection',
+  },
+];
+
+const laterSections = [
+  {
+    id: 'join',
+    title: 'How to join the beCP training pool?',
+  },
+  {
+    id: 'training',
+    title: 'How does that training work?',
+  },
+  {
+    id: 'selection',
+    title: 'How does the selection for International Olympiad work?',
+  },
+];
 ---
-<BaseLayout title="Competitive programming – beOI" lang="en">
+<BaseLayout title="Competitive programming – beCP – beOI" lang="en">
   <Nav lang="en" />
 
-  <main class="pt-32 pb-xl px-margin max-w-7xl mx-auto">
-    <section class="max-w-2xl">
-      <h1 class="font-headline text-headline-xl text-on-surface mb-md">Competitive programming</h1>
-      <p class="text-body-lg font-body text-on-surface-variant">
-        Resources and information about competitive programming will appear here.
-      </p>
+  <main class="pt-32 pb-0 overflow-x-clip">
+    <!-- Hero -->
+    <section class="px-margin max-w-7xl mx-auto mb-xl">
+      <div class="max-w-3xl mx-auto text-center">
+        <h1 class={`${titlePage} mb-md`}>
+          Competitive programming training
+        </h1>
+        <p class="text-body-lg font-body text-on-surface-variant">
+          Parallel to the main beOI contest, beOI organises <strong class="text-on-surface font-semibold">beCP</strong>:
+          continuous training for a pool of contestants aiming to represent Belgium
+          at international competitive programming olympiads.
+        </p>
+      </div>
+    </section>
+
+    <!-- What is beCP -->
+    <section class="px-margin max-w-7xl mx-auto mb-xl">
+      <div class="max-w-3xl mx-auto">
+        <h2 class={`${titleSection} mb-md text-center`}>What is beCP?</h2>
+        <div class="space-y-md text-body-md font-body text-on-surface-variant">
+          <p>
+            The Belgian Olympiad in Informatics runs a public contest open to a wide audience.
+            Alongside that path, <strong class="text-on-surface font-semibold">beCP</strong>
+            (Belgian Competitive Programming) is a longer-term training track for students who want to go further
+            in algorithmic problem-solving.
+          </p>
+          <p>
+            The objective is clear: prepare and select contestants who can represent Belgium
+            at major international olympiads, including:
+          </p>
+        </div>
+
+        <ul class="mt-md grid gap-sm sm:grid-cols-2 list-none p-0 m-0">
+          {olympiads.map((o, i) => (
+            <li
+              class:list={[
+                'bg-surface-container-lowest border-2 border-outline-variant/40 px-md py-sm stamp-shadow',
+                i % 2 === 0 ? 'wobbly-rotation-1' : 'wobbly-rotation-2',
+              ]}
+            >
+              <span class="font-headline text-headline-md text-primary block">{o.abbr}</span>
+              <span class="text-body-md font-body text-on-surface-variant">{o.name}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <!-- Journey overview (inspired by legacy beCP steps) -->
+    <section
+      class="relative bg-white border-y-2 border-outline-variant/30 mb-0"
+      aria-labelledby="journey-heading"
+    >
+      <div
+        class="pointer-events-none absolute inset-0 overflow-hidden"
+        aria-hidden="true"
+      >
+        <div class="absolute -right-8 top-12 w-40 h-40 rotate-12 bg-primary-container/25 hand-drawn-border" />
+        <div class="absolute -left-10 bottom-10 w-32 h-32 -rotate-6 bg-secondary-container/20 hand-drawn-border" />
+      </div>
+
+      <div class="relative px-margin max-w-7xl mx-auto py-xl">
+        <header class="text-center max-w-2xl mx-auto mb-lg">
+          <h2 id="journey-heading" class={titleSection}>
+            From training pool to world stage
+          </h2>
+          <p class="text-body-md font-body text-on-surface-variant mt-sm">
+            beCP is a multi-year path: join the group, train regularly, compete for selection,
+            and — if selected — fly the Belgian colours abroad.
+          </p>
+        </header>
+
+        <ol class="grid gap-md sm:grid-cols-2 lg:grid-cols-4 list-none p-0 m-0">
+          {journey.map((step, i) => (
+            <li class="relative">
+              <a
+                href={step.href}
+                class="block h-full bg-surface-container-low border-2 border-outline-variant/30 p-md no-underline text-inherit transition-transform hover:-translate-y-0.5 hover:border-primary/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+              >
+                <div class="flex items-center gap-sm mb-sm">
+                  <span
+                    class="inline-flex items-center justify-center w-10 h-10 bg-primary text-on-primary"
+                    aria-hidden="true"
+                  >
+                    <Icon name={step.icon} class="text-xl" />
+                  </span>
+                  <span class="font-label text-label-md tracking-wide text-on-surface-variant">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                </div>
+                <h3 class={`${titleSubsection} mb-xs`}>{step.title}</h3>
+                <p class="text-body-md font-body text-on-surface-variant m-0">
+                  {step.body}
+                </p>
+              </a>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <!-- Detail sections (content coming later) -->
+    <div class="px-margin max-w-7xl mx-auto py-xl flex flex-col gap-xl">
+      {laterSections.map((section) => (
+        <section
+          id={section.id}
+          class="scroll-mt-28 max-w-3xl mx-auto w-full"
+          aria-labelledby={`${section.id}-heading`}
+        >
+          <h2 id={`${section.id}-heading`} class={`${titleSection} mb-md`}>
+            {section.title}
+          </h2>
+          <p
+            class="text-body-md font-body text-on-surface-variant border-l-4 border-primary/40 pl-md m-0"
+          >
+            Information will come soon.
+          </p>
+        </section>
+      ))}
+    </div>
+
+    <!-- Contact -->
+    <section class="bg-chrome text-on-chrome">
+      <div class="px-margin max-w-7xl mx-auto py-xl">
+        <div class="text-center max-w-2xl mx-auto">
+          <h2 class="font-headline text-headline-lg text-on-chrome mb-sm">
+            Questions?
+          </h2>
+          <p class="text-body-md font-body text-on-chrome/90 mb-md">
+            Reach the beCP team about the training pool, camps, or international selection.
+          </p>
+          <a
+            href="mailto:becp@be-oi.be"
+            class="inline-block font-label text-label-md tracking-wide px-6 py-3 bg-on-chrome text-chrome border-2 border-on-chrome hover:bg-transparent hover:text-on-chrome transition-colors"
+          >
+            Contact us
+          </a>
+        </div>
+      </div>
     </section>
   </main>
   <Footer />
