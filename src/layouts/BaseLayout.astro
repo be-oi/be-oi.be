@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import {
   contentLocales,
+  defaultLocale,
   localizePath,
   stripLocalePrefix,
   xDefaultLocale,
@@ -23,7 +24,7 @@ const defaultDescription =
 const {
   title = 'beOI',
   description = defaultDescription,
-  lang = 'en',
+  lang = defaultLocale,
   image = '/img/logo-beoi.png',
   alternateLocales = contentLocales,
 } = Astro.props;

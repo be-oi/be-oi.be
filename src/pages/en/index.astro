@@ -35,14 +35,16 @@ import { contestSteps } from '../../data/contest-steps';
     <!-- Horizontal timeline -->
     <section aria-label="Contest journey timeline" class="relative mb-xl max-w-[900px] mx-auto w-full">
       <!--
-        Explicit equal 1fr columns for every step; fixed tracks for the gaps
+        Explicit equal columns for every step; fixed tracks for the gaps
         (after start, after qualif, after final). Subgrid keeps label tops aligned.
         Each sprite sits in a uniform aspect-square canvas with %-based placement
         so vertical alignment scales with the viewport.
+        minmax(5.5rem, 1fr) keeps each step column usable on narrow phones (~600px
+        min track total) so overflow-x-auto can scroll instead of crushing content.
       -->
       <div
         class="grid overflow-x-auto pb-md snap-x snap-mandatory"
-        style="grid-template-columns: minmax(0,1fr) 1.5rem minmax(0,1fr) 1.5rem minmax(0,1fr) minmax(0,1fr) minmax(0,1fr) 1.5rem minmax(0,1fr); grid-template-rows: auto auto auto;"
+        style="grid-template-columns: minmax(5.5rem,1fr) 1.5rem minmax(5.5rem,1fr) 1.5rem minmax(5.5rem,1fr) minmax(5.5rem,1fr) minmax(5.5rem,1fr) 1.5rem minmax(5.5rem,1fr); grid-template-rows: auto auto auto;"
       >
         {contestSteps.map((step) => (
           <a

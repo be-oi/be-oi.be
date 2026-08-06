@@ -3,15 +3,29 @@ import { mailingListStrings } from '../data/ui-i18n';
 
 interface Props {
   lang: string;
+  /**
+   * Base id for the section, form, and status messages.
+   * Must be unique if more than one form is rendered on the same page.
+   */
+  id?: string;
 }
 
-const { lang } = Astro.props;
+const { lang, id: idBase = 'newsletter' } = Astro.props;
 const t = mailingListStrings(lang);
-const formId = 'newsletter-form';
+const formId = `${idBase}-form`;
+const emailId = `${idBase}-email`;
+const alreadyId = `${idBase}-already`;
+const successId = `${idBase}-success`;
+const failureId = `${idBase}-failure`;
 const actionUrl = 'https://bvduaeykw6ah6ni7xoykyi3wt40ntdrx.lambda-url.eu-central-1.on.aws/';
 ---
 
-<section id="newsletter" aria-label={t.sectionAria} class="mb-xl max-w-2xl mx-auto text-center scroll-mt-28">
+<section
+  id={idBase}
+  data-mailing-list
+  aria-label={t.sectionAria}
+  class="mb-xl max-w-2xl mx-auto text-center scroll-mt-28"
+>
   <h2 class="font-headline text-headline-md text-on-surface mb-sm">
     {t.heading}
   </h2>
@@ -25,9 +39,9 @@ const actionUrl = 'https://bvduaeykw6ah6ni7xoykyi3wt40ntdrx.lambda-url.eu-centra
     method="post"
     class="flex flex-col sm:flex-row gap-sm items-stretch sm:items-center justify-center"
   >
-    <label for={`${formId}-email`} class="sr-only">{t.emailLabel}</label>
+    <label for={emailId} class="sr-only">{t.emailLabel}</label>
     <input
-      id={`${formId}-email`}
+      id={emailId}
       type="email"
       name="email"
       required
@@ -48,13 +62,13 @@ const actionUrl = 'https://bvduaeykw6ah6ni7xoykyi3wt40ntdrx.lambda-url.eu-centra
   </form>
 
   <div class="mt-md space-y-xs font-body text-body-md font-medium" aria-live="polite">
-    <p id="form-already" class="hidden text-tertiary">
+    <p id={alreadyId} data-ml-status="already" class="hidden text-tertiary">
       {t.already}
     </p>
-    <p id="form-success" class="hidden text-secondary">
+    <p id={successId} data-ml-status="success" class="hidden text-secondary">
       {t.success}
     </p>
-    <p id="form-failure" class="hidden text-error">
+    <p id={failureId} data-ml-status="failure" class="hidden text-error">
       {t.failure}
     </p>
   </div>
@@ -62,75 +76,80 @@ const actionUrl = 'https://bvduaeykw6ah6ni7xoykyi3wt40ntdrx.lambda-url.eu-centra
 
 <script is:inline>
   (function () {
-    var form = document.getElementById('newsletter-form');
-    if (!form) return;
+    document.querySelectorAll('[data-mailing-list]').forEach(function (root) {
+      if (root.getAttribute('data-ml-bound') === '1') return;
+      root.setAttribute('data-ml-bound', '1');
 
-    var already = document.getElementById('form-already');
-    var success = document.getElementById('form-success');
-    var failure = document.getElementById('form-failure');
-    var button = form.querySelector('button[type="submit"]');
+      var form = root.querySelector('form');
+      if (!form) return;
 
-    function hideAlerts() {
-      already.classList.add('hidden');
-      success.classList.add('hidden');
-      failure.classList.add('hidden');
-    }
+      var already = root.querySelector('[data-ml-status="already"]');
+      var success = root.querySelector('[data-ml-status="success"]');
+      var failure = root.querySelector('[data-ml-status="failure"]');
+      var button = form.querySelector('button[type="submit"]');
 
-    function show(el) {
-      el.classList.remove('hidden');
-    }
+      function hideAlerts() {
+        already.classList.add('hidden');
+        success.classList.add('hidden');
+        failure.classList.add('hidden');
+      }
 
-    // Listmonk/Lambda: 409 Conflict and messages mentioning already exists/subscribed.
-    function isAlreadySubscribed(status, response) {
-      if (status === 409) return true;
-      var message = response && response.message;
-      if (typeof message !== 'string') return false;
-      return /already\s*(exists|subscribed)/i.test(message);
-    }
+      function show(el) {
+        el.classList.remove('hidden');
+      }
 
-    form.addEventListener('submit', function (event) {
-      event.preventDefault();
-      hideAlerts();
+      // Listmonk/Lambda: 409 Conflict and messages mentioning already exists/subscribed.
+      function isAlreadySubscribed(status, response) {
+        if (status === 409) return true;
+        var message = response && response.message;
+        if (typeof message !== 'string') return false;
+        return /already\s*(exists|subscribed)/i.test(message);
+      }
 
-      if (button) button.disabled = true;
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        hideAlerts();
 
-      var body = new URLSearchParams(new FormData(form));
+        if (button) button.disabled = true;
 
-      fetch(form.action, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: body.toString(),
-      })
-        .then(function (res) {
-          return res.json().then(
-            function (response) {
-              return { res: res, response: response };
-            },
-            function () {
-              return { res: res, response: null };
-            },
-          );
+        var body = new URLSearchParams(new FormData(form));
+
+        fetch(form.action, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: body.toString(),
         })
-        .then(function (result) {
-          var res = result.res;
-          var response = result.response;
+          .then(function (res) {
+            return res.json().then(
+              function (response) {
+                return { res: res, response: response };
+              },
+              function () {
+                return { res: res, response: null };
+              },
+            );
+          })
+          .then(function (result) {
+            var res = result.res;
+            var response = result.response;
 
-          if (isAlreadySubscribed(res.status, response)) {
-            show(already);
-            return;
-          }
-          if (res.ok && response && response.data) {
-            show(success);
-            return;
-          }
-          show(failure);
-        })
-        .catch(function () {
-          show(failure);
-        })
-        .finally(function () {
-          if (button) button.disabled = false;
-        });
+            if (isAlreadySubscribed(res.status, response)) {
+              show(already);
+              return;
+            }
+            if (res.ok && response && response.data) {
+              show(success);
+              return;
+            }
+            show(failure);
+          })
+          .catch(function () {
+            show(failure);
+          })
+          .finally(function () {
+            if (button) button.disabled = false;
+          });
+      });
     });
   })();
 </script>

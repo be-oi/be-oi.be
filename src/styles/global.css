@@ -13,8 +13,10 @@
 @import "@fontsource/bricolage-grotesque/latin-600.css";
 @import "@fontsource/bricolage-grotesque/latin-ext-600.css";
 
-html {
-  scroll-behavior: smooth;
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 @theme {
@@ -144,8 +146,10 @@ html {
   }
 }
 
-.float-animation {
-  animation: float 4s ease-in-out infinite;
+@media (prefers-reduced-motion: no-preference) {
+  .float-animation {
+    animation: float 4s ease-in-out infinite;
+  }
 }
 
 .scribble-underline {
