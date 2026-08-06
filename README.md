@@ -2,13 +2,9 @@
 
 This repository contains the public website for **beOI** (Belgian Olympiad in Informatics / Olympiade belge d'informatique / Belgische olympiade in de informatica).
 
-The site is **static**: pages are written as files, then built into plain HTML that is hosted on Amazon S3. No server-side code runs in production.
+The site is **static**: pages are written as files, then built into plain HTML that is hosted on Amazon S3 (served via CloudFront at <https://www.be-oi.be>). No server-side code runs in production.
 
-The site is bilingual:
-
-- French: `/fr/`
-- Dutch: `/nl/`
-- The root `/` is a language picker (and auto-redirects based on browser language when possible).
+Locales are configured for French, Dutch, and English (`/fr/`, `/nl/`, `/en/`). **English has the real site content today**; `/`, `/fr/`, and `/nl/` redirect to `/en/` until translations ship.
 
 Built with [Astro](https://astro.build/).
 
@@ -56,13 +52,14 @@ To stop the server, press `Ctrl+C` in the terminal.
 | What | Path |
 |------|------|
 | Shared HTML layout (head, body shell) | `src/layouts/BaseLayout.astro` |
-| Language picker (root page) | `src/pages/index.astro` |
-| French pages | `src/pages/fr/` |
-| Dutch pages | `src/pages/nl/` |
+| Root page (redirects to English) | `src/pages/index.astro` |
+| English pages (primary content) | `src/pages/en/` |
+| French pages (redirect stubs for now) | `src/pages/fr/` |
+| Dutch pages (redirect stubs for now) | `src/pages/nl/` |
 | Contest step images (on the site) | `public/img/steps/` |
 | Contest step image masters (not deployed) | `image-sources/steps/` |
 
-When you add a new page, create it in **both** `fr/` and `nl/` so the two languages stay in sync (for example `src/pages/fr/about.astro` and `src/pages/nl/about.astro`).
+Edit content under `src/pages/en/` first. When French or Dutch pages are ready, add parallel paths (for example `src/pages/fr/about/index.astro` next to `src/pages/en/about/index.astro`) and register the locale in `contentLocales` (`src/data/i18n.ts`) and the sitemap settings in `astro.config.mjs`.
 
 Install [EditorConfig](https://editorconfig.org/) in your editor if you can — it applies the formatting rules from `.editorconfig` automatically.
 
@@ -84,7 +81,7 @@ npm run preview
 
 ### Automatic (recommended)
 
-On every push to the `main` branch, GitHub Actions builds the site and uploads `dist/` to the S3 bucket `www.be-oi.be` (region `eu-central-1`).
+On every push to the `main` branch, GitHub Actions builds the site, syncs `dist/` to the S3 bucket **`be-oi.be`** (region `eu-central-1`), and invalidates CloudFront distribution **`E1HFWB6I0WMJ8D`** so visitors see the new files.
 
 Required repository secrets:
 
@@ -95,11 +92,12 @@ See [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml).
 
 ### Manual
 
-If you have the [AWS CLI](https://aws.amazon.com/cli/) configured with credentials that can write to the bucket:
+If you have the [AWS CLI](https://aws.amazon.com/cli/) configured with credentials that can write to the bucket and invalidate CloudFront:
 
 ```bash
 npm run build
-aws s3 sync dist/ s3://www.be-oi.be --delete --region eu-central-1
+aws s3 sync dist/ s3://be-oi.be/ --delete --region eu-central-1
+aws cloudfront create-invalidation --distribution-id E1HFWB6I0WMJ8D --paths "/*"
 ```
 
 `--delete` removes files on S3 that are no longer in `dist/`.

@@ -6,8 +6,8 @@ This file describes how to work on the be-oi.be website so automated agents and 
 
 - **What**: Public static website for beOI (Belgian Olympiad in Informatics).
 - **Stack**: [Astro](https://astro.build/) (static site generator), npm, Node.js 22+.
-- **Hosting**: Amazon S3 bucket `www.be-oi.be`, region `eu-central-1`.
-- **Languages**: French (`/fr/`) and Dutch (`/nl/`). Root `/` is a language picker with optional browser-language redirect.
+- **Hosting**: S3 bucket `be-oi.be` (region `eu-central-1`) behind CloudFront distribution `E1HFWB6I0WMJ8D`. Public URL: `https://www.be-oi.be` (`site` in `astro.config.mjs`).
+- **Languages**: Astro locales `fr`, `nl`, `en` (all URL-prefixed). **Only English has real page content today** under `src/pages/en/`. Root `/`, `/fr/`, and `/nl/` redirect to `/en/` until translations ship.
 
 Do **not** introduce a server runtime, SSR adapters, or a CMS unless explicitly requested. Keep the site statically buildable with `npm run build`.
 
@@ -21,7 +21,7 @@ npm run build        # write static output to dist/
 npm run preview      # preview dist/ locally
 ```
 
-CI deploy (on push to `main`): install → check → build → `aws s3 sync dist/ s3://www.be-oi.be --delete`.
+CI deploy (on push to `main`): install → check → build → `aws s3 sync dist/ s3://be-oi.be/ --delete` → CloudFront invalidation of `/*` on distribution `E1HFWB6I0WMJ8D`.
 
 ## Directory layout
 
@@ -32,9 +32,10 @@ src/
   layouts/
     BaseLayout.astro      # shared HTML document shell
   pages/
-    index.astro           # language picker (/)
-    fr/                   # French routes (/fr/...)
-    nl/                   # Dutch routes (/nl/...)
+    index.astro           # redirects to /en/ (until language picker returns)
+    en/                   # English routes (/en/...) — primary content today
+    fr/                   # French routes (/fr/...) — redirect stubs until content ships
+    nl/                   # Dutch routes (/nl/...) — redirect stubs until content ships
 public/                   # static assets copied as-is into dist/ (served as-is)
   favicon.ico             # browser tab icon (+ PNG sizes, apple-touch-icon)
   robots.txt              # crawl policy + sitemap pointer
@@ -43,7 +44,7 @@ image-sources/            # high-res / masters for assets (not deployed)
   steps/                  # sources for public/img/steps/ (regenerate site PNGs from these)
 dist/                     # build output (gitignored); also sitemap-*.xml from @astrojs/sitemap
 .github/workflows/
-  deploy.yml              # build + S3 sync
+  deploy.yml              # build + S3 sync + CloudFront invalidation
 ```
 
 ### Contest step images
@@ -53,11 +54,11 @@ dist/                     # build output (gitignored); also sitemap-*.xml from @
 
 ## i18n conventions
 
-- Astro i18n is configured in `astro.config.mjs` with `locales: ['fr', 'nl', 'en']` and `prefixDefaultLocale: true`.
-- Locale pages live under `src/pages/fr/`, `src/pages/nl/`, and `src/pages/en/`.
-- When adding or renaming a page, update **all** content locales so URLs stay parallel (e.g. `/fr/faq/` and `/nl/faq/`).
+- Astro i18n is configured in `astro.config.mjs` with `locales: ['fr', 'nl', 'en']` and `prefixDefaultLocale: true` (`defaultLocale: 'fr'`).
+- **Primary content today**: edit pages under `src/pages/en/`. French and Dutch folders only have redirect stubs until translations exist.
+- When shipping a locale, keep URL paths parallel across locales that have content (e.g. `/en/faq/` and later `/fr/faq/`). Update every **content** locale listed in `contentLocales` (`src/data/i18n.ts`), not redirect-only stubs.
 - Set `lang` on `BaseLayout` to `"fr"`, `"nl"`, or `"en"` for locale pages; pass a page-specific `description` for SEO.
-- Head metadata (description, Open Graph, Twitter, canonical, hreflang, favicon) is emitted by `BaseLayout`. Hreflang only lists locales in `contentLocales` (`src/data/i18n.ts`) until translations ship — add a locale there and in the sitemap filter when real pages exist.
+- Head metadata (description, Open Graph, Twitter, canonical, hreflang, favicon) is emitted by `BaseLayout`. Hreflang and the sitemap only include locales in `contentLocales` until translations ship — add a locale there and enable it in the `astro.config.mjs` sitemap filter/`i18n.locales` when real pages exist.
 - Prefer keeping copy in the page files (or future shared content modules) rather than hard-coding only one language.
 
 ## Coding conventions
@@ -70,8 +71,16 @@ dist/                     # build output (gitignored); also sitemap-*.xml from @
 
 ## Deployment notes for agents
 
-- Production deploy is via GitHub Actions using secrets `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`.
-- Manual equivalent: `npm run build && aws s3 sync dist/ s3://www.be-oi.be --delete --region eu-central-1`.
+- Production deploy is via GitHub Actions (see [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml)) using secrets `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`.
+- Deploy targets **`s3://be-oi.be/`** (not `www.be-oi.be`), then invalidates CloudFront so CDN edge caches refresh.
+- Manual equivalent:
+
+```bash
+npm run build
+aws s3 sync dist/ s3://be-oi.be/ --delete --region eu-central-1
+aws cloudfront create-invalidation --distribution-id E1HFWB6I0WMJ8D --paths "/*"
+```
+
 - Never print or invent credentials. Assume secrets are already configured in GitHub / the local AWS CLI profile.
 
 ## Out of scope (for now)
