@@ -71,6 +71,96 @@ function isMainActive(match: string) {
       >
         <Icon name="language" />
       </button>
+      <button
+        type="button"
+        id="nav-menu-toggle"
+        class="md:hidden text-on-chrome border-b-2 border-transparent hover:border-on-chrome text-2xl leading-none"
+        aria-label="Open menu"
+        aria-expanded="false"
+        aria-controls="nav-mobile-panel"
+      >
+        <span data-icon="menu" class="block">
+          <Icon name="menu" />
+        </span>
+        <span data-icon="close" class="hidden">
+          <Icon name="close" />
+        </span>
+      </button>
+    </div>
+  </div>
+
+  <div
+    id="nav-mobile-panel"
+    class="md:hidden hidden border-t border-on-chrome/20 bg-chrome"
+    hidden
+  >
+    <div class="flex flex-col max-w-7xl mx-auto px-margin py-sm">
+      {mainLinks.map((link) => (
+        <a
+          href={`${link.href}/`}
+          class:list={[
+            'font-label text-label-md py-sm transition-colors',
+            isMainActive(link.match)
+              ? 'text-on-chrome border-l-2 border-on-chrome pl-sm'
+              : 'text-on-chrome/90 hover:text-on-chrome pl-sm border-l-2 border-transparent',
+          ]}
+        >
+          {link.label}
+        </a>
+      ))}
     </div>
   </div>
 </nav>
+
+<script is:inline>
+  (function () {
+    const toggle = document.getElementById('nav-menu-toggle');
+    const panel = document.getElementById('nav-mobile-panel');
+    if (!toggle || !panel) return;
+
+    const menuIcon = toggle.querySelector('[data-icon="menu"]');
+    const closeIcon = toggle.querySelector('[data-icon="close"]');
+
+    function setOpen(open) {
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      panel.classList.toggle('hidden', !open);
+      if (open) {
+        panel.removeAttribute('hidden');
+      } else {
+        panel.setAttribute('hidden', '');
+      }
+      menuIcon?.classList.toggle('hidden', open);
+      menuIcon?.classList.toggle('block', !open);
+      closeIcon?.classList.toggle('hidden', !open);
+      closeIcon?.classList.toggle('block', open);
+      document.body.classList.toggle('overflow-hidden', open);
+    }
+
+    function isOpen() {
+      return toggle.getAttribute('aria-expanded') === 'true';
+    }
+
+    toggle.addEventListener('click', function () {
+      setOpen(!isOpen());
+    });
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && isOpen()) {
+        setOpen(false);
+        toggle.focus();
+      }
+    });
+
+    // Close when switching to desktop layout so the hamburger state doesn't stick.
+    const mq = window.matchMedia('(min-width: 768px)');
+    function onViewportChange(event) {
+      if (event.matches && isOpen()) setOpen(false);
+    }
+    if (typeof mq.addEventListener === 'function') {
+      mq.addEventListener('change', onViewportChange);
+    } else {
+      mq.addListener(onViewportChange);
+    }
+  })();
+</script>
