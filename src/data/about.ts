@@ -49,13 +49,6 @@ export const members: LogoLink[] = [
   },
 ];
 
-export const administrators = [
-  'Damien Leroy',
-  'Bart Jacobs',
-  'Bas Ketsman',
-  'Ludovic Galant',
-] as const;
-
 export function logoSrc(image: string): string {
   return `/img/ext-logos/${image}`;
 }

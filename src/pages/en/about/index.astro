@@ -3,88 +3,115 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Nav from '../../../components/Nav.astro';
 import Footer from '../../../components/Footer.astro';
 import {
-  administrators,
   logoSrc,
   members,
   supporters,
 } from '../../../data/about';
+
+// Heading scale shared across the page so levels stay distinct.
+// h1 page · h2 section · h3 subsection
+const titlePage = 'font-headline text-headline-xl text-on-surface';
+const titleSection = 'font-headline text-headline-lg text-on-surface';
+// Below section titles, but still readable body-scale headlines (not tiny labels).
+const titleSubsection = 'font-headline text-headline-md text-on-surface';
 ---
 <BaseLayout title="About us – beOI" lang="en">
   <Nav lang="en" />
 
-  <main class="pt-32 pb-xl px-margin max-w-7xl mx-auto">
+  <main class="pt-32 pb-0 overflow-x-clip">
     <!-- Hero -->
-    <section class="mb-xl max-w-3xl">
-      <h1 class="font-headline text-headline-xl text-on-surface mb-md">
-        About beOI
-      </h1>
-      <p class="text-body-lg font-body text-on-surface-variant">
-        The Belgian Olympiad in Informatics is organised by the non-profit association beOI.
-        It is only possible thanks to the support of its members, its sponsors, and the time
-        devoted by its volunteers.
-      </p>
-    </section>
-
-    <!-- Support -->
-    <section id="sponsors" class="scroll-mt-36 py-lg border-t-2 border-outline-variant/40">
-      <div class="max-w-3xl mb-lg">
-        <h2 class="font-headline text-headline-lg text-on-surface mb-sm">
-          Support
-        </h2>
-        <p class="text-body-md font-body text-on-surface-variant">
-          We are grateful for the support of the Flemish Government and the Fédération
-          Wallonie-Bruxelles, which helps us fund training and offer prizes to participants.
+    <section class="px-margin max-w-7xl mx-auto mb-xl">
+      <div class="max-w-3xl mx-auto text-center">
+        <h1 class={`${titlePage} mb-md`}>
+          About beOI
+        </h1>
+        <p class="text-body-lg font-body text-on-surface-variant">
+          The Belgian Olympiad in Informatics is organised by the non-profit association of
+          the same name. It is only possible thanks to the support of its members, its sponsors,
+          and the time devoted by its volunteers.
         </p>
-      </div>
-
-      {/* Solid white so logos with white image backgrounds blend in (no floating rectangles). */}
-      <div class="bg-white mb-lg px-md py-lg sm:px-lg">
-        <ul class="flex flex-wrap items-center justify-center gap-x-xl gap-y-md list-none p-0 m-0">
-          {supporters.map((s) => (
-            <li>
-              <a
-                href={s.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="flex items-center justify-center h-20 sm:h-24 transition-opacity hover:opacity-70"
-              >
-                <img
-                  src={logoSrc(s.image)}
-                  alt={s.name}
-                  class="max-h-full max-w-[220px] w-auto object-contain"
-                />
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      <div class="text-center max-w-2xl mx-auto">
-        <p class="text-body-md font-body text-on-surface-variant mb-md">
-          Interested in becoming a sponsor for this edition, or in offering a prize?
-        </p>
-        <a
-          href="mailto:sponsors@be-oi.be"
-          class="inline-block font-label text-label-md tracking-wide px-6 py-3 bg-primary text-on-primary border-2 border-primary hover:bg-primary-container hover:text-on-primary-container transition-colors"
-        >
-          Want to sponsor us? Contact us
-        </a>
       </div>
     </section>
 
-    <!-- Contact -->
-    <section id="contact" class="scroll-mt-36 py-lg border-t-2 border-outline-variant/40">
+    <!-- Support — full-bleed white band -->
+    <section
+      id="sponsors"
+      class="scroll-mt-28 relative bg-white border-y-2 border-outline-variant/30"
+    >
+      <!-- Quiet craft accents (full section white — logos blend, no inset frame) -->
+      <div
+        class="pointer-events-none absolute inset-0 overflow-hidden"
+        aria-hidden="true"
+      >
+        <div class="absolute -right-8 top-12 w-40 h-40 rotate-12 bg-primary-container/25 hand-drawn-border" />
+        <div class="absolute -left-10 bottom-10 w-32 h-32 -rotate-6 bg-secondary-container/20 hand-drawn-border" />
+      </div>
+
+      <div class="relative px-margin max-w-7xl mx-auto py-xl">
+        <header class="text-center max-w-2xl mx-auto mb-lg">
+          <h2 class={titleSection}>
+            Support &amp; Sponsoring
+          </h2>
+        </header>
+
+        <!-- Public support (travel) -->
+        <div class="text-center mb-lg">
+          <h3 class={`${titleSubsection} mb-sm`}>
+            Public funding
+          </h3>
+          <ul class="flex flex-wrap items-center justify-center gap-x-lg gap-y-md list-none p-0 m-0 mt-sm">
+            {supporters.map((s, i) => (
+              <li class:list={[i === 0 ? 'wobbly-rotation-1' : 'wobbly-rotation-2']}>
+                <a
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="group block transition-transform duration-300 hover:-translate-y-0.5"
+                >
+                  <img
+                    src={logoSrc(s.image)}
+                    alt={s.name}
+                    class="h-14 sm:h-16 w-auto max-w-[200px] object-contain transition-opacity group-hover:opacity-85"
+                  />
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <!-- Private sponsors -->
+        <div class="text-center max-w-2xl mx-auto">
+          <h3 class={`${titleSubsection} mb-sm`}>
+            Sponsors
+          </h3>
+          <p class="text-body-md font-body text-on-surface-variant mb-md">
+            We do not currently have sponsors.
+            Interested in supporting this edition, or offering a prize?
+            {' '}
+            <a href="mailto:sponsors@be-oi.be" class="text-primary font-semibold hover:underline">
+              Contact us
+            </a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact (craft-paper again) -->
+    <section
+      id="contact"
+      class="scroll-mt-28 py-xl px-margin max-w-7xl mx-auto"
+    >
       <div class="grid gap-lg lg:grid-cols-2 lg:items-start">
         <div>
-          <h2 class="font-headline text-headline-lg text-on-surface mb-sm">
-            Contact details
+          <h2 class={`${titleSection} mb-sm`}>
+            Contact
           </h2>
           <p class="text-body-md font-body text-on-surface-variant">
             Feel free to contact us with any questions about the association or our activities.
           </p>
         </div>
-        <div class="bg-surface-container-low border-2 border-outline-variant/40 p-md font-body text-body-md text-on-surface">
-          <p class="font-headline text-headline-md mb-sm">beOI ASBL/VZW</p>
+        <div class="bg-surface-container-lowest border-2 border-outline-variant/40 p-md font-body text-body-md text-on-surface stamp-shadow">
+          <p class="font-headline text-headline-md text-on-surface mb-sm">beOI ASBL/VZW</p>
           <p class="text-on-surface-variant leading-relaxed mb-md">
             Celestijnenlaan 200A bus 4078<br />
             3001 Leuven<br />
@@ -112,68 +139,58 @@ import {
       </div>
     </section>
 
-    <!-- Members -->
-    <section id="members" class="scroll-mt-36 py-lg border-t-2 border-outline-variant/40">
-      <div class="max-w-3xl mb-lg">
-        <h2 class="font-headline text-headline-lg text-on-surface mb-sm">
-          Members
-        </h2>
-        <p class="text-body-md font-body text-on-surface-variant">
-          beOI brings together higher-education institutions across Belgium that support
-          informatics education and the contest.
-        </p>
+    <!-- Institutional members — full-bleed white band -->
+    <section
+      id="members"
+      class="scroll-mt-28 relative bg-white border-y-2 border-outline-variant/30"
+    >
+      <div
+        class="pointer-events-none absolute inset-0 overflow-hidden"
+        aria-hidden="true"
+      >
+        <div class="absolute right-8 top-8 w-24 h-24 rotate-6 bg-tertiary-container/30 hand-drawn-border" />
+        <div class="absolute left-[8%] bottom-16 w-16 h-16 -rotate-12 bg-primary-container/30 hand-drawn-border" />
       </div>
 
-      {/* Continuous white panel: logos with white backgrounds no longer show as separate tiles. */}
-      <div class="bg-white mb-lg px-sm py-md sm:px-md">
-        <ul class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-sm gap-y-md list-none p-0 m-0">
+      <div class="relative px-margin max-w-7xl mx-auto py-xl">
+        <header class="text-center max-w-2xl mx-auto mb-lg">
+          <h2 class={`${titleSection} mb-sm`}>
+            Institutional Members
+          </h2>
+          <p class="text-body-md font-body text-on-surface-variant">
+            beOI brings together higher-education institutions across Belgium that support
+            informatics education and the contest.
+          </p>
+        </header>
+
+        <ul class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-md gap-y-md list-none p-0 m-0">
           {members.map((m) => (
             <li>
               <a
                 href={m.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="flex items-center justify-center h-24 px-sm transition-opacity hover:opacity-70"
+                class="group flex items-center justify-center p-sm transition-transform duration-300 hover:-translate-y-0.5"
                 title={m.name}
               >
                 <img
                   src={logoSrc(m.image)}
                   alt={m.name}
-                  class="max-h-16 max-w-full w-auto object-contain"
+                  class="h-12 sm:h-14 max-w-full w-auto object-contain transition-opacity group-hover:opacity-85"
                 />
               </a>
             </li>
           ))}
         </ul>
-      </div>
 
-      <div class="text-center">
-        <a
-          href="mailto:info@be-oi.be"
-          class="inline-block font-label text-label-md tracking-wide px-6 py-3 bg-primary text-on-primary border-2 border-primary hover:bg-primary-container hover:text-on-primary-container transition-colors"
-        >
-          Become a member? Contact us
-        </a>
-      </div>
-    </section>
-
-    <!-- Board -->
-    <section id="board" class="scroll-mt-36 py-lg border-t-2 border-outline-variant/40">
-      <div class="max-w-3xl">
-        <h2 class="font-headline text-headline-lg text-on-surface mb-sm">
-          Board of directors
-        </h2>
-        <p class="text-body-md font-body text-on-surface-variant mb-md">
-          The following volunteers currently administer the non-profit association:
-        </p>
-        <ul class="list-none p-0 m-0 space-y-2 font-body text-body-md text-on-surface">
-          {administrators.map((name) => (
-            <li class="flex items-center gap-sm">
-              <span class="w-1.5 h-1.5 rounded-full bg-primary shrink-0" aria-hidden="true" />
-              {name}
-            </li>
-          ))}
-        </ul>
+        <div class="mt-lg text-center">
+          <a
+            href="mailto:info@be-oi.be"
+            class="inline-block font-label text-label-md tracking-wide px-6 py-3 bg-primary text-on-primary border-2 border-primary hover:bg-primary-container hover:text-on-primary-container transition-colors"
+          >
+            Become a member? Contact us
+          </a>
+        </div>
       </div>
     </section>
   </main>
