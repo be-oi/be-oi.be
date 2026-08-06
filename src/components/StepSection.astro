@@ -48,10 +48,9 @@ const tagIcons: Partial<Record<string, IconName>> = {
   Focus: 'psychology',
 };
 
-const toggleId = `details-${id}`;
 const hasDetails = detailsHtml.trim().length > 0;
 ---
-<section id={id} class="group/step scroll-mt-36 py-lg border-t-2 border-outline-variant/40">
+<section id={id} class="scroll-mt-36 py-lg border-t-2 border-outline-variant/40">
   <div
     class:list={[
       'flex flex-col lg:flex-row items-center gap-lg',
@@ -77,7 +76,7 @@ const hasDetails = detailsHtml.trim().length > 0;
       <p class="text-body-lg font-body text-on-surface-variant mb-md max-w-2xl">
         {description}
       </p>
-      <div class="flex flex-wrap gap-sm mb-md">
+      <div class:list={['flex flex-wrap gap-sm', hasDetails ? 'mb-md' : undefined]}>
         {tags.map((tag) => {
           const icon = tagIcons[tag.label];
           return (
@@ -94,32 +93,48 @@ const hasDetails = detailsHtml.trim().length > 0;
       </div>
 
       {hasDetails && (
-        <label
-          for={toggleId}
-          class="inline-flex items-center gap-xs cursor-pointer font-label text-label-md text-primary border-2 border-primary/30 bg-primary/5 hover:bg-primary/10 px-4 py-2 rounded-full transition-colors select-none"
-        >
-          <input id={toggleId} type="checkbox" class="peer sr-only" />
-          <span class="inline-flex items-center gap-xs peer-checked:hidden">
-            Show more details
-            <Icon name="expand_more" class="text-[1.125rem]" />
-          </span>
-          <span class="hidden items-center gap-xs peer-checked:inline-flex">
-            Hide details
-            <Icon name="expand_less" class="text-[1.125rem]" />
-          </span>
-        </label>
+        <details class="step-details">
+          <summary class="step-details-summary inline-flex items-center gap-xs cursor-pointer font-label text-label-md text-primary border-2 border-primary/30 bg-primary/5 hover:bg-primary/10 px-4 py-2 rounded-full transition-colors select-none">
+            <span class="step-details-label-closed inline-flex items-center gap-xs">
+              Show more details
+              <Icon name="expand_more" class="text-[1.125rem]" />
+            </span>
+            <span class="step-details-label-open items-center gap-xs">
+              Hide details
+              <Icon name="expand_less" class="text-[1.125rem]" />
+            </span>
+          </summary>
+          <div class="step-details-html w-full mt-lg pt-md border-t border-outline-variant/50">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-md lg:gap-lg" set:html={detailsHtml} />
+          </div>
+        </details>
       )}
     </div>
   </div>
-
-  {hasDetails && (
-    <div class="step-details-html hidden group-has-[input:checked]/step:block w-full mt-lg pt-md border-t border-outline-variant/50">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-md lg:gap-lg" set:html={detailsHtml} />
-    </div>
-  )}
 </section>
 
 <style>
+  .step-details-summary {
+    list-style: none;
+  }
+
+  .step-details-summary::-webkit-details-marker {
+    display: none;
+  }
+
+  /* Only the active label stays in the accessibility tree (display: none). */
+  .step-details-label-open {
+    display: none;
+  }
+
+  .step-details[open] > .step-details-summary .step-details-label-closed {
+    display: none;
+  }
+
+  .step-details[open] > .step-details-summary .step-details-label-open {
+    display: inline-flex;
+  }
+
   .step-details-html :global(section) {
     margin: 0;
   }
