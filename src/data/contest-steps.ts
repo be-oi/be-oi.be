@@ -26,6 +26,8 @@ export interface ContestStep {
   teaser: string[];
   canvasTop: string;
   canvasWidth: string;
+  /** 1-based column index in the contest page timeline’s 9-track CSS grid. */
+  gridColumn: number;
   tagline: string;
   description: string;
   tags: StepTag[];
@@ -45,6 +47,7 @@ export const contestSteps: ContestStep[] = [
     teaser: ['Logic puzzles', 'No coding yet'],
     canvasTop: '19.625%',
     canvasWidth: '100%',
+    gridColumn: 1,
     tagline: 'No coding yet — entirely optional',
     description:
       'This is the former qualification round (before 2027), without the programming tasks. A light-hearted first touch with computational thinking through logic puzzles — no programming, just brain power. Entirely optional: you may skip it; scores never decide who advances. Perfect for younger students and anyone curious about problem-solving.',
@@ -67,6 +70,7 @@ export const contestSteps: ContestStep[] = [
     teaser: ['Basic programming.', 'Short online rounds.'],
     canvasTop: '22.625%',
     canvasWidth: '100%',
+    gridColumn: 3,
     tagline: 'Three rounds, one pass — learn as you go',
     description:
       'Three independent online rounds you can take whenever you want, one per month. Each one simply checks basic concepts for your age group — knowledge you will need in the next stages. Passing a single round is enough to qualify. Use every round as a chance to learn. There is no ranking: you need a target score to advance.',
@@ -88,6 +92,7 @@ export const contestSteps: ContestStep[] = [
     teaser: ['First coding stage.'],
     canvasTop: '11.875%',
     canvasWidth: '100%',
+    gridColumn: 5,
     tagline: 'Where coding starts to matter',
     description:
       'First actual contest on basic programming challenges. This is where coding really starts to matter. A first real taste of competitive programming.',
@@ -109,6 +114,7 @@ export const contestSteps: ContestStep[] = [
     teaser: ['On-site contest.'],
     canvasTop: '4%',
     canvasWidth: '100%',
+    gridColumn: 6,
     tagline: 'Be among the best in your age group',
     description:
       'An in-person contest at regional centers across Belgium. Advanced problems test data structures, algorithms, and careful implementation under time pressure. Stand out with your problem-solving and programming skills.',
@@ -130,6 +136,7 @@ export const contestSteps: ContestStep[] = [
     teaser: ['National contest.', 'Hardest problems.'],
     canvasTop: '22%',
     canvasWidth: '100%',
+    gridColumn: 7,
     tagline: 'Compete for the national title',
     description:
       'The ultimate national contest with mid-level to very hard problems. Compete with the best Belgian competitors for the national title in your age group and make your way to the national pool with the aim of representing Belgium in international competitions.',
@@ -151,6 +158,7 @@ export const contestSteps: ContestStep[] = [
     teaser: ['Represent Belgium in the world'],
     canvasTop: '25%',
     canvasWidth: '80%',
+    gridColumn: 9,
     tagline: 'Represent Belgium on the world stage',
     description:
       'Top contestants, based on several contests and training over several years, may be selected to represent Belgium at international olympiads such as WEOI, EJOI, EGOI, and IOI.',

@@ -40,40 +40,35 @@ import { contestSteps } from '../../../data/contest-steps';
         class="grid overflow-x-auto pb-md snap-x snap-mandatory"
         style="grid-template-columns: minmax(0,1fr) 1.5rem minmax(0,1fr) 1.5rem minmax(0,1fr) minmax(0,1fr) minmax(0,1fr) 1.5rem minmax(0,1fr); grid-template-rows: auto auto auto;"
       >
-        {contestSteps.map((step, i) => {
-          // Column indices in the 9-track grid (1-based): gaps at tracks 2, 4, 8
-          const gridColumn = [1, 3, 5, 6, 7, 9][i];
-
-          return (
-            <a
-              href={`#${step.id}`}
-              class="grid grid-rows-subgrid justify-items-center text-center snap-center min-w-0 transition-transform hover:-translate-y-1"
-              style={`grid-column: ${gridColumn}; grid-row: 1 / span 3;`}
-            >
-              <div class="relative w-full aspect-[10/13] overflow-visible">
-                <img
-                  src={step.image}
-                  alt=""
-                  class="absolute left-1/2 -translate-x-1/2 object-contain"
-                  style={`image-rendering: pixelated; top: ${step.canvasTop}; width: ${step.canvasWidth};`}
-                  width="160"
-                  height="160"
-                />
-              </div>
-              <span class="font-label text-label-md text-on-surface -mt-1 w-full min-w-0 max-w-full break-words text-center self-start justify-self-stretch">
-                {step.shortTitle}
-              </span>
-              <p class="text-xs text-on-surface-variant mt-0 leading-snug text-center w-full min-w-0 max-w-full break-words self-start justify-self-stretch">
-                {step.teaser.map((line, lineIndex) => (
-                  <>
-                    {lineIndex > 0 && <br />}
-                    {line}
-                  </>
-                ))}
-              </p>
-            </a>
-          );
-        })}
+        {contestSteps.map((step) => (
+          <a
+            href={`#${step.id}`}
+            class="grid grid-rows-subgrid justify-items-center text-center snap-center min-w-0 transition-transform hover:-translate-y-1"
+            style={`grid-column: ${step.gridColumn}; grid-row: 1 / span 3;`}
+          >
+            <div class="relative w-full aspect-[10/13] overflow-visible">
+              <img
+                src={step.image}
+                alt=""
+                class="absolute left-1/2 -translate-x-1/2 object-contain"
+                style={`image-rendering: pixelated; top: ${step.canvasTop}; width: ${step.canvasWidth};`}
+                width="160"
+                height="160"
+              />
+            </div>
+            <span class="font-label text-label-md text-on-surface -mt-1 w-full min-w-0 max-w-full break-words text-center self-start justify-self-stretch">
+              {step.shortTitle}
+            </span>
+            <p class="text-xs text-on-surface-variant mt-0 leading-snug text-center w-full min-w-0 max-w-full break-words self-start justify-self-stretch">
+              {step.teaser.map((line, lineIndex) => (
+                <>
+                  {lineIndex > 0 && <br />}
+                  {line}
+                </>
+              ))}
+            </p>
+          </a>
+        ))}
       </div>
     </section>
 
