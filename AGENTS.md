@@ -16,11 +16,12 @@ Do **not** introduce a server runtime, SSR adapters, or a CMS unless explicitly 
 ```bash
 npm install          # install dependencies
 npm run dev          # local dev server (http://localhost:4321)
+npm run check        # Astro + TypeScript diagnostics
 npm run build        # write static output to dist/
 npm run preview      # preview dist/ locally
 ```
 
-CI deploy (on push to `main`): install → build → `aws s3 sync dist/ s3://www.be-oi.be --delete`.
+CI deploy (on push to `main`): install → check → build → `aws s3 sync dist/ s3://www.be-oi.be --delete`.
 
 ## Directory layout
 
