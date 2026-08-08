@@ -15,21 +15,19 @@ const t = navStrings(lang);
 const mainLinks = [
   // Contest overview is the locale home (`/en/`); only exact path is active.
   { href: base, label: t.contest, match: base, exact: true },
-  { href: `${base}/contest/rules`, label: t.rules, match: `${base}/contest/rules` },
-  { href: `${base}/contest/faq`, label: t.faq, match: `${base}/contest/faq` },
   {
     href: `${base}/competitive-programming`,
-    label: t.competitiveProgramming,
+    label: t.internationalContests,
     match: `${base}/competitive-programming`,
   },
-  { href: `${base}/hall-of-fame`, label: t.hallOfFame, match: `${base}/hall-of-fame` },
+  { href: `${base}/contest/faq`, label: t.faq, match: `${base}/contest/faq` },
   { href: `${base}/about`, label: t.about, match: `${base}/about` },
 ];
 
 function isMainActive(match: string, exact = false) {
   if (exact) return path === match;
   if (!(path === match || path.startsWith(`${match}/`))) return false;
-  // Prefer a more specific main-link match (e.g. FAQ/Rules over Contest).
+  // Prefer a more specific main-link match (e.g. FAQ over Contest).
   return !mainLinks.some(
     (link) =>
       link.match !== match &&

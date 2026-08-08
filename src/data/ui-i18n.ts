@@ -9,10 +9,8 @@ export function resolveLocale(lang: string | undefined): Locale {
 
 export interface NavStrings {
   contest: string;
-  rules: string;
+  internationalContests: string;
   faq: string;
-  competitiveProgramming: string;
-  hallOfFame: string;
   about: string;
   changeLanguage: string;
   openMenu: string;
@@ -34,10 +32,8 @@ export interface MailingListStrings {
 const navByLocale: Record<Locale, NavStrings> = {
   en: {
     contest: 'The beOI Contest',
-    rules: 'Rules',
+    internationalContests: 'International Contests',
     faq: 'FAQ',
-    competitiveProgramming: 'Competitive programming',
-    hallOfFame: 'Hall of Fame',
     about: 'About us',
     changeLanguage: 'Change language',
     openMenu: 'Open menu',
@@ -45,10 +41,8 @@ const navByLocale: Record<Locale, NavStrings> = {
   },
   fr: {
     contest: 'Le concours beOI',
-    rules: 'Règlement',
+    internationalContests: 'Concours internationaux',
     faq: 'FAQ',
-    competitiveProgramming: 'Programmation compétitive',
-    hallOfFame: 'Temple de la renommée',
     about: 'À propos',
     changeLanguage: 'Changer de langue',
     openMenu: 'Ouvrir le menu',
@@ -56,10 +50,8 @@ const navByLocale: Record<Locale, NavStrings> = {
   },
   nl: {
     contest: 'De beOI-wedstrijd',
-    rules: 'Reglement',
+    internationalContests: 'Internationale wedstrijden',
     faq: 'FAQ',
-    competitiveProgramming: 'Competitief programmeren',
-    hallOfFame: 'Eregalerij',
     about: 'Over ons',
     changeLanguage: 'Taal wijzigen',
     openMenu: 'Menu openen',
