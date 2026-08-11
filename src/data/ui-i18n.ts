@@ -32,7 +32,7 @@ export interface MailingListStrings {
 const navByLocale: Record<Locale, NavStrings> = {
   en: {
     contest: 'The beOI Contest',
-    internationalContests: 'International Contests',
+    internationalContests: 'National team',
     faq: 'FAQ',
     about: 'About us',
     changeLanguage: 'Change language',
@@ -41,7 +41,7 @@ const navByLocale: Record<Locale, NavStrings> = {
   },
   fr: {
     contest: 'Le concours beOI',
-    internationalContests: 'Concours internationaux',
+    internationalContests: 'Équipe nationale',
     faq: 'FAQ',
     about: 'À propos',
     changeLanguage: 'Changer de langue',
@@ -50,7 +50,7 @@ const navByLocale: Record<Locale, NavStrings> = {
   },
   nl: {
     contest: 'De beOI-wedstrijd',
-    internationalContests: 'Internationale wedstrijden',
+    internationalContests: 'Nationaal team',
     faq: 'FAQ',
     about: 'Over ons',
     changeLanguage: 'Taal wijzigen',

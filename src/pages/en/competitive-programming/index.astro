@@ -19,14 +19,14 @@ const olympiads = [
 const journey = [
   {
     icon: 'code' as const,
-    title: 'Join the pool',
-    body: 'Show motivation and skill to enter the continuous beCP training group of contestants.',
+    title: 'Join the group',
+    body: 'Show motivation and skill to enter the continuous beCP training group.',
     href: '#join',
   },
   {
     icon: 'psychology' as const,
     title: 'Train year-round',
-    body: 'Camps, courses, and coaching help you progress in competitive programming over time.',
+    body: 'Camps, courses, and coaching help you progress over time.',
     href: '#training',
   },
   {
@@ -37,8 +37,8 @@ const journey = [
   },
   {
     icon: 'language' as const,
-    title: 'International olympiads',
-    body: 'Selected contestants may join Belgian delegations at IOI, EGOI, WEOI, and EJOI.',
+    title: 'Wear Belgium’s colours',
+    body: 'Selected students may join Belgian delegations at IOI, EGOI, WEOI, and EJOI.',
     href: '#selection',
   },
 ];
@@ -46,7 +46,7 @@ const journey = [
 const laterSections = [
   {
     id: 'join',
-    title: 'How to join the beCP training pool?',
+    title: 'How to join the beCP training group?',
   },
   {
     id: 'training',
@@ -54,13 +54,13 @@ const laterSections = [
   },
   {
     id: 'selection',
-    title: 'How does the selection for International Olympiad work?',
+    title: 'How does selection for the national team work?',
   },
 ];
 ---
 <BaseLayout
-  title="Competitive programming – beCP – beOI"
-  description="beCP is beOI’s year-round competitive programming training pool, preparing contestants to represent Belgium at IOI, EGOI, WEOI, and EJOI."
+  title="National team – beCP – beOI"
+  description="Beside the open beOI contest, beCP is a year-round training track toward places in Belgium’s national teams at IOI, EGOI, WEOI, and EJOI."
   lang="en"
 >
   <Nav lang="en" />
@@ -70,12 +70,12 @@ const laterSections = [
     <section class="px-margin max-w-7xl mx-auto mb-xl">
       <div class="max-w-3xl mx-auto text-center">
         <h1 class={`${titlePage} mb-md`}>
-          Competitive programming training
+          Toward Belgium’s national team
         </h1>
         <p class="text-body-lg font-body text-on-surface-variant">
-          Parallel to the main beOI contest, beOI organises <strong class="text-on-surface font-semibold">beCP</strong>:
-          continuous training for a pool of contestants aiming to represent Belgium
-          at international competitive programming olympiads.
+          Beside the open beOI contest, beOI also runs <strong class="text-on-surface font-semibold">beCP</strong>:
+          a year-round training track — with coaching, camps, and online practice —
+          for students who want a chance to compete for Belgium internationally.
         </p>
       </div>
     </section>
@@ -87,12 +87,13 @@ const laterSections = [
         <div class="space-y-md text-body-md font-body text-on-surface-variant">
           <p>
             The Belgian Olympiad in Informatics runs a public contest open to a wide audience.
-            Alongside that path, <strong class="text-on-surface font-semibold">beCP</strong>
-            (Belgian Competitive Programming) is a longer-term training track for students who want to go further
-            in algorithmic problem-solving.
+            <strong class="text-on-surface font-semibold">Beside that path</strong>,
+            <strong class="text-on-surface font-semibold">beCP</strong>
+            is a longer-term training track for students who want to go further:
+            harder programming problems, regular practice, and coaches who follow your progress.
           </p>
           <p>
-            The objective is clear: prepare and select contestants who can represent Belgium
+            The objective is clear: prepare and select students who can represent Belgium
             at major international olympiads, including:
           </p>
         </div>
@@ -129,7 +130,7 @@ const laterSections = [
       <div class="relative px-margin max-w-7xl mx-auto py-xl">
         <header class="text-center max-w-2xl mx-auto mb-lg">
           <h2 id="journey-heading" class={titleSection}>
-            From training pool to world stage
+            From training group to Team Belgium
           </h2>
           <p class="text-body-md font-body text-on-surface-variant mt-sm">
             beCP is a multi-year path: join the group, train regularly, compete for selection,
@@ -194,7 +195,7 @@ const laterSections = [
             Questions?
           </h2>
           <p class="text-body-md font-body text-on-chrome/90 mb-md">
-            Reach the beCP team about the training pool, camps, or international selection.
+            Reach the beCP team about training, camps, or national-team selection.
           </p>
           <a
             href="mailto:becp@be-oi.be"
