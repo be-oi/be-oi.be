@@ -1,43 +1,18 @@
-import commonAudienceDetails from './contest-step-details/common-audience.html?raw';
-import stepInitialDetails from './contest-step-details/step-initial.html?raw';
-import stepQualifDetails from './contest-step-details/step-qualif.html?raw';
-import stepQuarterDetails from './contest-step-details/step-quarter.html?raw';
-import stepSemiDetails from './contest-step-details/step-semi.html?raw';
-import stepFinalDetails from './contest-step-details/step-final.html?raw';
-import stepInternDetails from './contest-step-details/step-intern.html?raw';
+import commonAudienceDetails from '../contest-step-details/en/common-audience.html?raw';
+import stepInitialDetails from '../contest-step-details/en/step-initial.html?raw';
+import stepQualifDetails from '../contest-step-details/en/step-qualif.html?raw';
+import stepQuarterDetails from '../contest-step-details/en/step-quarter.html?raw';
+import stepSemiDetails from '../contest-step-details/en/step-semi.html?raw';
+import stepFinalDetails from '../contest-step-details/en/step-final.html?raw';
+import stepInternDetails from '../contest-step-details/en/step-intern.html?raw';
+import type { ContestStep } from './types';
 
 function withAudience(detailsHtml: string) {
   return `${commonAudienceDetails}\n${detailsHtml}`;
 }
 
-export type StepAccent = 'primary' | 'secondary' | 'tertiary';
-
-export interface StepTag {
-  label: string;
-  value: string;
-}
-
-export interface ContestStep {
-  id: string;
-  image: string;
-  imageAlt: string;
-  title: string;
-  shortTitle: string;
-  teaser: string[];
-  canvasTop: string;
-  canvasWidth: string;
-  /** 1-based column index in the contest page timeline’s 9-track CSS grid. */
-  gridColumn: number;
-  tagline: string;
-  description: string;
-  tags: StepTag[];
-  /** Expanded “show more details” panel — edit the matching HTML file under contest-step-details/. */
-  detailsHtml: string;
-  accent: StepAccent;
-}
-
 /** Contest journey stages for the English 2027 structure page. */
-export const contestSteps: ContestStep[] = [
+export const contestStepsEn: ContestStep[] = [
   {
     id: 'step-initial',
     image: '/img/steps/step0-initial.png',
@@ -52,11 +27,11 @@ export const contestSteps: ContestStep[] = [
     description:
       'This is the former qualification round (before 2027), without the programming tasks. A light-hearted first touch with computational thinking through logic puzzles — no programming, just brain power. Entirely optional: you may skip it; scores never decide who advances. Perfect for younger students and anyone curious about problem-solving.',
     tags: [
-      { label: 'Duration', value: '45 min' },
-      { label: 'Timing', value: 'end-Nov' },
-      { label: 'Location', value: 'School / Home' },
-      { label: 'Code', value: 'None' },
-      { label: 'Status', value: 'Optional' },
+      { kind: 'duration', label: 'Duration', value: '45 min' },
+      { kind: 'timing', label: 'Timing', value: 'end-Nov' },
+      { kind: 'location', label: 'Location', value: 'School / Home' },
+      { kind: 'code', label: 'Code', value: 'None' },
+      { kind: 'status', label: 'Status', value: 'Optional' },
     ],
     detailsHtml: withAudience(stepInitialDetails),
     accent: 'primary',
@@ -75,10 +50,10 @@ export const contestSteps: ContestStep[] = [
     description:
       'Three independent online rounds you can take whenever you want, one per month. Each one simply checks basic concepts for your age group — knowledge you will need in the next stages. Passing a single round is enough to qualify. Use every round as a chance to learn. There is no ranking: you need a target score to advance.',
     tags: [
-      { label: 'Duration', value: '40 min each' },
-      { label: 'Timing', value: 'Dec, Jan, Feb' },
-      { label: 'Location', value: 'School or Home' },
-      { label: 'Code', value: 'Blockly, Python' },
+      { kind: 'duration', label: 'Duration', value: '40 min each' },
+      { kind: 'timing', label: 'Timing', value: 'Dec, Jan, Feb' },
+      { kind: 'location', label: 'Location', value: 'School or Home' },
+      { kind: 'code', label: 'Code', value: 'Blockly, Python' },
     ],
     detailsHtml: withAudience(stepQualifDetails),
     accent: 'secondary',
@@ -97,10 +72,10 @@ export const contestSteps: ContestStep[] = [
     description:
       'First actual contest on basic programming challenges. This is where coding really starts to matter. A first real taste of competitive programming.',
     tags: [
-      { label: 'Duration', value: '2 hours' },
-      { label: 'Timing', value: 'March' },
-      { label: 'Location', value: 'School / Regional centers' },
-      { label: 'Code', value: 'Blockly, Python, Java, C++' },
+      { kind: 'duration', label: 'Duration', value: '2 hours' },
+      { kind: 'timing', label: 'Timing', value: 'March' },
+      { kind: 'location', label: 'Location', value: 'School / Regional centers' },
+      { kind: 'code', label: 'Code', value: 'Blockly, Python, Java, C++' },
     ],
     detailsHtml: stepQuarterDetails,
     accent: 'secondary',
@@ -119,10 +94,10 @@ export const contestSteps: ContestStep[] = [
     description:
       'An in-person contest at regional centers across Belgium. Advanced problems test data structures, algorithms, and careful implementation under time pressure. Stand out with your problem-solving and programming skills.',
     tags: [
-      { label: 'Duration', value: '3 hours' },
-      { label: 'Timing', value: 'April' },
-      { label: 'Location', value: 'Regional centers' },
-      { label: 'Code', value: 'Blockly, Python, Java, C++' },
+      { kind: 'duration', label: 'Duration', value: '3 hours' },
+      { kind: 'timing', label: 'Timing', value: 'April' },
+      { kind: 'location', label: 'Location', value: 'Regional centers' },
+      { kind: 'code', label: 'Code', value: 'Blockly, Python, Java, C++' },
     ],
     detailsHtml: stepSemiDetails,
     accent: 'tertiary',
@@ -141,10 +116,10 @@ export const contestSteps: ContestStep[] = [
     description:
       'The ultimate national contest with mid-level to very hard problems. Compete with the best Belgian competitors for the national title in your age group and make your way to the national pool with the aim of representing Belgium in international competitions.',
     tags: [
-      { label: 'Duration', value: '2x 3 hours' },
-      { label: 'Timing', value: 'May' },
-      { label: 'Location', value: 'National venue' },
-      { label: 'Code', value: 'Python, C++' },
+      { kind: 'duration', label: 'Duration', value: '2x 3 hours' },
+      { kind: 'timing', label: 'Timing', value: 'May' },
+      { kind: 'location', label: 'Location', value: 'National venue' },
+      { kind: 'code', label: 'Code', value: 'Python, C++' },
     ],
     detailsHtml: stepFinalDetails,
     accent: 'tertiary',
@@ -163,9 +138,9 @@ export const contestSteps: ContestStep[] = [
     description:
       'Top contestants, based on several contests and training over several years, may be selected to represent Belgium at international olympiads such as WEOI, EJOI, EGOI, and IOI.',
     tags: [
-      { label: 'Timing', value: 'Around summer' },
-      { label: 'Location', value: 'Around the world' },
-      { label: 'Code', value: 'C++' },
+      { kind: 'timing', label: 'Timing', value: 'Around summer' },
+      { kind: 'location', label: 'Location', value: 'Around the world' },
+      { kind: 'code', label: 'Code', value: 'C++' },
     ],
     detailsHtml: stepInternDetails,
     accent: 'primary',

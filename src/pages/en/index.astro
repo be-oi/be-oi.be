@@ -4,7 +4,9 @@ import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 import StepSection from '../../components/StepSection.astro';
 import MailingListForm from '../../components/MailingListForm.astro';
-import { contestSteps } from '../../data/contest-steps';
+import { getContestSteps } from '../../data/contest-steps';
+
+const contestSteps = getContestSteps('en');
 ---
 <BaseLayout
   title="beOI 2027 – A new contest structure"
@@ -94,6 +96,7 @@ import { contestSteps } from '../../data/contest-steps';
           detailsHtml={step.detailsHtml}
           accent={step.accent}
           reverse={i % 2 === 1}
+          lang="en"
         />
       ))}
     </div>

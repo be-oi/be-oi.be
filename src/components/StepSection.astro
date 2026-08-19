@@ -1,6 +1,7 @@
 ---
 import Icon from './Icon.astro';
-import type { StepAccent, StepTag } from '../data/contest-steps';
+import type { StepAccent, StepTag, StepTagKind } from '../data/contest-steps';
+import { stepSectionStrings } from '../data/ui-i18n';
 import type { ComponentProps } from 'astro/types';
 
 type IconName = ComponentProps<typeof Icon>['name'];
@@ -16,6 +17,8 @@ interface Props {
   detailsHtml?: string;
   accent?: StepAccent;
   reverse?: boolean;
+  /** Locale for expandable panel labels. Defaults to "en". */
+  lang?: string;
 }
 
 const {
@@ -29,7 +32,10 @@ const {
   detailsHtml = '',
   accent = 'primary',
   reverse = false,
+  lang = 'en',
 } = Astro.props;
+
+const stepLabels = stepSectionStrings(lang);
 
 const taglineClasses = {
   primary: 'text-primary',
@@ -37,15 +43,15 @@ const taglineClasses = {
   tertiary: 'text-tertiary',
 } as const;
 
-const tagIcons: Partial<Record<string, IconName>> = {
-  Duration: 'schedule',
-  Timing: 'calendar_month',
-  Location: 'location_on',
-  Code: 'code',
-  Format: 'tune',
-  Goal: 'emoji_events',
-  Rounds: 'replay',
-  Focus: 'psychology',
+const tagIcons: Partial<Record<StepTagKind, IconName>> = {
+  duration: 'schedule',
+  timing: 'calendar_month',
+  location: 'location_on',
+  code: 'code',
+  format: 'tune',
+  goal: 'emoji_events',
+  rounds: 'replay',
+  focus: 'psychology',
 };
 
 const hasDetails = detailsHtml.trim().length > 0;
@@ -78,7 +84,7 @@ const hasDetails = detailsHtml.trim().length > 0;
       </p>
       <div class:list={['flex flex-wrap gap-sm', hasDetails ? 'mb-md' : undefined]}>
         {tags.map((tag) => {
-          const icon = tagIcons[tag.label];
+          const icon = tagIcons[tag.kind];
           return (
             <span
               class="inline-flex items-center gap-xs px-3 py-1.5 rounded-full border border-outline-variant bg-surface-container-lowest text-on-surface-variant"
@@ -96,11 +102,11 @@ const hasDetails = detailsHtml.trim().length > 0;
         <details class="step-details">
           <summary class="step-details-summary inline-flex items-center gap-xs cursor-pointer font-label text-label-md text-primary border-2 border-primary/30 bg-primary/5 hover:bg-primary/10 px-4 py-2 rounded-full transition-colors select-none">
             <span class="step-details-label-closed inline-flex items-center gap-xs">
-              Show more details
+              {stepLabels.showMore}
               <Icon name="expand_more" class="text-[1.125rem]" />
             </span>
             <span class="step-details-label-open items-center gap-xs">
-              Hide details
+              {stepLabels.hideDetails}
               <Icon name="expand_less" class="text-[1.125rem]" />
             </span>
           </summary>

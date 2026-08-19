@@ -104,3 +104,27 @@ export function navStrings(lang: string | undefined): NavStrings {
 export function mailingListStrings(lang: string | undefined): MailingListStrings {
   return mailingListByLocale[resolveLocale(lang)];
 }
+
+export interface StepSectionStrings {
+  showMore: string;
+  hideDetails: string;
+}
+
+const stepSectionByLocale: Record<Locale, StepSectionStrings> = {
+  en: {
+    showMore: 'Show more details',
+    hideDetails: 'Hide details',
+  },
+  fr: {
+    showMore: 'Plus de détails',
+    hideDetails: 'Masquer les détails',
+  },
+  nl: {
+    showMore: 'Meer details',
+    hideDetails: 'Details verbergen',
+  },
+};
+
+export function stepSectionStrings(lang: string | undefined): StepSectionStrings {
+  return stepSectionByLocale[resolveLocale(lang)];
+}

@@ -15,19 +15,18 @@ export default defineConfig({
 
   integrations: [
     sitemap({
-      // Only English has real content today; fr/nl (and /) are redirects.
       filter: (page) => {
         const path = new URL(page).pathname;
-        if (path === '/' || path === '/fr/' || path === '/nl/') return false;
-        return path.startsWith('/en/');
+        if (path === '/' || path === '/fr/') return false;
+        return path.startsWith('/en/') || path.startsWith('/nl/');
       },
       i18n: {
         defaultLocale: 'en',
         locales: {
           en: 'en',
-          // Uncomment when fr/nl pages ship:
+          nl: 'nl',
+          // Uncomment when fr pages ship:
           // fr: 'fr',
-          // nl: 'nl',
         },
       },
     }),

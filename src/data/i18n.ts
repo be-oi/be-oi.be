@@ -6,7 +6,7 @@ export type Locale = (typeof locales)[number];
  * Locales that currently ship real page content (not redirect stubs).
  * Extend when French / Dutch pages are published.
  */
-export const contentLocales: readonly Locale[] = ['en'];
+export const contentLocales: readonly Locale[] = ['en', 'nl'];
 
 export const defaultLocale: Locale = 'fr';
 

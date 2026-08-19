@@ -1,0 +1,205 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Nav from '../../../components/Nav.astro';
+import Footer from '../../../components/Footer.astro';
+import Icon from '../../../components/Icon.astro';
+
+const titlePage = 'font-headline text-headline-xl text-on-surface';
+const titleSection = 'font-headline text-headline-lg text-on-surface';
+const titleSubsection = 'font-headline text-headline-md text-on-surface';
+
+const olympiads = [
+  { abbr: 'IOI', name: 'Internationale Olympiade in Informatica' },
+  { abbr: 'EGOI', name: 'European Girls’ Olympiad in Informatics' },
+  { abbr: 'WEOI', name: 'Western European Olympiad in Informatics' },
+  { abbr: 'EJOI', name: 'European Junior Olympiad in Informatics' },
+];
+
+const journey = [
+  {
+    icon: 'code' as const,
+    title: 'Word lid van de groep',
+    body: 'Toon motivatie en talent om toe te treden tot de doorlopende beCP-trainingsgroep.',
+    href: '#join',
+  },
+  {
+    icon: 'psychology' as const,
+    title: 'Train het hele jaar',
+    body: 'Kampen, cursussen en coaching helpen je om na verloop van tijd vooruit te gaan.',
+    href: '#training',
+  },
+  {
+    icon: 'emoji_events' as const,
+    title: 'Belgische selectie',
+    body: 'Prestaties tijdens training en selectiewedstrijden bepalen wie België kan vertegenwoordigen.',
+    href: '#selection',
+  },
+  {
+    icon: 'language' as const,
+    title: 'Draag de kleuren van België',
+    body: 'Geselecteerde leerlingen kunnen deelnemen aan Belgische delegaties op IOI, EGOI, WEOI en EJOI.',
+    href: '#selection',
+  },
+];
+
+const laterSections = [
+  {
+    id: 'join',
+    title: 'Hoe word ik lid van de beCP-trainingsgroep?',
+  },
+  {
+    id: 'training',
+    title: 'Hoe werkt die training?',
+  },
+  {
+    id: 'selection',
+    title: 'Hoe verloopt de selectie voor het nationaal team?',
+  },
+];
+---
+<BaseLayout
+  title="Nationaal team – beCP – beOI"
+  description="Naast de open beOI-wedstrijd biedt beCP een jaarrond trainingstraject naar plaatsen in de Belgische nationale teams op IOI, EGOI, WEOI en EJOI."
+  lang="nl"
+>
+  <Nav lang="nl" />
+
+  <main class="pt-32 pb-0 overflow-x-clip">
+    <section class="px-margin max-w-7xl mx-auto mb-xl">
+      <div class="max-w-3xl mx-auto text-center">
+        <h1 class={`${titlePage} mb-md`}>
+          Richting het Belgische nationale team
+        </h1>
+        <p class="text-body-lg font-body text-on-surface-variant">
+          Naast de open beOI-wedstrijd organiseert beOI ook <strong class="text-on-surface font-semibold">beCP</strong>:
+          een jaarrond trainingstraject — met coaching, kampen en online oefening —
+          voor leerlingen die kans willen maken om internationaal voor België te strijden.
+        </p>
+      </div>
+    </section>
+
+    <section class="px-margin max-w-7xl mx-auto mb-xl">
+      <div class="max-w-3xl mx-auto">
+        <h2 class={`${titleSection} mb-md text-center`}>Wat is beCP?</h2>
+        <div class="space-y-md text-body-md font-body text-on-surface-variant">
+          <p>
+            De Belgische Informatica-olympiade organiseert een open wedstrijd voor een breed publiek.
+            <strong class="text-on-surface font-semibold">Naast dat traject</strong>
+            is <strong class="text-on-surface font-semibold">beCP</strong>
+            een langer trainingstraject voor leerlingen die verder willen gaan:
+            moeilijkere programmeeropgaven, regelmatige oefening, en coaches die je voortgang opvolgen.
+          </p>
+          <p>
+            Het doel is duidelijk: leerlingen voorbereiden en selecteren die België kunnen vertegenwoordigen
+            op grote internationale olympiades, waaronder:
+          </p>
+        </div>
+
+        <ul class="mt-md grid gap-sm sm:grid-cols-2 list-none p-0 m-0">
+          {olympiads.map((o, i) => (
+            <li
+              class:list={[
+                'bg-surface-container-lowest border-2 border-outline-variant/40 px-md py-sm stamp-shadow',
+                i % 2 === 0 ? 'wobbly-rotation-1' : 'wobbly-rotation-2',
+              ]}
+            >
+              <span class="font-headline text-headline-md text-primary block">{o.abbr}</span>
+              <span class="text-body-md font-body text-on-surface-variant">{o.name}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <section
+      class="relative bg-white border-y-2 border-outline-variant/30 mb-0"
+      aria-labelledby="journey-heading"
+    >
+      <div
+        class="pointer-events-none absolute inset-0 overflow-hidden"
+        aria-hidden="true"
+      >
+        <div class="absolute -right-8 top-12 w-40 h-40 rotate-12 bg-primary-container/25 hand-drawn-border" />
+        <div class="absolute -left-10 bottom-10 w-32 h-32 -rotate-6 bg-secondary-container/20 hand-drawn-border" />
+      </div>
+
+      <div class="relative px-margin max-w-7xl mx-auto py-xl">
+        <header class="text-center max-w-2xl mx-auto mb-lg">
+          <h2 id="journey-heading" class={titleSection}>
+            Van trainingsgroep tot Team België
+          </h2>
+          <p class="text-body-md font-body text-on-surface-variant mt-sm">
+            beCP is een meerjarig traject: word lid van de groep, train regelmatig, strijd voor selectie,
+            en — indien geselecteerd — draag de Belgische kleuren in het buitenland.
+          </p>
+        </header>
+
+        <ol class="grid gap-md sm:grid-cols-2 lg:grid-cols-4 list-none p-0 m-0">
+          {journey.map((step, i) => (
+            <li class="relative">
+              <a
+                href={step.href}
+                class="block h-full bg-surface-container-low border-2 border-outline-variant/30 p-md no-underline text-inherit transition-transform hover:-translate-y-0.5 hover:border-primary/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+              >
+                <div class="flex items-center gap-sm mb-sm">
+                  <span
+                    class="inline-flex items-center justify-center w-10 h-10 bg-primary text-on-primary"
+                    aria-hidden="true"
+                  >
+                    <Icon name={step.icon} class="text-xl" />
+                  </span>
+                  <span class="font-label text-label-md tracking-wide text-on-surface-variant">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                </div>
+                <h3 class={`${titleSubsection} mb-xs`}>{step.title}</h3>
+                <p class="text-body-md font-body text-on-surface-variant m-0">
+                  {step.body}
+                </p>
+              </a>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <div class="px-margin max-w-7xl mx-auto py-xl flex flex-col gap-xl">
+      {laterSections.map((section) => (
+        <section
+          id={section.id}
+          class="scroll-mt-28 max-w-3xl mx-auto w-full"
+          aria-labelledby={`${section.id}-heading`}
+        >
+          <h2 id={`${section.id}-heading`} class={`${titleSection} mb-md`}>
+            {section.title}
+          </h2>
+          <p
+            class="text-body-md font-body text-on-surface-variant border-l-4 border-primary/40 pl-md m-0"
+          >
+            Deze website wordt herschreven — binnenkort volgt hier meer informatie.
+          </p>
+        </section>
+      ))}
+    </div>
+
+    <section class="bg-chrome text-on-chrome">
+      <div class="px-margin max-w-7xl mx-auto py-xl">
+        <div class="text-center max-w-2xl mx-auto">
+          <h2 class="font-headline text-headline-lg text-on-chrome mb-sm">
+            Vragen?
+          </h2>
+          <p class="text-body-md font-body text-on-chrome/90 mb-md">
+            Neem contact op met het beCP-team over training, kampen of nationale teamselectie.
+          </p>
+          <a
+            href="mailto:becp@be-oi.be"
+            class="inline-block font-label text-label-md tracking-wide px-6 py-3 bg-on-chrome text-chrome border-2 border-on-chrome hover:bg-transparent hover:text-on-chrome transition-colors"
+          >
+            Neem contact op
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

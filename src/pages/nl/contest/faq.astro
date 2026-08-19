@@ -1,0 +1,134 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Nav from '../../../components/Nav.astro';
+import Footer from '../../../components/Footer.astro';
+import { getFaqHtml } from '../../../data/faq';
+
+const faqHtml = getFaqHtml('nl');
+---
+<BaseLayout
+  title="FAQ – De beOI-wedstrijd"
+  description="Veelgestelde vragen over de Belgische Informatica-olympiade: deelname, rondes, inschrijving en praktische details."
+  lang="nl"
+>
+  <Nav lang="nl" />
+
+  <main class="pt-32 pb-xl px-margin max-w-7xl mx-auto">
+    <header class="max-w-2xl mx-auto text-center mb-xl">
+      <h1 class="font-headline text-headline-xl text-on-surface mb-md">FAQ</h1>
+      <p class="text-body-lg font-body text-on-surface-variant mb-sm">
+        Antwoorden op de vragen die we het vaakst horen over de olympiade.
+      </p>
+      <p class="text-body-md font-body text-on-surface-variant">
+        Nog vragen? Schrijf ons op
+        <a href="mailto:info@be-oi.be" class="text-primary underline underline-offset-2 hover:decoration-2">info@be-oi.be</a>.
+      </p>
+    </header>
+
+    <!-- Q&A lives in src/data/faq/nl.html (one HTML file per language). -->
+    <div class="faq-content max-w-3xl mx-auto" set:html={faqHtml} />
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .faq-content :global(section) {
+    margin: 0 0 var(--spacing-xl);
+  }
+
+  .faq-content :global(section:last-child) {
+    margin-bottom: 0;
+  }
+
+  .faq-content :global(h2) {
+    font-family: var(--font-headline);
+    font-size: var(--text-headline-lg);
+    line-height: var(--text-headline-lg--line-height);
+    font-weight: 700;
+    color: var(--color-on-surface);
+    text-align: center;
+    margin: 0 0 var(--spacing-md);
+  }
+
+  .faq-content :global(details) {
+    border-top: 1px solid color-mix(in srgb, var(--color-outline-variant) 70%, transparent);
+    padding: 0;
+  }
+
+  .faq-content :global(section > details:last-child) {
+    border-bottom: 1px solid color-mix(in srgb, var(--color-outline-variant) 70%, transparent);
+  }
+
+  .faq-content :global(summary) {
+    font-family: var(--font-headline);
+    font-size: var(--text-headline-md);
+    line-height: var(--text-headline-md--line-height);
+    font-weight: 700;
+    color: var(--color-on-surface);
+    cursor: pointer;
+    list-style: none;
+    padding: 1rem 2rem 1rem 0;
+    position: relative;
+  }
+
+  .faq-content :global(summary::-webkit-details-marker) {
+    display: none;
+  }
+
+  .faq-content :global(summary::after) {
+    content: '+';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: var(--font-body);
+    font-size: 1.5rem;
+    font-weight: 400;
+    line-height: 1;
+    color: var(--color-primary);
+  }
+
+  .faq-content :global(details[open] > summary::after) {
+    content: '−';
+  }
+
+  .faq-content :global(summary:hover) {
+    color: var(--color-primary);
+  }
+
+  .faq-content :global(details > :not(summary)) {
+    font-family: var(--font-body);
+    font-size: var(--text-body-md);
+    line-height: 1.6;
+    color: var(--color-on-surface-variant);
+    margin: 0 0 1rem;
+    padding-right: 2rem;
+  }
+
+  .faq-content :global(p) {
+    margin: 0 0 0.5rem;
+  }
+
+  .faq-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .faq-content :global(ul) {
+    margin: 0.25rem 0 0.75rem;
+    padding-left: 1.25rem;
+  }
+
+  .faq-content :global(li) {
+    margin-bottom: 0.35rem;
+  }
+
+  .faq-content :global(a) {
+    color: var(--color-primary);
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+  }
+
+  .faq-content :global(a:hover) {
+    text-decoration-thickness: 2px;
+  }
+</style>
