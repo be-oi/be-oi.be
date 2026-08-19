@@ -4,7 +4,7 @@ This repository contains the public website for **beOI** (Belgian Olympiad in In
 
 The site is **static**: pages are written as files, then built into plain HTML that is hosted on Amazon S3 (served via CloudFront at <https://www.be-oi.be>). No server-side code runs in production.
 
-Locales are configured for French, Dutch, and English (`/fr/`, `/nl/`, `/en/`). **English has the real site content today**; `/`, `/fr/`, and `/nl/` redirect to `/en/` until translations ship.
+Locales are configured for French, Dutch, and English (`/fr/`, `/nl/`, `/en/`). **All three locales ship real page content.** Root `/` is a language picker; browsers whose language list includes `fr` or `nl` are redirected to the matching locale (append `?choose` to force the picker).
 
 Built with [Astro](https://astro.build/).
 
@@ -52,14 +52,14 @@ To stop the server, press `Ctrl+C` in the terminal.
 | What | Path |
 |------|------|
 | Shared HTML layout (head, body shell) | `src/layouts/BaseLayout.astro` |
-| Root page (redirects to English) | `src/pages/index.astro` |
-| English pages (primary content) | `src/pages/en/` |
-| French pages (redirect stubs for now) | `src/pages/fr/` |
-| Dutch pages (redirect stubs for now) | `src/pages/nl/` |
+| Root page (language picker) | `src/pages/index.astro` |
+| French pages | `src/pages/fr/` |
+| Dutch (Flemish) pages | `src/pages/nl/` |
+| English pages | `src/pages/en/` |
 | Contest step images (on the site) | `public/img/steps/` |
 | Contest step image masters (not deployed) | `image-sources/steps/` |
 
-Edit content under `src/pages/en/` first. When French or Dutch pages are ready, add parallel paths (for example `src/pages/fr/about/index.astro` next to `src/pages/en/about/index.astro`) and register the locale in `contentLocales` (`src/data/i18n.ts`) and the sitemap settings in `astro.config.mjs`.
+Edit content under `src/pages/{fr,nl,en}/` — keep parallel paths in sync across locales. Shared UI strings live in `src/data/ui-i18n.ts`.
 
 Install [EditorConfig](https://editorconfig.org/) in your editor if you can — it applies the formatting rules from `.editorconfig` automatically.
 

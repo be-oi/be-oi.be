@@ -7,7 +7,7 @@ This file describes how to work on the be-oi.be website so automated agents and 
 - **What**: Public static website for beOI (Belgian Olympiad in Informatics).
 - **Stack**: [Astro](https://astro.build/) (static site generator), npm, Node.js 22+.
 - **Hosting**: S3 bucket `be-oi.be` (region `eu-central-1`) behind CloudFront distribution `E1HFWB6I0WMJ8D`. Public URL: `https://www.be-oi.be` (`site` in `astro.config.mjs`).
-- **Languages**: Astro locales `fr`, `nl`, `en` (all URL-prefixed). **All three locales ship real page content** under `src/pages/fr/`, `src/pages/nl/`, and `src/pages/en/`. Root `/` redirects to `/fr/` (Astro `defaultLocale`) until a language picker returns.
+- **Languages**: Astro locales `fr`, `nl`, `en` (all URL-prefixed). **All three locales ship real page content** under `src/pages/fr/`, `src/pages/nl/`, and `src/pages/en/`. Root `/` is a language picker (Nederlands / Français / English); browsers whose language list includes `fr` or `nl` are redirected client-side to the matching locale.
 
 Do **not** introduce a server runtime, SSR adapters, or a CMS unless explicitly requested. Keep the site statically buildable with `npm run build`.
 
@@ -40,7 +40,7 @@ src/
   layouts/
     BaseLayout.astro      # shared HTML document shell
   pages/
-    index.astro           # redirects to /fr/ (until language picker returns)
+    index.astro           # language picker at / (auto-redirect fr/nl via inline script)
     en/                   # English routes (/en/...)
     fr/                   # French routes (/fr/...) — mirrors en/ page structure
     nl/                   # Dutch (Flemish) routes (/nl/...) — mirrors en/ page structure
@@ -62,7 +62,7 @@ dist/                     # build output (gitignored); also sitemap-*.xml from @
 
 ## i18n conventions
 
-- Astro i18n is configured in `astro.config.mjs` with `locales: ['fr', 'nl', 'en']` and `prefixDefaultLocale: true` (`defaultLocale: 'fr'`). All locales listed in `contentLocales` (`src/data/i18n.ts`) ship real content — currently `fr`, `nl`, and `en`.
+- Astro i18n is configured in `astro.config.mjs` with `locales: ['fr', 'nl', 'en']`, `prefixDefaultLocale: true`, and `redirectToDefaultLocale: false` (`defaultLocale: 'fr'`). The last setting keeps `/` as the language picker instead of Astro’s built-in redirect stub. All locales listed in `contentLocales` (`src/data/i18n.ts`) ship real content — currently `fr`, `nl`, and `en`.
 - Keep URL paths parallel across locales (e.g. `/fr/contest/faq/`, `/nl/contest/faq/`, `/en/contest/faq/`).
 - **French copy**: use Belgian French (`fr_BE`) wording. The full name is *Olympiade belge d'Informatique*. FAQ body in `src/data/faq/fr.html`; contest step copy in `src/data/contest-steps/fr.ts` and `src/data/contest-step-details/fr/`.
 - **Dutch copy**: use **Flemish** (`nl_BE`) wording. The full name is *Belgische Informatica-olympiade* (not a literal translation of “Belgian Olympiad in Informatics”). FAQ in `src/data/faq/nl.html`; contest steps in `src/data/contest-steps/nl.ts` and `src/data/contest-step-details/nl/`.

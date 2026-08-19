@@ -1,4 +1,66 @@
 ---
-// Until a language picker returns, send visitors to the French site (Astro defaultLocale).
-return Astro.redirect('/fr/');
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Footer from '../components/Footer.astro';
+import { languageChooserByLocale, languagePickerLabels } from '../data/ui-i18n';
+import type { Locale } from '../data/ui-i18n';
+
+const chooserLocales: Locale[] = ['nl', 'fr', 'en'];
+const wobblyClasses = ['wobbly-rotation-1', 'wobbly-rotation-2', 'wobbly-rotation-3'];
 ---
+<BaseLayout
+  title="beOI – Olympiade belge d'Informatique / Belgische Informatica-olympiade"
+  description="Belgian Olympiad in Informatics (beOI) — choose your language: Nederlands, Français, or English."
+  lang="fr"
+>
+  <script is:inline slot="head">
+    (function () {
+      if (location.search.indexOf('choose') !== -1) return;
+      var langs = navigator.languages || (navigator.language ? [navigator.language] : []);
+      for (var i = 0; i < langs.length; i++) {
+        var code = String(langs[i]).slice(0, 2).toLowerCase();
+        if (code === 'fr' || code === 'nl') {
+          location.replace('/' + code + '/');
+          return;
+        }
+      }
+    })();
+  </script>
+
+  <main class="min-h-screen flex flex-col items-center justify-center px-margin py-xl">
+    <div class="w-full max-w-5xl mx-auto flex flex-col items-center gap-xl">
+      <img
+        src="/img/logo-beoi.png"
+        alt="beOI"
+        class="h-32 w-32 sm:h-40 sm:w-40 object-contain stamp-shadow"
+        width="160"
+        height="160"
+      />
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-gutter w-full">
+        {chooserLocales.map((locale, index) => (
+          <article
+            lang={locale}
+            class:list={[
+              'flex flex-col bg-surface-container-lowest border-2 border-outline-variant/40 p-md gap-md',
+              wobblyClasses[index],
+            ]}
+          >
+            <p class="font-label text-label-md text-on-surface-variant uppercase tracking-wide flex-1">
+              {languageChooserByLocale[locale].tagline}
+            </p>
+            <a
+              href={`/${locale}/`}
+              hreflang={locale}
+              class="inline-block text-center font-label text-label-md bg-primary text-on-primary px-md py-sm border-2 border-primary hover:bg-primary/90 transition-colors no-underline"
+            >
+              {languageChooserByLocale[locale].cta}
+            </a>
+            <span class="sr-only">{languagePickerLabels[locale]}</span>
+          </article>
+        ))}
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>

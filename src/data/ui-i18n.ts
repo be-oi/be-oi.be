@@ -108,6 +108,30 @@ export const languagePickerLabels: Record<Locale, string> = {
   en: 'English',
 };
 
+export interface LanguageChooserStrings {
+  tagline: string;
+  cta: string;
+}
+
+/** Copy for the root `/` language chooser cards (one entry per locale). */
+export const languageChooserByLocale: Record<Locale, LanguageChooserStrings> = {
+  nl: {
+    tagline:
+      'Belgische wedstrijden logica en programmeren voor leerlingen uit het lager en secundair onderwijs',
+    cta: 'Ga verder in het Nederlands',
+  },
+  fr: {
+    tagline:
+      'Concours belges de logique et de programmation pour élèves du primaire et du secondaire',
+    cta: 'Continuer en français',
+  },
+  en: {
+    tagline:
+      'Belgian logic and programming contests for primary and secondary school pupils',
+    cta: 'Continue in English',
+  },
+};
+
 export function mailingListStrings(lang: string | undefined): MailingListStrings {
   return mailingListByLocale[resolveLocale(lang)];
 }
