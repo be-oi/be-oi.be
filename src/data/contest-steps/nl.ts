@@ -51,7 +51,7 @@ export const contestStepsNl: ContestStep[] = [
       'Drie onafhankelijke online rondes die je wanneer je wilt kan afleggen, één per maand. Elke ronde toetst eenvoudig de basisconcepten voor jouw leeftijdscategorie — kennis die je nodig hebt in de volgende fases. Slagen in één enkele ronde volstaat om te kwalificeren. Gebruik elke ronde als leerkans. Er is geen rangschikking: je hebt een doelscore nodig om door te gaan.',
     tags: [
       { kind: 'duration', label: 'Duur', value: '40 min per ronde' },
-      { kind: 'timing', label: 'Timing', value: 'dec., jan., feb.' },
+      { kind: 'timing', label: 'Timing', value: 'dec, jan, feb' },
       { kind: 'location', label: 'Locatie', value: 'School of thuis' },
       { kind: 'code', label: 'Code', value: 'Blockly, Python' },
     ],

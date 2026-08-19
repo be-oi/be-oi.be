@@ -25,7 +25,7 @@ export const contestStepsFr: ContestStep[] = [
     gridColumn: 1,
     tagline: 'Pas encore de programmation — entièrement facultatif',
     description:
-      'Il s’agit de l’ancienne épreuve de qualification (avant 2027), sans les tâches de programmation. Une première approche ludique de la pensée computationnelle à travers des énigmes logiques — pas de programmation, juste la réflexion. Entièrement facultatif&nbsp;: vous pouvez la passer ; les scores ne déterminent jamais qui passe à l’étape suivante. Idéal pour les plus jeunes et toute personne curieuse de la résolution de problèmes.',
+      'Il s’agit de l’ancienne épreuve de qualification (avant 2027), sans les tâches de programmation. Une première approche ludique de la pensée computationnelle à travers des énigmes logiques — pas de programmation, juste la réflexion. Entièrement facultatif\u00A0: vous pouvez la passer ; les scores ne déterminent jamais qui passe à l’étape suivante. Idéal pour les plus jeunes et toute personne curieuse de la résolution de problèmes.',
     tags: [
       { kind: 'duration', label: 'Durée', value: '45 min' },
       { kind: 'timing', label: 'Calendrier', value: 'fin nov.' },
@@ -40,7 +40,7 @@ export const contestStepsFr: ContestStep[] = [
     id: 'step-qualif',
     image: '/img/steps/step1-qualif.png',
     imageAlt: 'Aventurier en pixel art avançant sur un sentier herbeux avec des panneaux',
-    title: 'Épreuves de qualification',
+    title: 'Qualifications',
     shortTitle: 'Qualifications',
     teaser: ['Programmation de base.', 'Courtes épreuves en ligne.'],
     canvasTop: '22.625%',
@@ -48,10 +48,10 @@ export const contestStepsFr: ContestStep[] = [
     gridColumn: 3,
     tagline: 'Trois épreuves, une qualification — apprenez en chemin',
     description:
-      'Trois épreuves en ligne indépendantes que vous pouvez passer quand vous le souhaitez, une par mois. Chacune vérifie simplement les notions de base pour votre catégorie d’âge — des connaissances dont vous aurez besoin aux étapes suivantes. Réussir une seule épreuve suffit pour se qualifier. Profitez de chaque épreuve pour apprendre. Il n’y a pas de classement&nbsp;: il faut atteindre un score cible pour avancer.',
+      'Trois épreuves en ligne indépendantes que vous pouvez passer quand vous le souhaitez, une par mois. Chacune vérifie simplement les notions de base pour votre catégorie d’âge — des connaissances dont vous aurez besoin aux étapes suivantes. Réussir une seule épreuve suffit pour se qualifier. Profitez de chaque épreuve pour apprendre. Il n’y a pas de classement\u00A0: il faut atteindre un score cible pour avancer.',
     tags: [
       { kind: 'duration', label: 'Durée', value: '40 min chacune' },
-      { kind: 'timing', label: 'Calendrier', value: 'déc., janv., fév.' },
+      { kind: 'timing', label: 'Calendrier', value: 'déc, janv, fév' },
       { kind: 'location', label: 'Lieu', value: 'École ou domicile' },
       { kind: 'code', label: 'Code', value: 'Blockly, Python' },
     ],
