@@ -101,6 +101,13 @@ export function navStrings(lang: string | undefined): NavStrings {
   return navByLocale[resolveLocale(lang)];
 }
 
+/** Native language names for the nav language picker (same in every locale). */
+export const languagePickerLabels: Record<Locale, string> = {
+  fr: 'Français',
+  nl: 'Nederlands',
+  en: 'English',
+};
+
 export function mailingListStrings(lang: string | undefined): MailingListStrings {
   return mailingListByLocale[resolveLocale(lang)];
 }

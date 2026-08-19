@@ -11,6 +11,14 @@ This file describes how to work on the be-oi.be website so automated agents and 
 
 Do **not** introduce a server runtime, SSR adapters, or a CMS unless explicitly requested. Keep the site statically buildable with `npm run build`.
 
+## Important rules
+
+- **All locales, every time.** Any change to user-facing content, routes, navigation, FAQ, contest steps, UI strings, or page structure **must be applied to all three locales** (`fr`, `nl`, `en`) in the same change. Do not ship an update that only touches one language unless the user explicitly scoped the work to a single locale.
+- When adding a page or route, create the parallel files under `src/pages/fr/`, `src/pages/nl/`, and `src/pages/en/` (same path suffix in each folder).
+- When editing shared data, update every locale file that exists for that content type — for example all of `src/data/faq/fr.html`, `nl.html`, and `en.html`, or `src/data/contest-steps/fr.ts`, `nl.ts`, and `en.ts` plus matching files under `src/data/contest-step-details/{fr,nl,en}/`.
+- When adding or changing UI chrome (nav labels, buttons, form messages), extend **all** entries in `src/data/ui-i18n.ts`, not just English.
+- Before finishing, sanity-check that `fr`, `nl`, and `en` stay in sync (same pages exist, same links work, no locale left pointing at another language’s URL).
+
 ## Commands
 
 ```bash
@@ -54,14 +62,15 @@ dist/                     # build output (gitignored); also sitemap-*.xml from @
 
 ## i18n conventions
 
-- Astro i18n is configured in `astro.config.mjs` with `locales: ['fr', 'nl', 'en']` and `prefixDefaultLocale: true` (`defaultLocale: 'fr'`).
-- **Primary content**: edit pages under `src/pages/fr/`, `src/pages/nl/`, and `src/pages/en/`. Keep URL paths parallel across locales (e.g. `/fr/contest/faq/`, `/nl/contest/faq/`, `/en/contest/faq/`).
+- Astro i18n is configured in `astro.config.mjs` with `locales: ['fr', 'nl', 'en']` and `prefixDefaultLocale: true` (`defaultLocale: 'fr'`). All locales listed in `contentLocales` (`src/data/i18n.ts`) ship real content — currently `fr`, `nl`, and `en`.
+- Keep URL paths parallel across locales (e.g. `/fr/contest/faq/`, `/nl/contest/faq/`, `/en/contest/faq/`).
 - **French copy**: use Belgian French (`fr_BE`) wording. The full name is *Olympiade belge d'Informatique*. FAQ body in `src/data/faq/fr.html`; contest step copy in `src/data/contest-steps/fr.ts` and `src/data/contest-step-details/fr/`.
-- **Dutch copy**: use **Flemish** (`nl_BE`) wording. The full name is *Belgische Informatica-olympiade* (not a literal translation of “Belgian Olympiad in Informatics”). Shared UI strings live in `src/data/ui-i18n.ts`; FAQ bodies in `src/data/faq/nl.html`; contest step copy in `src/data/contest-steps/nl.ts` and `src/data/contest-step-details/nl/`.
-- When shipping a locale, keep URL paths parallel across locales that have content (e.g. `/en/faq/` and later `/fr/faq/`). Update every **content** locale listed in `contentLocales` (`src/data/i18n.ts`), not redirect-only stubs.
+- **Dutch copy**: use **Flemish** (`nl_BE`) wording. The full name is *Belgische Informatica-olympiade* (not a literal translation of “Belgian Olympiad in Informatics”). FAQ in `src/data/faq/nl.html`; contest steps in `src/data/contest-steps/nl.ts` and `src/data/contest-step-details/nl/`.
+- **English copy**: FAQ in `src/data/faq/en.html`; contest steps in `src/data/contest-steps/en.ts` and `src/data/contest-step-details/en/`.
+- Shared UI strings for all locales live in `src/data/ui-i18n.ts`.
 - Set `lang` on `BaseLayout` to `"fr"`, `"nl"`, or `"en"` for locale pages; pass a page-specific `description` for SEO.
-- Head metadata (description, Open Graph, Twitter, canonical, hreflang, favicon) is emitted by `BaseLayout`. Hreflang and the sitemap only include locales in `contentLocales` until translations ship — add a locale there and enable it in the `astro.config.mjs` sitemap filter/`i18n.locales` when real pages exist.
-- Prefer keeping copy in the page files (or future shared content modules) rather than hard-coding only one language.
+- Head metadata (description, Open Graph, Twitter, canonical, hreflang, favicon) is emitted by `BaseLayout`. Hreflang and the sitemap include every locale in `contentLocales`.
+- Prefer keeping copy in locale-specific page files or the matching data modules above rather than hard-coding only one language in shared components.
 
 ## Coding conventions
 

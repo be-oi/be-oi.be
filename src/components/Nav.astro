@@ -1,6 +1,8 @@
 ---
 import Icon from './Icon.astro';
-import { navStrings } from '../data/ui-i18n';
+import { contentLocales, localizePath, stripLocalePrefix } from '../data/i18n';
+import type { Locale } from '../data/i18n';
+import { languagePickerLabels, navStrings } from '../data/ui-i18n';
 
 interface Props {
   /** Locale prefix for links, e.g. "en". Defaults to "en". */
@@ -8,9 +10,18 @@ interface Props {
 }
 
 const { lang = 'en' } = Astro.props;
-const base = `/${lang}`;
+const currentLocale = (lang === 'fr' || lang === 'nl' || lang === 'en' ? lang : 'en') as Locale;
+const base = `/${currentLocale}`;
 const path = Astro.url.pathname.replace(/\/$/, '') || '/';
-const t = navStrings(lang);
+const pathWithoutLocale = stripLocalePrefix(Astro.url.pathname);
+const t = navStrings(currentLocale);
+
+const languageOptions = contentLocales.map((locale) => ({
+  locale,
+  label: languagePickerLabels[locale],
+  href: localizePath(locale, pathWithoutLocale),
+  current: locale === currentLocale,
+}));
 
 const mainLinks = [
   // Contest overview is the locale home (`/en/`); only exact path is active.
@@ -66,13 +77,43 @@ function isMainActive(match: string, exact = false) {
     </div>
 
     <div class="flex items-center gap-sm">
-      <button
-        type="button"
-        class="text-on-chrome border-b-2 border-transparent hover:border-on-chrome text-2xl leading-none"
-        aria-label={t.changeLanguage}
-      >
-        <Icon name="language" />
-      </button>
+      <div class="relative">
+        <button
+          type="button"
+          id="nav-lang-toggle"
+          class="text-on-chrome border-b-2 border-transparent hover:border-on-chrome text-2xl leading-none"
+          aria-label={t.changeLanguage}
+          aria-haspopup="menu"
+          aria-expanded="false"
+          aria-controls="nav-lang-menu"
+        >
+          <Icon name="language" />
+        </button>
+        <div
+          id="nav-lang-menu"
+          role="menu"
+          hidden
+          class="absolute right-0 top-full mt-2 min-w-[10rem] py-1 bg-surface-container-lowest border-2 border-outline-variant/40 shadow-lg"
+        >
+          {languageOptions.map((option) => (
+            <a
+              href={option.href}
+              role="menuitem"
+              lang={option.locale}
+              hreflang={option.locale}
+              aria-current={option.current ? 'page' : undefined}
+              class:list={[
+                'block px-4 py-2 font-label text-label-md no-underline transition-colors',
+                option.current
+                  ? 'bg-primary/10 text-primary font-semibold'
+                  : 'text-on-surface hover:bg-surface-container-low',
+              ]}
+            >
+              {option.label}
+            </a>
+          ))}
+        </div>
+      </div>
       <button
         type="button"
         id="nav-menu-toggle"
@@ -112,56 +153,117 @@ function isMainActive(match: string, exact = false) {
           {link.label}
         </a>
       ))}
+      <div class="border-t border-on-chrome/20 mt-sm pt-sm">
+        <p class="font-label text-label-md text-on-chrome/70 px-sm pb-xs">{t.changeLanguage}</p>
+        <div class="flex flex-wrap gap-sm px-sm">
+          {languageOptions.map((option) => (
+            <a
+              href={option.href}
+              lang={option.locale}
+              hreflang={option.locale}
+              aria-current={option.current ? 'page' : undefined}
+              class:list={[
+                'font-label text-label-md px-3 py-1.5 border-2 no-underline transition-colors',
+                option.current
+                  ? 'border-on-chrome bg-on-chrome/15 text-on-chrome'
+                  : 'border-on-chrome/30 text-on-chrome/90 hover:border-on-chrome hover:text-on-chrome',
+              ]}
+            >
+              {option.label}
+            </a>
+          ))}
+        </div>
+      </div>
     </div>
   </div>
 </nav>
 
 <script is:inline>
   (function () {
-    const toggle = document.getElementById('nav-menu-toggle');
-    const panel = document.getElementById('nav-mobile-panel');
-    if (!toggle || !panel) return;
+    const langToggle = document.getElementById('nav-lang-toggle');
+    const langMenu = document.getElementById('nav-lang-menu');
+    const menuToggle = document.getElementById('nav-menu-toggle');
+    const mobilePanel = document.getElementById('nav-mobile-panel');
 
-    const menuIcon = toggle.querySelector('[data-icon="menu"]');
-    const closeIcon = toggle.querySelector('[data-icon="close"]');
-    const labelOpen = toggle.getAttribute('data-label-open') || 'Open menu';
-    const labelClose = toggle.getAttribute('data-label-close') || 'Close menu';
-
-    function setOpen(open) {
-      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-      toggle.setAttribute('aria-label', open ? labelClose : labelOpen);
-      panel.classList.toggle('hidden', !open);
+    function setLangOpen(open) {
+      if (!langToggle || !langMenu) return;
+      langToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      langMenu.classList.toggle('hidden', !open);
       if (open) {
-        panel.removeAttribute('hidden');
+        langMenu.removeAttribute('hidden');
       } else {
-        panel.setAttribute('hidden', '');
+        langMenu.setAttribute('hidden', '');
+      }
+    }
+
+    function isLangOpen() {
+      return langToggle?.getAttribute('aria-expanded') === 'true';
+    }
+
+    if (langToggle && langMenu) {
+      langToggle.addEventListener('click', function (event) {
+        event.stopPropagation();
+        setLangOpen(!isLangOpen());
+      });
+
+      langMenu.addEventListener('click', function (event) {
+        event.stopPropagation();
+      });
+
+      document.addEventListener('click', function () {
+        if (isLangOpen()) setLangOpen(false);
+      });
+
+      document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape' && isLangOpen()) {
+          setLangOpen(false);
+          langToggle.focus();
+        }
+      });
+    }
+
+    if (!menuToggle || !mobilePanel) return;
+
+    const menuIcon = menuToggle.querySelector('[data-icon="menu"]');
+    const closeIcon = menuToggle.querySelector('[data-icon="close"]');
+    const labelOpen = menuToggle.getAttribute('data-label-open') || 'Open menu';
+    const labelClose = menuToggle.getAttribute('data-label-close') || 'Close menu';
+
+    function setMenuOpen(open) {
+      menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      menuToggle.setAttribute('aria-label', open ? labelClose : labelOpen);
+      mobilePanel.classList.toggle('hidden', !open);
+      if (open) {
+        mobilePanel.removeAttribute('hidden');
+      } else {
+        mobilePanel.setAttribute('hidden', '');
       }
       menuIcon?.classList.toggle('hidden', open);
       menuIcon?.classList.toggle('block', !open);
       closeIcon?.classList.toggle('hidden', !open);
       closeIcon?.classList.toggle('block', open);
       document.body.classList.toggle('overflow-hidden', open);
+      if (open && isLangOpen()) setLangOpen(false);
     }
 
-    function isOpen() {
-      return toggle.getAttribute('aria-expanded') === 'true';
+    function isMenuOpen() {
+      return menuToggle.getAttribute('aria-expanded') === 'true';
     }
 
-    toggle.addEventListener('click', function () {
-      setOpen(!isOpen());
+    menuToggle.addEventListener('click', function () {
+      setMenuOpen(!isMenuOpen());
     });
 
     document.addEventListener('keydown', function (event) {
-      if (event.key === 'Escape' && isOpen()) {
-        setOpen(false);
-        toggle.focus();
+      if (event.key === 'Escape' && isMenuOpen()) {
+        setMenuOpen(false);
+        menuToggle.focus();
       }
     });
 
-    // Close when switching to desktop layout so the hamburger state doesn't stick.
     const mq = window.matchMedia('(min-width: 768px)');
     function onViewportChange(event) {
-      if (event.matches && isOpen()) setOpen(false);
+      if (event.matches && isMenuOpen()) setMenuOpen(false);
     }
     if (typeof mq.addEventListener === 'function') {
       mq.addEventListener('change', onViewportChange);
