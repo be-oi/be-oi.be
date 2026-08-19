@@ -1,11 +1,12 @@
 import type { Locale } from '../i18n';
 import type { ContestStep } from './types';
 import { contestStepsEn } from './en';
+import { contestStepsFr } from './fr';
 import { contestStepsNl } from './nl';
 
 const contestStepsByLocale: Record<Locale, ContestStep[]> = {
   en: contestStepsEn,
-  fr: contestStepsEn, // French pages not shipped yet — fallback for type completeness
+  fr: contestStepsFr,
   nl: contestStepsNl,
 };
 

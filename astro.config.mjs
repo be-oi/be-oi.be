@@ -17,16 +17,15 @@ export default defineConfig({
     sitemap({
       filter: (page) => {
         const path = new URL(page).pathname;
-        if (path === '/' || path === '/fr/') return false;
-        return path.startsWith('/en/') || path.startsWith('/nl/');
+        if (path === '/') return false;
+        return path.startsWith('/en/') || path.startsWith('/nl/') || path.startsWith('/fr/');
       },
       i18n: {
         defaultLocale: 'en',
         locales: {
           en: 'en',
+          fr: 'fr',
           nl: 'nl',
-          // Uncomment when fr pages ship:
-          // fr: 'fr',
         },
       },
     }),

@@ -1,0 +1,205 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Nav from '../../../components/Nav.astro';
+import Footer from '../../../components/Footer.astro';
+import Icon from '../../../components/Icon.astro';
+
+const titlePage = 'font-headline text-headline-xl text-on-surface';
+const titleSection = 'font-headline text-headline-lg text-on-surface';
+const titleSubsection = 'font-headline text-headline-md text-on-surface';
+
+const olympiads = [
+  { abbr: 'IOI', name: 'Olympiade Internationale d’Informatique' },
+  { abbr: 'EGOI', name: 'European Girls’ Olympiad in Informatics' },
+  { abbr: 'WEOI', name: 'Western European Olympiad in Informatics' },
+  { abbr: 'EJOI', name: 'European Junior Olympiad in Informatics' },
+];
+
+const journey = [
+  {
+    icon: 'code' as const,
+    title: 'Rejoindre le groupe',
+    body: 'Montrez votre motivation et vos compétences pour intégrer le groupe d’entraînement beCP.',
+    href: '#join',
+  },
+  {
+    icon: 'psychology' as const,
+    title: 'S’entraîner toute l’année',
+    body: 'Stages, cours et coaching vous aident à progresser au fil du temps.',
+    href: '#training',
+  },
+  {
+    icon: 'emoji_events' as const,
+    title: 'Sélection belge',
+    body: 'Les performances à l’entraînement et lors des concours de sélection déterminent qui peut représenter la Belgique.',
+    href: '#selection',
+  },
+  {
+    icon: 'language' as const,
+    title: 'Porter les couleurs de la Belgique',
+    body: 'Les élèves sélectionnés peuvent rejoindre les délégations belges à l’IOI, l’EGOI, le WEOI et l’EJOI.',
+    href: '#selection',
+  },
+];
+
+const laterSections = [
+  {
+    id: 'join',
+    title: 'Comment rejoindre le groupe d’entraînement beCP&nbsp;?',
+  },
+  {
+    id: 'training',
+    title: 'Comment fonctionne cet entraînement&nbsp;?',
+  },
+  {
+    id: 'selection',
+    title: 'Comment se déroule la sélection pour l’équipe nationale&nbsp;?',
+  },
+];
+---
+<BaseLayout
+  title="Équipe nationale – beCP – beOI"
+  description="À côté du concours ouvert beOI, beCP est un parcours d’entraînement sur l’année vers les places dans les équipes nationales belges à l’IOI, l’EGOI, le WEOI et l’EJOI."
+  lang="fr"
+>
+  <Nav lang="fr" />
+
+  <main class="pt-32 pb-0 overflow-x-clip">
+    <section class="px-margin max-w-7xl mx-auto mb-xl">
+      <div class="max-w-3xl mx-auto text-center">
+        <h1 class={`${titlePage} mb-md`}>
+          Vers l’équipe nationale belge
+        </h1>
+        <p class="text-body-lg font-body text-on-surface-variant">
+          À côté du concours ouvert beOI, beOI organise aussi <strong class="text-on-surface font-semibold">beCP</strong>&nbsp;:
+          un parcours d’entraînement sur l’année — avec coaching, stages et pratique en ligne —
+          pour les élèves qui veulent tenter de concourir pour la Belgique à l’international.
+        </p>
+      </div>
+    </section>
+
+    <section class="px-margin max-w-7xl mx-auto mb-xl">
+      <div class="max-w-3xl mx-auto">
+        <h2 class={`${titleSection} mb-md text-center`}>Qu’est-ce que beCP&nbsp;?</h2>
+        <div class="space-y-md text-body-md font-body text-on-surface-variant">
+          <p>
+            L’Olympiade belge d’Informatique organise un concours ouvert à un large public.
+            <strong class="text-on-surface font-semibold">À côté de ce parcours</strong>,
+            <strong class="text-on-surface font-semibold">beCP</strong>
+            est un parcours d’entraînement à plus long terme pour les élèves qui veulent aller plus loin&nbsp;:
+            des problèmes de programmation plus difficiles, une pratique régulière, et des entraîneurs qui suivent vos progrès.
+          </p>
+          <p>
+            L’objectif est clair&nbsp;: préparer et sélectionner des élèves capables de représenter la Belgique
+            lors des grandes olympiades internationales, notamment&nbsp;:
+          </p>
+        </div>
+
+        <ul class="mt-md grid gap-sm sm:grid-cols-2 list-none p-0 m-0">
+          {olympiads.map((o, i) => (
+            <li
+              class:list={[
+                'bg-surface-container-lowest border-2 border-outline-variant/40 px-md py-sm stamp-shadow',
+                i % 2 === 0 ? 'wobbly-rotation-1' : 'wobbly-rotation-2',
+              ]}
+            >
+              <span class="font-headline text-headline-md text-primary block">{o.abbr}</span>
+              <span class="text-body-md font-body text-on-surface-variant">{o.name}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <section
+      class="relative bg-white border-y-2 border-outline-variant/30 mb-0"
+      aria-labelledby="journey-heading"
+    >
+      <div
+        class="pointer-events-none absolute inset-0 overflow-hidden"
+        aria-hidden="true"
+      >
+        <div class="absolute -right-8 top-12 w-40 h-40 rotate-12 bg-primary-container/25 hand-drawn-border" />
+        <div class="absolute -left-10 bottom-10 w-32 h-32 -rotate-6 bg-secondary-container/20 hand-drawn-border" />
+      </div>
+
+      <div class="relative px-margin max-w-7xl mx-auto py-xl">
+        <header class="text-center max-w-2xl mx-auto mb-lg">
+          <h2 id="journey-heading" class={titleSection}>
+            Du groupe d’entraînement à l’équipe Belgique
+          </h2>
+          <p class="text-body-md font-body text-on-surface-variant mt-sm">
+            beCP est un parcours sur plusieurs années&nbsp;: rejoignez le groupe, entraînez-vous régulièrement,
+            concourez pour la sélection, et — si vous êtes retenu·e — portez les couleurs belges à l’étranger.
+          </p>
+        </header>
+
+        <ol class="grid gap-md sm:grid-cols-2 lg:grid-cols-4 list-none p-0 m-0">
+          {journey.map((step, i) => (
+            <li class="relative">
+              <a
+                href={step.href}
+                class="block h-full bg-surface-container-low border-2 border-outline-variant/30 p-md no-underline text-inherit transition-transform hover:-translate-y-0.5 hover:border-primary/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+              >
+                <div class="flex items-center gap-sm mb-sm">
+                  <span
+                    class="inline-flex items-center justify-center w-10 h-10 bg-primary text-on-primary"
+                    aria-hidden="true"
+                  >
+                    <Icon name={step.icon} class="text-xl" />
+                  </span>
+                  <span class="font-label text-label-md tracking-wide text-on-surface-variant">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                </div>
+                <h3 class={`${titleSubsection} mb-xs`}>{step.title}</h3>
+                <p class="text-body-md font-body text-on-surface-variant m-0">
+                  {step.body}
+                </p>
+              </a>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <div class="px-margin max-w-7xl mx-auto py-xl flex flex-col gap-xl">
+      {laterSections.map((section) => (
+        <section
+          id={section.id}
+          class="scroll-mt-28 max-w-3xl mx-auto w-full"
+          aria-labelledby={`${section.id}-heading`}
+        >
+          <h2 id={`${section.id}-heading`} class={`${titleSection} mb-md`}>
+            {section.title}
+          </h2>
+          <p
+            class="text-body-md font-body text-on-surface-variant border-l-4 border-primary/40 pl-md m-0"
+          >
+            Ce site est en cours de refonte — plus d’informations seront publiées ici prochainement.
+          </p>
+        </section>
+      ))}
+    </div>
+
+    <section class="bg-chrome text-on-chrome">
+      <div class="px-margin max-w-7xl mx-auto py-xl">
+        <div class="text-center max-w-2xl mx-auto">
+          <h2 class="font-headline text-headline-lg text-on-chrome mb-sm">
+            Des questions&nbsp;?
+          </h2>
+          <p class="text-body-md font-body text-on-chrome/90 mb-md">
+            Contactez l’équipe beCP pour l’entraînement, les stages ou la sélection pour l’équipe nationale.
+          </p>
+          <a
+            href="mailto:becp@be-oi.be"
+            class="inline-block font-label text-label-md tracking-wide px-6 py-3 bg-on-chrome text-chrome border-2 border-on-chrome hover:bg-transparent hover:text-on-chrome transition-colors"
+          >
+            Contactez-nous
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>
