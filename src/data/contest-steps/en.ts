@@ -91,7 +91,7 @@ export const contestStepsEn: ContestStep[] = [
     canvasTop: '4%',
     canvasWidth: '100%',
     gridColumn: 6,
-    tagline: 'Be among the best in your age group',
+    tagline: 'More advanced tasks',
     description:
       'An in-person contest at regional centers across Belgium. Advanced problems test data structures, algorithms, and careful implementation under time pressure. Stand out with your problem-solving and programming skills.',
     tags: [

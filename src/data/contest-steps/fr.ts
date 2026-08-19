@@ -91,7 +91,7 @@ export const contestStepsFr: ContestStep[] = [
     canvasTop: '4%',
     canvasWidth: '100%',
     gridColumn: 6,
-    tagline: 'Faites partie des meilleurs de votre catégorie',
+    tagline: 'Problèmes plus avancés',
     description:
       'Un concours sur place dans des centres régionaux à travers la Belgique. Des problèmes avancés testent les structures de données, les algorithmes et une implémentation soignée sous pression. Distinguez-vous par vos compétences en résolution de problèmes et en programmation.',
     tags: [

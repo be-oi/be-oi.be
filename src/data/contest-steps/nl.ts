@@ -91,7 +91,7 @@ export const contestStepsNl: ContestStep[] = [
     canvasTop: '4%',
     canvasWidth: '100%',
     gridColumn: 6,
-    tagline: 'Behoor tot de besten in jouw leeftijdscategorie',
+    tagline: 'Geavanceerdere opgaven',
     description:
       'Een wedstrijd op locatie in regionale centra door heel België. Moeilijkere opgaven testen datastructuren, algoritmen en zorgvuldige implementatie onder tijdsdruk. Val op met jouw probleemoplossend en programmeervaardigheden.',
     tags: [
