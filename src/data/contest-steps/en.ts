@@ -5,6 +5,7 @@ import stepQuarterDetails from '../contest-step-details/en/step-quarter.html?raw
 import stepSemiDetails from '../contest-step-details/en/step-semi.html?raw';
 import stepFinalDetails from '../contest-step-details/en/step-final.html?raw';
 import stepInternDetails from '../contest-step-details/en/step-intern.html?raw';
+import { stepImages } from './images';
 import type { ContestStep } from './types';
 
 function withAudience(detailsHtml: string) {
@@ -15,7 +16,7 @@ function withAudience(detailsHtml: string) {
 export const contestStepsEn: ContestStep[] = [
   {
     id: 'step-initial',
-    image: '/img/steps/step0-initial.png',
+    image: stepImages.initial,
     imageAlt: 'Pixel-art adventurer at a campsite with a cat, backpack, and wooden sword',
     title: 'Brain Teaser Round',
     shortTitle: 'Brain Teaser Round',
@@ -38,7 +39,7 @@ export const contestStepsEn: ContestStep[] = [
   },
   {
     id: 'step-qualif',
-    image: '/img/steps/step1-qualif.png',
+    image: stepImages.qualif,
     imageAlt: 'Pixel-art adventurer progressing along a grassy path with signposts',
     title: 'Qualification Rounds',
     shortTitle: 'Qualification Rounds',
@@ -60,7 +61,7 @@ export const contestStepsEn: ContestStep[] = [
   },
   {
     id: 'step-quarter',
-    image: '/img/steps/step2-quarter.png',
+    image: stepImages.quarter,
     imageAlt: 'Pixel-art adventurer with pith helmet exploring a rocky clearing',
     title: 'Quarter-final',
     shortTitle: 'Quarter-final',
@@ -82,7 +83,7 @@ export const contestStepsEn: ContestStep[] = [
   },
   {
     id: 'step-semi',
-    image: '/img/steps/step3-semi.png',
+    image: stepImages.semi,
     imageAlt: 'Pixel-art armored knight with sword on a rocky island',
     title: 'Semi-final',
     shortTitle: 'Semi-final',
@@ -104,7 +105,7 @@ export const contestStepsEn: ContestStep[] = [
   },
   {
     id: 'step-final',
-    image: '/img/steps/step4-final.png',
+    image: stepImages.final,
     imageAlt: 'Pixel-art knight with glowing sword on a volcanic lava island',
     title: 'Final',
     shortTitle: 'Final',
@@ -126,7 +127,7 @@ export const contestStepsEn: ContestStep[] = [
   },
   {
     id: 'step-intern',
-    image: '/img/steps/step5-intern.png',
+    image: stepImages.intern,
     imageAlt: 'Pixel-art rocket launching from Earth toward international contests',
     title: 'International Contests',
     shortTitle: 'International Contests',

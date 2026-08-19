@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import Icon from './Icon.astro';
 import type { StepAccent, StepTag, StepTagKind } from '../data/contest-steps';
 import { stepSectionStrings } from '../data/ui-i18n';
@@ -8,7 +9,7 @@ type IconName = ComponentProps<typeof Icon>['name'];
 
 interface Props {
   id: string;
-  image: string;
+  image: ImageMetadata;
   imageAlt: string;
   title: string;
   tagline: string;
@@ -65,13 +66,12 @@ const hasDetails = detailsHtml.trim().length > 0;
   >
     <div class="w-full lg:w-2/5 flex justify-center">
       <div class="relative p-md bg-surface-container-low hand-drawn-border border-2 border-outline-variant stamp-shadow">
-        <img
+        <Image
           src={image}
           alt={imageAlt}
           class="w-48 h-48 sm:w-56 sm:h-56 object-contain"
           style="image-rendering: pixelated;"
-          width="224"
-          height="224"
+          quality={90}
         />
       </div>
     </div>
@@ -120,6 +120,12 @@ const hasDetails = detailsHtml.trim().length > 0;
 </section>
 
 <style>
+  /* Closed panels stay out of layout so Astro’s dev audit does not treat
+     hidden headings/links as missing accessible names (innerText is empty). */
+  .step-details:not([open]) .step-details-html {
+    display: none;
+  }
+
   .step-details-summary {
     list-style: none;
   }

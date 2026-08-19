@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
@@ -45,13 +46,13 @@ const contestSteps = getContestSteps('fr');
             style={`grid-column: ${step.gridColumn}; grid-row: 1 / span 3;`}
           >
             <div class="relative w-full aspect-[10/13] overflow-visible">
-              <img
+              <Image
                 src={step.image}
                 alt=""
                 class="absolute left-1/2 -translate-x-1/2 object-contain"
                 style={`image-rendering: pixelated; top: ${step.canvasTop}; width: ${step.canvasWidth};`}
-                width="160"
-                height="160"
+                quality={90}
+                loading="eager"
               />
             </div>
             <span class="font-label text-label-md text-on-surface -mt-1 w-full min-w-0 max-w-full break-words text-center self-start justify-self-stretch">

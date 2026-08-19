@@ -5,6 +5,7 @@ import stepQuarterDetails from '../contest-step-details/fr/step-quarter.html?raw
 import stepSemiDetails from '../contest-step-details/fr/step-semi.html?raw';
 import stepFinalDetails from '../contest-step-details/fr/step-final.html?raw';
 import stepInternDetails from '../contest-step-details/fr/step-intern.html?raw';
+import { stepImages } from './images';
 import type { ContestStep } from './types';
 
 function withAudience(detailsHtml: string) {
@@ -15,7 +16,7 @@ function withAudience(detailsHtml: string) {
 export const contestStepsFr: ContestStep[] = [
   {
     id: 'step-initial',
-    image: '/img/steps/step0-initial.png',
+    image: stepImages.initial,
     imageAlt: 'Aventurier en pixel art au campement avec un chat, un sac à dos et une épée en bois',
     title: 'Épreuve logique',
     shortTitle: 'Épreuve logique',
@@ -38,7 +39,7 @@ export const contestStepsFr: ContestStep[] = [
   },
   {
     id: 'step-qualif',
-    image: '/img/steps/step1-qualif.png',
+    image: stepImages.qualif,
     imageAlt: 'Aventurier en pixel art avançant sur un sentier herbeux avec des panneaux',
     title: 'Qualifications',
     shortTitle: 'Qualifications',
@@ -60,7 +61,7 @@ export const contestStepsFr: ContestStep[] = [
   },
   {
     id: 'step-quarter',
-    image: '/img/steps/step2-quarter.png',
+    image: stepImages.quarter,
     imageAlt: 'Aventurier en pixel art avec un casque d’explorateur dans une clairière rocheuse',
     title: 'Quart de finale',
     shortTitle: 'Quart de finale',
@@ -82,7 +83,7 @@ export const contestStepsFr: ContestStep[] = [
   },
   {
     id: 'step-semi',
-    image: '/img/steps/step3-semi.png',
+    image: stepImages.semi,
     imageAlt: 'Chevalier en pixel art avec une épée sur une île rocheuse',
     title: 'Demi-finale',
     shortTitle: 'Demi-finale',
@@ -104,7 +105,7 @@ export const contestStepsFr: ContestStep[] = [
   },
   {
     id: 'step-final',
-    image: '/img/steps/step4-final.png',
+    image: stepImages.final,
     imageAlt: 'Chevalier en pixel art avec une épée lumineuse sur une île de lave volcanique',
     title: 'Finale',
     shortTitle: 'Finale',
@@ -126,7 +127,7 @@ export const contestStepsFr: ContestStep[] = [
   },
   {
     id: 'step-intern',
-    image: '/img/steps/step5-intern.png',
+    image: stepImages.intern,
     imageAlt: 'Fusée en pixel art quittant la Terre vers des concours internationaux',
     title: 'Concours internationaux',
     shortTitle: 'Concours internationaux',

@@ -5,6 +5,7 @@ import stepQuarterDetails from '../contest-step-details/nl/step-quarter.html?raw
 import stepSemiDetails from '../contest-step-details/nl/step-semi.html?raw';
 import stepFinalDetails from '../contest-step-details/nl/step-final.html?raw';
 import stepInternDetails from '../contest-step-details/nl/step-intern.html?raw';
+import { stepImages } from './images';
 import type { ContestStep } from './types';
 
 function withAudience(detailsHtml: string) {
@@ -15,7 +16,7 @@ function withAudience(detailsHtml: string) {
 export const contestStepsNl: ContestStep[] = [
   {
     id: 'step-initial',
-    image: '/img/steps/step0-initial.png',
+    image: stepImages.initial,
     imageAlt: 'Pixel-art avonturier op een kampplaats met een kat, rugzak en houten zwaard',
     title: 'Hersenkraker',
     shortTitle: 'Hersenkraker',
@@ -38,7 +39,7 @@ export const contestStepsNl: ContestStep[] = [
   },
   {
     id: 'step-qualif',
-    image: '/img/steps/step1-qualif.png',
+    image: stepImages.qualif,
     imageAlt: 'Pixel-art avonturier die een grasrijk pad met wegwijzers volgt',
     title: 'Kwalificatierondes',
     shortTitle: 'Kwalificatierondes',
@@ -60,7 +61,7 @@ export const contestStepsNl: ContestStep[] = [
   },
   {
     id: 'step-quarter',
-    image: '/img/steps/step2-quarter.png',
+    image: stepImages.quarter,
     imageAlt: 'Pixel-art avonturier met pithhelm die een rotsachtige open plek verkent',
     title: 'Kwartfinale',
     shortTitle: 'Kwartfinale',
@@ -82,7 +83,7 @@ export const contestStepsNl: ContestStep[] = [
   },
   {
     id: 'step-semi',
-    image: '/img/steps/step3-semi.png',
+    image: stepImages.semi,
     imageAlt: 'Pixel-art ridder in harnas met zwaard op een rotsachtig eiland',
     title: 'Halve finale',
     shortTitle: 'Halve finale',
@@ -104,7 +105,7 @@ export const contestStepsNl: ContestStep[] = [
   },
   {
     id: 'step-final',
-    image: '/img/steps/step4-final.png',
+    image: stepImages.final,
     imageAlt: 'Pixel-art ridder met lichtgevend zwaard op een vulkanisch lava-eiland',
     title: 'Finale',
     shortTitle: 'Finale',
@@ -126,7 +127,7 @@ export const contestStepsNl: ContestStep[] = [
   },
   {
     id: 'step-intern',
-    image: '/img/steps/step5-intern.png',
+    image: stepImages.intern,
     imageAlt: 'Pixel-art raket die van de aarde lanceert richting internationale wedstrijden',
     title: 'Internationale wedstrijden',
     shortTitle: 'Internationale wedstrijden',

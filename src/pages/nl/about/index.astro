@@ -1,10 +1,12 @@
 ---
+import { Image } from 'astro:assets';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Nav from '../../../components/Nav.astro';
 import Footer from '../../../components/Footer.astro';
 import {
-  logoSrc,
+  memberLogoHeight,
   members,
+  supporterLogoHeight,
   supporters,
 } from '../../../data/about';
 
@@ -65,9 +67,11 @@ const titleSubsection = 'font-headline text-headline-md text-on-surface';
                   rel="noopener noreferrer"
                   class="group block transition-transform duration-300 hover:-translate-y-0.5"
                 >
-                  <img
-                    src={logoSrc(s.image)}
+                  <Image
+                    src={s.image}
                     alt={s.name}
+                    height={supporterLogoHeight(s.image)}
+                    loading="eager"
                     class="h-14 sm:h-16 w-auto max-w-[200px] object-contain transition-opacity group-hover:opacity-85"
                   />
                 </a>
@@ -167,9 +171,10 @@ const titleSubsection = 'font-headline text-headline-md text-on-surface';
                 class="group flex items-center justify-center p-sm transition-transform duration-300 hover:-translate-y-0.5"
                 title={m.name}
               >
-                <img
-                  src={logoSrc(m.image)}
+                <Image
+                  src={m.image}
                   alt={m.name}
+                  height={memberLogoHeight(m.image)}
                   class="h-12 sm:h-14 max-w-full w-auto object-contain transition-opacity group-hover:opacity-85"
                 />
               </a>

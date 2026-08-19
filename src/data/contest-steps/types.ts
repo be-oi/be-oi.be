@@ -19,7 +19,7 @@ export interface StepTag {
 
 export interface ContestStep {
   id: string;
-  image: string;
+  image: ImageMetadata;
   imageAlt: string;
   title: string;
   shortTitle: string;
