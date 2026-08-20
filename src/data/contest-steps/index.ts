@@ -16,6 +16,3 @@ export type { ContestStep, StepAccent, StepTag, StepTagKind } from './types';
 export function getContestSteps(locale: Locale): ContestStep[] {
   return contestStepsByLocale[locale] ?? contestStepsEn;
 }
-
-/** @deprecated Use getContestSteps('en') — kept for existing imports during migration. */
-export const contestSteps = contestStepsEn;

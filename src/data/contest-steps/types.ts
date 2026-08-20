@@ -5,10 +5,6 @@ export type StepTagKind =
   | 'timing'
   | 'location'
   | 'code'
-  | 'format'
-  | 'goal'
-  | 'rounds'
-  | 'focus'
   | 'status';
 
 export interface StepTag {
