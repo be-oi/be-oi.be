@@ -34,6 +34,8 @@ export interface MailingListStrings {
 
 export interface FooterStrings {
   dataProtection: string;
+  facebook: string;
+  instagram: string;
 }
 
 const navByLocale: Record<Locale, NavStrings> = {
@@ -116,12 +118,18 @@ const mailingListByLocale: Record<Locale, MailingListStrings> = {
 const footerByLocale: Record<Locale, FooterStrings> = {
   en: {
     dataProtection: 'Data protection',
+    facebook: 'beOI on Facebook',
+    instagram: 'beOI on Instagram',
   },
   fr: {
     dataProtection: 'Protection des données',
+    facebook: 'beOI sur Facebook',
+    instagram: 'beOI sur Instagram',
   },
   nl: {
     dataProtection: 'Databescherming',
+    facebook: 'beOI op Facebook',
+    instagram: 'beOI op Instagram',
   },
 };
 
