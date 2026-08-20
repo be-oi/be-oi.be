@@ -83,36 +83,35 @@ function isMainActive(match: string, exact = false) {
           id="nav-lang-toggle"
           class="text-on-chrome border-b-2 border-transparent hover:border-on-chrome text-2xl leading-none"
           aria-label={t.changeLanguage}
-          aria-haspopup="menu"
           aria-expanded="false"
           aria-controls="nav-lang-menu"
         >
           <Icon name="language" />
         </button>
-        <div
+        <ul
           id="nav-lang-menu"
-          role="menu"
           hidden
-          class="absolute right-0 top-full mt-2 min-w-[10rem] py-1 bg-surface-container-lowest border-2 border-outline-variant/40 shadow-lg"
+          class="absolute right-0 top-full mt-2 min-w-[10rem] py-1 bg-surface-container-lowest border-2 border-outline-variant/40 shadow-lg list-none m-0 p-0"
         >
           {languageOptions.map((option) => (
-            <a
-              href={option.href}
-              role="menuitem"
-              lang={option.locale}
-              hreflang={option.locale}
-              aria-current={option.current ? 'page' : undefined}
-              class:list={[
-                'block px-4 py-2 font-label text-label-md no-underline transition-colors',
-                option.current
-                  ? 'bg-primary/10 text-primary font-semibold'
-                  : 'text-on-surface hover:bg-surface-container-low',
-              ]}
-            >
-              {option.label}
-            </a>
+            <li>
+              <a
+                href={option.href}
+                lang={option.locale}
+                hreflang={option.locale}
+                aria-current={option.current ? 'page' : undefined}
+                class:list={[
+                  'block px-4 py-2 font-label text-label-md no-underline transition-colors',
+                  option.current
+                    ? 'bg-primary/10 text-primary font-semibold'
+                    : 'text-on-surface hover:bg-surface-container-low',
+                ]}
+              >
+                {option.label}
+              </a>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
       <button
         type="button"
