@@ -102,13 +102,13 @@ const buildLabel = commitSha
             {t.dataProtection}
           </a>
         </p>
+        <p
+          class="text-[0.7rem] font-body text-on-chrome/50 tracking-wide sm:text-right"
+          title={builtAt.toISOString()}
+        >
+          {buildLabel}
+        </p>
       </div>
     </div>
-    <p
-      class="text-[0.7rem] font-body text-on-chrome/50 tracking-wide"
-      title={builtAt.toISOString()}
-    >
-      {buildLabel}
-    </p>
   </div>
 </footer>
