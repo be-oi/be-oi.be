@@ -60,7 +60,7 @@ const hasDetails = detailsHtml.trim().length > 0;
 <section id={id} class="scroll-mt-36 py-lg border-t-2 border-outline-variant/40">
   <div
     class:list={[
-      'flex flex-col lg:flex-row items-center gap-lg',
+      'flex flex-col lg:flex-row items-center lg:items-start gap-lg',
       reverse && 'lg:flex-row-reverse',
     ]}
   >
@@ -82,7 +82,7 @@ const hasDetails = detailsHtml.trim().length > 0;
       <p class="text-body-lg font-body text-on-surface-variant mb-md max-w-2xl">
         {description}
       </p>
-      <div class:list={['flex flex-wrap gap-sm', hasDetails ? 'mb-md' : undefined]}>
+      <div class="flex flex-wrap gap-sm">
         {tags.map((tag) => {
           const icon = tagIcons[tag.kind];
           return (
@@ -97,26 +97,26 @@ const hasDetails = detailsHtml.trim().length > 0;
           );
         })}
       </div>
-
-      {hasDetails && (
-        <details class="step-details">
-          <summary class="step-details-summary inline-flex items-center gap-xs cursor-pointer font-label text-label-md text-primary border-2 border-primary/30 bg-primary/5 hover:bg-primary/10 px-4 py-2 rounded-full transition-colors select-none">
-            <span class="step-details-label-closed inline-flex items-center gap-xs">
-              {stepLabels.showMore}
-              <Icon name="expand_more" class="text-[1.125rem]" />
-            </span>
-            <span class="step-details-label-open items-center gap-xs">
-              {stepLabels.hideDetails}
-              <Icon name="expand_less" class="text-[1.125rem]" />
-            </span>
-          </summary>
-          <div class="step-details-html w-full mt-lg pt-md border-t border-outline-variant/50">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-md lg:gap-lg" set:html={detailsHtml} />
-          </div>
-        </details>
-      )}
     </div>
   </div>
+
+  {hasDetails && (
+    <details class="step-details mt-md">
+      <summary class="step-details-summary inline-flex items-center gap-xs cursor-pointer font-label text-label-md text-primary border-2 border-primary/30 bg-primary/5 hover:bg-primary/10 px-4 py-2 rounded-full transition-colors select-none">
+        <span class="step-details-label-closed inline-flex items-center gap-xs">
+          {stepLabels.showMore}
+          <Icon name="expand_more" class="text-[1.125rem]" />
+        </span>
+        <span class="step-details-label-open items-center gap-xs">
+          {stepLabels.hideDetails}
+          <Icon name="expand_less" class="text-[1.125rem]" />
+        </span>
+      </summary>
+      <div class="step-details-html w-full mt-lg pt-md border-t border-outline-variant/50">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-md lg:gap-lg" set:html={detailsHtml} />
+      </div>
+    </details>
+  )}
 </section>
 
 <style>
