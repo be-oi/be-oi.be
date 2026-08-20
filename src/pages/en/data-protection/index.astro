@@ -1,0 +1,97 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Nav from '../../../components/Nav.astro';
+import Footer from '../../../components/Footer.astro';
+import { getDataProtectionHtml } from '../../../data/data-protection';
+
+const bodyHtml = getDataProtectionHtml('en');
+---
+<BaseLayout
+  title="Data protection – beOI"
+  description="beOI ASBL/VZW data protection policy: contests, mailing list, retention, and your GDPR rights."
+  lang="en"
+>
+  <Nav lang="en" />
+
+  <main class="pt-32 pb-xl px-margin max-w-7xl mx-auto">
+    <header class="max-w-2xl mx-auto text-center mb-xl">
+      <h1 class="font-headline text-headline-xl text-on-surface mb-md">
+        Data protection
+      </h1>
+      <p class="text-body-lg font-body text-on-surface-variant">
+        How beOI ASBL/VZW collects, uses, and protects your personal data.
+      </p>
+    </header>
+
+    <div class="policy-content max-w-3xl mx-auto" set:html={bodyHtml} />
+  </main>
+  <Footer lang="en" />
+</BaseLayout>
+
+<style>
+  .policy-content :global(section) {
+    margin: 0 0 var(--spacing-xl);
+  }
+
+  .policy-content :global(section:last-child) {
+    margin-bottom: 0;
+  }
+
+  .policy-content :global(h2) {
+    font-family: var(--font-headline);
+    font-size: var(--text-headline-lg);
+    line-height: var(--text-headline-lg--line-height);
+    font-weight: 700;
+    color: var(--color-on-surface);
+    margin: 0 0 var(--spacing-md);
+  }
+
+  .policy-content :global(h3) {
+    font-family: var(--font-headline);
+    font-size: var(--text-headline-md);
+    line-height: var(--text-headline-md--line-height);
+    font-weight: 700;
+    color: var(--color-on-surface);
+    margin: var(--spacing-md) 0 var(--spacing-sm);
+  }
+
+  .policy-content :global(p),
+  .policy-content :global(li) {
+    font-family: var(--font-body);
+    font-size: var(--text-body-md);
+    line-height: 1.6;
+    color: var(--color-on-surface-variant);
+  }
+
+  .policy-content :global(p) {
+    margin: 0 0 0.75rem;
+  }
+
+  .policy-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .policy-content :global(ul) {
+    margin: 0.25rem 0 0.75rem;
+    padding-left: 1.25rem;
+  }
+
+  .policy-content :global(li) {
+    margin-bottom: 0.35rem;
+  }
+
+  .policy-content :global(a) {
+    color: var(--color-primary);
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+  }
+
+  .policy-content :global(a:hover) {
+    text-decoration-thickness: 2px;
+  }
+
+  .policy-content :global(strong) {
+    color: var(--color-on-surface);
+    font-weight: 600;
+  }
+</style>

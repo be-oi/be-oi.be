@@ -27,6 +27,13 @@ export interface MailingListStrings {
   already: string;
   success: string;
   failure: string;
+  /** Shown under the form; `{link}` is replaced by the privacy-page anchor. */
+  privacyNotice: string;
+  privacyLinkLabel: string;
+}
+
+export interface FooterStrings {
+  dataProtection: string;
 }
 
 const navByLocale: Record<Locale, NavStrings> = {
@@ -70,6 +77,9 @@ const mailingListByLocale: Record<Locale, MailingListStrings> = {
     already: "It looks like you're already subscribed.",
     success: "Thanks. We'll let you know when registration opens.",
     failure: "Couldn't add you to the list. If this persists, contact us (info@be-oi.be).",
+    privacyNotice:
+      'By subscribing, you agree that we store your email to send olympiad updates. Subscription is immediate (no confirmation email). See our {link}.',
+    privacyLinkLabel: 'data protection notice',
   },
   fr: {
     sectionAria: 'Inscription à la liste de diffusion',
@@ -82,6 +92,9 @@ const mailingListByLocale: Record<Locale, MailingListStrings> = {
     success: "Merci. Nous vous préviendrons lorsque les inscriptions ouvriront.",
     failure:
       "Impossible de vous ajouter à la liste. Si le problème persiste, contactez-nous (info@be-oi.be).",
+    privacyNotice:
+      'En vous inscrivant, vous acceptez que nous conservions votre e-mail pour vous envoyer des informations sur l’olympiade. L’inscription est immédiate (pas d’e-mail de confirmation). Voir notre {link}.',
+    privacyLinkLabel: 'notice de protection des données',
   },
   nl: {
     sectionAria: 'Aanmelding mailinglijst',
@@ -94,6 +107,21 @@ const mailingListByLocale: Record<Locale, MailingListStrings> = {
     success: 'Bedankt. We laten je weten wanneer de inschrijvingen openen.',
     failure:
       'We konden je niet aan de lijst toevoegen. Als dit aanhoudt, neem contact op (info@be-oi.be).',
+    privacyNotice:
+      'Door je in te schrijven ga je akkoord dat we je e-mail bewaren om olympiade-updates te sturen. Inschrijving is onmiddellijk (geen bevestigingsmail). Zie onze {link}.',
+    privacyLinkLabel: 'databeschermingsverklaring',
+  },
+};
+
+const footerByLocale: Record<Locale, FooterStrings> = {
+  en: {
+    dataProtection: 'Data protection',
+  },
+  fr: {
+    dataProtection: 'Protection des données',
+  },
+  nl: {
+    dataProtection: 'Databescherming',
   },
 };
 
@@ -134,6 +162,10 @@ export const languageChooserByLocale: Record<Locale, LanguageChooserStrings> = {
 
 export function mailingListStrings(lang: string | undefined): MailingListStrings {
   return mailingListByLocale[resolveLocale(lang)];
+}
+
+export function footerStrings(lang: string | undefined): FooterStrings {
+  return footerByLocale[resolveLocale(lang)];
 }
 
 export interface StepSectionStrings {

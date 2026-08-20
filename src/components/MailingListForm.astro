@@ -1,5 +1,6 @@
 ---
-import { mailingListStrings } from '../data/ui-i18n';
+import { localizePath } from '../data/i18n';
+import { mailingListStrings, resolveLocale } from '../data/ui-i18n';
 
 interface Props {
   lang: string;
@@ -11,13 +12,16 @@ interface Props {
 }
 
 const { lang, id: idBase = 'newsletter' } = Astro.props;
-const t = mailingListStrings(lang);
+const locale = resolveLocale(lang);
+const t = mailingListStrings(locale);
 const formId = `${idBase}-form`;
 const emailId = `${idBase}-email`;
 const alreadyId = `${idBase}-already`;
 const successId = `${idBase}-success`;
 const failureId = `${idBase}-failure`;
 const actionUrl = 'https://bvduaeykw6ah6ni7xoykyi3wt40ntdrx.lambda-url.eu-central-1.on.aws/';
+const privacyHref = localizePath(locale, '/data-protection');
+const privacyNoticeParts = t.privacyNotice.split('{link}');
 ---
 
 <section
@@ -60,6 +64,17 @@ const actionUrl = 'https://bvduaeykw6ah6ni7xoykyi3wt40ntdrx.lambda-url.eu-centra
       {t.submit}
     </button>
   </form>
+
+  <p class="mt-sm font-body text-sm text-on-surface-variant leading-relaxed">
+    {privacyNoticeParts[0]}
+    <a
+      href={privacyHref}
+      class="text-primary underline underline-offset-2 hover:decoration-2"
+    >
+      {t.privacyLinkLabel}
+    </a>
+    {privacyNoticeParts[1] ?? ''}
+  </p>
 
   <div class="mt-md space-y-xs font-body text-body-md font-medium" aria-live="polite">
     <p id={alreadyId} data-ml-status="already" class="hidden text-tertiary">
