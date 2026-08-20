@@ -33,6 +33,11 @@ export interface MailingListStrings {
   /** Shown under the form; `{link}` is replaced by the privacy-page anchor. */
   privacyNotice: string;
   privacyLinkLabel: string;
+  /**
+   * Shown inside `<noscript>` when the fetch-based form cannot run.
+   * `{email}` is replaced by a mailto link to the contact address.
+   */
+  noscriptFallback: string;
 }
 
 export interface FooterStrings {
@@ -85,6 +90,8 @@ const mailingListByLocale: Record<Locale, MailingListStrings> = {
     privacyNotice:
       'By subscribing, you agree that we store your email to send olympiad updates. Subscription is immediate (no confirmation email). See our {link}.',
     privacyLinkLabel: 'data protection notice',
+    noscriptFallback:
+      'Subscribing requires JavaScript. You can also email {email} to join the mailing list.',
   },
   fr: {
     sectionAria: 'Inscription à la liste de diffusion',
@@ -100,6 +107,8 @@ const mailingListByLocale: Record<Locale, MailingListStrings> = {
     privacyNotice:
       'En vous inscrivant, vous acceptez que nous conservions votre e-mail pour vous envoyer des informations sur l’olympiade. L’inscription est immédiate (pas d’e-mail de confirmation). Voir notre {link}.',
     privacyLinkLabel: 'notice de protection des données',
+    noscriptFallback:
+      'L’inscription nécessite JavaScript. Vous pouvez aussi écrire à {email} pour rejoindre la liste de diffusion.',
   },
   nl: {
     sectionAria: 'Aanmelding mailinglijst',
@@ -115,6 +124,8 @@ const mailingListByLocale: Record<Locale, MailingListStrings> = {
     privacyNotice:
       'Door je in te schrijven ga je akkoord dat we je e-mail bewaren om olympiade-updates te sturen. Inschrijving is onmiddellijk (geen bevestigingsmail). Zie onze {link}.',
     privacyLinkLabel: 'databeschermingsverklaring',
+    noscriptFallback:
+      'Inschrijven vereist JavaScript. Je kunt ook mailen naar {email} om je aan te melden voor de mailinglijst.',
   },
 };
 

@@ -19,9 +19,12 @@ const emailId = `${idBase}-email`;
 const alreadyId = `${idBase}-already`;
 const successId = `${idBase}-success`;
 const failureId = `${idBase}-failure`;
-const actionUrl = 'https://bvduaeykw6ah6ni7xoykyi3wt40ntdrx.lambda-url.eu-central-1.on.aws/';
+const endpointUrl =
+  'https://bvduaeykw6ah6ni7xoykyi3wt40ntdrx.lambda-url.eu-central-1.on.aws/';
+const contactEmail = 'info@be-oi.be';
 const privacyHref = localizePath(locale, '/data-protection');
 const privacyNoticeParts = t.privacyNotice.split('{link}');
+const noscriptParts = t.noscriptFallback.split('{email}');
 ---
 
 <section
@@ -37,10 +40,12 @@ const privacyNoticeParts = t.privacyNotice.split('{link}');
     {t.intro}
   </p>
 
+  {/* Endpoint is only used by fetch (data-ml-endpoint); action stays on-page for no-JS. */}
   <form
     id={formId}
-    action={actionUrl}
+    action={`#${idBase}`}
     method="post"
+    data-ml-endpoint={endpointUrl}
     class="flex flex-col sm:flex-row gap-sm items-stretch sm:items-center justify-center"
   >
     <label for={emailId} class="sr-only">{t.emailLabel}</label>
@@ -59,11 +64,25 @@ const privacyNoticeParts = t.privacyNotice.split('{link}');
     </div>
     <button
       type="submit"
+      disabled
       class="shrink-0 font-label text-label-md text-on-primary bg-primary hover:bg-primary/90 px-5 py-2.5 rounded-full border-2 border-primary transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
     >
       {t.submit}
     </button>
   </form>
+
+  <noscript>
+    <p class="mt-sm font-body text-body-md text-on-surface-variant">
+      {noscriptParts[0]}
+      <a
+        href={`mailto:${contactEmail}`}
+        class="text-primary underline underline-offset-2 hover:decoration-2"
+      >
+        {contactEmail}
+      </a>
+      {noscriptParts[1] ?? ''}
+    </p>
+  </noscript>
 
   <p class="mt-sm font-body text-xs text-on-surface-variant leading-relaxed">
     {privacyNoticeParts[0]}
@@ -98,10 +117,14 @@ const privacyNoticeParts = t.privacyNotice.split('{link}');
       var form = root.querySelector('form');
       if (!form) return;
 
+      var endpoint = form.getAttribute('data-ml-endpoint');
+      if (!endpoint) return;
+
       var already = root.querySelector('[data-ml-status="already"]');
       var success = root.querySelector('[data-ml-status="success"]');
       var failure = root.querySelector('[data-ml-status="failure"]');
       var button = form.querySelector('button[type="submit"]');
+      if (button) button.disabled = false;
 
       function hideAlerts() {
         already.classList.add('hidden');
@@ -129,7 +152,7 @@ const privacyNoticeParts = t.privacyNotice.split('{link}');
 
         var body = new URLSearchParams(new FormData(form));
 
-        fetch(form.action, {
+        fetch(endpoint, {
           method: 'POST',
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
           body: body.toString(),
