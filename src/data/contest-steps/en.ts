@@ -20,7 +20,7 @@ export const contestStepsEn: ContestStep[] = [
     imageAlt: 'Pixel-art adventurer at a campsite with a cat, backpack, and wooden sword',
     title: 'Brain Teaser Round',
     shortTitle: 'Brain Teaser Round',
-    teaser: ['Logic puzzles', 'No coding yet'],
+    teaser: ['Logic puzzles.', 'No coding yet.'],
     canvasTop: '19.625%',
     canvasWidth: '100%',
     gridColumn: 1,

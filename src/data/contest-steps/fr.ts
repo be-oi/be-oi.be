@@ -20,7 +20,7 @@ export const contestStepsFr: ContestStep[] = [
     imageAlt: 'Aventurier en pixel art au campement avec un chat, un sac à dos et une épée en bois',
     title: 'Épreuve logique',
     shortTitle: 'Épreuve logique',
-    teaser: ['Énigmes de logique', 'Aucun code'],
+    teaser: ['Énigmes de logique.', 'Aucun code.'],
     canvasTop: '19.625%',
     canvasWidth: '100%',
     gridColumn: 1,

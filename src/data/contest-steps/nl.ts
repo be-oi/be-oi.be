@@ -20,7 +20,7 @@ export const contestStepsNl: ContestStep[] = [
     imageAlt: 'Pixel-art avonturier op een kampplaats met een kat, rugzak en houten zwaard',
     title: 'Hersenkraker',
     shortTitle: 'Hersenkraker',
-    teaser: ['Logica-raadsels', 'Nog geen code'],
+    teaser: ['Logica-raadsels.', 'Nog geen code.'],
     canvasTop: '19.625%',
     canvasWidth: '100%',
     gridColumn: 1,
