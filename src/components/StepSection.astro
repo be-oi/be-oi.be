@@ -57,69 +57,121 @@ const tagIcons: Partial<Record<StepTagKind, IconName>> = {
 
 const hasDetails = detailsHtml.trim().length > 0;
 ---
-<section id={id} class="scroll-mt-36 py-lg border-t-2 border-outline-variant/40">
-  <div
-    class:list={[
-      'flex flex-col lg:flex-row items-center lg:items-start gap-lg',
-      reverse && 'lg:flex-row-reverse',
-    ]}
-  >
-    <div class="w-full lg:w-2/5 flex justify-center">
-      <div class="relative p-md bg-surface-container-low hand-drawn-border border-2 border-outline-variant stamp-shadow">
-        <Image
-          src={image}
-          alt={imageAlt}
-          class="w-48 h-48 sm:w-56 sm:h-56 object-contain"
-          style="image-rendering: pixelated;"
-          quality={90}
-        />
-      </div>
-    </div>
-
-    <div class="w-full lg:w-3/5">
-      <h2 class="font-headline text-headline-lg text-on-surface mb-xs">{title}</h2>
-      <p class:list={['font-bold mb-md', taglineClasses[accent]]}>{tagline}</p>
-      <p class="text-body-lg font-body text-on-surface-variant mb-md max-w-2xl">
-        {description}
-      </p>
-      <div class="flex flex-wrap gap-sm">
-        {tags.map((tag) => {
-          const icon = tagIcons[tag.kind];
-          return (
-            <span
-              class="inline-flex items-center gap-xs px-3 py-1.5 rounded-full border border-outline-variant bg-surface-container-lowest text-on-surface-variant"
-              title={tag.label}
-            >
-              {icon && <Icon name={icon} class="text-primary text-[1.125rem]" />}
-              <span class="sr-only">{tag.label}: </span>
-              <span class="font-body text-sm leading-none text-on-surface">{tag.value}</span>
-            </span>
-          );
-        })}
-      </div>
+<section
+  id={id}
+  class:list={[
+    'step-section scroll-mt-36 py-lg border-t-2 border-outline-variant/40',
+    reverse && 'step-section-reverse',
+  ]}
+>
+  <div class="step-image flex justify-center">
+    <div class="relative p-md bg-surface-container-low hand-drawn-border border-2 border-outline-variant stamp-shadow">
+      <Image
+        src={image}
+        alt={imageAlt}
+        class="w-48 h-48 sm:w-56 sm:h-56 object-contain"
+        style="image-rendering: pixelated;"
+        quality={90}
+      />
     </div>
   </div>
 
-  {hasDetails && (
-    <details class="step-details mt-md">
-      <summary class="step-details-summary inline-flex items-center gap-xs cursor-pointer font-label text-label-md text-primary border-2 border-primary/30 bg-primary/5 hover:bg-primary/10 px-4 py-2 rounded-full transition-colors select-none">
-        <span class="step-details-label-closed inline-flex items-center gap-xs">
-          {stepLabels.showMore}
-          <Icon name="expand_more" class="text-[1.125rem]" />
-        </span>
-        <span class="step-details-label-open items-center gap-xs">
-          {stepLabels.hideDetails}
-          <Icon name="expand_less" class="text-[1.125rem]" />
-        </span>
-      </summary>
-      <div class="step-details-html w-full mt-lg pt-md border-t border-outline-variant/50">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-md lg:gap-lg" set:html={detailsHtml} />
-      </div>
-    </details>
-  )}
+  <div class="step-body">
+    <h2 class="font-headline text-headline-lg text-on-surface mb-xs">{title}</h2>
+    <p class:list={['font-bold mb-md', taglineClasses[accent]]}>{tagline}</p>
+    <p class="text-body-lg font-body text-on-surface-variant mb-md max-w-2xl">
+      {description}
+    </p>
+    <div class:list={['flex flex-wrap gap-sm', hasDetails && 'mb-md']}>
+      {tags.map((tag) => {
+        const icon = tagIcons[tag.kind];
+        return (
+          <span
+            class="inline-flex items-center gap-xs px-3 py-1.5 rounded-full border border-outline-variant bg-surface-container-lowest text-on-surface-variant"
+            title={tag.label}
+          >
+            {icon && <Icon name={icon} class="text-primary text-[1.125rem]" />}
+            <span class="sr-only">{tag.label}: </span>
+            <span class="font-body text-sm leading-none text-on-surface">{tag.value}</span>
+          </span>
+        );
+      })}
+    </div>
+
+    {hasDetails && (
+      <details class="step-details">
+        <summary class="step-details-summary inline-flex items-center gap-xs cursor-pointer font-label text-label-md text-primary border-2 border-primary/30 bg-primary/5 hover:bg-primary/10 px-4 py-2 rounded-full transition-colors select-none">
+          <span class="step-details-label-closed inline-flex items-center gap-xs">
+            {stepLabels.showMore}
+            <Icon name="expand_more" class="text-[1.125rem]" />
+          </span>
+          <span class="step-details-label-open items-center gap-xs">
+            {stepLabels.hideDetails}
+            <Icon name="expand_less" class="text-[1.125rem]" />
+          </span>
+        </summary>
+        <div class="step-details-html mt-lg pt-md border-t border-outline-variant/50">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-md lg:gap-lg" set:html={detailsHtml} />
+        </div>
+      </details>
+    )}
+  </div>
 </section>
 
 <style>
+  .step-section {
+    container-type: inline-size;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+    align-items: start;
+  }
+
+  .step-image,
+  .step-body {
+    min-width: 0;
+  }
+
+  @media (min-width: 1024px) {
+    .step-section {
+      grid-template-columns: 2fr 3fr;
+    }
+
+    .step-section-reverse {
+      grid-template-columns: 3fr 2fr;
+    }
+
+    .step-image {
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    .step-body {
+      grid-column: 2;
+      grid-row: 1;
+    }
+
+    .step-section-reverse .step-image {
+      grid-column: 2;
+    }
+
+    .step-section-reverse .step-body {
+      grid-column: 1;
+    }
+
+    /* Break the details panel out to the full section width (both columns). */
+    .step-details-html {
+      width: 100cqi;
+      max-width: 100cqi;
+      box-sizing: border-box;
+    }
+
+    /* Body is the right column: shift panel back to the section’s left edge. */
+    .step-section:not(.step-section-reverse) .step-details-html {
+      margin-left: calc(100% - 100cqi);
+    }
+  }
+
   /* Closed panels stay out of layout so Astro’s dev audit does not treat
      hidden headings/links as missing accessible names (innerText is empty). */
   .step-details:not([open]) .step-details-html {
