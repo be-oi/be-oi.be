@@ -44,7 +44,7 @@ const taglineClasses = {
   tertiary: 'text-tertiary',
 } as const;
 
-const tagIcons: Partial<Record<StepTagKind, IconName>> = {
+const tagIcons: Record<StepTagKind, IconName | null> = {
   duration: 'schedule',
   timing: 'calendar_month',
   location: 'location_on',
@@ -53,6 +53,7 @@ const tagIcons: Partial<Record<StepTagKind, IconName>> = {
   goal: 'emoji_events',
   rounds: 'replay',
   focus: 'psychology',
+  status: null,
 };
 
 const hasDetails = detailsHtml.trim().length > 0;
