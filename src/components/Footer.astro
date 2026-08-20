@@ -4,12 +4,12 @@ import { localizePath } from '../data/i18n';
 import { footerStrings, resolveLocale } from '../data/ui-i18n';
 
 interface Props {
-  /** Locale for the privacy link. Defaults to French (site defaultLocale). */
+  /** Locale for the privacy link. Defaults to site defaultLocale via resolveLocale. */
   lang?: string;
 }
 
 const { lang } = Astro.props;
-const locale = resolveLocale(lang ?? 'fr');
+const locale = resolveLocale(lang);
 const t = footerStrings(locale);
 const privacyHref = localizePath(locale, '/data-protection');
 

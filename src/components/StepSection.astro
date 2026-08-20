@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 import Icon from './Icon.astro';
 import type { StepAccent, StepTag, StepTagKind } from '../data/contest-steps';
+import { defaultLocale } from '../data/i18n';
 import { stepSectionStrings } from '../data/ui-i18n';
 import type { ComponentProps } from 'astro/types';
 
@@ -18,7 +19,7 @@ interface Props {
   detailsHtml?: string;
   accent?: StepAccent;
   reverse?: boolean;
-  /** Locale for expandable panel labels. Defaults to "en". */
+  /** Locale for expandable panel labels. Defaults to site defaultLocale. */
   lang?: string;
 }
 
@@ -33,7 +34,7 @@ const {
   detailsHtml = '',
   accent = 'primary',
   reverse = false,
-  lang = 'en',
+  lang = defaultLocale,
 } = Astro.props;
 
 const stepLabels = stepSectionStrings(lang);

@@ -39,8 +39,15 @@ const ogImageURL = image.startsWith('http')
   ? image
   : new URL(image.startsWith('/') ? image : `/${image}`, site).href;
 
+const isLanguagePicker = pathname === '/' || pathname === '';
+
 // Always include this page’s lang and the x-default target among alternates.
 const uniqueLocales = [...new Set<string>([...alternateLocales, lang, xDefaultLocale])];
+
+// Language picker `/` is x-default; localized pages fall back to the site default locale.
+const xDefaultHref = isLanguagePicker
+  ? new URL('/', site).href
+  : new URL(localizePath(xDefaultLocale, pathWithoutLocale), site).href;
 ---
 <!doctype html>
 <html lang={lang}>
@@ -59,11 +66,7 @@ const uniqueLocales = [...new Set<string>([...alternateLocales, lang, xDefaultLo
         href={new URL(localizePath(locale, pathWithoutLocale), site).href}
       />
     ))}
-    <link
-      rel="alternate"
-      hreflang="x-default"
-      href={new URL(localizePath(xDefaultLocale, pathWithoutLocale), site).href}
-    />
+    <link rel="alternate" hreflang="x-default" href={xDefaultHref} />
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="beOI" />

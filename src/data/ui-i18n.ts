@@ -1,10 +1,13 @@
 /** Shared chrome/UI strings for components that take a `lang` prop. */
 
-export type Locale = 'en' | 'fr' | 'nl';
+import { defaultLocale } from './i18n';
+import type { Locale as SiteLocale } from './i18n';
+
+export type Locale = SiteLocale;
 
 export function resolveLocale(lang: string | undefined): Locale {
   if (lang === 'fr' || lang === 'nl' || lang === 'en') return lang;
-  return 'en';
+  return defaultLocale;
 }
 
 export interface NavStrings {

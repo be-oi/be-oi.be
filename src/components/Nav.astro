@@ -1,16 +1,15 @@
 ---
 import Icon from './Icon.astro';
-import { contentLocales, localizePath, stripLocalePrefix } from '../data/i18n';
-import type { Locale } from '../data/i18n';
-import { languagePickerLabels, navStrings } from '../data/ui-i18n';
+import { contentLocales, defaultLocale, localizePath, stripLocalePrefix } from '../data/i18n';
+import { languagePickerLabels, navStrings, resolveLocale } from '../data/ui-i18n';
 
 interface Props {
-  /** Locale prefix for links, e.g. "en". Defaults to "en". */
+  /** Locale prefix for links, e.g. "fr". Defaults to site defaultLocale. */
   lang?: string;
 }
 
-const { lang = 'en' } = Astro.props;
-const currentLocale = (lang === 'fr' || lang === 'nl' || lang === 'en' ? lang : 'en') as Locale;
+const { lang = defaultLocale } = Astro.props;
+const currentLocale = resolveLocale(lang);
 const base = `/${currentLocale}`;
 const path = Astro.url.pathname.replace(/\/$/, '') || '/';
 const pathWithoutLocale = stripLocalePrefix(Astro.url.pathname);

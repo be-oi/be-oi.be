@@ -2,16 +2,16 @@
 export const locales = ['fr', 'nl', 'en'] as const;
 export type Locale = (typeof locales)[number];
 
-/**
- * Locales that currently ship real page content (not redirect stubs).
- * Extend when French / Dutch pages are published.
- */
+/** Locales that currently ship real page content (not redirect stubs). */
 export const contentLocales: readonly Locale[] = ['fr', 'nl', 'en'];
 
 export const defaultLocale: Locale = 'fr';
 
-/** Fallback locale when a visitor’s language has no published content yet. */
-export const xDefaultLocale: Locale = 'en';
+/**
+ * hreflang `x-default` target for localized content pages (same as site default).
+ * The language picker at `/` is special-cased in BaseLayout to point at itself.
+ */
+export const xDefaultLocale: Locale = defaultLocale;
 
 const localePrefix = new RegExp(`^/(${locales.join('|')})(?=/|$)`);
 
