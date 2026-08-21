@@ -48,26 +48,26 @@ const laterSections = [
     id: 'join',
     title: 'How to join the beCP training group?',
     bodyHtml: `
-      <p>Entry into the beCP group is by application. We look for motivated students who train regularly and are curious to learn. Finalists of the Belgian Olympiad may ask to join the group directly.</p>
-      <p>If you are not a finalist, or if you wish to join the group during the year, you must show that you already have a solid C++ programming foundation and that you are ready to commit for the long term. To that end, if you have not yet entered the sixth year of secondary school, we ask you to solve a list of problems on <a href="https://usaco.guide/" target="_blank" rel="noopener noreferrer">USACO Guide</a>, using C++.</p>
+      <p>Entry into the beCP group is by <strong>application</strong>. We look for <strong>motivated</strong> students who train <strong>regularly</strong> and are curious to learn. <strong>Finalists</strong> of the Belgian Olympiad may ask to join the group directly.</p>
+      <p>If you are not a finalist, or if you wish to join the group during the year, you must show that you already have a solid <strong>C++</strong> programming foundation and that you are ready to commit. To that end, if you have not yet entered the sixth year of secondary school, we ask you to solve a list of problems on <a href="https://usaco.guide/" target="_blank" rel="noopener noreferrer">USACO Guide</a>, using <strong>C++</strong>.</p>
       <h3>In practice</h3>
       <p>Create an account on USACO Guide and join the group via <a href="https://usaco.guide/groups/join?key=rjW0XfoSo8iPeB4GVDNA" target="_blank" rel="noopener noreferrer">this link</a> so that we can follow your progress. The list of problems for your school year is in the group.</p>
       <p>Once you have solved everything, email us at <a href="mailto:becp@be-oi.be">becp@be-oi.be</a> to let us know.</p>
-      <p>From the sixth year of secondary school onward, contact us if you think you deserve a place in the group. Training for the international olympiads is long-haul work, however. It is up to you to convince us that you will be ready to join the International Olympiad team before the end of secondary school — for example by showing strong results in online algorithmic contests.</p>
+      <p>From the sixth year of secondary school onward, contact us if you think you deserve a place in the group. It is up to you to convince us that you will be ready to join the International Olympiad team before the end of secondary school — for example by showing strong results in online algorithmic contests.</p>
     `,
   },
   {
     id: 'training',
     title: 'How does that training work?',
     bodyHtml: `
-      <p>beCP training combines camps, coaching sessions, and independent online practice. Participants receive a variety of problems, feedback on their solutions, and progressive support to strengthen their competitive programming skills. The goal is to build solid foundations and to progress over time. Independent practice is just as important for progress, and the key word for learning is regularity.</p>
+      <p>beCP training combines <strong>camps</strong>, <strong>coaching</strong> sessions, and independent online practice. Participants receive a variety of problems, feedback on their solutions, and progressive support. The goal is to build <strong>solid foundations</strong> so you can keep progressing. Alongside that, learning rests on practice done in <strong>autonomy</strong>, on a <strong>regular</strong> basis.</p>
     `,
   },
   {
     id: 'selection',
     title: 'How does selection for the national team work?',
     bodyHtml: `
-      <p>Selection is based on performance in the selection contests organised during the year and on commitment to training. The most regular and persevering students are more likely to be selected. More details will follow.</p>
+      <p>Selection is based on performance in the <strong>selection contests</strong> organised during the year and on <strong>commitment to training</strong>. More details will follow.</p>
     `,
   },
 ];
@@ -255,5 +255,10 @@ const laterSections = [
   .becp-section-body :global(code) {
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     font-size: 0.92em;
+  }
+
+  .becp-section-body :global(strong) {
+    color: var(--color-on-surface);
+    font-weight: 600;
   }
 </style>

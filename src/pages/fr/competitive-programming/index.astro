@@ -47,26 +47,26 @@ const laterSections = [
     id: 'join',
     title: 'Comment rejoindre le groupe d’entraînement beCP\u00A0?',
     bodyHtml: `
-      <p>L’entrée dans le groupe beCP se fait sur candidature. Nous recherchons des élèves motivés, réguliers dans leur entraînement et curieux d’apprendre. Les finalistes des Olympiades belges peuvent demander à rejoindre le groupe directement.</p>
-      <p>Si vous n’êtes pas finaliste ou que vous souhaitez rejoindre le groupe en cours d’année, vous devez nous montrer que vous avez déjà une bonne base en programmation en C++ et que vous êtes prêt à vous investir sur la durée. Pour cela, si vous n’êtes pas encore entré en sixième secondaire, nous vous demandons de résoudre une liste de problèmes sur le site de <a href="https://www.france-ioi.org/" target="_blank" rel="noopener noreferrer">France-IOI</a> (progression plus lente, site en français) ou de <a href="https://usaco.guide/" target="_blank" rel="noopener noreferrer">USACO Guide</a> (progression plus rapide, site en anglais). Dans les deux cas, utilisez le langage C++.</p>
+      <p>L’entrée dans le groupe beCP se fait sur <strong>candidature</strong>. Nous recherchons des élèves <strong>motivés</strong>, <strong>réguliers</strong> dans leur entraînement et curieux d’apprendre. Les <strong>finalistes</strong> des Olympiades belges peuvent demander à rejoindre le groupe directement.</p>
+      <p>Si vous n’êtes pas finaliste ou que vous souhaitez rejoindre le groupe en cours d’année, vous devez nous montrer que vous avez déjà une bonne base en programmation en <strong>C++</strong> et que vous êtes prêt·e à vous investir. Pour cela, si vous n’êtes pas encore entré·e en sixième secondaire, nous vous demandons de résoudre une liste de problèmes sur le site de <a href="https://www.france-ioi.org/" target="_blank" rel="noopener noreferrer">France-IOI</a> (site en français) ou de <a href="https://usaco.guide/" target="_blank" rel="noopener noreferrer">USACO Guide</a> (site en anglais). Dans les deux cas, utilisez le langage <strong>C++</strong>.</p>
       <h3>En pratique</h3>
       <p>Créez un compte sur le site que vous désirez utiliser et rejoignez le groupe qui se trouve sur <a href="http://www.france-ioi.org/algo/group.php?idGroup=20052" target="_blank" rel="noopener noreferrer">ce lien</a>, en utilisant le mot de passe <code>becp_password_1234</code> pour France-IOI ou sur <a href="https://usaco.guide/groups/join?key=rjW0XfoSo8iPeB4GVDNA" target="_blank" rel="noopener noreferrer">ce lien</a> pour USACO Guide afin que nous puissions suivre votre progression. En fonction de votre année d’étude, une quantité différente d’exercices est attendue de vous. Pour France-IOI&nbsp;: si vous êtes primaire ou en première-deuxième secondaire, il vous suffit de compléter le niveau&nbsp;1&nbsp;; si vous êtes en troisième, ce sont 2 premiers niveaux&nbsp;; en quatrième, les 3 premiers niveaux&nbsp;; et en cinquième, les 4 premiers niveaux. Pour USACO Guide&nbsp;: la liste des problèmes qui concerne votre année d’étude se trouve dans le groupe.</p>
       <p>Lorsque vous aurez tout résolu, envoyez-nous un e-mail à <a href="mailto:becp@be-oi.be">becp@be-oi.be</a> pour nous en faire part.</p>
-      <p>À partir de la sixième secondaire, contactez-nous si vous pensez que vous méritez d’intégrer le groupe. Cependant, s’entraîner pour les olympiades internationales est un travail de longue haleine. À vous de nous convaincre que vous serez prêt pour intégrer l’équipe pour l’Olympiade Internationale avant la fin de vos études secondaires, par exemple en nous montrant vos bons résultats à des concours d’algorithmique en ligne.</p>
+      <p>À partir de la sixième secondaire, contactez-nous si vous pensez que vous méritez d’intégrer le groupe. À vous de nous convaincre que vous serez prêt·e pour intégrer l’équipe pour l’Olympiade Internationale avant la fin de vos études secondaires, par exemple en nous montrant vos bons résultats à des concours d’algorithmique en ligne.</p>
     `,
   },
   {
     id: 'training',
     title: 'Comment fonctionne cet entraînement\u00A0?',
     bodyHtml: `
-      <p>L’entraînement beCP combine des stages, des séances de coaching et de la pratique autonome en ligne. Les participants reçoivent des problèmes variés, des retours sur leurs solutions et un accompagnement progressif pour renforcer leurs compétences en programmation compétitive. L’objectif est de construire des bases solides et de progresser sur la durée. Les entraînements en autonomie sont tout aussi importants dans la progression et le mot clé de l’apprentissage est la régularité.</p>
+      <p>L’entraînement beCP combine des <strong>stages</strong>, des séances de <strong>coaching</strong> et de la pratique autonome en ligne. Les participants reçoivent des problèmes variés, des retours sur leurs solutions et un accompagnement progressif. L’objectif est de construire des <strong>bases solides</strong> pour pouvoir progresser. Parallèlement à cela, l’apprentissage repose sur des entraînements pratiqués en <strong>autonomie</strong>, de manière <strong>régulière</strong>.</p>
     `,
   },
   {
     id: 'selection',
     title: 'Comment se déroule la sélection pour l’équipe nationale\u00A0?',
     bodyHtml: `
-      <p>La sélection repose sur les performances aux concours de sélections organisés durant l’année et sur l’investissement aux entraînements. Les élèves les plus réguliers et persévérants sont plus susceptibles d’être retenus. Plus de détails suivront.</p>
+      <p>La sélection repose sur les performances aux <strong>concours de sélections</strong> organisés durant l’année et sur l’<strong>investissement aux entraînements</strong>. Plus de détails suivront.</p>
     `,
   },
 ];
@@ -249,5 +249,10 @@ const laterSections = [
   .becp-section-body :global(code) {
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     font-size: 0.92em;
+  }
+
+  .becp-section-body :global(strong) {
+    color: var(--color-on-surface);
+    font-weight: 600;
   }
 </style>
