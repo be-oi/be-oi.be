@@ -22,18 +22,18 @@
 @theme {
   /*
    * Reduced palette for beOI
-   * Brand: cool steel blue · surfaces: cool greys · accents: green + amber
+   * Brand: step-illustration blue (#3a54a4) · surfaces: cool greys · accents: green + amber
    * Error is reserved for destructive/failure states only.
    */
 
   /* Brand */
-  --color-primary: #1c648e;
+  --color-primary: #3a54a4;
   --color-on-primary: #ffffff;
-  --color-primary-container: #b7d2e1;
-  --color-on-primary-container: #0f3d57;
+  --color-primary-container: #c5cdea;
+  --color-on-primary-container: #1e2d5c;
 
   /* Nav / footer chrome (not a surface elevator) */
-  --color-chrome: #406e86;
+  --color-chrome: #3a54a4;
   --color-on-chrome: #ffffff;
 
   /* Surfaces — light elevators on page background */
