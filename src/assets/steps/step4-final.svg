@@ -42,7 +42,7 @@
       }
 
       .cls-1, .cls-2, .cls-3, .cls-4, .cls-5, .cls-6, .cls-7, .cls-8, .cls-9, .cls-10, .cls-11, .cls-12, .cls-13, .cls-14, .cls-15, .cls-16, .cls-17, .cls-18, .cls-19, .cls-20, .cls-21, .cls-22, .cls-23, .cls-24, .cls-25, .cls-26, .cls-27, .cls-28, .cls-29, .cls-30 {
-        stroke-width: 2px;
+        stroke-width: 1.0357px;
       }
 
       .cls-1, .cls-3, .cls-4, .cls-5, .cls-31, .cls-6, .cls-32, .cls-7, .cls-8, .cls-33, .cls-9, .cls-10, .cls-11, .cls-12, .cls-13, .cls-14, .cls-34, .cls-15, .cls-16, .cls-17, .cls-35, .cls-18, .cls-19, .cls-36, .cls-20, .cls-21, .cls-37, .cls-38, .cls-23, .cls-39, .cls-24, .cls-25, .cls-27, .cls-40, .cls-29, .cls-30 {
@@ -138,7 +138,7 @@
       }
 
       .cls-36 {
-        stroke-width: .75px;
+        stroke-width: 0.3884px;
       }
 
       .cls-21 {
@@ -152,7 +152,7 @@
       .cls-37 {
         opacity: .24;
         stroke: #364c9f;
-        stroke-width: 23px;
+        stroke-width: 11.9105px;
       }
 
       .cls-38 {
@@ -565,7 +565,7 @@
        cy="-283.49417"
        rx="0.77044296"
        ry="0.82327574"
-       style="fill:#b3b3c7;stroke:#050706;stroke-width:0.832011px;stroke-miterlimit:10"
+       style="fill:#b3b3c7;stroke:#050706;stroke-width:0.4309px;stroke-miterlimit:10"
        transform="scale(-1)" />
     <ellipse
        id="path13328-7-7-5"
@@ -574,7 +574,7 @@
        cy="-278.5885"
        rx="0.82818574"
        ry="0.88497823"
-       style="fill:#b3b3c7;stroke:#050706;stroke-width:0.894368px;stroke-miterlimit:10"
+       style="fill:#b3b3c7;stroke:#050706;stroke-width:0.4631px;stroke-miterlimit:10"
        transform="scale(-1)" />
     <path
        style="opacity:0.425403;fill:#e7e7ee;fill-opacity:1;stroke-width:12;stroke-linecap:round;stroke-linejoin:round"
