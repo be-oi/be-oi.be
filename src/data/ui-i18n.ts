@@ -95,7 +95,7 @@ const mailingListByLocale: Record<Locale, MailingListStrings> = {
   },
   fr: {
     sectionAria: 'Inscription à la liste de diffusion',
-    heading: 'Restez informés de la prochaine olympiade',
+    heading: 'Restez informé de la prochaine olympiade',
     intro: "Recevez un e-mail à l'ouverture des inscriptions.",
     emailLabel: 'Adresse e-mail',
     emailPlaceholder: 'Adresse e-mail',

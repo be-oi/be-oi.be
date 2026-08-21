@@ -137,7 +137,7 @@ export const contestStepsFr: ContestStep[] = [
     gridColumn: 9,
     tagline: 'Représenter la Belgique sur la scène mondiale',
     description:
-      'Les meilleurs participants, sur la base de plusieurs concours et d’une formation sur plusieurs années, peuvent être sélectionnés pour représenter la Belgique lors d’olympiades internationales telles que WEOI, EJOI, EGOI et IOI.',
+      'Les meilleurs participants, sur base de plusieurs concours et d’une formation sur plusieurs années, peuvent être sélectionnés pour représenter la Belgique lors d’olympiades internationales telles que WEOI, EJOI, EGOI et IOI.',
     tags: [
       { kind: 'timing', label: 'Calendrier', value: 'Période estivale' },
       { kind: 'location', label: 'Lieu', value: 'Partout dans le monde' },

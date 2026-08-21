@@ -46,14 +46,28 @@ const laterSections = [
   {
     id: 'join',
     title: 'Hoe word ik lid van de beCP-trainingsgroep?',
+    bodyHtml: `
+      <p>Toetreden tot de beCP-groep gebeurt op kandidatuur. We zoeken gemotiveerde leerlingen die regelmatig trainen en nieuwsgierig zijn om bij te leren. Finalisten van de Belgische olympiades kunnen vragen om rechtstreeks tot de groep toe te treden.</p>
+      <p>Als je geen finalist bent of tijdens het jaar tot de groep wil toetreden, moet je aantonen dat je al een goede basis hebt in C++-programmeren en dat je bereid bent je op lange termijn in te zetten. Als je nog niet in het zesde middelbaar zit, vragen we je daarvoor een lijst problemen op te lossen op <a href="https://usaco.guide/" target="_blank" rel="noopener noreferrer">USACO Guide</a>, in C++.</p>
+      <h3>In de praktijk</h3>
+      <p>Maak een account aan op USACO Guide en word lid van de groep via <a href="https://usaco.guide/groups/join?key=rjW0XfoSo8iPeB4GVDNA" target="_blank" rel="noopener noreferrer">deze link</a>, zodat we je voortgang kunnen volgen. De probleemlijst voor jouw studiejaar staat in de groep.</p>
+      <p>Wanneer je alles hebt opgelost, stuur ons een e-mail naar <a href="mailto:becp@be-oi.be">becp@be-oi.be</a> om ons dat te laten weten.</p>
+      <p>Vanaf het zesde middelbaar kan je contact met ons opnemen als je denkt dat je een plaats in de groep verdient. Trainen voor de internationale olympiades is echter een werk van lange adem. Het is aan jou om ons te overtuigen dat je klaar zult zijn om vóór het einde van het secundair onderwijs tot het team voor de Internationale Olympiade toe te treden — bijvoorbeeld door sterke resultaten in online algoritmiewedstrijden te tonen.</p>
+    `,
   },
   {
     id: 'training',
     title: 'Hoe werkt die training?',
+    bodyHtml: `
+      <p>De beCP-training combineert kampen, coachingsessies en zelfstandige online oefening. Deelnemers krijgen gevarieerde problemen, feedback op hun oplossingen en progressieve begeleiding om hun vaardigheden in competitive programming te versterken. Het doel is stevige basissen op te bouwen en op lange termijn vooruitgang te boeken. Zelfstandig trainen is even belangrijk voor de progressie, en het sleutelwoord van het leren is regelmaat.</p>
+    `,
   },
   {
     id: 'selection',
     title: 'Hoe verloopt de selectie voor het nationaal team?',
+    bodyHtml: `
+      <p>De selectie berust op de prestaties in de selectiewedstrijden die tijdens het jaar worden georganiseerd en op de inzet bij de trainingen. De meest regelmatige en doorzettende leerlingen maken meer kans om geselecteerd te worden. Meer details volgen.</p>
+    `,
   },
 ];
 ---
@@ -173,11 +187,7 @@ const laterSections = [
           <h2 id={`${section.id}-heading`} class={`${titleSection} mb-md`}>
             {section.title}
           </h2>
-          <p
-            class="text-body-md font-body text-on-surface-variant border-l-4 border-primary/40 pl-md m-0"
-          >
-            Deze website wordt herschreven — binnenkort volgt hier meer informatie.
-          </p>
+          <div class="becp-section-body" set:html={section.bodyHtml} />
         </section>
       ))}
     </div>
@@ -203,3 +213,41 @@ const laterSections = [
   </main>
   <Footer lang="nl" />
 </BaseLayout>
+
+<style>
+  .becp-section-body :global(h3) {
+    font-family: var(--font-headline);
+    font-size: var(--text-headline-md);
+    line-height: var(--text-headline-md--line-height);
+    font-weight: 700;
+    color: var(--color-on-surface);
+    margin: var(--spacing-md) 0 var(--spacing-sm);
+  }
+
+  .becp-section-body :global(p) {
+    font-family: var(--font-body);
+    font-size: var(--text-body-md);
+    line-height: 1.6;
+    color: var(--color-on-surface-variant);
+    margin: 0 0 0.75rem;
+  }
+
+  .becp-section-body :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .becp-section-body :global(a) {
+    color: var(--color-primary);
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+  }
+
+  .becp-section-body :global(a:hover) {
+    text-decoration-thickness: 2px;
+  }
+
+  .becp-section-body :global(code) {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.92em;
+  }
+</style>
