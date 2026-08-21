@@ -1,7 +1,7 @@
 ---
-import { Image } from 'astro:assets';
 import Icon from './Icon.astro';
 import type { StepAccent, StepTag, StepTagKind } from '../data/contest-steps';
+import type { StepImage } from '../data/contest-steps/images';
 import { defaultLocale } from '../data/i18n';
 import { stepSectionStrings } from '../data/ui-i18n';
 import type { ComponentProps } from 'astro/types';
@@ -10,7 +10,7 @@ type IconName = ComponentProps<typeof Icon>['name'];
 
 interface Props {
   id: string;
-  image: ImageMetadata;
+  image: StepImage;
   imageAlt: string;
   title: string;
   tagline: string;
@@ -63,15 +63,15 @@ const hasDetails = detailsHtml.trim().length > 0;
   ]}
 >
   <div class="step-image flex justify-center">
-    <div class="relative p-md bg-surface-container-low hand-drawn-border border-2 border-outline-variant stamp-shadow">
-      <Image
-        src={image}
-        alt={imageAlt}
-        class="w-48 h-48 sm:w-56 sm:h-56 object-contain"
-        style="image-rendering: pixelated;"
-        quality={90}
-      />
-    </div>
+    <img
+      src={image.src}
+      alt={imageAlt}
+      width={image.width}
+      height={image.height}
+      class="w-64 h-64 sm:w-72 sm:h-72 lg:w-80 lg:h-80 object-contain"
+      loading="lazy"
+      decoding="async"
+    />
   </div>
 
   <div class="step-body">

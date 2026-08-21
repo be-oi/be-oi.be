@@ -37,6 +37,8 @@ CI deploy (on push to `main`): install → check → build → `aws s3 sync dist
 astro.config.mjs          # site URL + i18n routing
 package.json              # scripts and dependencies
 src/
+  assets/
+    steps/                # web contest roadmap illustrations (SVG)
   layouts/
     BaseLayout.astro      # shared HTML document shell
   pages/
@@ -47,9 +49,6 @@ src/
 public/                   # static assets copied as-is into dist/ (served as-is)
   favicon.ico             # browser tab icon (+ PNG sizes, apple-touch-icon)
   robots.txt              # crawl policy + sitemap pointer
-  img/steps/              # web-sized contest roadmap illustrations
-image-sources/            # high-res / masters for assets (not deployed)
-  steps/                  # sources for public/img/steps/ (regenerate site PNGs from these)
 dist/                     # build output (gitignored); also sitemap-*.xml from @astrojs/sitemap
 .github/workflows/
   deploy.yml              # build + S3 sync + CloudFront invalidation
@@ -57,8 +56,7 @@ dist/                     # build output (gitignored); also sitemap-*.xml from @
 
 ### Contest step images
 
-- **Deployed files**: `public/img/steps/stepN-*.png` (paths referenced from `src/data/contest-steps/`).
-- **Masters**: `image-sources/steps/` — keep higher-resolution or pre-export sources here so web-sized variants can be regenerated later. Do **not** put masters under `public/` (they would ship with the site).
+- Edit Inkscape sources and site assets in place under `src/assets/steps/stepN-*.svg` (imported from `src/data/contest-steps/images.ts`). Keep them cropped to the artwork bounds for layout. Do **not** put working masters under `public/` (they would ship with the site).
 
 ## i18n conventions
 

@@ -1,5 +1,4 @@
 ---
-import { Image } from 'astro:assets';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
@@ -36,7 +35,7 @@ const contestSteps = getContestSteps('fr');
 
     <section aria-label="Frise chronologique du parcours du concours" class="relative mb-xl max-w-[900px] mx-auto w-full">
       <div
-        class="grid overflow-x-auto pb-md snap-x snap-mandatory"
+        class="grid overflow-x-auto md:overflow-x-visible pb-md snap-x snap-mandatory"
         style="grid-template-columns: minmax(5.5rem,1fr) 1.5rem minmax(5.5rem,1fr) 1.5rem minmax(5.5rem,1fr) minmax(5.5rem,1fr) minmax(5.5rem,1fr) 1.5rem minmax(5.5rem,1fr); grid-template-rows: auto auto auto;"
       >
         {contestSteps.map((step) => (
@@ -50,13 +49,14 @@ const contestSteps = getContestSteps('fr');
                 class="absolute left-1/2 -translate-x-1/2"
                 style={`top: ${step.canvasTop}; width: ${step.canvasWidth}; aspect-ratio: ${step.image.width} / ${step.image.height};`}
               >
-                <Image
-                  src={step.image}
+                <img
+                  src={step.image.src}
                   alt=""
+                  width={step.image.width}
+                  height={step.image.height}
                   class="w-full h-full object-contain"
-                  style="image-rendering: pixelated;"
-                  quality={90}
                   loading="eager"
+                  decoding="async"
                 />
               </div>
             </div>

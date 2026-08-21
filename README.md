@@ -56,8 +56,7 @@ To stop the server, press `Ctrl+C` in the terminal.
 | French pages | `src/pages/fr/` |
 | Dutch (Flemish) pages | `src/pages/nl/` |
 | English pages | `src/pages/en/` |
-| Contest step images (on the site) | `public/img/steps/` |
-| Contest step image masters (not deployed) | `image-sources/steps/` |
+| Contest step images | `src/assets/steps/` |
 
 Edit content under `src/pages/{fr,nl,en}/` — keep parallel paths in sync across locales. Shared UI strings live in `src/data/ui-i18n.ts`.
 

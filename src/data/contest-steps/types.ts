@@ -1,3 +1,5 @@
+import type { StepImage } from './images';
+
 export type StepAccent = 'primary' | 'secondary' | 'tertiary';
 
 export type StepTagKind =
@@ -15,7 +17,7 @@ export interface StepTag {
 
 export interface ContestStep {
   id: string;
-  image: ImageMetadata;
+  image: StepImage;
   imageAlt: string;
   title: string;
   shortTitle: string;
