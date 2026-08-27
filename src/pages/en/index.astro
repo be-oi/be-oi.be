@@ -15,81 +15,83 @@ const contestSteps = getContestSteps('en');
 >
   <Nav lang="en" />
 
-  <main class="pt-32 pb-xl px-margin max-w-7xl mx-auto">
-    <!-- Hero -->
-    <section class="text-center mb-xl">
-      <div class="inline-block px-4 py-1 bg-tertiary-container/20 text-tertiary rounded-full font-label text-label-md mb-md wobbly-rotation-1 border border-tertiary/20">
-        New in 2027
-      </div>
-      <h1 class="font-headline text-headline-xl text-on-surface mb-md">
-        A new contest structure<br />
-        <span class="text-primary relative inline-block">
-          From fun logic to competitive programming
-          <span class="absolute -bottom-2 left-0 w-full h-1 bg-primary/20 rounded-full"></span>
-        </span>
-      </h1>
-      <p class="text-body-lg font-body text-on-surface-variant max-w-4xl mx-auto">
-        The Belgian Olympiad in Informatics is a contest in computational reasoning and an introduction to programming for primary and secondary school pupils.<br />
-        Starting in 2027, it metamorphoses: five stages accompany participants aged 10 to 18, from logic puzzles to representing Belgium at international programming contests.
-      </p>
-    </section>
+  <main class="pt-32 pb-0 overflow-x-clip">
+    <div class="px-margin max-w-7xl mx-auto">
+      <!-- Hero -->
+      <section class="text-center mb-xl">
+        <div class="inline-block px-4 py-1 bg-tertiary-container/20 text-tertiary rounded-full font-label text-label-md mb-md wobbly-rotation-1 border border-tertiary/20">
+          New in 2027
+        </div>
+        <h1 class="font-headline text-headline-xl text-on-surface mb-md">
+          A new contest structure<br />
+          <span class="text-primary relative inline-block">
+            From fun logic to competitive programming
+            <span class="absolute -bottom-2 left-0 w-full h-1 bg-primary/20 rounded-full"></span>
+          </span>
+        </h1>
+        <p class="text-body-lg font-body text-on-surface-variant max-w-4xl mx-auto">
+          The Belgian Olympiad in Informatics is a contest in computational reasoning and an introduction to programming for primary and secondary school pupils.<br />
+          Starting in 2027, it metamorphoses: five stages accompany participants aged 10 to 18, from logic puzzles to representing Belgium at international programming contests.
+        </p>
+      </section>
 
-    <!-- Horizontal timeline -->
-    <section aria-label="Contest journey timeline" class="relative mb-xl max-w-[940px] mx-auto w-full">
-      <!--
-        Explicit equal columns for every step; fixed tracks for the gaps
-        (after start, after qualif, after final). Subgrid keeps label tops aligned.
-        Each sprite sits in a uniform aspect-square canvas with %-based placement
-        so vertical alignment scales with the viewport.
-        minmax(5.5rem, 1fr) keeps each step column usable on narrow phones (~600px
-        min track total) so small viewports can still scroll; md+ uses overflow-x-visible
-        so canvasWidth over 100% (e.g. last icon) can stick out without a scrollbar.
-      -->
-      <div
-        class="grid overflow-x-auto md:overflow-x-visible pb-md snap-x snap-mandatory"
-        style="grid-template-columns: minmax(5.5rem,1fr) 1.5rem minmax(5.5rem,1fr) 1.5rem minmax(5.5rem,1fr) minmax(5.5rem,1fr) minmax(5.5rem,1fr) 1.5rem minmax(5.5rem,1fr); grid-template-rows: auto auto auto;"
-      >
-        {contestSteps.map((step) => (
-          <a
-            href={`#${step.id}`}
-            class="grid grid-rows-subgrid justify-items-center text-center snap-center min-w-0 transition-transform hover:-translate-y-1"
-            style={`grid-column: ${step.gridColumn}; grid-row: 1 / span 3;`}
-          >
-            <div class="relative w-full aspect-[10/13] overflow-visible">
-              <div
-                class="absolute left-1/2 -translate-x-1/2"
-                style={`top: ${step.canvasTop}; width: ${step.canvasWidth}; aspect-ratio: ${step.image.width} / ${step.image.height};`}
-              >
-                <img
-                  src={step.image.src}
-                  alt=""
-                  width={step.image.width}
-                  height={step.image.height}
-                  class="w-full h-full object-contain"
-                  loading="eager"
-                  decoding="async"
-                />
+      <!-- Horizontal timeline -->
+      <section aria-label="Contest journey timeline" class="relative mb-xl max-w-[940px] mx-auto w-full">
+        <!--
+          Explicit equal columns for every step; fixed tracks for the gaps
+          (after start, after qualif, after final). Subgrid keeps label tops aligned.
+          Each sprite sits in a uniform aspect-square canvas with %-based placement
+          so vertical alignment scales with the viewport.
+          minmax(5.5rem, 1fr) keeps each step column usable on narrow phones (~600px
+          min track total) so small viewports can still scroll; md+ uses overflow-x-visible
+          so canvasWidth over 100% (e.g. last icon) can stick out without a scrollbar.
+        -->
+        <div
+          class="grid overflow-x-auto md:overflow-x-visible pb-md snap-x snap-mandatory"
+          style="grid-template-columns: minmax(5.5rem,1fr) 1.5rem minmax(5.5rem,1fr) 1.5rem minmax(5.5rem,1fr) minmax(5.5rem,1fr) minmax(5.5rem,1fr) 1.5rem minmax(5.5rem,1fr); grid-template-rows: auto auto auto;"
+        >
+          {contestSteps.map((step) => (
+            <a
+              href={`#${step.id}`}
+              class="grid grid-rows-subgrid justify-items-center text-center snap-center min-w-0 transition-transform hover:-translate-y-1"
+              style={`grid-column: ${step.gridColumn}; grid-row: 1 / span 3;`}
+            >
+              <div class="relative w-full aspect-[10/13] overflow-visible">
+                <div
+                  class="absolute left-1/2 -translate-x-1/2"
+                  style={`top: ${step.canvasTop}; width: ${step.canvasWidth}; aspect-ratio: ${step.image.width} / ${step.image.height};`}
+                >
+                  <img
+                    src={step.image.src}
+                    alt=""
+                    width={step.image.width}
+                    height={step.image.height}
+                    class="w-full h-full object-contain"
+                    loading="eager"
+                    decoding="async"
+                  />
+                </div>
               </div>
-            </div>
-            <span class="font-label text-label-md text-on-surface -mt-1 w-full min-w-0 max-w-full break-words text-center self-start justify-self-stretch">
-              {step.shortTitle}
-            </span>
-            <p class="text-xs text-on-surface-variant mt-0 leading-snug text-center w-full min-w-0 max-w-full break-words self-start justify-self-stretch">
-              {step.teaser.map((line, lineIndex) => (
-                <>
-                  {lineIndex > 0 && <br />}
-                  {line}
-                </>
-              ))}
-            </p>
-          </a>
-        ))}
-      </div>
-    </section>
+              <span class="font-label text-label-md text-on-surface -mt-1 w-full min-w-0 max-w-full break-words text-center self-start justify-self-stretch">
+                {step.shortTitle}
+              </span>
+              <p class="text-xs text-on-surface-variant mt-0 leading-snug text-center w-full min-w-0 max-w-full break-words self-start justify-self-stretch">
+                {step.teaser.map((line, lineIndex) => (
+                  <>
+                    {lineIndex > 0 && <br />}
+                    {line}
+                  </>
+                ))}
+              </p>
+            </a>
+          ))}
+        </div>
+      </section>
 
-    <MailingListForm lang="en" />
+      <MailingListForm lang="en" />
+    </div>
 
-    <!-- Full-width step sections -->
+    <!-- Full-bleed step sections: alternate white / craft-paper -->
     <div class="flex flex-col">
       {contestSteps.map((step, i) => (
         <StepSection
@@ -103,6 +105,7 @@ const contestSteps = getContestSteps('en');
           detailsHtml={step.detailsHtml}
           accent={step.accent}
           reverse={i % 2 === 1}
+          whiteBand={i % 2 === 0}
           lang="en"
         />
       ))}
