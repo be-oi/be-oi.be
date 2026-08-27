@@ -115,7 +115,7 @@ export const contestStepsEn: ContestStep[] = [
     gridColumn: 7,
     tagline: 'Compete for the national title',
     description:
-      'The ultimate national contest with mid-level to very hard problems. Compete with the best Belgian competitors for the national title in your age group and make your way to the national pool with the aim of representing Belgium in international competitions.',
+      'The ultimate national contest with mid-level to very hard problems. Compete with the best Belgian competitors for the national title in your age group.',
     tags: [
       { kind: 'duration', label: 'Duration', value: '2x 3 hours' },
       { kind: 'timing', label: 'Timing', value: 'May' },

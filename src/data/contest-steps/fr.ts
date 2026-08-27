@@ -115,7 +115,7 @@ export const contestStepsFr: ContestStep[] = [
     gridColumn: 7,
     tagline: 'Disputez le titre national',
     description:
-      'Le concours national ultime avec des problèmes de niveau intermédiaire à très difficile. Affrontez les meilleurs concurrents belges pour le titre national dans votre catégorie d’âge et intégrez le pool national en vue de représenter la Belgique lors de compétitions internationales.',
+      'Le concours national ultime avec des problèmes de niveau intermédiaire à très difficile. Affrontez les meilleurs concurrents belges pour le titre national dans votre catégorie d’âge.',
     tags: [
       { kind: 'duration', label: 'Durée', value: '2× 3 h' },
       { kind: 'timing', label: 'Calendrier', value: 'mai' },

@@ -115,7 +115,7 @@ export const contestStepsNl: ContestStep[] = [
     gridColumn: 7,
     tagline: 'Strijd om de nationale titel',
     description:
-      'De ultieme nationale wedstrijd met opgaven van gemiddeld tot zeer moeilijk niveau. Concurreer met de beste Belgische deelnemers om de nationale titel in jouw leeftijdscategorie en maak kans op de nationale pool met als doel België te vertegenwoordigen op internationale wedstrijden.',
+      'De ultieme nationale wedstrijd met opgaven van gemiddeld tot zeer moeilijk niveau. Concurreer met de beste Belgische deelnemers om de nationale titel in jouw leeftijdscategorie.',
     tags: [
       { kind: 'duration', label: 'Duur', value: '2× 3 uur' },
       { kind: 'timing', label: 'Timing', value: 'mei' },
