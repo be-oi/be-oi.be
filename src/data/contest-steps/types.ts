@@ -30,6 +30,11 @@ export interface ContestStep {
   description: string;
   tags: StepTag[];
   /** Expanded “show more details” panel — edit the matching HTML file under contest-step-details/. */
-  detailsHtml: string;
+  detailsHtml?: string;
+  /** Link button shown under the tags (e.g. National Team page instead of expandable details). */
+  cta?: {
+    href: string;
+    label: string;
+  };
   accent: StepAccent;
 }

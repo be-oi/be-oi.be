@@ -4,7 +4,6 @@ import stepQualifDetails from '../contest-step-details/nl/step-qualif.html?raw';
 import stepQuarterDetails from '../contest-step-details/nl/step-quarter.html?raw';
 import stepSemiDetails from '../contest-step-details/nl/step-semi.html?raw';
 import stepFinalDetails from '../contest-step-details/nl/step-final.html?raw';
-import stepInternDetails from '../contest-step-details/nl/step-intern.html?raw';
 import { stepImages } from './images';
 import type { ContestStep } from './types';
 
@@ -143,7 +142,10 @@ export const contestStepsNl: ContestStep[] = [
       { kind: 'location', label: 'Locatie', value: 'Overal ter wereld' },
       { kind: 'code', label: 'Code', value: 'C++' },
     ],
-    detailsHtml: stepInternDetails,
+    cta: {
+      href: '/nl/competitive-programming/',
+      label: 'Meer lezen over het nationaal team',
+    },
     accent: 'primary',
   },
 ];

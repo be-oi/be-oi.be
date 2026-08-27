@@ -4,7 +4,6 @@ import stepQualifDetails from '../contest-step-details/fr/step-qualif.html?raw';
 import stepQuarterDetails from '../contest-step-details/fr/step-quarter.html?raw';
 import stepSemiDetails from '../contest-step-details/fr/step-semi.html?raw';
 import stepFinalDetails from '../contest-step-details/fr/step-final.html?raw';
-import stepInternDetails from '../contest-step-details/fr/step-intern.html?raw';
 import { stepImages } from './images';
 import type { ContestStep } from './types';
 
@@ -143,7 +142,10 @@ export const contestStepsFr: ContestStep[] = [
       { kind: 'location', label: 'Lieu', value: 'Partout dans le monde' },
       { kind: 'code', label: 'Code', value: 'C++' },
     ],
-    detailsHtml: stepInternDetails,
+    cta: {
+      href: '/fr/competitive-programming/',
+      label: 'En savoir plus sur l’équipe nationale',
+    },
     accent: 'primary',
   },
 ];

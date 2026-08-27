@@ -17,6 +17,10 @@ interface Props {
   description: string;
   tags: StepTag[];
   detailsHtml?: string;
+  cta?: {
+    href: string;
+    label: string;
+  };
   accent?: StepAccent;
   reverse?: boolean;
   /**
@@ -37,6 +41,7 @@ const {
   description,
   tags,
   detailsHtml = '',
+  cta,
   accent = 'primary',
   reverse = false,
   whiteBand = false,
@@ -60,6 +65,9 @@ const tagIcons: Record<StepTagKind, IconName | null> = {
 };
 
 const hasDetails = detailsHtml.trim().length > 0;
+const hasCta = Boolean(cta?.href && cta?.label);
+const buttonClass =
+  'inline-flex items-center gap-xs font-label text-label-md text-primary border-2 border-primary/30 bg-primary/5 hover:bg-primary/10 px-4 py-2 rounded-full transition-colors';
 ---
 <section
   id={id}
@@ -92,7 +100,7 @@ const hasDetails = detailsHtml.trim().length > 0;
       <p class="text-body-lg font-body text-on-surface-variant mb-md max-w-2xl">
         {description}
       </p>
-      <div class:list={['flex flex-wrap gap-sm', hasDetails && 'mb-md']}>
+      <div class:list={['flex flex-wrap gap-sm', (hasDetails || hasCta) && 'mb-md']}>
         {tags.map((tag) => {
           const icon = tagIcons[tag.kind];
           return (
@@ -111,9 +119,15 @@ const hasDetails = detailsHtml.trim().length > 0;
         })}
       </div>
 
+      {hasCta && cta && (
+        <a href={cta.href} class={buttonClass}>
+          {cta.label}
+        </a>
+      )}
+
       {hasDetails && (
         <details class="step-details">
-          <summary class="step-details-summary inline-flex items-center gap-xs cursor-pointer font-label text-label-md text-primary border-2 border-primary/30 bg-primary/5 hover:bg-primary/10 px-4 py-2 rounded-full transition-colors select-none">
+          <summary class:list={['step-details-summary cursor-pointer select-none', buttonClass]}>
             <span class="step-details-label-closed inline-flex items-center gap-xs">
               {stepLabels.showMore}
               <Icon name="expand_more" class="text-[1.125rem]" />
