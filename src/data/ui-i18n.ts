@@ -49,9 +49,9 @@ export interface FooterStrings {
 const navByLocale: Record<Locale, NavStrings> = {
   en: {
     contest: 'The beOI Contest',
-    internationalContests: 'National team',
+    internationalContests: 'National Team',
     faq: 'FAQ',
-    about: 'About us',
+    about: 'About Us',
     changeLanguage: 'Change language',
     openMenu: 'Open menu',
     closeMenu: 'Close menu',
