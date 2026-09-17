@@ -15,6 +15,10 @@ export interface NavStrings {
   internationalContests: string;
   faq: string;
   about: string;
+  /** Brand label for the external training platform link. */
+  lab: string;
+  /** Accessible name; should mention that the link opens externally. */
+  labAria: string;
   changeLanguage: string;
   openMenu: string;
   closeMenu: string;
@@ -52,6 +56,8 @@ const navByLocale: Record<Locale, NavStrings> = {
     internationalContests: 'National Team',
     faq: 'FAQ',
     about: 'About Us',
+    lab: 'beOI Lab',
+    labAria: 'beOI Lab (opens in a new tab)',
     changeLanguage: 'Change language',
     openMenu: 'Open menu',
     closeMenu: 'Close menu',
@@ -61,6 +67,8 @@ const navByLocale: Record<Locale, NavStrings> = {
     internationalContests: 'Équipe nationale',
     faq: 'FAQ',
     about: 'À propos',
+    lab: 'beOI Lab',
+    labAria: 'beOI Lab (s’ouvre dans un nouvel onglet)',
     changeLanguage: 'Changer de langue',
     openMenu: 'Ouvrir le menu',
     closeMenu: 'Fermer le menu',
@@ -70,6 +78,8 @@ const navByLocale: Record<Locale, NavStrings> = {
     internationalContests: 'Nationaal team',
     faq: 'FAQ',
     about: 'Over ons',
+    lab: 'beOI Lab',
+    labAria: 'beOI Lab (opent in een nieuw tabblad)',
     changeLanguage: 'Taal wijzigen',
     openMenu: 'Menu openen',
     closeMenu: 'Menu sluiten',
