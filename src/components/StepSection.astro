@@ -1,5 +1,6 @@
 ---
 import Icon from './Icon.astro';
+import { injectBeoiLabLinks } from '../data/beoi-lab-link';
 import type { StepAccent, StepTag, StepTagKind } from '../data/contest-steps';
 import type { StepImage } from '../data/contest-steps/images';
 import { defaultLocale } from '../data/i18n';
@@ -49,6 +50,7 @@ const {
 } = Astro.props;
 
 const stepLabels = stepSectionStrings(lang);
+const resolvedDetailsHtml = injectBeoiLabLinks(detailsHtml, lang, 'surface');
 
 const taglineClasses = {
   primary: 'text-primary',
@@ -64,7 +66,7 @@ const tagIcons: Record<StepTagKind, IconName | null> = {
   status: null,
 };
 
-const hasDetails = detailsHtml.trim().length > 0;
+const hasDetails = resolvedDetailsHtml.trim().length > 0;
 const hasCta = Boolean(cta?.href && cta?.label);
 const buttonClass =
   'inline-flex items-center gap-xs font-label text-label-md text-primary border-2 border-primary/30 bg-primary/5 hover:bg-primary/10 px-4 py-2 rounded-full transition-colors';
@@ -138,7 +140,7 @@ const buttonClass =
             </span>
           </summary>
           <div class="step-details-html mt-lg pt-md border-t border-outline-variant/50">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-md lg:gap-lg" set:html={detailsHtml} />
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-md lg:gap-lg" set:html={resolvedDetailsHtml} />
           </div>
         </details>
       )}
@@ -252,13 +254,13 @@ const buttonClass =
     margin-top: 0.5rem;
   }
 
-  .step-details-html :global(a) {
+  .step-details-html :global(a:not(.beoi-lab-link)) {
     color: var(--color-primary);
     text-decoration: underline;
     text-underline-offset: 0.15em;
   }
 
-  .step-details-html :global(a:hover) {
+  .step-details-html :global(a:not(.beoi-lab-link):hover) {
     text-decoration-thickness: 2px;
   }
 </style>

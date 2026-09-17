@@ -1,4 +1,5 @@
 ---
+import BeoiLabLink from './BeoiLabLink.astro';
 import Icon from './Icon.astro';
 import { contentLocales, defaultLocale, localizePath, stripLocalePrefix } from '../data/i18n';
 import { languagePickerLabels, navStrings, resolveLocale } from '../data/ui-i18n';
@@ -33,8 +34,6 @@ const mainLinks = [
   { href: `${base}/contest/faq`, label: t.faq, match: `${base}/contest/faq` },
   { href: `${base}/about`, label: t.about, match: `${base}/about` },
 ];
-
-const labHref = `https://lab.be-oi.be/${currentLocale}/`;
 
 function isMainActive(match: string, exact = false) {
   if (exact) return path === match;
@@ -78,43 +77,7 @@ function isMainActive(match: string, exact = false) {
     </div>
 
     <div class="flex items-center gap-sm shrink-0">
-      <a
-        href={labHref}
-        class="nav-lab-btn inline-flex"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label={t.labAria}
-      >
-        {/* Custom Erlenmeyer flask with liquid wave (matches design mock). */}
-        <svg
-          class="nav-lab-btn__flask shrink-0"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          width="1.15em"
-          height="1.15em"
-          fill="none"
-          aria-hidden="true"
-        >
-          <path
-            stroke="currentColor"
-            stroke-width="1.7"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M9 2.75h6M10.25 2.75v5.1L5.1 17.55A2.15 2.15 0 0 0 6.95 20.75h10.1a2.15 2.15 0 0 0 1.85-3.2L13.75 7.85v-5.1"
-          />
-          <path
-            class="nav-lab-btn__liquid"
-            stroke="currentColor"
-            stroke-width="1.7"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M7.15 15.05c1.15-.95 2.05.85 3.25-.15s2.05.85 3.2-.15 2-.75 2.85-.1"
-          />
-        </svg>
-        <span class="hidden sm:inline">{t.lab}</span>
-        <span class="sm:hidden">Lab</span>
-        <Icon name="arrow_outward" class="nav-lab-btn__arrow" />
-      </a>
+      <BeoiLabLink lang={currentLocale} variant="chrome" />
       <div class="relative flex items-center">
         <button
           type="button"
@@ -214,77 +177,6 @@ function isMainActive(match: string, exact = false) {
     </div>
   </div>
 </nav>
-
-<style>
-  .nav-lab-btn {
-    align-items: center;
-    gap: 0.4rem;
-    padding: 0.35rem 0.85rem;
-    border-radius: 9999px;
-    border: 1px solid color-mix(in srgb, var(--color-on-chrome) 30%, transparent);
-    background: color-mix(in srgb, var(--color-on-chrome) 12%, transparent);
-    color: var(--color-on-chrome);
-    font-family: var(--font-label);
-    font-size: var(--text-label-md);
-    line-height: var(--text-label-md--line-height);
-    letter-spacing: var(--text-label-md--letter-spacing);
-    font-weight: 600;
-    text-decoration: none;
-    white-space: nowrap;
-    transition:
-      background-color 0.2s ease,
-      border-color 0.2s ease,
-      box-shadow 0.2s ease,
-      transform 0.2s ease;
-  }
-
-  .nav-lab-btn__flask {
-    color: #7dffc4;
-    transition: filter 0.25s ease, transform 0.25s ease;
-  }
-
-  /* Icon.astro is a child component — pierce scoped styles. */
-  .nav-lab-btn :global(.nav-lab-btn__arrow) {
-    font-size: 0.95em;
-    opacity: 0.9;
-    transition: transform 0.2s ease, opacity 0.2s ease;
-  }
-
-  .nav-lab-btn:hover,
-  .nav-lab-btn:focus-visible {
-    background: color-mix(in srgb, var(--color-on-chrome) 22%, transparent);
-    border-color: color-mix(in srgb, var(--color-on-chrome) 55%, transparent);
-    box-shadow: 0 0 0 1px color-mix(in srgb, #7dffc4 35%, transparent);
-  }
-
-  .nav-lab-btn:hover .nav-lab-btn__flask,
-  .nav-lab-btn:focus-visible .nav-lab-btn__flask {
-    filter: drop-shadow(0 0 4px color-mix(in srgb, #7dffc4 70%, transparent));
-  }
-
-  .nav-lab-btn:hover :global(.nav-lab-btn__arrow),
-  .nav-lab-btn:focus-visible :global(.nav-lab-btn__arrow) {
-    transform: translate(1px, -1px);
-    opacity: 1;
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    .nav-lab-btn:hover,
-    .nav-lab-btn:focus-visible {
-      transform: translateY(-1px);
-    }
-
-    .nav-lab-btn:hover .nav-lab-btn__flask,
-    .nav-lab-btn:focus-visible .nav-lab-btn__flask {
-      transform: rotate(30deg);
-    }
-  }
-
-  .nav-lab-btn:focus-visible {
-    outline: 2px solid #7dffc4;
-    outline-offset: 2px;
-  }
-</style>
 
 <script is:inline>
   (function () {

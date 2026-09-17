@@ -1,0 +1,138 @@
+---
+import { beoiLabLinkHtml, type BeoiLabLinkVariant } from '../data/beoi-lab-link';
+import { defaultLocale } from '../data/i18n';
+
+interface Props {
+  /** Locale for the Lab URL and aria-label. */
+  lang?: string;
+  /** `chrome` for the dark nav bar; `surface` for light page content. */
+  variant?: BeoiLabLinkVariant;
+  class?: string;
+}
+
+const { lang = defaultLocale, variant = 'chrome', class: className } = Astro.props;
+const html = beoiLabLinkHtml(lang, variant, { className });
+---
+<Fragment set:html={html} />
+
+<style is:global>
+  .beoi-lab-link {
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.35rem 0.85rem;
+    border-radius: 9999px;
+    font-family: var(--font-label);
+    font-size: var(--text-label-md);
+    line-height: var(--text-label-md--line-height);
+    letter-spacing: var(--text-label-md--letter-spacing);
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    vertical-align: middle;
+    transition:
+      background-color 0.2s ease,
+      border-color 0.2s ease,
+      box-shadow 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  .beoi-lab-link--chrome {
+    border: 1px solid color-mix(in srgb, var(--color-on-chrome) 30%, transparent);
+    background: color-mix(in srgb, var(--color-on-chrome) 12%, transparent);
+    color: var(--color-on-chrome);
+  }
+
+  /* Inline in body copy — no pill, sits on the text baseline. */
+  .beoi-lab-link--surface {
+    gap: 0.25rem;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    color: var(--color-primary);
+    font-family: var(--font-body);
+    font-size: inherit;
+    line-height: inherit;
+    letter-spacing: normal;
+    font-weight: 600;
+    vertical-align: baseline;
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+  }
+
+  .beoi-lab-link__flask {
+    color: #7dffc4;
+    transition: filter 0.25s ease, transform 0.25s ease;
+  }
+
+  .beoi-lab-link--surface .beoi-lab-link__flask {
+    width: 1em;
+    height: 1em;
+    /* Deeper mint so the flask stays vivid on white. */
+    color: #1aa86a;
+  }
+
+  .beoi-lab-link__arrow {
+    font-size: 0.95em;
+    opacity: 0.9;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+
+  .beoi-lab-link--surface .beoi-lab-link__arrow {
+    font-size: 0.85em;
+    opacity: 0.75;
+  }
+
+  .beoi-lab-link--chrome:hover,
+  .beoi-lab-link--chrome:focus-visible {
+    background: color-mix(in srgb, var(--color-on-chrome) 22%, transparent);
+    border-color: color-mix(in srgb, var(--color-on-chrome) 55%, transparent);
+    box-shadow: 0 0 0 1px color-mix(in srgb, #7dffc4 35%, transparent);
+  }
+
+  .beoi-lab-link--surface:hover,
+  .beoi-lab-link--surface:focus-visible {
+    background: transparent;
+    box-shadow: none;
+    text-decoration-thickness: 2px;
+  }
+
+  .beoi-lab-link--chrome:hover .beoi-lab-link__flask,
+  .beoi-lab-link--chrome:focus-visible .beoi-lab-link__flask {
+    filter: drop-shadow(0 0 4px color-mix(in srgb, #7dffc4 70%, transparent));
+  }
+
+  .beoi-lab-link--surface:hover .beoi-lab-link__flask,
+  .beoi-lab-link--surface:focus-visible .beoi-lab-link__flask {
+    filter: drop-shadow(0 0 3px color-mix(in srgb, #1aa86a 45%, transparent));
+  }
+
+  .beoi-lab-link:hover .beoi-lab-link__arrow,
+  .beoi-lab-link:focus-visible .beoi-lab-link__arrow {
+    transform: translate(1px, -1px);
+    opacity: 1;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .beoi-lab-link--chrome:hover,
+    .beoi-lab-link--chrome:focus-visible {
+      transform: translateY(-1px);
+    }
+
+    .beoi-lab-link:hover .beoi-lab-link__flask,
+    .beoi-lab-link:focus-visible .beoi-lab-link__flask {
+      transform: rotate(30deg);
+    }
+  }
+
+  .beoi-lab-link--chrome:focus-visible {
+    outline: 2px solid #7dffc4;
+    outline-offset: 2px;
+  }
+
+  .beoi-lab-link--surface:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+</style>
