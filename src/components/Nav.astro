@@ -115,11 +115,11 @@ function isMainActive(match: string, exact = false) {
         <span class="sm:hidden">Lab</span>
         <Icon name="arrow_outward" class="nav-lab-btn__arrow" />
       </a>
-      <div class="relative">
+      <div class="relative flex items-center">
         <button
           type="button"
           id="nav-lang-toggle"
-          class="text-on-chrome border-b-2 border-transparent hover:border-on-chrome text-2xl leading-none"
+          class="inline-flex items-center justify-center size-8 text-on-chrome text-2xl leading-none rounded-md hover:bg-on-chrome/15 transition-colors"
           aria-label={t.changeLanguage}
           aria-expanded="false"
           aria-controls="nav-lang-menu"
@@ -154,7 +154,7 @@ function isMainActive(match: string, exact = false) {
       <button
         type="button"
         id="nav-menu-toggle"
-        class="md:hidden text-on-chrome border-b-2 border-transparent hover:border-on-chrome text-2xl leading-none"
+        class="md:hidden inline-flex items-center justify-center size-8 text-on-chrome text-2xl leading-none rounded-md hover:bg-on-chrome/15 transition-colors"
         aria-label={t.openMenu}
         data-label-open={t.openMenu}
         data-label-close={t.closeMenu}
