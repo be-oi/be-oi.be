@@ -2,7 +2,8 @@ import { resolveLocale, navStrings, type Locale } from './ui-i18n';
 
 /**
  * Marker replaced in contest-step-details HTML with the branded Lab link.
- * Optional key: `{{beoi-lab}}` (home) or `{{beoi-lab:brain-teaser}}` / `{{beoi-lab:qualif}}`.
+ * Optional key: `{{beoi-lab}}` (home) or `{{beoi-lab:brain-teaser}}` /
+ * `{{beoi-lab:qualif}}` / `{{beoi-lab:quarter-semi}}`.
  */
 export const BEOI_LAB_PLACEHOLDER_RE = /\{\{beoi-lab(?::([a-z0-9-]+))?\}\}/g;
 
@@ -10,6 +11,7 @@ export const BEOI_LAB_PLACEHOLDER_RE = /\{\{beoi-lab(?::([a-z0-9-]+))?\}\}/g;
 const labDeepPaths = {
   'brain-teaser': 'a/4429983549991579600;p=1,7122528748040789673',
   qualif: 'a/5876258403877279036;p=1,7122528748040789673',
+  'quarter-semi': 'a/7601856471276184584;p=1,7122528748040789673',
 } as const;
 
 export type BeoiLabDeepLink = keyof typeof labDeepPaths;
