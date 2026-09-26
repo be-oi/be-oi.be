@@ -54,7 +54,7 @@ const contestSteps = getContestSteps('en');
           {contestSteps.map((step) => (
             <a
               href={`#${step.id}`}
-              class="grid grid-rows-subgrid justify-items-center text-center snap-center min-w-0 transition-transform hover:-translate-y-1"
+              class="grid grid-rows-subgrid justify-items-center text-center snap-center min-w-0 motion-safe:transition-transform motion-safe:hover:-translate-y-1"
               style={`grid-column: ${step.gridColumn}; grid-row: 1 / span 3;`}
             >
               <div class="relative w-full aspect-[10/13] overflow-visible">
