@@ -156,10 +156,10 @@ A reduced Material-like palette: one brand blue shared with the illustrations, c
 - Keep rare so callouts stay loud when they appear.
 
 ### Lab accent
-- **Lab Mint** (`#7dffc4` / `--color-lab-mint`): Flask glow, chrome Lab-link focus ring, and mint hover halo on Contest Blue chrome. Observed today as hardcoded hex in `BeoiLabLink.astro`.
-- **Lab Mint Deep** (`#1aa86a` / `--color-lab-mint-deep`): Flask on light page surfaces (surface Lab-link variant) so mint stays vivid on Page White.
+- **Lab Mint** (`#7dffc4` / `--color-lab-mint`): Flask glow, chrome Lab-link focus ring, and mint hover halo on Contest Blue chrome. Declared in `global.css` `@theme`.
+- **Lab Mint Deep** (`#1aa86a` / `--color-lab-mint-deep`): Flask on light page surfaces (surface Lab-link variant) so mint stays vivid on Page White. Declared in `global.css` `@theme`.
 
-**Token contract:** treat Lab mint as named color tokens *and* as the intended CSS custom properties `--color-lab-mint` / `--color-lab-mint-deep`. Prefer `var(--color-lab-mint)` / `var(--color-lab-mint-deep)` in new or edited styles — do not introduce fresh hex literals — even if those vars are not yet declared in `global.css` `@theme` (declare them when touching Lab styles). Lab mint is never general decoration.
+**Token contract:** treat Lab mint as named color tokens *and* as the CSS custom properties `--color-lab-mint` / `--color-lab-mint-deep` in `@theme`. Prefer `var(--color-lab-mint)` / `var(--color-lab-mint-deep)` in styles — do not introduce fresh hex literals. Lab mint is never general decoration.
 
 ### Neutral
 - **Craft Paper** (`#ececec` / `background` + `surface`): Page background with the dotted craft-paper texture. Do **not** rename this craft-paper surface to “white.”

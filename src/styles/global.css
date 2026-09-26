@@ -21,7 +21,7 @@
 @theme {
   /*
    * Reduced palette for beOI
-   * Brand: step-illustration blue (#3a54a4) · surfaces: cool greys · accents: green + amber
+   * Brand: step-illustration blue (#3a54a4) · surfaces: cool greys · accents: green + amber · Lab mint (Lab link only)
    * Error is reserved for destructive/failure states only.
    */
 
@@ -68,6 +68,10 @@
   /* Error — failures only */
   --color-error: #ba1a1a;
   --color-on-error: #ffffff;
+
+  /* Lab accent — Lab link flask / focus only; never general decoration */
+  --color-lab-mint: #7dffc4;
+  --color-lab-mint-deep: #1aa86a;
 
   /* Fonts */
   --font-headline: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;

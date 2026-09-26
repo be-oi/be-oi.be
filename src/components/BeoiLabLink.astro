@@ -66,15 +66,15 @@ const html = beoiLabLinkHtml(lang, variant, { className });
   }
 
   .beoi-lab-link__flask {
-    color: #7dffc4;
+    color: var(--color-lab-mint);
     transition: filter 0.25s ease, transform 0.25s ease;
   }
 
   .beoi-lab-link--surface .beoi-lab-link__flask {
     width: 1em;
     height: 1em;
-    /* Deeper mint so the flask stays vivid on white. */
-    color: #1aa86a;
+    /* Deeper mint so the flask stays vivid on Page White. */
+    color: var(--color-lab-mint-deep);
   }
 
   .beoi-lab-link__arrow {
@@ -92,7 +92,7 @@ const html = beoiLabLinkHtml(lang, variant, { className });
   .beoi-lab-link--chrome:focus-visible {
     background: color-mix(in srgb, var(--color-on-chrome) 22%, transparent);
     border-color: color-mix(in srgb, var(--color-on-chrome) 55%, transparent);
-    box-shadow: 0 0 0 1px color-mix(in srgb, #7dffc4 35%, transparent);
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-lab-mint) 35%, transparent);
   }
 
   .beoi-lab-link--surface:hover,
@@ -104,12 +104,12 @@ const html = beoiLabLinkHtml(lang, variant, { className });
 
   .beoi-lab-link--chrome:hover .beoi-lab-link__flask,
   .beoi-lab-link--chrome:focus-visible .beoi-lab-link__flask {
-    filter: drop-shadow(0 0 4px color-mix(in srgb, #7dffc4 70%, transparent));
+    filter: drop-shadow(0 0 4px color-mix(in srgb, var(--color-lab-mint) 70%, transparent));
   }
 
   .beoi-lab-link--surface:hover .beoi-lab-link__flask,
   .beoi-lab-link--surface:focus-visible .beoi-lab-link__flask {
-    filter: drop-shadow(0 0 3px color-mix(in srgb, #1aa86a 45%, transparent));
+    filter: drop-shadow(0 0 3px color-mix(in srgb, var(--color-lab-mint-deep) 45%, transparent));
   }
 
   .beoi-lab-link:hover .beoi-lab-link__arrow,
@@ -131,7 +131,7 @@ const html = beoiLabLinkHtml(lang, variant, { className });
   }
 
   .beoi-lab-link--chrome:focus-visible {
-    outline: 2px solid #7dffc4;
+    outline: 2px solid var(--color-lab-mint);
     outline-offset: 2px;
   }
 
