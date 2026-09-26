@@ -15,8 +15,20 @@ const privacyHref = localizePath(locale, '/data-protection');
 
 // Evaluated at build/dev time so it stays visible locally and on CI.
 const builtAt = new Date();
-// UTC so CI and local timestamps stay comparable.
-const buildDate = builtAt.toISOString().replace('T', ' ').slice(0, 16) + ' UTC';
+// Brussels local time (CET/CEST) so the stamp matches when the site is usually read.
+const brusselsParts = new Intl.DateTimeFormat('en-GB', {
+  timeZone: 'Europe/Brussels',
+  year: 'numeric',
+  month: '2-digit',
+  day: '2-digit',
+  hour: '2-digit',
+  minute: '2-digit',
+  hour12: false,
+  timeZoneName: 'short',
+}).formatToParts(builtAt);
+const part = (type: Intl.DateTimeFormatPartTypes) =>
+  brusselsParts.find((p) => p.type === type)?.value ?? '';
+const buildDate = `${part('year')}-${part('month')}-${part('day')} ${part('hour')}:${part('minute')} ${part('timeZoneName')}`;
 
 function resolveCommitSha(): string {
   const fromEnv = process.env.GITHUB_SHA || process.env.COMMIT_SHA;
