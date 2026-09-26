@@ -195,10 +195,18 @@ A reduced Material-like palette: one brand blue shared with the illustrations, c
 - **Label MD** (600, 14px, 1.4, 0.05em): Nav, buttons, chips, Lab link — the UI voice.
 - **Mono** (system stack, ~0.92em relative to body on competitive-programming pages): Inline `<code>` only — not UI chrome, not headlines.
 
+### Caption ladder (intentional off-ramp sizes)
+These are **not** `@theme` type tokens. They stay on Be Vietnam Pro (body face) and are reserved for metadata — do not promote them into the main reading hierarchy or invent a fourth UI family for them.
+- **Caption** (400, Tailwind `text-sm` / 14px, relaxed leading): Footer legal block, data-protection link line, mailing-list privacy notice, meta-chip values inside step chips.
+- **Caption XS** (400, Tailwind `text-xs` / 12px, snug): Home timeline teaser lines under step titles.
+- **Micro stamp** (400, `text-[0.7rem]` / ~11.2px, wide tracking): Footer build label only (`Footer.astro`) — deployment metadata, never body copy.
+
 Self-hosted via Fontsource **latin** subsets only (one file per used weight) for the three UI faces — Belgian French/Dutch accents are in the latin range, and latin-ext subset CSS omits `unicode-range` which would force duplicate downloads. Weights: Jakarta 700; Be Vietnam Pro 400 + 600; Bricolage 600. Critical body + headline woff2s are preloaded from `BaseLayout`. Do not load Google Fonts or other third-party font CDNs. Mono stays on the platform stack (no remote mono CDN).
 
 ### Named Rules
 **The Three-Face (+ Code Mono) Rule.** Three UI faces remain: Headlines → Plus Jakarta; reading → Be Vietnam Pro; chrome/UI → Bricolage. Mono is a fourth specialized role for code only (system `ui-monospace` stack on competitive-programming pages). Do not invent additional families for decoration — and do use mono for code.
+
+**The Caption Ladder Rule.** `text-sm`, `text-xs`, and `text-[0.7rem]` are intentional caption/micro sizes for legal, timeline teasers, chip values, and the build stamp. Do not use them for section reading copy, and do not “fix” them up to `body-md` / `label-md` just to match the token list.
 
 ## Layout
 
@@ -228,12 +236,19 @@ Breakpoints in use: `sm` 640px, `md` 768px, `lg` 1024px.
 
 ## Shapes
 
-Corners are soft and pill-forward: default radius `1rem`, large `2rem`/`3rem`, and **full pills** (`9999px`) for CTAs, inputs, chips, and the Lab chrome control. Hand-drawn organic borders (`hand-drawn-border`) and tiny rotations (`wobbly-rotation-*`) appear as craft accents on badges and decorative blots — sparingly, never on dense text blocks.
+Corners are soft and pill-forward: default radius `1rem`, large `2rem`/`3rem`, and **full pills** (`9999px`) for CTAs, inputs, chips, and the Lab chrome control. Borders are typically `border-2` with outline-variant or primary at low opacity.
 
-Borders are typically `border-2` with outline-variant or primary at low opacity.
+### Intentional radius exceptions (outside `--radius-*`)
+These are deliberate craft or chrome fits — keep them local; do not expand the `@theme` radius scale to absorb them.
+- **Chrome icon buttons** (`rounded-md` / ~0.375rem): Language, menu, and footer social hit targets on Contest Blue chrome — soft square affordances, not pills.
+- **Hand-drawn blot** (`.hand-drawn-border`): Organic radii `255px 15px 225px 15px / 15px 225px 15px 255px` on decorative craft shapes only — never on dense text blocks or form controls. Pair sparingly with `wobbly-rotation-*`.
+- **Lab surface focus** (`border-radius: 2px` on `.beoi-lab-link--surface:focus-visible`): Tight focus clip for the inline text Lab link on Page White. Chrome Lab control stays full pill; surface variant stays `border-radius: 0` at rest.
+- **Mailing-list status** (`rounded-md` on the live-region message): Quiet soft corner for a text status line — not a card.
 
 ### Named Rules
 **The Pill CTA Rule.** Primary actions and email fields are full pills. Rectangular sharp cards are not the default container language.
+
+**The Radius Exception Rule.** Organic hand-drawn radii, Lab surface focus `2px`, and chrome-icon `rounded-md` are sanctioned one-offs. Do not “normalize” them to `--radius-DEFAULT` / full pill, and do not invent new radius tokens for single-use accents.
 
 ## Components
 
@@ -246,7 +261,7 @@ Playful and clear: full pills, thick quiet borders, wobble kept light.
 - **Focus:** Prefer visible `:focus-visible` rings (Contest Blue or Lab mint on chrome). Do not strip outlines without a replacement.
 
 ### Chips
-- **Style:** Pill, `border border-outline-variant`, tonal fill (`surface-container-lowest` or `low` on white bands), icon in primary + value in on-surface; kind label in `sr-only`.
+- **Style:** Pill, `border border-outline-variant`, tonal fill (`surface-container-lowest` or `low` on white bands), icon in primary + value in on-surface at **Caption** (`text-sm`); kind label in `sr-only`.
 - **State:** Informational meta only (duration, timing, location) — not filters.
 
 ### Cards / Containers
@@ -261,9 +276,12 @@ Playful and clear: full pills, thick quiet borders, wobble kept light.
 ### Navigation
 - Fixed Contest Blue chrome bar, white logo wordmark, label-md links.
 - Active desktop link: bottom border on chrome; mobile: left border + panel.
-- Desktop main links: at least 24×24 CSS px hit area (WCAG 2.5.8); language/menu icon buttons and Lab chrome control prefer 44×44.
+- Desktop main links: at least 24×24 CSS px hit area (WCAG 2.5.8); language/menu icon buttons and Lab chrome control prefer 44×44 (`size-11`) with `rounded-md` (see Shapes exceptions).
 - Language and menu toggles: icon buttons on chrome; menus escape to light surface panels.
-- **Lab link (chrome):** Pill with translucent white border, min-height 44px; Lab Mint flask accent via `--color-lab-mint`; external target. Surface variant uses `--color-lab-mint-deep` for the flask on Page White (inline text link — not enlarged as a chrome control).
+- **Lab link (chrome):** Pill with translucent white border, min-height 44px; Lab Mint flask accent via `--color-lab-mint`; external target. Surface variant uses `--color-lab-mint-deep` for the flask on Page White (inline text link — not enlarged as a chrome control; focus ring uses intentional `2px` radius).
+
+### Footer
+- Legal entity block and data-protection link use **Caption** (`text-sm`); build stamp uses **Micro stamp** (`text-[0.7rem]`). Social icons match chrome icon-button radius (`rounded-md` / `size-11`).
 
 ### Signature: Contest step section
 Image + title + accent tagline + body + meta chips + optional details `<details>`. Illustrations from `src/assets/steps/` are mandatory journey markers — do not replace with generic stock. Optional `whiteBand` should paint Page White via `surface-container-lowest`, not raw `bg-white`.
@@ -280,6 +298,7 @@ Body copy may include `<code>` set in the `mono` stack at ~0.92em. Do not style 
 - **Do** keep Contest Blue as the sole dominant brand accent and match illustration blue.
 - **Do** alternate craft-paper (`background`/`surface`) and Page White (`surface-container-lowest`) bands on long pages — use the surface token, not raw `bg-white`.
 - **Do** use full-pill CTAs/inputs and quiet 2px borders.
+- **Do** keep caption/micro sizes (`text-sm` / `text-xs` / `text-[0.7rem]`) for metadata only, and keep hand-drawn / Lab-focus / chrome-icon radii as documented exceptions.
 - **Do** gate motion behind `prefers-reduced-motion: no-preference`.
 - **Do** preserve mascot step art and beOI logos as identity assets.
 - **Do** use `var(--color-lab-mint)` / `var(--color-lab-mint-deep)` for Lab accents, and the system `mono` stack for code.
@@ -291,3 +310,4 @@ Body copy may include `<code>` set in the `mono` stack at ~0.92em. Do not style 
 - **Don't** use error red or Lab mint as general decoration.
 - **Don't** default to card grids with layered shadows for content that belongs in open bands.
 - **Don't** paint white bands with raw `bg-white` when `bg-surface-container-lowest` is the tokenized Page White.
+- **Don't** “fix” sanctioned caption sizes or radius exceptions into the `@theme` ramp just to silence a detector advisory.
