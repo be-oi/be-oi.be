@@ -7,6 +7,7 @@ import {
   stripLocalePrefix,
   xDefaultLocale,
 } from '../data/i18n';
+import { skipToContentLabel } from '../data/ui-i18n';
 
 interface Props {
   title?: string;
@@ -40,6 +41,7 @@ const ogImageURL = image.startsWith('http')
   : new URL(image.startsWith('/') ? image : `/${image}`, site).href;
 
 const isLanguagePicker = pathname === '/' || pathname === '';
+const skipLabel = skipToContentLabel(lang);
 
 // Always include this page’s lang and the x-default target among alternates.
 const uniqueLocales = [...new Set<string>([...alternateLocales, lang, xDefaultLocale])];
@@ -88,6 +90,7 @@ const xDefaultHref = isLanguagePicker
     <slot name="head" />
   </head>
   <body class="bg-background text-on-background font-body text-body-md craft-paper overflow-x-hidden">
+    <a class="skip-link" href="#main">{skipLabel}</a>
     <slot />
   </body>
 </html>

@@ -33,13 +33,13 @@ function resolveCommitSha(): string {
 
 const commitSha = resolveCommitSha();
 const buildLabel = commitSha
-  ? `Built ${buildDate} · ${commitSha}`
-  : `Built ${buildDate}`;
+  ? `${t.built} ${buildDate} · ${commitSha}`
+  : `${t.built} ${buildDate}`;
 ---
 <footer class="bg-chrome border-t-2 border-on-chrome/20 mt-xl">
   <div class="w-full px-margin py-lg max-w-7xl mx-auto flex flex-col gap-md">
     <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-md">
-      <div class="text-sm font-body text-on-chrome leading-relaxed space-y-1 max-w-3xl">
+      <div class="text-sm font-body text-on-chrome leading-relaxed space-y-1 max-w-3xl min-w-0">
         <p>
           Belgische Informatica-olympiade - Olympiade belge d’Informatique (beOI) ASBL/VZW
         </p>
@@ -47,7 +47,12 @@ const buildLabel = commitSha
           Celestijnenlaan 200A bus 4078, 3001 Leuven
         </p>
         <p>
-          info@be-oi.be
+          <a
+            href="mailto:info@be-oi.be"
+            class="text-on-chrome underline underline-offset-2 hover:decoration-2 break-all"
+          >
+            info@be-oi.be
+          </a>
         </p>
         <p>BTW/TVA BE 0849.738.707</p>
       </div>
@@ -55,7 +60,7 @@ const buildLabel = commitSha
         <div class="flex items-center gap-sm">
           <a
             href="https://www.facebook.com/beoi.contest"
-            class="text-on-chrome hover:opacity-80"
+            class="text-on-chrome hover:opacity-80 rounded-sm"
             target="_blank"
             rel="noopener noreferrer"
             aria-label={t.facebook}
@@ -75,7 +80,7 @@ const buildLabel = commitSha
           </a>
           <a
             href="https://www.instagram.com/beoi_official/"
-            class="text-on-chrome hover:opacity-80"
+            class="text-on-chrome hover:opacity-80 rounded-sm"
             target="_blank"
             rel="noopener noreferrer"
             aria-label={t.instagram}

@@ -31,8 +31,27 @@ export interface MailingListStrings {
   emailLabel: string;
   emailPlaceholder: string;
   submit: string;
+  /** Button label while the request is in flight. */
+  pending: string;
+  /** Empty field, after submit. */
+  empty: string;
+  /** Client-side or HTTP 400: the address was rejected. */
+  invalid: string;
   already: string;
   success: string;
+  /** HTTP 429. */
+  rateLimit: string;
+  /** Browser reports no network. */
+  offline: string;
+  /**
+   * Request aborted after the client timeout.
+   * `{email}` is replaced by a mailto link to the contact address.
+   */
+  timeout: string;
+  /**
+   * Any other failure.
+   * `{email}` is replaced by a mailto link to the contact address.
+   */
   failure: string;
   /** Shown under the form; `{link}` is replaced by the privacy-page anchor. */
   privacyNotice: string;
@@ -48,6 +67,8 @@ export interface FooterStrings {
   dataProtection: string;
   facebook: string;
   instagram: string;
+  /** Prefix for the build stamp, e.g. "Built". */
+  built: string;
 }
 
 const navByLocale: Record<Locale, NavStrings> = {
@@ -94,9 +115,15 @@ const mailingListByLocale: Record<Locale, MailingListStrings> = {
     emailLabel: 'Email address',
     emailPlaceholder: 'Email address',
     submit: 'Keep me informed',
+    pending: 'Sending…',
+    empty: 'Enter your email address.',
+    invalid: "That doesn't look like an email address. Check it and try again.",
     already: "It looks like you're already subscribed.",
     success: "Thanks. We'll let you know when registration opens.",
-    failure: "Couldn't add you to the list. If this persists, contact us (info@be-oi.be).",
+    rateLimit: 'Too many attempts. Wait a moment, then try again.',
+    offline: 'You seem to be offline. Check your connection and try again.',
+    timeout: 'That took too long. Try again, or email {email}.',
+    failure: "Couldn't add you to the list. If this persists, contact us ({email}).",
     privacyNotice:
       'By subscribing, you agree that we store your email to send olympiad updates. Subscription is immediate (no confirmation email). See our {link}.',
     privacyLinkLabel: 'data protection notice',
@@ -110,10 +137,16 @@ const mailingListByLocale: Record<Locale, MailingListStrings> = {
     emailLabel: 'Adresse e-mail',
     emailPlaceholder: 'Adresse e-mail',
     submit: 'Tenez-moi informé',
+    pending: 'Envoi en cours…',
+    empty: 'Indiquez votre adresse e-mail.',
+    invalid: 'Cette adresse e-mail ne semble pas valide. Vérifiez-la et réessayez.',
     already: 'Il semble que vous soyez déjà inscrit.',
     success: "Merci. Nous vous préviendrons lorsque les inscriptions ouvriront.",
+    rateLimit: 'Trop de tentatives. Patientez un instant, puis réessayez.',
+    offline: 'Vous semblez hors ligne. Vérifiez votre connexion, puis réessayez.',
+    timeout: 'La demande a pris trop de temps. Réessayez, ou écrivez à {email}.',
     failure:
-      "Impossible de vous ajouter à la liste. Si le problème persiste, contactez-nous (info@be-oi.be).",
+      'Impossible de vous ajouter à la liste. Si le problème persiste, contactez-nous ({email}).',
     privacyNotice:
       'En vous inscrivant, vous acceptez que nous conservions votre e-mail pour vous envoyer des informations sur l’olympiade. L’inscription est immédiate (pas d’e-mail de confirmation). Voir notre {link}.',
     privacyLinkLabel: 'notice de protection des données',
@@ -127,10 +160,16 @@ const mailingListByLocale: Record<Locale, MailingListStrings> = {
     emailLabel: 'E-mailadres',
     emailPlaceholder: 'E-mailadres',
     submit: 'Houd mij op de hoogte',
+    pending: 'Bezig met versturen…',
+    empty: 'Geef je e-mailadres op.',
+    invalid: 'Dit lijkt geen geldig e-mailadres. Controleer het en probeer opnieuw.',
     already: 'Het lijkt erop dat je al bent ingeschreven.',
     success: 'Bedankt. We laten je weten wanneer de inschrijvingen openen.',
+    rateLimit: 'Te veel pogingen. Wacht even en probeer het opnieuw.',
+    offline: 'Je lijkt offline te zijn. Controleer je verbinding en probeer opnieuw.',
+    timeout: 'Het duurde te lang. Probeer opnieuw, of mail naar {email}.',
     failure:
-      'We konden je niet aan de lijst toevoegen. Als dit aanhoudt, neem contact op (info@be-oi.be).',
+      'We konden je niet aan de lijst toevoegen. Als dit aanhoudt, neem contact op ({email}).',
     privacyNotice:
       'Door je in te schrijven ga je akkoord dat we je e-mail bewaren om olympiade-updates te sturen. Inschrijving is onmiddellijk (geen bevestigingsmail). Zie onze {link}.',
     privacyLinkLabel: 'databeschermingsverklaring',
@@ -144,18 +183,31 @@ const footerByLocale: Record<Locale, FooterStrings> = {
     dataProtection: 'Data protection',
     facebook: 'beOI on Facebook',
     instagram: 'beOI on Instagram',
+    built: 'Built',
   },
   fr: {
     dataProtection: 'Protection des données',
     facebook: 'beOI sur Facebook',
     instagram: 'beOI sur Instagram',
+    built: 'Généré',
   },
   nl: {
     dataProtection: 'Databescherming',
     facebook: 'beOI op Facebook',
     instagram: 'beOI op Instagram',
+    built: 'Gebouwd',
   },
 };
+
+const skipToContentByLocale: Record<Locale, string> = {
+  en: 'Skip to content',
+  fr: 'Aller au contenu',
+  nl: 'Ga naar de inhoud',
+};
+
+export function skipToContentLabel(lang: string | undefined): string {
+  return skipToContentByLocale[resolveLocale(lang)];
+}
 
 export function navStrings(lang: string | undefined): NavStrings {
   return navByLocale[resolveLocale(lang)];

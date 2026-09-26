@@ -13,7 +13,7 @@ const faqHtml = getFaqHtml('en');
 >
   <Nav lang="en" />
 
-  <main class="pt-32 pb-xl px-margin max-w-7xl mx-auto">
+  <main id="main" class="pt-32 pb-xl px-margin max-w-7xl mx-auto">
     <header class="max-w-2xl mx-auto text-center mb-xl">
       <h1 class="font-headline text-headline-xl text-on-surface mb-md">FAQ</h1>
       <p class="text-body-lg font-body text-on-surface-variant mb-sm">
@@ -98,6 +98,11 @@ const faqHtml = getFaqHtml('en');
 
   .faq-content :global(summary:hover) {
     color: var(--color-primary);
+  }
+
+  .faq-content :global(summary:focus-visible) {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
   }
 
   .faq-content :global(details > :not(summary)) {

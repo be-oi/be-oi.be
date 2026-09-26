@@ -70,7 +70,7 @@ const tagIcons: Record<StepTagKind, IconName | null> = {
 const hasDetails = resolvedDetailsHtml.trim().length > 0;
 const hasCta = Boolean(cta?.href && cta?.label);
 const buttonClass =
-  'inline-flex items-center gap-xs font-label text-label-md text-primary border-2 border-primary/30 bg-primary/5 hover:bg-primary/10 px-4 py-2 rounded-full transition-colors';
+  'inline-flex items-center gap-xs font-label text-label-md text-primary border-2 border-primary/30 bg-primary/5 hover:bg-primary/10 px-4 py-2 rounded-full transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary';
 ---
 <section
   id={id}

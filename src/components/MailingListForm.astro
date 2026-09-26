@@ -16,15 +16,18 @@ const locale = resolveLocale(lang);
 const t = mailingListStrings(locale);
 const formId = `${idBase}-form`;
 const emailId = `${idBase}-email`;
-const alreadyId = `${idBase}-already`;
-const successId = `${idBase}-success`;
-const failureId = `${idBase}-failure`;
+const statusId = `${idBase}-status`;
 const endpointUrl =
   'https://bvduaeykw6ah6ni7xoykyi3wt40ntdrx.lambda-url.eu-central-1.on.aws/';
 const contactEmail = 'info@be-oi.be';
 const privacyHref = localizePath(locale, '/data-protection');
 const privacyNoticeParts = t.privacyNotice.split('{link}');
 const noscriptParts = t.noscriptFallback.split('{email}');
+const failureParts = t.failure.split('{email}');
+const timeoutParts = t.timeout.split('{email}');
+
+const mailtoClass =
+  'text-inherit underline underline-offset-2 decoration-1 hover:decoration-2 break-all';
 ---
 
 <section
@@ -45,6 +48,7 @@ const noscriptParts = t.noscriptFallback.split('{email}');
     id={formId}
     action={`#${idBase}`}
     method="post"
+    novalidate
     data-ml-endpoint={endpointUrl}
     class="flex flex-col sm:flex-row gap-sm items-stretch sm:items-center justify-center"
   >
@@ -54,9 +58,16 @@ const noscriptParts = t.noscriptFallback.split('{email}');
       type="email"
       name="email"
       required
+      maxlength="254"
+      inputmode="email"
+      enterkeyhint="send"
+      autocapitalize="none"
+      autocorrect="off"
+      spellcheck="false"
       autocomplete="email"
       placeholder={t.emailPlaceholder}
-      class="flex-1 min-w-0 px-4 py-2.5 rounded-full border-2 border-outline-variant/60 bg-surface-container-lowest font-body text-body-md text-on-surface placeholder:text-on-surface-variant/60 focus:outline-none focus:border-primary"
+      aria-invalid="false"
+      class="flex-1 min-w-0 w-full px-4 py-2.5 rounded-full border-2 border-outline-variant/60 bg-surface-container-lowest font-body text-body-md text-on-surface placeholder:text-on-surface-variant focus:border-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary aria-invalid:border-error"
     />
     <input type="hidden" name="lang" value={lang} />
     <div class="absolute left-[-5000px]" aria-hidden="true">
@@ -65,51 +76,73 @@ const noscriptParts = t.noscriptFallback.split('{email}');
     <button
       type="submit"
       disabled
-      class="shrink-0 font-label text-label-md text-on-primary bg-primary hover:bg-primary/90 px-5 py-2.5 rounded-full border-2 border-primary transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+      data-label-submit={t.submit}
+      data-label-pending={t.pending}
+      class="shrink-0 whitespace-normal text-center font-label text-label-md text-on-primary bg-primary hover:bg-primary/90 px-5 py-2.5 rounded-full border-2 border-primary transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-on-primary disabled:opacity-60 disabled:cursor-not-allowed"
     >
       {t.submit}
     </button>
   </form>
 
+  <div
+    id={statusId}
+    role="status"
+    aria-live="polite"
+    aria-atomic="true"
+    tabindex="-1"
+    hidden
+    class="mt-sm font-body text-body-md font-medium break-words rounded-md focus:outline focus:outline-2 focus:outline-offset-4 focus:outline-primary"
+  >
+  </div>
+
+  <template data-ml-template="empty">
+    <p class="m-0">{t.empty}</p>
+  </template>
+  <template data-ml-template="invalid">
+    <p class="m-0">{t.invalid}</p>
+  </template>
+  <template data-ml-template="already">
+    <p class="m-0">{t.already}</p>
+  </template>
+  <template data-ml-template="success">
+    <p class="m-0">{t.success}</p>
+  </template>
+  <template data-ml-template="rate">
+    <p class="m-0">{t.rateLimit}</p>
+  </template>
+  <template data-ml-template="offline">
+    <p class="m-0">{t.offline}</p>
+  </template>
+  <template data-ml-template="timeout">
+    <p class="m-0">{timeoutParts[0]}<a href={`mailto:${contactEmail}`} class={mailtoClass}>{contactEmail}</a>{timeoutParts[1] ?? ''}</p>
+  </template>
+  <template data-ml-template="failure">
+    <p class="m-0">{failureParts[0]}<a href={`mailto:${contactEmail}`} class={mailtoClass}>{contactEmail}</a>{failureParts[1] ?? ''}</p>
+  </template>
+
   <noscript>
-    <p class="mt-sm font-body text-body-md text-on-surface-variant">
-      {noscriptParts[0]}
-      <a
-        href={`mailto:${contactEmail}`}
-        class="text-primary underline underline-offset-2 hover:decoration-2"
-      >
-        {contactEmail}
-      </a>
-      {noscriptParts[1] ?? ''}
-    </p>
+    <p class="mt-sm font-body text-body-md text-on-surface-variant break-words">{noscriptParts[0]}<a href={`mailto:${contactEmail}`} class="text-primary underline underline-offset-2 hover:decoration-2 break-all">{contactEmail}</a>{noscriptParts[1] ?? ''}</p>
   </noscript>
 
-  <p class="mt-sm font-body text-xs text-on-surface-variant leading-relaxed">
-    {privacyNoticeParts[0]}
-    <a
-      href={privacyHref}
-      class="text-primary underline underline-offset-2 hover:decoration-2"
-    >
-      {t.privacyLinkLabel}
-    </a>
-    {privacyNoticeParts[1] ?? ''}
-  </p>
-
-  <div class="mt-md space-y-xs font-body text-body-md font-medium" aria-live="polite">
-    <p id={alreadyId} data-ml-status="already" class="hidden text-tertiary">
-      {t.already}
-    </p>
-    <p id={successId} data-ml-status="success" class="hidden text-secondary">
-      {t.success}
-    </p>
-    <p id={failureId} data-ml-status="failure" class="hidden text-error">
-      {t.failure}
-    </p>
-  </div>
+  <p class="mt-sm font-body text-sm text-on-surface-variant leading-relaxed break-words">{privacyNoticeParts[0]}<a href={privacyHref} class="text-primary underline underline-offset-2 hover:decoration-2">{t.privacyLinkLabel}</a>{privacyNoticeParts[1] ?? ''}</p>
 </section>
 
 <script is:inline>
   (function () {
+    var FIELD_ERRORS = { empty: true, invalid: true };
+    var TONES = {
+      empty: 'text-error',
+      invalid: 'text-error',
+      failure: 'text-error',
+      timeout: 'text-error',
+      success: 'text-secondary',
+      already: 'text-tertiary',
+      rate: 'text-tertiary',
+      offline: 'text-tertiary',
+    };
+    var TONE_CLASSES = ['text-error', 'text-secondary', 'text-tertiary'];
+    var TIMEOUT_MS = 12000;
+
     document.querySelectorAll('[data-mailing-list]').forEach(function (root) {
       if (root.getAttribute('data-ml-bound') === '1') return;
       root.setAttribute('data-ml-bound', '1');
@@ -120,42 +153,119 @@ const noscriptParts = t.noscriptFallback.split('{email}');
       var endpoint = form.getAttribute('data-ml-endpoint');
       if (!endpoint) return;
 
-      var already = root.querySelector('[data-ml-status="already"]');
-      var success = root.querySelector('[data-ml-status="success"]');
-      var failure = root.querySelector('[data-ml-status="failure"]');
+      var input = form.querySelector('input[type="email"]');
       var button = form.querySelector('button[type="submit"]');
+      var status = root.querySelector('[role="status"]');
+      if (!input || !status) return;
+
+      var submitting = false;
       if (button) button.disabled = false;
 
-      function hideAlerts() {
-        already.classList.add('hidden');
-        success.classList.add('hidden');
-        failure.classList.add('hidden');
+      function hideStatus() {
+        status.replaceChildren();
+        status.classList.add('hidden');
+        status.setAttribute('hidden', '');
+        input.setAttribute('aria-invalid', 'false');
+        input.removeAttribute('aria-errormessage');
       }
 
-      function show(el) {
-        el.classList.remove('hidden');
+      function focusEl(el) {
+        try {
+          el.focus({ preventScroll: true });
+        } catch (e) {
+          el.focus();
+        }
+      }
+
+      function show(name) {
+        var template = root.querySelector('template[data-ml-template="' + name + '"]');
+        if (!template || !template.content) return;
+        status.replaceChildren(template.content.cloneNode(true));
+        status.classList.remove('hidden');
+        TONE_CLASSES.forEach(function (cls) {
+          status.classList.remove(cls);
+        });
+        if (TONES[name]) status.classList.add(TONES[name]);
+        status.removeAttribute('hidden');
+        if (FIELD_ERRORS[name]) {
+          input.setAttribute('aria-invalid', 'true');
+          input.setAttribute('aria-errormessage', status.id);
+          focusEl(input);
+          return;
+        }
+        input.setAttribute('aria-invalid', 'false');
+        input.removeAttribute('aria-errormessage');
+        focusEl(status);
+      }
+
+      function setPending(on) {
+        submitting = on;
+        form.setAttribute('aria-busy', on ? 'true' : 'false');
+        input.readOnly = on;
+        if (!button) return;
+        button.disabled = on;
+        button.setAttribute('aria-busy', on ? 'true' : 'false');
+        var next = button.getAttribute(on ? 'data-label-pending' : 'data-label-submit');
+        if (next) button.textContent = next;
       }
 
       // Listmonk/Lambda: 409 Conflict and messages mentioning already exists/subscribed.
-      function isAlreadySubscribed(status, response) {
-        if (status === 409) return true;
+      function isAlreadySubscribed(resStatus, response) {
+        if (resStatus === 409) return true;
         var message = response && response.message;
         if (typeof message !== 'string') return false;
         return /already\s*(exists|subscribed)/i.test(message);
       }
 
+      input.addEventListener('input', function () {
+        if (submitting) return;
+        if (input.getAttribute('aria-invalid') === 'true') hideStatus();
+      });
+
       form.addEventListener('submit', function (event) {
         event.preventDefault();
-        hideAlerts();
+        if (submitting) return;
 
-        if (button) button.disabled = true;
+        var value = input.value.trim();
+        if (value !== input.value) input.value = value;
+
+        if (!value) {
+          show('empty');
+          return;
+        }
+        if (!input.checkValidity()) {
+          show('invalid');
+          return;
+        }
+
+        var trap = form.querySelector('[name="nottobefilled"]');
+        if (trap && trap.value) {
+          show('success');
+          return;
+        }
+
+        if (navigator.onLine === false) {
+          show('offline');
+          return;
+        }
+
+        hideStatus();
+        setPending(true);
 
         var body = new URLSearchParams(new FormData(form));
+        var controller = typeof AbortController === 'function' ? new AbortController() : null;
+        var timer = 0;
+        if (controller) {
+          timer = window.setTimeout(function () {
+            controller.abort();
+          }, TIMEOUT_MS);
+        }
 
         fetch(endpoint, {
           method: 'POST',
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
           body: body.toString(),
+          signal: controller ? controller.signal : undefined,
         })
           .then(function (res) {
             return res.json().then(
@@ -172,20 +282,31 @@ const noscriptParts = t.noscriptFallback.split('{email}');
             var response = result.response;
 
             if (isAlreadySubscribed(res.status, response)) {
-              show(already);
+              show('already');
+              return;
+            }
+            if (res.status === 400) {
+              show('invalid');
+              return;
+            }
+            if (res.status === 429) {
+              show('rate');
               return;
             }
             if (res.ok && response && response.data) {
-              show(success);
+              show('success');
               return;
             }
-            show(failure);
+            show('failure');
           })
-          .catch(function () {
-            show(failure);
+          .catch(function (err) {
+            if (err && err.name === 'AbortError') show('timeout');
+            else if (navigator.onLine === false) show('offline');
+            else show('failure');
           })
           .finally(function () {
-            if (button) button.disabled = false;
+            if (timer) window.clearTimeout(timer);
+            setPending(false);
           });
       });
     });

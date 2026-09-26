@@ -60,12 +60,12 @@ function isMainActive(match: string, exact = false) {
       <span class="font-headline text-headline-md text-on-chrome tracking-tight hidden sm:inline">beOI</span>
     </a>
 
-    <div class="hidden md:flex items-center gap-gutter">
+    <div class="hidden md:flex flex-1 min-w-0 flex-wrap items-center justify-center gap-x-3 gap-y-1 lg:gap-x-gutter">
       {mainLinks.map((link) => (
         <a
           href={`${link.href}/`}
           class:list={[
-            'font-label text-label-md transition-colors',
+            'font-label text-label-md leading-snug text-center transition-colors',
             isMainActive(link.match, link.exact)
               ? 'text-on-chrome border-b-2 border-on-chrome pb-1'
               : 'text-on-chrome hover:underline',
@@ -84,6 +84,7 @@ function isMainActive(match: string, exact = false) {
           id="nav-lang-toggle"
           class="inline-flex items-center justify-center size-8 text-on-chrome text-2xl leading-none rounded-md hover:bg-on-chrome/15 transition-colors"
           aria-label={t.changeLanguage}
+          aria-haspopup="true"
           aria-expanded="false"
           aria-controls="nav-lang-menu"
         >
@@ -144,7 +145,7 @@ function isMainActive(match: string, exact = false) {
         <a
           href={`${link.href}/`}
           class:list={[
-            'font-label text-label-md py-sm transition-colors',
+            'font-label text-label-md py-sm break-words transition-colors',
             isMainActive(link.match, link.exact)
               ? 'text-on-chrome border-l-2 border-on-chrome pl-sm'
               : 'text-on-chrome/90 hover:text-on-chrome pl-sm border-l-2 border-transparent',
@@ -185,6 +186,20 @@ function isMainActive(match: string, exact = false) {
     const menuToggle = document.getElementById('nav-menu-toggle');
     const mobilePanel = document.getElementById('nav-mobile-panel');
 
+    function langLinks() {
+      if (!langMenu) return [];
+      return Array.prototype.slice.call(langMenu.querySelectorAll('a'));
+    }
+
+    function focusLangLink(link) {
+      if (!link) return;
+      try {
+        link.focus({ preventScroll: true });
+      } catch (e) {
+        link.focus();
+      }
+    }
+
     function setLangOpen(open) {
       if (!langToggle || !langMenu) return;
       langToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
@@ -203,7 +218,40 @@ function isMainActive(match: string, exact = false) {
     if (langToggle && langMenu) {
       langToggle.addEventListener('click', function (event) {
         event.stopPropagation();
-        setLangOpen(!isLangOpen());
+        var open = !isLangOpen();
+        setLangOpen(open);
+        if (open) {
+          var current = langMenu.querySelector('[aria-current="page"]') || langLinks()[0];
+          focusLangLink(current);
+        }
+      });
+
+      langToggle.addEventListener('keydown', function (event) {
+        if (event.key !== 'ArrowDown' && event.key !== 'ArrowUp') return;
+        event.preventDefault();
+        var links = langLinks();
+        if (!links.length) return;
+        setLangOpen(true);
+        focusLangLink(event.key === 'ArrowUp' ? links[links.length - 1] : links[0]);
+      });
+
+      langMenu.addEventListener('keydown', function (event) {
+        var links = langLinks();
+        if (!links.length) return;
+        var index = links.indexOf(document.activeElement);
+        if (event.key === 'ArrowDown') {
+          event.preventDefault();
+          focusLangLink(links[(index + 1) % links.length]);
+        } else if (event.key === 'ArrowUp') {
+          event.preventDefault();
+          focusLangLink(links[(index - 1 + links.length) % links.length]);
+        } else if (event.key === 'Home') {
+          event.preventDefault();
+          focusLangLink(links[0]);
+        } else if (event.key === 'End') {
+          event.preventDefault();
+          focusLangLink(links[links.length - 1]);
+        }
       });
 
       langMenu.addEventListener('click', function (event) {
@@ -243,6 +291,10 @@ function isMainActive(match: string, exact = false) {
       closeIcon?.classList.toggle('hidden', !open);
       closeIcon?.classList.toggle('block', open);
       document.body.classList.toggle('overflow-hidden', open);
+      var pageRest = document.querySelectorAll('main, footer');
+      for (var i = 0; i < pageRest.length; i++) {
+        pageRest[i].inert = open;
+      }
       if (open && isLangOpen()) setLangOpen(false);
     }
 
