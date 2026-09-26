@@ -41,7 +41,7 @@ const wobblyClasses = ['wobbly-rotation-1', 'wobbly-rotation-2', 'wobbly-rotatio
           <article
             lang={locale}
             class:list={[
-              'flex flex-col min-w-0 bg-surface-container-lowest border-2 border-outline-variant/40 p-md gap-md',
+              'flex flex-col min-w-0 bg-surface-container-lowest border-2 border-outline-variant/40 rounded p-md gap-md',
               wobblyClasses[index],
             ]}
           >
@@ -51,7 +51,7 @@ const wobblyClasses = ['wobbly-rotation-1', 'wobbly-rotation-2', 'wobbly-rotatio
             <a
               href={`/${locale}/`}
               hreflang={locale}
-              class="block w-full text-center font-label text-label-md bg-primary text-on-primary px-md py-sm border-2 border-primary hover:bg-primary/90 transition-colors no-underline break-words"
+              class="inline-flex items-center justify-center w-full min-h-11 text-center font-label text-label-md bg-primary text-on-primary px-md py-sm rounded-full border-2 border-primary hover:bg-primary/90 transition-colors no-underline break-words focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
             >
               {languageChooserByLocale[locale].cta}
             </a>

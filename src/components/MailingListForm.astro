@@ -50,7 +50,7 @@ const mailtoClass =
     method="post"
     novalidate
     data-ml-endpoint={endpointUrl}
-    class="flex flex-col sm:flex-row gap-sm items-stretch sm:items-center justify-center"
+    class="relative flex flex-col sm:flex-row gap-sm items-stretch sm:items-center justify-center"
   >
     <label for={emailId} class="sr-only">{t.emailLabel}</label>
     <input
@@ -70,7 +70,7 @@ const mailtoClass =
       class="flex-1 min-w-0 w-full px-4 py-2.5 rounded-full border-2 border-outline-variant/60 bg-surface-container-lowest font-body text-body-md text-on-surface placeholder:text-on-surface-variant focus:border-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary aria-invalid:border-error"
     />
     <input type="hidden" name="lang" value={lang} />
-    <div class="absolute left-[-5000px]" aria-hidden="true">
+    <div class="absolute -left-[10000px] top-auto w-px h-px overflow-hidden" aria-hidden="true">
       <input type="text" name="nottobefilled" tabindex="-1" value="" autocomplete="off" />
     </div>
     <button
