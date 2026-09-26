@@ -204,12 +204,16 @@ Self-hosted via Fontsource **latin** subsets only (one file per used weight) for
 
 Content lives in a centered column (`max-w-7xl`) with horizontal page margin (`32px` / `px-margin`). Vertical rhythm uses the spacing scale (`sm` 12 → `xl` 80). Home and long pages alternate **craft-paper** and **Page White** full-bleed bands; step sections use a 1-col → 2-col (image/body) grid from `lg` (1024px), with optional reverse columns.
 
+**Reading measure:** body and lead copy on home and competitive-programming use `max-w-2xl` (~62ch at body-md / ~55ch at body-lg). Page shells, timeline, and multi-column grids stay wider; only the reading column tightens.
+
 Fixed chrome nav (`z-50`) requires generous top padding on `<main>` (`pt-32`) and `scroll-mt-*` on in-page targets. Timeline on home may horizontal-scroll on small viewports; prefer equal step columns over card grids.
 
 Breakpoints in use: `sm` 640px, `md` 768px, `lg` 1024px.
 
 ### Named Rules
 **The Band Alternation Rule.** Long pages breathe by alternating craft-paper (`background` / `surface` `#ececec`) and Page White (`surface-container-lowest` `#ffffff`) full-bleed bands — not by stacking cards. White bands use the surface-system white token (`bg-surface-container-lowest` / `var(--color-surface-container-lowest)`), not raw Tailwind `bg-white`. Craft-paper `surface` stays `#ececec`; do not rename it to white.
+
+**The Reading Measure Rule.** Constrain continuous body and lead text to `max-w-2xl` on home and competitive-programming so line length stays near ~65ch at body size on wide viewports. Do not stretch reading columns to `max-w-3xl` / `max-w-4xl` for comfort.
 
 ## Elevation & Depth
 
