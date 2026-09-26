@@ -84,7 +84,8 @@ components:
     backgroundColor: "color-mix(in srgb, {colors.primary} 5%, transparent)"
     textColor: "{colors.primary}"
     rounded: "{rounded.full}"
-    padding: "8px 16px"
+    padding: "0 20px"
+    minHeight: "2.75rem"
     typography: "{typography.label}"
   button-primary-hover:
     backgroundColor: "color-mix(in srgb, {colors.primary} 10%, transparent)"
@@ -116,7 +117,8 @@ components:
     backgroundColor: "color-mix(in srgb, {colors.on-chrome} 12%, transparent)"
     textColor: "{colors.on-chrome}"
     rounded: "{rounded.full}"
-    padding: "0.35rem 0.85rem"
+    padding: "0 1rem"
+    minHeight: "2.75rem"
     typography: "{typography.label}"
 ---
 
@@ -235,7 +237,7 @@ Playful and clear: full pills, thick quiet borders, wobble kept light.
 
 ### Buttons
 - **Shape:** Full pill (`9999px`)
-- **Primary (outline wash):** Primary text on `primary/5` fill, `border-2 border-primary/30`, label type, padding ~`8px 16px`. Hover → `primary/10`. Used for step CTAs and “Show more”.
+- **Primary (outline wash):** Primary text on `primary/5` fill, `border-2 border-primary/30`, label type, min-height `2.75rem` (44px) with horizontal padding ~`20px`. Hover → `primary/10`. Used for step CTAs and “Show more”.
 - **Filled:** Primary fill, on-primary text (newsletter submit). Hover slightly darkens.
 - **Focus:** Prefer visible `:focus-visible` rings (Contest Blue or Lab mint on chrome). Do not strip outlines without a replacement.
 
@@ -255,8 +257,9 @@ Playful and clear: full pills, thick quiet borders, wobble kept light.
 ### Navigation
 - Fixed Contest Blue chrome bar, white logo wordmark, label-md links.
 - Active desktop link: bottom border on chrome; mobile: left border + panel.
+- Desktop main links: at least 24×24 CSS px hit area (WCAG 2.5.8); language/menu icon buttons and Lab chrome control prefer 44×44.
 - Language and menu toggles: icon buttons on chrome; menus escape to light surface panels.
-- **Lab link (chrome):** Pill with translucent white border; Lab Mint flask accent via `--color-lab-mint`; external target. Surface variant uses `--color-lab-mint-deep` for the flask on Page White.
+- **Lab link (chrome):** Pill with translucent white border, min-height 44px; Lab Mint flask accent via `--color-lab-mint`; external target. Surface variant uses `--color-lab-mint-deep` for the flask on Page White (inline text link — not enlarged as a chrome control).
 
 ### Signature: Contest step section
 Image + title + accent tagline + body + meta chips + optional details `<details>`. Illustrations from `src/assets/steps/` are mandatory journey markers — do not replace with generic stock. Optional `whiteBand` should paint Page White via `surface-container-lowest`, not raw `bg-white`.

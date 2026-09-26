@@ -37,6 +37,11 @@ const html = beoiLabLinkHtml(lang, variant, { className });
   }
 
   .beoi-lab-link--chrome {
+    /* WCAG 2.5.5-minded chrome control: 44×44 preferred hit area */
+    box-sizing: border-box;
+    min-height: 2.75rem;
+    min-width: 2.75rem;
+    padding: 0 1rem;
     border: 1px solid color-mix(in srgb, var(--color-on-chrome) 30%, transparent);
     background: color-mix(in srgb, var(--color-on-chrome) 12%, transparent);
     color: var(--color-on-chrome);
