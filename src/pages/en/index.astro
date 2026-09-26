@@ -1,8 +1,8 @@
 ---
-import { Image } from 'astro:assets';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
+import ContestTimeline from '../../components/ContestTimeline.astro';
 import StepSection from '../../components/StepSection.astro';
 import MailingListForm from '../../components/MailingListForm.astro';
 import { getContestSteps } from '../../data/contest-steps';
@@ -36,55 +36,7 @@ const contestSteps = getContestSteps('en');
         </p>
       </section>
 
-      <!-- Horizontal timeline -->
-      <section aria-label="Contest journey timeline" class="relative mb-xl max-w-[940px] mx-auto w-full">
-        <!--
-          Explicit equal columns for every step; fixed tracks for the gaps
-          (after start, after qualif, after final). Subgrid keeps label tops aligned.
-          Each sprite sits in a uniform aspect-square canvas with %-based placement
-          so vertical alignment scales with the viewport.
-          minmax(5.5rem, 1fr) keeps each step column usable on narrow phones (~600px
-          min track total) so small viewports can still scroll; md+ uses overflow-x-visible
-          so canvasWidth over 100% (e.g. last icon) can stick out without a scrollbar.
-        -->
-        <div
-          class="grid overflow-x-auto md:overflow-x-visible pb-md snap-x snap-mandatory"
-          style="grid-template-columns: minmax(5.5rem,1fr) 1.5rem minmax(5.5rem,1fr) 1.5rem minmax(5.5rem,1fr) minmax(5.5rem,1fr) minmax(5.5rem,1fr) 1.5rem minmax(5.5rem,1fr); grid-template-rows: auto auto auto;"
-        >
-          {contestSteps.map((step) => (
-            <a
-              href={`#${step.id}`}
-              class="grid grid-rows-subgrid justify-items-center text-center snap-center min-w-0 motion-safe:transition-transform motion-safe:hover:-translate-y-1"
-              style={`grid-column: ${step.gridColumn}; grid-row: 1 / span 3;`}
-            >
-              <div class="relative w-full aspect-[10/13] overflow-visible">
-                <div
-                  class="absolute left-1/2 -translate-x-1/2"
-                  style={`top: ${step.canvasTop}; width: ${step.canvasWidth}; aspect-ratio: ${step.image.width} / ${step.image.height};`}
-                >
-                  <Image
-                    src={step.image}
-                    alt=""
-                    class="w-full h-full object-contain"
-                    loading="eager"
-                  />
-                </div>
-              </div>
-              <span class="font-label text-label-md text-on-surface -mt-1 w-full min-w-0 max-w-full break-words text-center self-start justify-self-stretch">
-                {step.shortTitle}
-              </span>
-              <p class="text-xs text-on-surface-variant mt-0 leading-snug text-center w-full min-w-0 max-w-full break-words self-start justify-self-stretch">
-                {step.teaser.map((line, lineIndex) => (
-                  <>
-                    {lineIndex > 0 && <br />}
-                    {line}
-                  </>
-                ))}
-              </p>
-            </a>
-          ))}
-        </div>
-      </section>
+      <ContestTimeline steps={contestSteps} ariaLabel="Contest journey timeline" />
 
       <MailingListForm lang="en" />
     </div>
