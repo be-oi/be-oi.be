@@ -34,13 +34,13 @@ Belgium’s free national olympiad path in computational reasoning and programmi
 ## Capabilities and Constraints
 
 **Capabilities (site):**
-- Locale-prefixed content in French, Dutch, and English (`/fr/`, `/nl/`, `/en/`); root `/` is a language picker (with client redirect for `fr`/`nl` browser languages).
+- Locale-prefixed content in French, Dutch, English, and German (`/fr/`, `/nl/`, `/en/`, `/de/`); root `/` is a language picker (with client redirect for `fr`/`nl`/`de` browser languages).
 - Contest journey overview (home), FAQ, competitive-programming / international path, about (members & support), data-protection, mailing-list signup.
 - Links out to beOI Lab and social channels.
 
 **Constraints:**
 - Static site only (Astro build → S3 + CloudFront). No SSR, server runtime, or CMS unless explicitly requested later.
-- All three locales must stay in sync for user-facing content and routes.
+- All four locales must stay in sync for user-facing content and routes.
 - Do not invent or alter official names per locale, legal entity details, or contest rules / age bands.
 - Participation in the contest itself is free (optional costs may apply only for some trainings/camps — as stated in FAQ).
 
@@ -53,21 +53,22 @@ Belgium’s free national olympiad path in computational reasoning and programmi
   - **en:** Belgian Olympiad in Informatics
   - **fr (fr_BE):** Olympiade belge d'Informatique
   - **nl (nl_BE / Flemish):** Belgische Informatica-olympiade
+  - **de (de_BE):** Belgische Informatik-Olympiade
 - Legal entity wording (footer / privacy): *Belgische Informatica-olympiade - Olympiade belge d’Informatique (beOI) ASBL/VZW*; address Celestijnenlaan 200A bus 4078, 3001 Leuven; BTW/TVA BE 0849.738.707; contact `info@be-oi.be`.
 - Existing logos under `public/img/` and contest-step mascot illustrations under `src/assets/steps/` are binding brand assets — do not replace without explicit request.
 
 ## Evidence on Hand
 
-- Live product copy and structure in `src/pages/{fr,nl,en}/`, `src/data/contest-steps/`, `src/data/contest-step-details/`, `src/data/faq/`, `src/data/data-protection/`, `src/data/ui-i18n.ts`.
+- Live product copy and structure in `src/pages/{fr,nl,en,de}/`, `src/data/contest-steps/`, `src/data/contest-step-details/`, `src/data/faq/`, `src/data/data-protection/`, `src/data/ui-i18n.ts`.
 - About-page member and supporter logos via `src/data/about/`.
 - No testimonials, rankings, or sponsor claims beyond what the repo currently states (About currently notes no private sponsors). Future work must not fabricate social proof, results, or partnerships.
 
 ## Product Principles
 
 1. **Clarity to join** — A pupil or teacher should leave knowing what beOI is and the next step to participate.
-2. **Locale truth** — French, Dutch, and English are first-class; names and wording follow Belgian French / Flemish / English conventions already in the product.
+2. **Locale truth** — French, Dutch, English, and German are first-class; names and wording follow Belgian French / Flemish / English / German conventions already in the product (German translates from English, with Flemish as tie-break).
 3. **Factual restraint** — Contest rules, age bands, legal identity, and free participation stay accurate; never invent claims.
-4. **Static and durable** — Prefer content and UX that ship as a static site and stay maintainable across three locales.
+4. **Static and durable** — Prefer content and UX that ship as a static site and stay maintainable across four locales.
 5. **Audience ladder** — Serve joiners first; keep parents and partners informed without crowding the primary path.
 
 ## Accessibility & Inclusion

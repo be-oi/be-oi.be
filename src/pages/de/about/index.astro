@@ -1,0 +1,207 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Nav from '../../../components/Nav.astro';
+import Footer from '../../../components/Footer.astro';
+import {
+  memberLogoHeight,
+  members,
+  supporterLogoHeight,
+  supporters,
+} from '../../../data/about';
+
+// Heading scale shared across the page so levels stay distinct.
+// h1 page · h2 section · h3 subsection
+const titlePage = 'font-headline text-headline-xl text-on-surface';
+const titleSection = 'font-headline text-headline-lg text-on-surface';
+// Below section titles, but still readable body-scale headlines (not tiny labels).
+const titleSubsection = 'font-headline text-headline-md text-on-surface';
+---
+<BaseLayout
+  title="Über uns – beOI"
+  description="Die Belgische Informatik-Olympiade wird von beOI ASBL/VZW organisiert, mit Unterstützung von Universitäten, Hochschulen, Sponsoren und Freiwilligen in ganz Belgien."
+  lang="de"
+>
+  <Nav lang="de" />
+
+  <main id="main" class="pt-32 pb-0 overflow-x-clip">
+    <!-- Hero -->
+    <section class="px-margin max-w-7xl mx-auto mb-xl">
+      <div class="max-w-2xl mx-auto text-center">
+        <h1 class={`${titlePage} mb-md`}>
+          Über beOI
+        </h1>
+        <p class="text-body-lg font-body text-on-surface-variant">
+          Die Belgische Informatik-Olympiade wird von der gemeinnützigen Vereinigung
+          gleichen Namens organisiert. Sie ist nur möglich dank der Unterstützung ihrer Mitglieder,
+          ihrer Sponsoren und der Zeit, die Freiwillige investieren.
+        </p>
+      </div>
+    </section>
+
+    <!-- Support — full-bleed white band -->
+    <section
+      id="sponsors"
+      class="scroll-mt-28 relative bg-surface-container-lowest border-y-2 border-outline-variant/30"
+    >
+      <!-- Quiet craft accents (full section white — logos blend, no inset frame) -->
+      <div
+        class="pointer-events-none absolute inset-0 overflow-hidden"
+        aria-hidden="true"
+      >
+        <div class="absolute -right-8 top-12 w-40 h-40 rotate-12 bg-primary-container/25 hand-drawn-border" />
+        <div class="absolute -left-10 bottom-10 w-32 h-32 -rotate-6 bg-secondary-container/20 hand-drawn-border" />
+      </div>
+
+      <div class="relative px-margin max-w-7xl mx-auto py-xl">
+        <header class="text-center max-w-2xl mx-auto mb-lg">
+          <h2 class={titleSection}>
+            Unterstützung &amp; Sponsoring
+          </h2>
+        </header>
+
+        <!-- Public support (travel) -->
+        <div class="text-center mb-lg">
+          <h3 class={`${titleSubsection} mb-sm`}>
+            Öffentliche Förderung
+          </h3>
+          <ul class="flex flex-wrap items-center justify-center gap-x-lg gap-y-md list-none p-0 m-0 mt-sm">
+            {supporters.map((s, i) => (
+              <li class:list={[i === 0 ? 'wobbly-rotation-1' : 'wobbly-rotation-2']}>
+                <a
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="group block motion-safe:transition-transform motion-safe:duration-300 motion-safe:hover:-translate-y-0.5"
+                >
+                  <Image
+                    src={s.image}
+                    alt={s.name}
+                    height={supporterLogoHeight(s.image)}
+                    loading="eager"
+                    class="h-14 sm:h-16 w-auto max-w-[200px] object-contain transition-opacity group-hover:opacity-85"
+                  />
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <!-- Private sponsors -->
+        <div class="text-center max-w-2xl mx-auto">
+          <h3 class={`${titleSubsection} mb-sm`}>
+            Sponsoren
+          </h3>
+          <p class="text-body-md font-body text-on-surface-variant mb-md">
+            Wir haben derzeit keine Sponsoren.
+            Interesse, diese Ausgabe zu unterstützen oder einen Preis zu stiften?
+            {' '}
+            <a href="mailto:sponsors@be-oi.be" class="text-primary font-semibold hover:underline">
+              Kontaktiere uns
+            </a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact (craft-paper again) -->
+    <section
+      id="contact"
+      class="scroll-mt-28 py-xl px-margin max-w-7xl mx-auto"
+    >
+      <div class="grid gap-lg lg:grid-cols-2 lg:items-start">
+        <div>
+          <h2 class={`${titleSection} mb-sm`}>
+            Kontakt
+          </h2>
+          <p class="text-body-md font-body text-on-surface-variant">
+            Schreib uns gerne bei Fragen zur Vereinigung oder zu unseren Aktivitäten.
+          </p>
+        </div>
+        <div class="bg-surface-container-lowest border-2 border-outline-variant/40 rounded p-md font-body text-body-md text-on-surface stamp-shadow">
+          <p class="font-headline text-headline-md text-on-surface mb-sm">beOI ASBL/VZW</p>
+          <p class="text-on-surface-variant leading-relaxed mb-md">
+            Celestijnenlaan 200A bus 4078<br />
+            3001 Leuven<br />
+            Belgien
+          </p>
+          <dl class="space-y-2 text-on-surface-variant">
+            <div class="flex flex-wrap gap-x-2">
+              <dt class="font-semibold text-on-surface">E-Mail:</dt>
+              <dd>
+                <a href="mailto:info@be-oi.be" class="text-primary hover:underline">
+                  info@be-oi.be
+                </a>
+              </dd>
+            </div>
+            <div class="flex flex-wrap gap-x-2">
+              <dt class="font-semibold text-on-surface">BCE-Nummer:</dt>
+              <dd>0849.738.707</dd>
+            </div>
+            <div class="flex flex-wrap gap-x-2">
+              <dt class="font-semibold text-on-surface">IBAN:</dt>
+              <dd>BE79 0016 8388 4533</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <!-- Institutional members — full-bleed white band -->
+    <section
+      id="members"
+      class="scroll-mt-28 relative bg-surface-container-lowest border-y-2 border-outline-variant/30"
+    >
+      <div
+        class="pointer-events-none absolute inset-0 overflow-hidden"
+        aria-hidden="true"
+      >
+        <div class="absolute right-8 top-8 w-24 h-24 rotate-6 bg-tertiary-container/30 hand-drawn-border" />
+        <div class="absolute left-[8%] bottom-16 w-16 h-16 -rotate-12 bg-primary-container/30 hand-drawn-border" />
+      </div>
+
+      <div class="relative px-margin max-w-7xl mx-auto py-xl">
+        <header class="text-center max-w-2xl mx-auto mb-lg">
+          <h2 class={`${titleSection} mb-sm`}>
+            Institutionelle Mitglieder
+          </h2>
+          <p class="text-body-md font-body text-on-surface-variant">
+            beOI vereint Hochschulen in ganz Belgien, die die Informatikausbildung
+            und den Wettbewerb unterstützen.
+          </p>
+        </header>
+
+        <ul class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-md gap-y-md list-none p-0 m-0">
+          {members.map((m) => (
+            <li>
+              <a
+                href={m.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="group flex items-center justify-center p-sm motion-safe:transition-transform motion-safe:duration-300 motion-safe:hover:-translate-y-0.5"
+                title={m.name}
+              >
+                <Image
+                  src={m.image}
+                  alt={m.name}
+                  height={memberLogoHeight(m.image)}
+                  class="h-12 sm:h-14 max-w-full w-auto object-contain transition-opacity group-hover:opacity-85"
+                />
+              </a>
+            </li>
+          ))}
+        </ul>
+
+        <div class="mt-lg text-center">
+          <a
+            href="mailto:info@be-oi.be"
+            class="inline-flex items-center justify-center min-h-11 font-label text-label-md tracking-wide px-6 py-2.5 rounded-full bg-primary text-on-primary border-2 border-primary hover:bg-primary/90 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+          >
+            Mitglied werden? Kontaktiere uns
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer lang="de" />
+</BaseLayout>

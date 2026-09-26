@@ -1,11 +1,12 @@
 import type { Locale } from '../i18n';
+import de from './de.html?raw';
 import en from './en.html?raw';
 import fr from './fr.html?raw';
 import nl from './nl.html?raw';
 
 /**
  * FAQ body HTML per language.
- * Edit the matching file under `src/data/faq/` (en.html, fr.html, nl.html).
+ * Edit the matching file under `src/data/faq/` (en.html, fr.html, nl.html, de.html).
  *
  * Optional year tokens (filled at build time from the current beOI edition):
  *   {{contestYear}}       e.g. 2027 — edition end calendar year (1 Jul previous … 30 Jun this)
@@ -14,6 +15,7 @@ import nl from './nl.html?raw';
  *   {{birthCutoffYear}}   e.g. 2007 — born on/after 1 July of this year if under 20 on 30 June of contest year
  */
 export const faqHtmlByLocale: Record<Locale, string> = {
+  de,
   en,
   fr,
   nl,

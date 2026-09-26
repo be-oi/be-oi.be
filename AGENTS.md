@@ -7,17 +7,17 @@ This file describes how to work on the be-oi.be website so automated agents and 
 - **What**: Public static website for beOI (Belgian Olympiad in Informatics).
 - **Stack**: [Astro](https://astro.build/) (static site generator), npm, Node.js 22+.
 - **Hosting**: S3 bucket `be-oi.be` (region `eu-central-1`) behind CloudFront distribution `E1HFWB6I0WMJ8D`. Public URL: `https://www.be-oi.be` (`site` in `astro.config.mjs`).
-- **Languages**: Astro locales `fr`, `nl`, `en` (all URL-prefixed). **All three locales ship real page content** under `src/pages/fr/`, `src/pages/nl/`, and `src/pages/en/`. Root `/` is a language picker (Nederlands / Français / English); browsers whose language list includes `fr` or `nl` are redirected client-side to the matching locale.
+- **Languages**: Astro locales `fr`, `nl`, `en`, `de` (all URL-prefixed). **All four locales ship real page content** under `src/pages/fr/`, `src/pages/nl/`, `src/pages/en/`, and `src/pages/de/`. Root `/` is a language picker (Nederlands / Français / Deutsch / English); browsers whose language list includes `fr`, `nl`, or `de` are redirected client-side to the matching locale.
 
 Do **not** introduce a server runtime, SSR adapters, or a CMS unless explicitly requested. Keep the site statically buildable with `npm run build`.
 
 ## Important rules
 
-- **All locales, every time.** Any change to user-facing content, routes, navigation, FAQ, contest steps, UI strings, or page structure **must be applied to all three locales** (`fr`, `nl`, `en`) in the same change. Do not ship an update that only touches one language unless the user explicitly scoped the work to a single locale.
-- When adding a page or route, create the parallel files under `src/pages/fr/`, `src/pages/nl/`, and `src/pages/en/` (same path suffix in each folder).
-- When editing shared data, update every locale file that exists for that content type — for example all of `src/data/faq/fr.html`, `nl.html`, and `en.html`, or `src/data/contest-steps/fr.ts`, `nl.ts`, and `en.ts` plus matching files under `src/data/contest-step-details/{fr,nl,en}/`.
+- **All locales, every time.** Any change to user-facing content, routes, navigation, FAQ, contest steps, UI strings, or page structure **must be applied to all four locales** (`fr`, `nl`, `en`, `de`) in the same change. Do not ship an update that only touches one language unless the user explicitly scoped the work to a single locale.
+- When adding a page or route, create the parallel files under `src/pages/fr/`, `src/pages/nl/`, `src/pages/en/`, and `src/pages/de/` (same path suffix in each folder).
+- When editing shared data, update every locale file that exists for that content type — for example all of `src/data/faq/fr.html`, `nl.html`, `en.html`, and `de.html`, or `src/data/contest-steps/fr.ts`, `nl.ts`, `en.ts`, and `de.ts` plus matching files under `src/data/contest-step-details/{fr,nl,en,de}/`.
 - When adding or changing UI chrome (nav labels, buttons, form messages), extend **all** entries in `src/data/ui-i18n.ts`, not just English.
-- Before finishing, sanity-check that `fr`, `nl`, and `en` stay in sync (same pages exist, same links work, no locale left pointing at another language’s URL).
+- Before finishing, sanity-check that `fr`, `nl`, `en`, and `de` stay in sync (same pages exist, same links work, no locale left pointing at another language’s URL).
 
 ## Commands
 
@@ -42,7 +42,8 @@ src/
   layouts/
     BaseLayout.astro      # shared HTML document shell
   pages/
-    index.astro           # language picker at / (auto-redirect fr/nl via inline script)
+    index.astro           # language picker at / (auto-redirect fr/nl/de via inline script)
+    de/                   # German routes (/de/...) — mirrors en/ page structure
     en/                   # English routes (/en/...)
     fr/                   # French routes (/fr/...) — mirrors en/ page structure
     nl/                   # Dutch (Flemish) routes (/nl/...) — mirrors en/ page structure
@@ -60,13 +61,14 @@ dist/                     # build output (gitignored); also sitemap-*.xml from @
 
 ## i18n conventions
 
-- Astro i18n is configured in `astro.config.mjs` with `locales: ['fr', 'nl', 'en']`, `prefixDefaultLocale: true`, and `redirectToDefaultLocale: false` (`defaultLocale: 'fr'`). The last setting keeps `/` as the language picker instead of Astro’s built-in redirect stub. All locales listed in `contentLocales` (`src/data/i18n.ts`) ship real content — currently `fr`, `nl`, and `en`.
-- Keep URL paths parallel across locales (e.g. `/fr/contest/faq/`, `/nl/contest/faq/`, `/en/contest/faq/`).
+- Astro i18n is configured in `astro.config.mjs` with `locales: ['fr', 'nl', 'en', 'de']`, `prefixDefaultLocale: true`, and `redirectToDefaultLocale: false` (`defaultLocale: 'fr'`). The last setting keeps `/` as the language picker instead of Astro’s built-in redirect stub. All locales listed in `contentLocales` (`src/data/i18n.ts`) ship real content — currently `fr`, `nl`, `en`, and `de`.
+- Keep URL paths parallel across locales (e.g. `/fr/contest/faq/`, `/nl/contest/faq/`, `/en/contest/faq/`, `/de/contest/faq/`).
 - **French copy**: use Belgian French (`fr_BE`) wording. The full name is *Olympiade belge d'Informatique*. FAQ body in `src/data/faq/fr.html`; contest step copy in `src/data/contest-steps/fr.ts` and `src/data/contest-step-details/fr/`.
 - **Dutch copy**: use **Flemish** (`nl_BE`) wording. The full name is *Belgische Informatica-olympiade* (not a literal translation of “Belgian Olympiad in Informatics”). FAQ in `src/data/faq/nl.html`; contest steps in `src/data/contest-steps/nl.ts` and `src/data/contest-step-details/nl/`.
 - **English copy**: FAQ in `src/data/faq/en.html`; contest steps in `src/data/contest-steps/en.ts` and `src/data/contest-step-details/en/`.
+- **German copy**: use standard German (`de_BE` for `og:locale`). The full name is *Belgische Informatik-Olympiade* (parallel to Flemish, not a literal translation of the English name). Address the reader with **du**. Translate from the English copy; when English is ambiguous (school stages, tone, official name), follow the Flemish wording. FAQ in `src/data/faq/de.html`; contest steps in `src/data/contest-steps/de.ts` and `src/data/contest-step-details/de/`.
 - Shared UI strings for all locales live in `src/data/ui-i18n.ts`.
-- Set `lang` on `BaseLayout` to `"fr"`, `"nl"`, or `"en"` for locale pages; pass a page-specific `description` for SEO.
+- Set `lang` on `BaseLayout` to `"fr"`, `"nl"`, `"en"`, or `"de"` for locale pages; pass a page-specific `description` for SEO.
 - Head metadata (description, Open Graph, Twitter, canonical, hreflang, favicon) is emitted by `BaseLayout`. Hreflang and the sitemap include every locale in `contentLocales`.
 - Prefer keeping copy in locale-specific page files or the matching data modules above rather than hard-coding only one language in shared components.
 

@@ -7,7 +7,7 @@ export default defineConfig({
 
   i18n: {
     defaultLocale: 'fr',
-    locales: ['fr', 'nl', 'en'],
+    locales: ['fr', 'nl', 'en', 'de'],
     routing: {
       prefixDefaultLocale: true,
       redirectToDefaultLocale: false,
@@ -19,7 +19,12 @@ export default defineConfig({
       filter: (page) => {
         const path = new URL(page).pathname;
         if (path === '/') return false;
-        return path.startsWith('/en/') || path.startsWith('/nl/') || path.startsWith('/fr/');
+        return (
+          path.startsWith('/en/') ||
+          path.startsWith('/nl/') ||
+          path.startsWith('/fr/') ||
+          path.startsWith('/de/')
+        );
       },
       i18n: {
         // Keep in sync with `i18n.defaultLocale` and `src/data/i18n.ts`.
@@ -28,6 +33,7 @@ export default defineConfig({
           fr: 'fr',
           nl: 'nl',
           en: 'en',
+          de: 'de',
         },
       },
       // Emit hreflang x-default → French (site default); HTML head also covers `/`.

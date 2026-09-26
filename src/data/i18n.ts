@@ -1,9 +1,9 @@
 /** Locales configured in astro.config.mjs i18n. */
-export const locales = ['fr', 'nl', 'en'] as const;
+export const locales = ['fr', 'nl', 'en', 'de'] as const;
 export type Locale = (typeof locales)[number];
 
 /** Locales that currently ship real page content (not redirect stubs). */
-export const contentLocales: readonly Locale[] = ['fr', 'nl', 'en'];
+export const contentLocales: readonly Locale[] = ['fr', 'nl', 'en', 'de'];
 
 export const defaultLocale: Locale = 'fr';
 

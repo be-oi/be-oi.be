@@ -79,7 +79,12 @@ const xDefaultHref = isLanguagePicker
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:image" content={ogImageURL} />
-    <meta property="og:locale" content={lang === 'en' ? 'en_BE' : lang === 'nl' ? 'nl_BE' : 'fr_BE'} />
+    <meta
+      property="og:locale"
+      content={
+        lang === 'en' ? 'en_BE' : lang === 'nl' ? 'nl_BE' : lang === 'de' ? 'de_BE' : 'fr_BE'
+      }
+    />
 
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content={title} />

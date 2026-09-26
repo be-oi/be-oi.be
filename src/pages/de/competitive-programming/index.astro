@@ -1,0 +1,265 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Nav from '../../../components/Nav.astro';
+import Footer from '../../../components/Footer.astro';
+import Icon from '../../../components/Icon.astro';
+
+// Heading scale shared across the page so levels stay distinct.
+const titlePage = 'font-headline text-headline-xl text-on-surface';
+const titleSection = 'font-headline text-headline-lg text-on-surface';
+const titleSubsection = 'font-headline text-headline-md text-on-surface';
+
+const olympiads = [
+  { abbr: 'IOI', name: 'International Olympiad in Informatics' },
+  { abbr: 'EGOI', name: 'European Girls’ Olympiad in Informatics' },
+  { abbr: 'WEOI', name: 'Western European Olympiad in Informatics' },
+  { abbr: 'EJOI', name: 'European Junior Olympiad in Informatics' },
+];
+
+const journey = [
+  {
+    icon: 'code' as const,
+    title: 'Der Gruppe beitreten',
+    body: 'Zeige Motivation und Talent, um in die laufende beCP-Trainingsgruppe aufgenommen zu werden.',
+    href: '#join',
+  },
+  {
+    icon: 'psychology' as const,
+    title: 'Das ganze Jahr trainieren',
+    body: 'Camps, Kurse und Coaching helfen dir, über die Zeit voranzukommen.',
+    href: '#training',
+  },
+  {
+    icon: 'emoji_events' as const,
+    title: 'Belgische Auswahl',
+    body: 'Leistungen im Training und bei Auswahlwettbewerben entscheiden, wer Belgien vertreten kann.',
+    href: '#selection',
+  },
+  {
+    icon: 'language' as const,
+    title: 'Die Farben Belgiens tragen',
+    body: 'Ausgewählte Schülerinnen und Schüler können belgischen Delegationen bei IOI, EGOI, WEOI und EJOI angehören.',
+    href: '#selection',
+  },
+];
+
+const laterSections = [
+  {
+    id: 'join',
+    title: 'Wie tritt man der beCP-Trainingsgruppe bei?',
+    bodyHtml: `
+      <p>Der Eintritt in die beCP-Gruppe erfolgt auf <strong>Bewerbung</strong>. Wir suchen <strong>motivierte</strong> Schülerinnen und Schüler, die <strong>regelmäßig</strong> trainieren und neugierig sind, dazuzulernen. <strong>Finalistinnen und Finalisten</strong> der belgischen Olympiade können um direkten Beitritt zur Gruppe bitten.</p>
+      <p>Wenn du keine Finalistin bzw. kein Finalist bist oder im Laufe des Jahres der Gruppe beitreten möchtest, musst du zeigen, dass du bereits eine solide Grundlage in <strong>C++</strong>-Programmierung hast und bereit bist, dich zu engagieren. Wenn du noch nicht im sechsten Jahr der Sekundarschule bist, bitten wir dich dafür, eine Liste von Aufgaben auf <a href="https://usaco.guide/" target="_blank" rel="noopener noreferrer">USACO Guide</a> in <strong>C++</strong> zu lösen.</p>
+      <h3>In der Praxis</h3>
+      <p>Erstelle ein Konto auf USACO Guide und tritt der Gruppe über <a href="https://usaco.guide/groups/join?key=rjW0XfoSo8iPeB4GVDNA" target="_blank" rel="noopener noreferrer">diesen Link</a> bei, damit wir deinen Fortschritt verfolgen können. Die Aufgabenliste für dein Schuljahr findest du in der Gruppe.</p>
+      <p>Wenn du alles gelöst hast, schreib uns an <a href="mailto:becp@be-oi.be">becp@be-oi.be</a>.</p>
+      <p>Ab dem sechsten Jahr der Sekundarschule kontaktiere uns, wenn du meinst, dass du einen Platz in der Gruppe verdienst. Überzeuge uns, dass du vor dem Ende der Sekundarschule bereit sein wirst, dem Team für die Internationale Olympiade beizutreten — zum Beispiel mit guten Ergebnissen bei Online-Algorithmik-Wettbewerben.</p>
+    `,
+  },
+  {
+    id: 'training',
+    title: 'Wie läuft dieses Training ab?',
+    bodyHtml: `
+      <p>Das beCP-Training kombiniert <strong>Camps</strong>, <strong>Coaching</strong>-Sitzungen und selbstständiges Online-Üben. Teilnehmende erhalten abwechslungsreiche Aufgaben, Feedback zu ihren Lösungen und progressive Begleitung. Das Ziel ist, <strong>solide Grundlagen</strong> aufzubauen, um weiterwachsen zu können. Parallel dazu beruht das Lernen auf Übungen in <strong>Autonomie</strong>, auf <strong>regelmäßige</strong> Weise.</p>
+    `,
+  },
+  {
+    id: 'selection',
+    title: 'Wie funktioniert die Auswahl für die Nationalmannschaft?',
+    bodyHtml: `
+      <p>Die Auswahl beruht auf den Ergebnissen der <strong>Finale</strong> und einiger früherer <strong>Wettbewerbe vor Ort</strong>, die an Wochenenden vor dem Finale stattfinden. Die Wettbewerbe stehen Mitgliedern der <strong>beCP-Trainingsgruppe</strong> offen. Alle <strong>Finalistinnen und Finalisten</strong> können ebenfalls teilnehmen, wenn sie möchten.</p>
+    `,
+  },
+];
+---
+<BaseLayout
+  title="Nationalmannschaft – beCP – beOI"
+  description="Neben dem offenen beOI-Wettbewerb bietet beCP ein ganzjähriges Trainingsweg zu Plätzen in den belgischen Nationalmannschaften bei IOI, EGOI, WEOI und EJOI."
+  lang="de"
+>
+  <Nav lang="de" />
+
+  <main id="main" class="pt-32 pb-0 overflow-x-clip">
+    <!-- Hero -->
+    <section class="px-margin max-w-7xl mx-auto mb-xl">
+      <div class="max-w-2xl mx-auto text-center">
+        <h1 class={`${titlePage} mb-md`}>
+          Auf dem Weg zur belgischen Nationalmannschaft
+        </h1>
+        <p class="text-body-lg font-body text-on-surface-variant">
+          Neben dem offenen beOI-Wettbewerb bietet die Organisation beOI auch <strong class="text-on-surface font-semibold">beCP</strong>:
+          ein ganzjähriges Trainingsweg — mit Coaching, Camps und Online-Übung —
+          für Schülerinnen und Schüler, die die Chance haben wollen, international für Belgien zu starten.
+        </p>
+      </div>
+    </section>
+
+    <!-- What is beCP -->
+    <section class="px-margin max-w-7xl mx-auto mb-xl">
+      <div class="max-w-2xl mx-auto">
+        <h2 class={`${titleSection} mb-md text-center`}>Was ist beCP?</h2>
+        <div class="space-y-md text-body-md font-body text-on-surface-variant">
+          <p>
+            Die Belgische Informatik-Olympiade führt einen öffentlichen Wettbewerb für ein breites Publikum durch.
+            <strong class="text-on-surface font-semibold">Neben diesem Weg</strong>
+            ist
+            <strong class="text-on-surface font-semibold">beCP</strong>
+            ein längerfristiges Trainingsweg für Schülerinnen und Schüler, die weitergehen wollen:
+            schwierigere Programmieraufgaben, regelmäßiges Üben und Coaches, die deinen Fortschritt begleiten.
+          </p>
+          <p>
+            Das Ziel ist klar: Schülerinnen und Schüler vorbereiten und auswählen, die Belgien
+            bei großen internationalen Olympiaden vertreten können, darunter:
+          </p>
+        </div>
+
+        <ul class="mt-md grid gap-sm sm:grid-cols-2 list-none p-0 m-0">
+          {olympiads.map((o, i) => (
+            <li
+              class:list={[
+                'bg-surface-container-lowest border-2 border-outline-variant/40 rounded px-md py-sm stamp-shadow',
+                i % 2 === 0 ? 'wobbly-rotation-1' : 'wobbly-rotation-2',
+              ]}
+            >
+              <span class="font-headline text-headline-md text-primary block">{o.abbr}</span>
+              <span class="text-body-md font-body text-on-surface-variant">{o.name}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <!-- Journey overview (inspired by legacy beCP steps) -->
+    <section
+      class="relative bg-surface-container-lowest border-y-2 border-outline-variant/30 mb-0"
+      aria-labelledby="journey-heading"
+    >
+      <div
+        class="pointer-events-none absolute inset-0 overflow-hidden"
+        aria-hidden="true"
+      >
+        <div class="absolute -right-8 top-12 w-40 h-40 rotate-12 bg-primary-container/25 hand-drawn-border" />
+        <div class="absolute -left-10 bottom-10 w-32 h-32 -rotate-6 bg-secondary-container/20 hand-drawn-border" />
+      </div>
+
+      <div class="relative px-margin max-w-7xl mx-auto py-xl">
+        <header class="text-center max-w-2xl mx-auto mb-lg">
+          <h2 id="journey-heading" class={titleSection}>
+            Von der Trainingsgruppe zu Team Belgium
+          </h2>
+          <p class="text-body-md font-body text-on-surface-variant mt-sm">
+            beCP ist ein mehrjähriger Weg: der Gruppe beitreten, regelmäßig trainieren, um die Auswahl kämpfen
+            und — wenn ausgewählt — die belgischen Farben im Ausland tragen.
+          </p>
+        </header>
+
+        <ol class="grid gap-md sm:grid-cols-2 lg:grid-cols-4 list-none p-0 m-0">
+          {journey.map((step, i) => (
+            <li class="relative min-w-0">
+              <a
+                href={step.href}
+                class="block h-full min-w-0 break-words bg-surface-container-low border-2 border-outline-variant/30 rounded p-md no-underline text-inherit motion-safe:transition-transform motion-safe:hover:-translate-y-0.5 hover:border-primary/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+              >
+                <div class="flex items-center gap-sm mb-sm">
+                  <span
+                    class="inline-flex items-center justify-center w-10 h-10 rounded bg-primary text-on-primary"
+                    aria-hidden="true"
+                  >
+                    <Icon name={step.icon} class="text-xl" />
+                  </span>
+                  <span class="font-label text-label-md tracking-wide text-on-surface-variant">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                </div>
+                <h3 class={`${titleSubsection} mb-xs`}>{step.title}</h3>
+                <p class="text-body-md font-body text-on-surface-variant m-0">
+                  {step.body}
+                </p>
+              </a>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <!-- Detail sections -->
+    <div class="px-margin max-w-7xl mx-auto py-xl flex flex-col gap-xl">
+      {laterSections.map((section) => (
+        <section
+          id={section.id}
+          class="scroll-mt-28 max-w-2xl mx-auto w-full"
+          aria-labelledby={`${section.id}-heading`}
+        >
+          <h2 id={`${section.id}-heading`} class={`${titleSection} mb-md`}>
+            {section.title}
+          </h2>
+          <div class="becp-section-body" set:html={section.bodyHtml} />
+        </section>
+      ))}
+    </div>
+
+    <!-- Contact -->
+    <section class="relative bg-surface-container-lowest border-y-2 border-outline-variant/30">
+      <div class="px-margin max-w-7xl mx-auto py-xl">
+        <div class="text-center max-w-2xl mx-auto">
+          <h2 class={`${titleSection} mb-sm`}>
+            Fragen?
+          </h2>
+          <p class="text-body-md font-body text-on-surface-variant mb-md">
+            Erreiche das beCP-Team zu Training, Camps oder der Auswahl für die Nationalmannschaft.
+          </p>
+          <a
+            href="mailto:becp@be-oi.be"
+            class="inline-flex items-center justify-center min-h-11 font-label text-label-md tracking-wide px-6 py-2.5 rounded-full bg-primary text-on-primary border-2 border-primary hover:bg-primary/90 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+          >
+            Kontaktiere uns
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer lang="de" />
+</BaseLayout>
+
+<style>
+  .becp-section-body :global(h3) {
+    font-family: var(--font-headline);
+    font-size: var(--text-headline-md);
+    line-height: var(--text-headline-md--line-height);
+    font-weight: 700;
+    color: var(--color-on-surface);
+    margin: var(--spacing-md) 0 var(--spacing-sm);
+  }
+
+  .becp-section-body :global(p) {
+    font-family: var(--font-body);
+    font-size: var(--text-body-md);
+    line-height: 1.6;
+    color: var(--color-on-surface-variant);
+    margin: 0 0 0.75rem;
+  }
+
+  .becp-section-body :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .becp-section-body :global(a) {
+    color: var(--color-primary);
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+  }
+
+  .becp-section-body :global(a:hover) {
+    text-decoration-thickness: 2px;
+  }
+
+  .becp-section-body :global(code) {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.92em;
+  }
+
+  .becp-section-body :global(strong) {
+    color: var(--color-on-surface);
+    font-weight: 600;
+  }
+</style>

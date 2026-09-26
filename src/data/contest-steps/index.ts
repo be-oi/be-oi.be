@@ -1,10 +1,12 @@
 import type { Locale } from '../i18n';
 import type { ContestStep } from './types';
+import { contestStepsDe } from './de';
 import { contestStepsEn } from './en';
 import { contestStepsFr } from './fr';
 import { contestStepsNl } from './nl';
 
 const contestStepsByLocale: Record<Locale, ContestStep[]> = {
+  de: contestStepsDe,
   en: contestStepsEn,
   fr: contestStepsFr,
   nl: contestStepsNl,

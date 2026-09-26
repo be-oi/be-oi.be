@@ -6,7 +6,7 @@ import type { Locale as SiteLocale } from './i18n';
 export type Locale = SiteLocale;
 
 export function resolveLocale(lang: string | undefined): Locale {
-  if (lang === 'fr' || lang === 'nl' || lang === 'en') return lang;
+  if (lang === 'fr' || lang === 'nl' || lang === 'en' || lang === 'de') return lang;
   return defaultLocale;
 }
 
@@ -105,6 +105,17 @@ const navByLocale: Record<Locale, NavStrings> = {
     openMenu: 'Menu openen',
     closeMenu: 'Menu sluiten',
   },
+  de: {
+    contest: 'Der beOI-Wettbewerb',
+    internationalContests: 'Nationalmannschaft',
+    faq: 'FAQ',
+    about: 'Über uns',
+    lab: 'beOI Lab',
+    labAria: 'beOI Lab (öffnet in einem neuen Tab)',
+    changeLanguage: 'Sprache ändern',
+    openMenu: 'Menü öffnen',
+    closeMenu: 'Menü schließen',
+  },
 };
 
 const mailingListByLocale: Record<Locale, MailingListStrings> = {
@@ -176,6 +187,29 @@ const mailingListByLocale: Record<Locale, MailingListStrings> = {
     noscriptFallback:
       'Inschrijven vereist JavaScript. Je kunt ook mailen naar {email} om je aan te melden voor de mailinglijst.',
   },
+  de: {
+    sectionAria: 'Anmeldung zur Mailingliste',
+    heading: 'Bleib über die nächste Olympiade informiert',
+    intro: 'Erhalte eine E-Mail, wenn die Anmeldung öffnet.',
+    emailLabel: 'E-Mail-Adresse',
+    emailPlaceholder: 'E-Mail-Adresse',
+    submit: 'Halte mich auf dem Laufenden',
+    pending: 'Wird gesendet…',
+    empty: 'Gib deine E-Mail-Adresse ein.',
+    invalid: 'Das sieht nicht wie eine E-Mail-Adresse aus. Prüfe sie und versuche es erneut.',
+    already: 'Es sieht so aus, als wärst du bereits angemeldet.',
+    success: 'Danke. Wir melden uns, wenn die Anmeldung öffnet.',
+    rateLimit: 'Zu viele Versuche. Warte kurz und versuche es erneut.',
+    offline: 'Du scheinst offline zu sein. Prüfe deine Verbindung und versuche es erneut.',
+    timeout: 'Das hat zu lange gedauert. Versuche es erneut oder schreib an {email}.',
+    failure:
+      'Wir konnten dich nicht zur Liste hinzufügen. Wenn das anhält, kontaktiere uns ({email}).',
+    privacyNotice:
+      'Mit der Anmeldung stimmst du zu, dass wir deine E-Mail speichern, um Olympiade-Updates zu senden. Die Anmeldung ist sofort (keine Bestätigungs-E-Mail). Siehe unsere {link}.',
+    privacyLinkLabel: 'Datenschutzerklärung',
+    noscriptFallback:
+      'Die Anmeldung erfordert JavaScript. Du kannst auch an {email} schreiben, um dich für die Mailingliste anzumelden.',
+  },
 };
 
 const footerByLocale: Record<Locale, FooterStrings> = {
@@ -197,12 +231,19 @@ const footerByLocale: Record<Locale, FooterStrings> = {
     instagram: 'beOI op Instagram',
     built: 'Gebouwd',
   },
+  de: {
+    dataProtection: 'Datenschutz',
+    facebook: 'beOI auf Facebook',
+    instagram: 'beOI auf Instagram',
+    built: 'Erstellt',
+  },
 };
 
 const skipToContentByLocale: Record<Locale, string> = {
   en: 'Skip to content',
   fr: 'Aller au contenu',
   nl: 'Ga naar de inhoud',
+  de: 'Zum Inhalt springen',
 };
 
 export function skipToContentLabel(lang: string | undefined): string {
@@ -218,6 +259,7 @@ export const languagePickerLabels: Record<Locale, string> = {
   fr: 'Français',
   nl: 'Nederlands',
   en: 'English',
+  de: 'Deutsch',
 };
 
 export interface LanguageChooserStrings {
@@ -236,6 +278,11 @@ export const languageChooserByLocale: Record<Locale, LanguageChooserStrings> = {
     tagline:
       'Concours belges de logique et de programmation pour élèves du primaire et du secondaire',
     cta: 'Continuer en français',
+  },
+  de: {
+    tagline:
+      'Belgische Wettbewerbe in Logik und Programmieren für Schülerinnen und Schüler der Primar- und Sekundarschule',
+    cta: 'Auf Deutsch weiter',
   },
   en: {
     tagline:
@@ -269,6 +316,10 @@ const stepSectionByLocale: Record<Locale, StepSectionStrings> = {
   nl: {
     showMore: 'Meer details',
     hideDetails: 'Details verbergen',
+  },
+  de: {
+    showMore: 'Mehr Details',
+    hideDetails: 'Details ausblenden',
   },
 };
 

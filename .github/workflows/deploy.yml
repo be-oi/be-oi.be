@@ -51,4 +51,4 @@ jobs:
         run: |
           aws cloudfront create-invalidation \
             --distribution-id E1HFWB6I0WMJ8D \
-            --paths "/" "/fr/*" "/nl/*" "/en/*" "/sitemap-index.xml" "/sitemap-0.xml" "/robots.txt"
+            --paths "/" "/fr/*" "/nl/*" "/en/*" "/de/*" "/sitemap-index.xml" "/sitemap-0.xml" "/robots.txt"

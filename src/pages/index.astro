@@ -4,12 +4,17 @@ import Footer from '../components/Footer.astro';
 import { languageChooserByLocale, languagePickerLabels } from '../data/ui-i18n';
 import type { Locale } from '../data/ui-i18n';
 
-const chooserLocales: Locale[] = ['nl', 'fr', 'en'];
-const wobblyClasses = ['wobbly-rotation-1', 'wobbly-rotation-2', 'wobbly-rotation-3'];
+const chooserLocales: Locale[] = ['nl', 'fr', 'de', 'en'];
+const wobblyClasses = [
+  'wobbly-rotation-1',
+  'wobbly-rotation-2',
+  'wobbly-rotation-3',
+  'wobbly-rotation-4',
+];
 ---
 <BaseLayout
-  title="beOI – Olympiade belge d'Informatique / Belgische Informatica-olympiade"
-  description="Belgian Olympiad in Informatics (beOI) — choose your language: Nederlands, Français, or English."
+  title="beOI – Olympiade belge d'Informatique / Belgische Informatica-olympiade / Belgische Informatik-Olympiade"
+  description="Belgian Olympiad in Informatics (beOI) — choose your language: Nederlands, Français, Deutsch, or English."
   lang="fr"
 >
   <script is:inline slot="head">
@@ -18,7 +23,7 @@ const wobblyClasses = ['wobbly-rotation-1', 'wobbly-rotation-2', 'wobbly-rotatio
       var langs = navigator.languages || (navigator.language ? [navigator.language] : []);
       for (var i = 0; i < langs.length; i++) {
         var code = String(langs[i]).slice(0, 2).toLowerCase();
-        if (code === 'fr' || code === 'nl') {
+        if (code === 'fr' || code === 'nl' || code === 'de') {
           location.replace('/' + code + '/');
           return;
         }
@@ -36,7 +41,7 @@ const wobblyClasses = ['wobbly-rotation-1', 'wobbly-rotation-2', 'wobbly-rotatio
         height="160"
       />
 
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-gutter w-full">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter w-full">
         {chooserLocales.map((locale, index) => (
           <article
             lang={locale}
