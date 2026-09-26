@@ -1,0 +1,13 @@
+# Machine-local
+config.local.json
+
+# Decision / build scratch
+decision-*.json
+mocks/
+questions/
+review/
+build/
+briefs/
+
+# Live sessions (keep live/config.json if shared)
+live/sessions/

@@ -263,31 +263,28 @@ export const languagePickerLabels: Record<Locale, string> = {
 };
 
 export interface LanguageChooserStrings {
-  tagline: string;
+  /** Official full name of beOI in this language. */
+  name: string;
   cta: string;
 }
 
-/** Copy for the root `/` language chooser cards (one entry per locale). */
+/** Copy for the root `/` language chooser (one entry per locale). */
 export const languageChooserByLocale: Record<Locale, LanguageChooserStrings> = {
   nl: {
-    tagline:
-      'Belgische wedstrijden logica en programmeren voor leerlingen uit het lager en secundair onderwijs',
-    cta: 'Ga verder in het Nederlands',
+    name: 'Belgische Informatica-olympiade',
+    cta: 'Ga verder',
   },
   fr: {
-    tagline:
-      'Concours belges de logique et de programmation pour élèves du primaire et du secondaire',
-    cta: 'Continuer en français',
+    name: "Olympiade belge d'Informatique",
+    cta: 'Continuer',
   },
   de: {
-    tagline:
-      'Belgische Wettbewerbe in Logik und Programmieren für Schülerinnen und Schüler der Primar- und Sekundarschule',
-    cta: 'Auf Deutsch weiter',
+    name: 'Belgische Informatik-Olympiade',
+    cta: 'Weiter',
   },
   en: {
-    tagline:
-      'Belgian logic and programming contests for primary and secondary school pupils',
-    cta: 'Continue in English',
+    name: 'Belgian Olympiad in Informatics',
+    cta: 'Continue',
   },
 };
 
