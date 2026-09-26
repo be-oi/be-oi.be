@@ -34,7 +34,7 @@ typography:
   headline:
     fontFamily: "Plus Jakarta Sans, ui-sans-serif, system-ui, sans-serif"
     fontSize: "40px"
-    fontWeight: 800
+    fontWeight: 700
     lineHeight: 1.2
     letterSpacing: "-0.02em"
   headline-lg:
@@ -185,7 +185,7 @@ A reduced Material-like palette: one brand blue shared with the illustrations, c
 **Character:** Confident rounded sans for titles, readable workhorse for explanation, slightly quirky label face for nav and controls — sketchbook energy without novelty fonts. Inline code on competitive-programming pages uses the system mono stack so algorithms stay scannable without importing a decorative monospace face.
 
 ### Hierarchy
-- **Headline XL** (800, 40px, 1.2, −0.02em): Page heroes.
+- **Headline XL** (700, 40px, 1.2, −0.02em): Page heroes.
 - **Headline LG** (700, 32px, 1.2): Section titles (step names, about blocks).
 - **Headline MD** (700, 24px, 1.3): Subsections and newsletter heading.
 - **Body LG** (400, 18px, 1.6): Lead paragraphs under heroes and steps.
@@ -193,7 +193,7 @@ A reduced Material-like palette: one brand blue shared with the illustrations, c
 - **Label MD** (600, 14px, 1.4, 0.05em): Nav, buttons, chips, Lab link — the UI voice.
 - **Mono** (system stack, ~0.92em relative to body on competitive-programming pages): Inline `<code>` only — not UI chrome, not headlines.
 
-Self-hosted via Fontsource (latin + latin-ext) for the three UI faces. Do not load Google Fonts or other third-party font CDNs. Mono stays on the platform stack (no remote mono CDN).
+Self-hosted via Fontsource **latin** subsets only (one file per used weight) for the three UI faces — Belgian French/Dutch accents are in the latin range, and latin-ext subset CSS omits `unicode-range` which would force duplicate downloads. Weights: Jakarta 700; Be Vietnam Pro 400 + 600; Bricolage 600. Critical body + headline woff2s are preloaded from `BaseLayout`. Do not load Google Fonts or other third-party font CDNs. Mono stays on the platform stack (no remote mono CDN).
 
 ### Named Rules
 **The Three-Face (+ Code Mono) Rule.** Three UI faces remain: Headlines → Plus Jakarta; reading → Be Vietnam Pro; chrome/UI → Bricolage. Mono is a fourth specialized role for code only (system `ui-monospace` stack on competitive-programming pages). Do not invent additional families for decoration — and do use mono for code.
