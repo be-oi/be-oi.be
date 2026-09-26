@@ -1,0 +1,270 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-26T10:40:00.000Z",
+  "title": "Design System: beOI",
+  "extensions": {
+    "colorMeta": {
+      "primary": {
+        "role": "primary",
+        "displayName": "Contest Blue",
+        "canonical": "#3a54a4",
+        "tonalRamp": ["#12182e", "#1e2d5c", "#2a3f7d", "#3a54a4", "#5c73b8", "#8a9bcc", "#c5cdea", "#e8ecf6"]
+      },
+      "secondary": {
+        "role": "secondary",
+        "displayName": "Advance Green",
+        "canonical": "#3d6841",
+        "tonalRamp": ["#142218", "#2a4a2e", "#3d6841", "#528456", "#7aa67c", "#bbecba", "#d8f5d7", "#eef9ee"]
+      },
+      "tertiary": {
+        "role": "tertiary",
+        "displayName": "Callout Amber",
+        "canonical": "#8d4f11",
+        "tonalRamp": ["#3a1e00", "#6b3800", "#8d4f11", "#b56a24", "#d4843c", "#f0a15d", "#f6c898", "#fbeede"]
+      },
+      "background": {
+        "role": "neutral",
+        "displayName": "Craft Paper",
+        "canonical": "#ececec",
+        "tonalRamp": ["#232323", "#41484e", "#5f717c", "#b8c4cb", "#dde2e6", "#e8ecf0", "#ececec", "#ffffff"]
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "Craft Paper",
+        "canonical": "#ececec",
+        "tonalRamp": ["#232323", "#41484e", "#5f717c", "#b8c4cb", "#dde2e6", "#e8ecf0", "#ececec", "#ffffff"]
+      },
+      "surface-container-lowest": {
+        "role": "neutral",
+        "displayName": "Page White",
+        "canonical": "#ffffff",
+        "tonalRamp": ["#232323", "#41484e", "#b8c4cb", "#dde2e6", "#e8ecf0", "#f4f6f7", "#fafbfb", "#ffffff"]
+      },
+      "on-surface": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "#232323",
+        "tonalRamp": ["#0d0d0d", "#232323", "#41484e", "#5f717c", "#8a969e", "#b8c4cb", "#dde2e6", "#f4f6f7"]
+      },
+      "error": {
+        "role": "error",
+        "displayName": "Failure Red",
+        "canonical": "#ba1a1a",
+        "tonalRamp": ["#410000", "#690000", "#930000", "#ba1a1a", "#de3730", "#ff897a", "#ffdad5", "#ffedea"]
+      },
+      "lab-mint": {
+        "role": "accent",
+        "displayName": "Lab Mint",
+        "canonical": "#7dffc4",
+        "cssVar": "--color-lab-mint",
+        "tonalRamp": ["#003822", "#1aa86a", "#2bc98a", "#4dd9a4", "#7dffc4", "#a8ffe0", "#d0fff0", "#eafff8"]
+      },
+      "lab-mint-deep": {
+        "role": "accent",
+        "displayName": "Lab Mint Deep",
+        "canonical": "#1aa86a",
+        "cssVar": "--color-lab-mint-deep",
+        "tonalRamp": ["#003822", "#0f6b42", "#1aa86a", "#2bc98a", "#4dd9a4", "#7dffc4", "#a8ffe0", "#eafff8"]
+      }
+    },
+    "typographyMeta": {
+      "headline": {
+        "displayName": "Headline XL",
+        "purpose": "Page heroes and brand-forward titles."
+      },
+      "headline-lg": {
+        "displayName": "Headline LG",
+        "purpose": "Section titles such as contest step names."
+      },
+      "headline-md": {
+        "displayName": "Headline MD",
+        "purpose": "Subsections and compact section heads."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Default reading text."
+      },
+      "body-lg": {
+        "displayName": "Body LG",
+        "purpose": "Lead paragraphs under heroes and steps."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Nav, buttons, chips, and Lab link UI voice."
+      },
+      "mono": {
+        "displayName": "Mono",
+        "purpose": "Inline code on competitive-programming pages only — system ui-monospace stack, not a decorative UI face."
+      }
+    },
+    "shadows": [
+      {
+        "name": "menu-lift",
+        "value": "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)",
+        "purpose": "Language menu panel only."
+      },
+      {
+        "name": "stamp",
+        "value": "drop-shadow(4px 4px 0px color-mix(in srgb, #3a54a4 18%, transparent))",
+        "purpose": "Occasional illustration stamp accent — not default UI chrome."
+      }
+    ],
+    "motion": [
+      {
+        "name": "state-color",
+        "value": "transition-colors / ~0.2s ease",
+        "purpose": "Default hover/focus color shifts on links and buttons."
+      },
+      {
+        "name": "hover-nudge",
+        "value": "transform translateY(-1px to -4px)",
+        "purpose": "Light lift on timeline steps and Lab chrome link when motion is allowed."
+      },
+      {
+        "name": "float",
+        "value": "float 4s ease-in-out infinite",
+        "purpose": "Optional decorative float; only under prefers-reduced-motion: no-preference."
+      }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary outline button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Step CTAs and Show more — pill with primary wash and quiet border.",
+      "html": "<button type=\"button\" class=\"ds-btn-primary\">Show more</button>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; gap: 4px; font-family: var(--font-label, \"Bricolage Grotesque\", sans-serif); font-size: 14px; font-weight: 600; letter-spacing: 0.05em; line-height: 1.4; color: var(--color-primary, #3a54a4); background: color-mix(in srgb, var(--color-primary, #3a54a4) 5%, transparent); border: 2px solid color-mix(in srgb, var(--color-primary, #3a54a4) 30%, transparent); border-radius: 9999px; padding: 8px 16px; cursor: pointer; transition: background-color 0.2s ease, border-color 0.2s ease; } .ds-btn-primary:hover { background: color-mix(in srgb, var(--color-primary, #3a54a4) 10%, transparent); } .ds-btn-primary:focus-visible { outline: 2px solid var(--color-primary, #3a54a4); outline-offset: 2px; }"
+    },
+    {
+      "name": "Filled primary button",
+      "kind": "button",
+      "refersTo": "button-filled",
+      "description": "Newsletter submit and strong primary actions.",
+      "html": "<button type=\"button\" class=\"ds-btn-filled\">Keep me informed</button>",
+      "css": ".ds-btn-filled { display: inline-flex; align-items: center; justify-content: center; font-family: var(--font-label, \"Bricolage Grotesque\", sans-serif); font-size: 14px; font-weight: 600; letter-spacing: 0.05em; color: var(--color-on-primary, #ffffff); background: var(--color-primary, #3a54a4); border: 2px solid var(--color-primary, #3a54a4); border-radius: 9999px; padding: 10px 20px; cursor: pointer; transition: background-color 0.2s ease, opacity 0.2s ease; } .ds-btn-filled:hover { background: color-mix(in srgb, var(--color-primary, #3a54a4) 90%, black); } .ds-btn-filled:focus-visible { outline: 2px solid var(--color-primary, #3a54a4); outline-offset: 2px; } .ds-btn-filled:disabled { opacity: 0.6; cursor: not-allowed; }"
+    },
+    {
+      "name": "Email field",
+      "kind": "input",
+      "refersTo": "input-email",
+      "description": "Mailing-list email input — full pill on Page White (surface-container-lowest).",
+      "html": "<label class=\"ds-field\"><span class=\"ds-field-label\">Email</span><input class=\"ds-input-email\" type=\"email\" placeholder=\"you@school.be\" /></label>",
+      "css": ".ds-field { display: flex; flex-direction: column; gap: 8px; width: 100%; } .ds-field-label { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; } .ds-input-email { width: 100%; box-sizing: border-box; font-family: var(--font-body, \"Be Vietnam Pro\", sans-serif); font-size: 16px; line-height: 1.6; color: var(--color-on-surface, #232323); background: var(--color-surface-container-lowest, #ffffff); border: 2px solid color-mix(in srgb, var(--color-outline-variant, #b8c4cb) 60%, transparent); border-radius: 9999px; padding: 10px 16px; } .ds-input-email::placeholder { color: color-mix(in srgb, var(--color-on-surface-variant, #41484e) 60%, transparent); } .ds-input-email:focus { outline: none; border-color: var(--color-primary, #3a54a4); } .ds-input-email:focus-visible { outline: 2px solid var(--color-primary, #3a54a4); outline-offset: 2px; }"
+    },
+    {
+      "name": "Meta chip",
+      "kind": "chip",
+      "refersTo": "chip-meta",
+      "description": "Step duration/timing/location chips.",
+      "html": "<span class=\"ds-chip-meta\"><svg class=\"ds-chip-icon\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z\"/></svg><span class=\"ds-sr\">Duration: </span><span>45 min</span></span>",
+      "css": ".ds-chip-meta { display: inline-flex; align-items: center; gap: 4px; padding: 6px 12px; border-radius: 9999px; border: 1px solid var(--color-outline-variant, #b8c4cb); background: var(--color-surface-container-lowest, #ffffff); color: var(--color-on-surface, #232323); font-family: var(--font-body, \"Be Vietnam Pro\", sans-serif); font-size: 14px; line-height: 1; } .ds-chip-icon { color: var(--color-primary, #3a54a4); flex-shrink: 0; } .ds-sr { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }"
+    },
+    {
+      "name": "Chrome navigation",
+      "kind": "nav",
+      "refersTo": "nav-chrome",
+      "description": "Fixed Contest Blue top bar with white labels.",
+      "html": "<nav class=\"ds-nav-chrome\" aria-label=\"Primary\"><a class=\"ds-nav-brand\" href=\"#\">beOI</a><a class=\"ds-nav-link ds-nav-link-active\" href=\"#\">Contest</a><a class=\"ds-nav-link\" href=\"#\">FAQ</a></nav>",
+      "css": ".ds-nav-chrome { display: flex; align-items: center; gap: 24px; background: var(--color-chrome, #3a54a4); color: var(--color-on-chrome, #ffffff); padding: 12px 32px; border-bottom: 2px solid color-mix(in srgb, #ffffff 20%, transparent); font-family: var(--font-label, \"Bricolage Grotesque\", sans-serif); font-size: 14px; font-weight: 600; letter-spacing: 0.05em; } .ds-nav-brand { font-family: var(--font-headline, \"Plus Jakarta Sans\", sans-serif); font-size: 24px; font-weight: 700; color: inherit; text-decoration: none; } .ds-nav-link { color: inherit; text-decoration: none; padding-bottom: 4px; border-bottom: 2px solid transparent; } .ds-nav-link:hover { text-decoration: underline; } .ds-nav-link:focus-visible { outline: 2px solid var(--color-lab-mint, #7dffc4); outline-offset: 2px; } .ds-nav-link-active { border-bottom-color: currentColor; }"
+    },
+    {
+      "name": "Lab link (chrome)",
+      "kind": "custom",
+      "refersTo": "lab-link-chrome",
+      "description": "External Lab CTA on the blue nav with mint flask accent via --color-lab-mint.",
+      "html": "<a class=\"ds-lab-link\" href=\"https://lab.be-oi.be/en/\" target=\"_blank\" rel=\"noopener noreferrer\" aria-label=\"Open beOI Lab\"><svg class=\"ds-lab-flask\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" aria-hidden=\"true\"><path stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M9 2.75h6M10.25 2.75v5.1L5.1 17.55A2.15 2.15 0 0 0 6.95 20.75h10.1a2.15 2.15 0 0 0 1.85-3.2L13.75 7.85v-5.1\"/><path stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" d=\"M7.15 15.05c1.15-.95 2.05.85 3.25-.15s2.05.85 3.2-.15 2-.75 2.85-.1\"/></svg><span>Lab</span><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 -960 960 960\" width=\"14\" height=\"14\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"m256-240-56-56 384-384H240v-80h480v480h-80v-344L256-240Z\"/></svg></a>",
+      "css": ".ds-lab-link { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.35rem 0.85rem; border-radius: 9999px; border: 1px solid color-mix(in srgb, var(--color-on-chrome, #ffffff) 30%, transparent); background: color-mix(in srgb, var(--color-on-chrome, #ffffff) 12%, transparent); color: var(--color-on-chrome, #ffffff); font-family: var(--font-label, \"Bricolage Grotesque\", sans-serif); font-size: 14px; font-weight: 600; letter-spacing: 0.05em; text-decoration: none; transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease; } .ds-lab-flask { color: var(--color-lab-mint, #7dffc4); transition: filter 0.25s ease, transform 0.25s ease; } .ds-lab-link:hover, .ds-lab-link:focus-visible { background: color-mix(in srgb, var(--color-on-chrome, #ffffff) 22%, transparent); border-color: color-mix(in srgb, var(--color-on-chrome, #ffffff) 55%, transparent); box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-lab-mint, #7dffc4) 35%, transparent); } .ds-lab-link:hover .ds-lab-flask, .ds-lab-link:focus-visible .ds-lab-flask { filter: drop-shadow(0 0 4px color-mix(in srgb, var(--color-lab-mint, #7dffc4) 70%, transparent)); } .ds-lab-link:focus-visible { outline: 2px solid var(--color-lab-mint, #7dffc4); outline-offset: 2px; } @media (prefers-reduced-motion: no-preference) { .ds-lab-link:hover { transform: translateY(-1px); } .ds-lab-link:hover .ds-lab-flask, .ds-lab-link:focus-visible .ds-lab-flask { transform: rotate(30deg); } }"
+    },
+    {
+      "name": "Callout badge",
+      "kind": "chip",
+      "refersTo": "chip-meta",
+      "description": "Hero “New in 2027” style amber callout with light wobble.",
+      "html": "<span class=\"ds-callout-badge\">New in 2027</span>",
+      "css": ".ds-callout-badge { display: inline-block; padding: 4px 16px; font-family: var(--font-label, \"Bricolage Grotesque\", sans-serif); font-size: 14px; font-weight: 600; letter-spacing: 0.05em; color: var(--color-tertiary, #8d4f11); background: color-mix(in srgb, var(--color-tertiary-container, #f0a15d) 20%, transparent); border: 1px solid color-mix(in srgb, var(--color-tertiary, #8d4f11) 20%, transparent); border-radius: 9999px; transform: rotate(-1deg); }"
+    },
+    {
+      "name": "Inline code",
+      "kind": "custom",
+      "refersTo": null,
+      "description": "Competitive-programming inline code — system mono stack only.",
+      "html": "<p class=\"ds-body\">Solve <code class=\"ds-code\">O(n log n)</code> in time.</p>",
+      "css": ".ds-body { font-family: var(--font-body, \"Be Vietnam Pro\", sans-serif); font-size: 16px; line-height: 1.6; color: var(--color-on-surface, #232323); } .ds-code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 0.92em; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Olympiad Sketchbook",
+    "overview": "beOI’s public site should feel like a well-kept contest sketchbook for ages 10–18: playful enough to invite curiosity, clear enough that a pupil or teacher can see how to join. Cool grey craft-paper pages carry the story; Contest Blue chrome frames navigation and footer like a notebook cover; step illustrations and light hand-drawn wobble supply personality without tipping into cartoon chaos.\n\nDensity stays open and readable — generous page margins, alternating white and craft-paper bands, one job per section. Interaction is lightly kinetic (hover lift, Lab flask tilt) but always gated behind prefers-reduced-motion. The system rejects corporate SaaS chrome, paid-product urgency, dark “cyber olympiad” tropes, and anything that talks down to teenagers.",
+    "keyCharacteristics": [
+      "Contest Blue brand + cool craft-paper surfaces",
+      "Three UI type faces (headline / body / label) plus system mono for code only",
+      "Flat-by-default depth (tone, borders, texture over shadows)",
+      "Full-pill CTAs and meta chips; thick quiet borders",
+      "Mascot step art as the visual signature of the journey"
+    ],
+    "rules": [
+      {
+        "name": "The One Ink Rule",
+        "body": "Contest Blue is the only brand accent that may dominate a viewport (chrome, primary CTAs, key links). Green and amber are supporting voices.",
+        "section": "colors"
+      },
+      {
+        "name": "The Error Is Failure Rule",
+        "body": "#ba1a1a appears only for destructive or form-failure states — never as decoration.",
+        "section": "colors"
+      },
+      {
+        "name": "The Quiet Border Rule",
+        "body": "Structural lines use outline neutrals, not primary blue.",
+        "section": "colors"
+      },
+      {
+        "name": "The Lab Mint Contract Rule",
+        "body": "Lab mint exists only for the Lab link accent. Use --color-lab-mint / --color-lab-mint-deep (or the named tokens), never as a general brand or decorative fill.",
+        "section": "colors"
+      },
+      {
+        "name": "The Three-Face (+ Code Mono) Rule",
+        "body": "Three UI faces remain: Headlines → Plus Jakarta; reading → Be Vietnam Pro; chrome/UI → Bricolage. Mono is a fourth specialized role for code only (system ui-monospace stack on competitive-programming pages). Do not invent additional families for decoration — and do use mono for code.",
+        "section": "typography"
+      },
+      {
+        "name": "The Band Alternation Rule",
+        "body": "Long pages breathe by alternating craft-paper (background / surface #ececec) and Page White (surface-container-lowest #ffffff) full-bleed bands — not by stacking cards. White bands use the surface-system white token (bg-surface-container-lowest / var(--color-surface-container-lowest)), not raw Tailwind bg-white. Craft-paper surface stays #ececec; do not rename it to white.",
+        "section": "layout"
+      },
+      {
+        "name": "The Flat-By-Default Rule",
+        "body": "Surfaces stay flat at rest. Shadows appear only for transient UI (menus) or intentional stamp effects — not for every container.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Pill CTA Rule",
+        "body": "Primary actions and email fields are full pills. Rectangular sharp cards are not the default container language.",
+        "section": "shapes"
+      }
+    ],
+    "dos": [
+      "Do keep Contest Blue as the sole dominant brand accent and match illustration blue.",
+      "Do alternate craft-paper (background/surface) and Page White (surface-container-lowest) bands on long pages — use the surface token, not raw bg-white.",
+      "Do use full-pill CTAs/inputs and quiet 2px borders.",
+      "Do gate motion behind prefers-reduced-motion: no-preference.",
+      "Do preserve mascot step art and beOI logos as identity assets.",
+      "Do use var(--color-lab-mint) / var(--color-lab-mint-deep) for Lab accents, and the system mono stack for code."
+    ],
+    "donts": [
+      "Don't make it feel like corporate SaaS, a paid product funnel, or dark cyber UI.",
+      "Don't tip into toddler-cartoon chaos (overuse of wobble, stickers, or rainbow accents).",
+      "Don't invent an extra decorative UI font family or load remote font CDNs (mono for code is the only specialized exception).",
+      "Don't use error red or Lab mint as general decoration.",
+      "Don't default to card grids with layered shadows for content that belongs in open bands.",
+      "Don't paint white bands with raw bg-white when bg-surface-container-lowest is the tokenized Page White."
+    ]
+  }
+}

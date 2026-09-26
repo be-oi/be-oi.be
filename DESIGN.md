@@ -63,6 +63,8 @@ typography:
     fontWeight: 600
     lineHeight: 1.4
     letterSpacing: "0.05em"
+  mono:
+    fontFamily: "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace"
 rounded:
   DEFAULT: "1rem"
   lg: "2rem"
@@ -130,14 +132,14 @@ Density stays open and readable — generous page margins, alternating white and
 
 **Key Characteristics:**
 - Contest Blue brand + cool craft-paper surfaces
-- Three-type pairing: bold headlines, calm body, characterful labels
+- Three UI type faces (headline / body / label) plus system mono for code only
 - Flat-by-default depth (tone, borders, texture over shadows)
 - Full-pill CTAs and meta chips; thick quiet borders
 - Mascot step art as the visual signature of the journey
 
 ## Colors
 
-A reduced Material-like palette: one brand blue shared with the illustrations, cool neutral surfaces, green for progress/success accents, amber for warm callouts, red only for failure.
+A reduced Material-like palette: one brand blue shared with the illustrations, cool neutral surfaces, green for progress/success accents, amber for warm callouts, Lab mint for the Lab link only, red only for failure.
 
 ### Primary
 - **Contest Blue** (`#3a54a4`): Brand ink for links, primary CTAs, step accents, and the fixed nav/footer **chrome** (same hex as `chrome` / `on-chrome` white). Drawn from the step-illustration blue so UI and artwork stay one voice.
@@ -151,9 +153,15 @@ A reduced Material-like palette: one brand blue shared with the illustrations, c
 - **Callout Amber** (`#8d4f11`): Warm “new / notice” moments (hero badge, optional highlights). Container `#f0a15d`.
 - Keep rare so callouts stay loud when they appear.
 
+### Lab accent
+- **Lab Mint** (`#7dffc4` / `--color-lab-mint`): Flask glow, chrome Lab-link focus ring, and mint hover halo on Contest Blue chrome. Observed today as hardcoded hex in `BeoiLabLink.astro`.
+- **Lab Mint Deep** (`#1aa86a` / `--color-lab-mint-deep`): Flask on light page surfaces (surface Lab-link variant) so mint stays vivid on Page White.
+
+**Token contract:** treat Lab mint as named color tokens *and* as the intended CSS custom properties `--color-lab-mint` / `--color-lab-mint-deep`. Prefer `var(--color-lab-mint)` / `var(--color-lab-mint-deep)` in new or edited styles — do not introduce fresh hex literals — even if those vars are not yet declared in `global.css` `@theme` (declare them when touching Lab styles). Lab mint is never general decoration.
+
 ### Neutral
-- **Craft Paper** (`#ececec`): Page background with the dotted craft-paper texture.
-- **Page White** (`#ffffff` / `surface-container-lowest`): Alternating full-bleed bands and elevated form fields.
+- **Craft Paper** (`#ececec` / `background` + `surface`): Page background with the dotted craft-paper texture. Do **not** rename this craft-paper surface to “white.”
+- **Page White** (`#ffffff` / `surface-container-lowest`): Alternating full-bleed bands and elevated form fields. The tokenized equivalent of white page bands — use `bg-surface-container-lowest` / `var(--color-surface-container-lowest)`, **not** raw Tailwind `bg-white`.
 - **Cool Elevators** (`#f4f6f7` → `#dde2e6`): Nested surfaces and chip fills on white bands.
 - **Ink** (`#232323`) / **Muted ink** (`#41484e`): Primary and secondary text.
 - **Quiet borders** (`#b8c4cb` outline-variant, `#5f717c` outline): Separators — never brand-blue rules for structure.
@@ -165,13 +173,16 @@ A reduced Material-like palette: one brand blue shared with the illustrations, c
 
 **The Quiet Border Rule.** Structural lines use outline neutrals, not primary blue.
 
+**The Lab Mint Contract Rule.** Lab mint exists only for the Lab link accent. Use `--color-lab-mint` / `--color-lab-mint-deep` (or the named tokens), never as a general brand or decorative fill.
+
 ## Typography
 
 **Display/Headline Font:** Plus Jakarta Sans (ui-sans-serif, system-ui)
 **Body Font:** Be Vietnam Pro (ui-sans-serif, system-ui)
 **Label Font:** Bricolage Grotesque (ui-sans-serif, system-ui)
+**Mono Font:** System mono stack — `ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace` (code only)
 
-**Character:** Confident rounded sans for titles, readable workhorse for explanation, slightly quirky label face for nav and controls — sketchbook energy without novelty fonts.
+**Character:** Confident rounded sans for titles, readable workhorse for explanation, slightly quirky label face for nav and controls — sketchbook energy without novelty fonts. Inline code on competitive-programming pages uses the system mono stack so algorithms stay scannable without importing a decorative monospace face.
 
 ### Hierarchy
 - **Headline XL** (800, 40px, 1.2, −0.02em): Page heroes.
@@ -180,22 +191,23 @@ A reduced Material-like palette: one brand blue shared with the illustrations, c
 - **Body LG** (400, 18px, 1.6): Lead paragraphs under heroes and steps.
 - **Body MD** (400, 16px, 1.6): Default reading measure; keep lines comfortable (~65ch max where constrained).
 - **Label MD** (600, 14px, 1.4, 0.05em): Nav, buttons, chips, Lab link — the UI voice.
+- **Mono** (system stack, ~0.92em relative to body on competitive-programming pages): Inline `<code>` only — not UI chrome, not headlines.
 
-Self-hosted via Fontsource (latin + latin-ext). Do not load Google Fonts or other third-party font CDNs.
+Self-hosted via Fontsource (latin + latin-ext) for the three UI faces. Do not load Google Fonts or other third-party font CDNs. Mono stays on the platform stack (no remote mono CDN).
 
 ### Named Rules
-**The Three-Face Rule.** Headlines → Plus Jakarta; reading → Be Vietnam Pro; chrome/UI → Bricolage. Do not invent a fourth family for decoration.
+**The Three-Face (+ Code Mono) Rule.** Three UI faces remain: Headlines → Plus Jakarta; reading → Be Vietnam Pro; chrome/UI → Bricolage. Mono is a fourth specialized role for code only (system `ui-monospace` stack on competitive-programming pages). Do not invent additional families for decoration — and do use mono for code.
 
 ## Layout
 
-Content lives in a centered column (`max-w-7xl`) with horizontal page margin (`32px` / `px-margin`). Vertical rhythm uses the spacing scale (`sm` 12 → `xl` 80). Home and long pages alternate **craft-paper** and **white** full-bleed bands; step sections use a 1-col → 2-col (image/body) grid from `lg` (1024px), with optional reverse columns.
+Content lives in a centered column (`max-w-7xl`) with horizontal page margin (`32px` / `px-margin`). Vertical rhythm uses the spacing scale (`sm` 12 → `xl` 80). Home and long pages alternate **craft-paper** and **Page White** full-bleed bands; step sections use a 1-col → 2-col (image/body) grid from `lg` (1024px), with optional reverse columns.
 
 Fixed chrome nav (`z-50`) requires generous top padding on `<main>` (`pt-32`) and `scroll-mt-*` on in-page targets. Timeline on home may horizontal-scroll on small viewports; prefer equal step columns over card grids.
 
 Breakpoints in use: `sm` 640px, `md` 768px, `lg` 1024px.
 
 ### Named Rules
-**The Band Alternation Rule.** Long pages breathe by alternating craft-paper and white full-bleed bands — not by stacking cards.
+**The Band Alternation Rule.** Long pages breathe by alternating craft-paper (`background` / `surface` `#ececec`) and Page White (`surface-container-lowest` `#ffffff`) full-bleed bands — not by stacking cards. White bands use the surface-system white token (`bg-surface-container-lowest` / `var(--color-surface-container-lowest)`), not raw Tailwind `bg-white`. Craft-paper `surface` stays `#ececec`; do not rename it to white.
 
 ## Elevation & Depth
 
@@ -236,7 +248,7 @@ Playful and clear: full pills, thick quiet borders, wobble kept light.
 - When a bordered panel appears (language menu, FAQ patterns elsewhere), use surface-container-lowest + outline-variant border — not heavy shadow stacks.
 
 ### Inputs / Fields
-- **Style:** Full-pill email field, white fill, `border-2` outline-variant, body type.
+- **Style:** Full-pill email field, Page White fill (`surface-container-lowest`), `border-2` outline-variant, body type.
 - **Focus:** Border shifts to primary; keep a clear focus ring.
 - **Error / success:** Error and secondary/tertiary text in the live region under the form — not colored field chrome by default.
 
@@ -244,26 +256,31 @@ Playful and clear: full pills, thick quiet borders, wobble kept light.
 - Fixed Contest Blue chrome bar, white logo wordmark, label-md links.
 - Active desktop link: bottom border on chrome; mobile: left border + panel.
 - Language and menu toggles: icon buttons on chrome; menus escape to light surface panels.
-- **Lab link (chrome):** Pill with translucent white border; mint flask accent (`#7dffc4`); external target.
+- **Lab link (chrome):** Pill with translucent white border; Lab Mint flask accent via `--color-lab-mint`; external target. Surface variant uses `--color-lab-mint-deep` for the flask on Page White.
 
 ### Signature: Contest step section
-Image + title + accent tagline + body + meta chips + optional details `<details>`. Illustrations from `src/assets/steps/` are mandatory journey markers — do not replace with generic stock.
+Image + title + accent tagline + body + meta chips + optional details `<details>`. Illustrations from `src/assets/steps/` are mandatory journey markers — do not replace with generic stock. Optional `whiteBand` should paint Page White via `surface-container-lowest`, not raw `bg-white`.
 
 ### Signature: Craft-paper body
-`.craft-paper` dotted + faint line texture on the page background; white bands interrupt it for resting the eye.
+`.craft-paper` dotted + faint line texture on the page background; Page White bands (`surface-container-lowest`) interrupt it for resting the eye.
+
+### Signature: Inline code (competitive programming)
+Body copy may include `<code>` set in the `mono` stack at ~0.92em. Do not style code with label or headline faces.
 
 ## Do's and Don'ts
 
 ### Do:
 - **Do** keep Contest Blue as the sole dominant brand accent and match illustration blue.
-- **Do** alternate craft-paper and white bands on long pages.
+- **Do** alternate craft-paper (`background`/`surface`) and Page White (`surface-container-lowest`) bands on long pages — use the surface token, not raw `bg-white`.
 - **Do** use full-pill CTAs/inputs and quiet 2px borders.
 - **Do** gate motion behind `prefers-reduced-motion: no-preference`.
 - **Do** preserve mascot step art and beOI logos as identity assets.
+- **Do** use `var(--color-lab-mint)` / `var(--color-lab-mint-deep)` for Lab accents, and the system `mono` stack for code.
 
 ### Don't:
 - **Don't** make it feel like corporate SaaS, a paid product funnel, or dark cyber UI.
 - **Don't** tip into toddler-cartoon chaos (overuse of wobble, stickers, or rainbow accents).
-- **Don't** invent a fourth font family or load remote font CDNs.
+- **Don't** invent an extra decorative UI font family or load remote font CDNs (mono for code is the only specialized exception).
 - **Don't** use error red or Lab mint as general decoration.
 - **Don't** default to card grids with layered shadows for content that belongs in open bands.
+- **Don't** paint white bands with raw `bg-white` when `bg-surface-container-lowest` is the tokenized Page White.
