@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
@@ -52,14 +53,11 @@ const contestSteps = getContestSteps('nl');
                   class="absolute left-1/2 -translate-x-1/2"
                   style={`top: ${step.canvasTop}; width: ${step.canvasWidth}; aspect-ratio: ${step.image.width} / ${step.image.height};`}
                 >
-                  <img
-                    src={step.image.src}
+                  <Image
+                    src={step.image}
                     alt=""
-                    width={step.image.width}
-                    height={step.image.height}
                     class="w-full h-full object-contain"
                     loading="eager"
-                    decoding="async"
                   />
                 </div>
               </div>
