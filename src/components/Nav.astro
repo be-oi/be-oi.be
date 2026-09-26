@@ -49,17 +49,18 @@ function isMainActive(match: string, exact = false) {
 ---
 <nav class="fixed top-0 left-0 w-full z-50 bg-chrome backdrop-blur-sm border-b-2 border-on-chrome/20">
   <div class="flex justify-between items-center w-full px-margin py-sm max-w-7xl mx-auto gap-sm">
-    <a href={`${base}/`} class="flex items-center gap-sm shrink-0">
+    <a href={`${base}/`} class="flex items-center gap-sm shrink-0" aria-label="beOI">
       <img
         src="/img/logo-beoi-white-80.png"
         srcset="/img/logo-beoi-white-80.png 80w, /img/logo-beoi-white.png 280w"
         sizes="40px"
-        alt="beOI"
+        alt=""
         class="h-10 w-10 object-contain"
         width="40"
         height="40"
+        decoding="async"
       />
-      <span class="font-headline text-headline-md text-on-chrome tracking-tight hidden sm:inline">beOI</span>
+      <span class="font-headline text-headline-md text-on-chrome tracking-tight hidden sm:inline" aria-hidden="true">beOI</span>
     </a>
 
     <div class="hidden md:flex flex-1 min-w-0 flex-wrap items-center justify-center gap-x-3 gap-y-1 lg:gap-x-gutter">
