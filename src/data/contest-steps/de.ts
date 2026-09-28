@@ -42,7 +42,7 @@ export const contestStepsDe: ContestStep[] = [
     imageAlt: 'Halb Roboter halb Mensch-Maskottchen neben Wegweisern Round 1, 2 und 3',
     title: 'Qualifikationsrunden',
     shortTitle: 'Qualifikationsrunden',
-    teaser: ['Basisprogrammieren.', 'Kurze Online-Runden.'],
+    teaser: ['Basisprogrammieren.', 'Drei Online-Runden.'],
     canvasTop: '18%',
     canvasWidth: '100%',
     gridColumn: 3,
@@ -50,7 +50,7 @@ export const contestStepsDe: ContestStep[] = [
     description:
       'Drei unabhängige Online-Runden, die du nehmen kannst, wann du willst, eine pro Monat. Jede prüft einfach Grundkonzepte für deine Altersgruppe — Wissen, das du in den nächsten Phasen brauchst. Eine bestandene Runde reicht zur Qualifikation. Nutze jede Runde als Lernchance. Es gibt keine Rangliste: du brauchst eine Zielpunktzahl, um weiterzukommen.',
     tags: [
-      { kind: 'duration', label: 'Dauer', value: 'je 40 Min.' },
+      { kind: 'duration', label: 'Dauer', value: 'Demnächst' },
       { kind: 'timing', label: 'Zeitpunkt', value: 'Dez., Jan., Feb.' },
       { kind: 'location', label: 'Ort', value: 'Schule oder Zuhause' },
       { kind: 'code', label: 'Code', value: 'Blockly, Python' },

@@ -42,7 +42,7 @@ export const contestStepsNl: ContestStep[] = [
     imageAlt: 'Half robot half mens-mascotte naast wegwijzers Round 1, 2 en 3',
     title: 'Kwalificatierondes',
     shortTitle: 'Kwalificatierondes',
-    teaser: ['Basis programmeren.', 'Korte online rondes.'],
+    teaser: ['Basis programmeren.', 'Drie online rondes.'],
     canvasTop: '18%',
     canvasWidth: '100%',
     gridColumn: 3,
@@ -50,7 +50,7 @@ export const contestStepsNl: ContestStep[] = [
     description:
       'Drie onafhankelijke online rondes die je wanneer je wilt kan afleggen, één per maand. Elke ronde toetst eenvoudig de basisconcepten voor jouw leeftijdscategorie — kennis die je nodig hebt in de volgende fases. Slagen in één enkele ronde volstaat om te kwalificeren. Gebruik elke ronde als leerkans. Er is geen rangschikking: je hebt een doelscore nodig om door te gaan.',
     tags: [
-      { kind: 'duration', label: 'Duur', value: '40 min per ronde' },
+      { kind: 'duration', label: 'Duur', value: 'Binnenkort' },
       { kind: 'timing', label: 'Timing', value: 'dec, jan, feb' },
       { kind: 'location', label: 'Locatie', value: 'School of thuis' },
       { kind: 'code', label: 'Code', value: 'Blockly, Python' },

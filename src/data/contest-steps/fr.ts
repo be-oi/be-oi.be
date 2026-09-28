@@ -42,7 +42,7 @@ export const contestStepsFr: ContestStep[] = [
     imageAlt: 'Mascotte mi-robot mi-humain à côté de panneaux Round 1, 2 et 3',
     title: 'Qualifications',
     shortTitle: 'Qualifications',
-    teaser: ['Programmation de base.', 'Courtes épreuves en ligne.'],
+    teaser: ['Programmation de base.', 'Trois épreuves en ligne.'],
     canvasTop: '18%',
     canvasWidth: '100%',
     gridColumn: 3,
@@ -50,7 +50,7 @@ export const contestStepsFr: ContestStep[] = [
     description:
       'Trois épreuves en ligne indépendantes que vous pouvez passer quand vous le souhaitez, une par mois. Chacune vérifie simplement les notions de base pour votre catégorie d’âge — des connaissances dont vous aurez besoin aux étapes suivantes. Réussir une seule épreuve suffit pour se qualifier. Profitez de chaque épreuve pour apprendre. Il n’y a pas de classement\u00A0: il faut atteindre un score cible pour avancer.',
     tags: [
-      { kind: 'duration', label: 'Durée', value: '40 min chacune' },
+      { kind: 'duration', label: 'Durée', value: 'À venir' },
       { kind: 'timing', label: 'Calendrier', value: 'déc, janv, fév' },
       { kind: 'location', label: 'Lieu', value: 'École ou domicile' },
       { kind: 'code', label: 'Code', value: 'Blockly, Python' },
