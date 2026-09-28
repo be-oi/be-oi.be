@@ -25,7 +25,7 @@ export const contestStepsDe: ContestStep[] = [
     gridColumn: 1,
     tagline: 'Noch kein Programmieren — völlig optional',
     description:
-      'Das ist die frühere Qualifikationsrunde (vor 2027), ohne Programmieraufgaben. Eine lockere erste Berührung mit computationalem Denken durch Logikrätsel — kein Programmieren, nur Denkvermögen. Völlig optional: du darfst sie überspringen; Ergebnisse entscheiden nie, wer weiterkommt. Ideal für jüngere Schülerinnen und Schüler und alle, die neugierig auf Problemlösen sind.',
+      'Das ist die frühere Qualifikationsrunde, ohne Programmieraufgaben. Eine lockere erste Berührung mit computationalem Denken durch Logikrätsel — kein Programmieren, nur Denkvermögen. Völlig optional: du darfst sie überspringen; Ergebnisse entscheiden nie, wer weiterkommt. Ideal für jüngere Schülerinnen und Schüler und alle, die neugierig auf Problemlösen sind.',
     tags: [
       { kind: 'duration', label: 'Dauer', value: '45 Min.' },
       { kind: 'timing', label: 'Zeitpunkt', value: 'Ende Nov.' },

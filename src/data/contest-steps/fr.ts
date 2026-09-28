@@ -25,7 +25,7 @@ export const contestStepsFr: ContestStep[] = [
     gridColumn: 1,
     tagline: 'Pas encore de programmation — entièrement facultatif',
     description:
-      'Il s’agit de l’ancienne épreuve de qualification (avant 2027), sans les tâches de programmation. Une première approche ludique de la pensée computationnelle à travers des énigmes logiques — pas de programmation, juste la réflexion. Entièrement facultatif\u00A0: vous pouvez la passer ; les scores ne déterminent jamais qui passe à l’étape suivante. Idéal pour les plus jeunes et toute personne curieuse de la résolution de problèmes.',
+      'Il s’agit de l’ancienne épreuve de qualification, sans les tâches de programmation. Une première approche ludique de la pensée computationnelle à travers des énigmes logiques — pas de programmation, juste la réflexion. Entièrement facultatif\u00A0: vous pouvez la passer ; les scores ne déterminent jamais qui passe à l’étape suivante. Idéal pour les plus jeunes et toute personne curieuse de la résolution de problèmes.',
     tags: [
       { kind: 'duration', label: 'Durée', value: '45 min' },
       { kind: 'timing', label: 'Calendrier', value: 'fin nov.' },

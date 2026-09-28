@@ -25,7 +25,7 @@ export const contestStepsEn: ContestStep[] = [
     gridColumn: 1,
     tagline: 'No coding yet — entirely optional',
     description:
-      'This is the former qualification round (before 2027), without the programming tasks. A light-hearted first touch with computational thinking through logic puzzles — no programming, just brain power. Entirely optional: you may skip it; scores never decide who advances. Perfect for younger students and anyone curious about problem-solving.',
+      'This is the former qualification round, without the programming tasks. A light-hearted first touch with computational thinking through logic puzzles — no programming, just brain power. Entirely optional: you may skip it; scores never decide who advances. Perfect for younger students and anyone curious about problem-solving.',
     tags: [
       { kind: 'duration', label: 'Duration', value: '45 min' },
       { kind: 'timing', label: 'Timing', value: 'end-Nov' },

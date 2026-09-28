@@ -25,7 +25,7 @@ export const contestStepsNl: ContestStep[] = [
     gridColumn: 1,
     tagline: 'Nog geen programmeren — volledig optioneel',
     description:
-      'Dit is de voormalige kwalificatieronde (vóór 2027), zonder programmeeropgaven. Een luchtige eerste kennismaking met computationeel denken via logica-raadsels — geen programmeren, enkel hersenkracht. Volledig optioneel: je mag deze ronde overslaan; scores bepalen nooit wie doorgaat. Ideaal voor jongere leerlingen en iedereen die nieuwsgierig is naar probleemoplossen.',
+      'Dit is de voormalige kwalificatieronde, zonder programmeeropgaven. Een luchtige eerste kennismaking met computationeel denken via logica-raadsels — geen programmeren, enkel hersenkracht. Volledig optioneel: je mag deze ronde overslaan; scores bepalen nooit wie doorgaat. Ideaal voor jongere leerlingen en iedereen die nieuwsgierig is naar probleemoplossen.',
     tags: [
       { kind: 'duration', label: 'Duur', value: '45 min' },
       { kind: 'timing', label: 'Timing', value: 'eind nov.' },
