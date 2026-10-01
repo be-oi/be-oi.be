@@ -5,7 +5,7 @@ This file describes how to work on the be-oi.be website so automated agents and 
 ## Project summary
 
 - **What**: Public static website for beOI (Belgian Olympiad in Informatics).
-- **Stack**: [Astro](https://astro.build/) (static site generator), npm, Node.js 22+.
+- **Stack**: [Astro](https://astro.build/) (static site generator), npm, Node.js **22.12.0+** (Astro 7 drops Node 18/20).
 - **Hosting**: S3 bucket `be-oi.be` (region `eu-central-1`) behind CloudFront distribution `E1HFWB6I0WMJ8D`. Public URL: `https://www.be-oi.be` (`site` in `astro.config.mjs`).
 - **Languages**: Astro locales `fr`, `nl`, `en`, `de` (all URL-prefixed). **All four locales ship real page content** under `src/pages/fr/`, `src/pages/nl/`, `src/pages/en/`, and `src/pages/de/`. Root `/` is a language picker (Nederlands / Français / Deutsch / English); browsers whose language list includes `fr`, `nl`, or `de` are redirected client-side to the matching locale.
 

@@ -5,6 +5,11 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   site: 'https://www.be-oi.be',
 
+  // Astro 7 defaults to JSX whitespace rules (`'jsx'`), which strip spaces
+  // between adjacent inline tags split across lines (e.g. `</strong>\nist\n<strong>`
+  // → `</strong>ist<strong>`). Keep HTML-aware compression so copy stays readable.
+  compressHTML: true,
+
   i18n: {
     defaultLocale: 'fr',
     locales: ['fr', 'nl', 'en', 'de'],

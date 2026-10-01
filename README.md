@@ -10,9 +10,9 @@ Built with [Astro](https://astro.build/).
 
 ## Prerequisites
 
-You only need **Node.js** (version 22 or newer recommended).
+You only need **Node.js** **22.12.0 or newer** (Astro 7 requirement).
 
-1. Download and install Node.js from <https://nodejs.org/> (the LTS version is fine).
+1. Download and install Node.js 22 from <https://nodejs.org/> (Current or the newest 22.x LTS). Node 20 is not supported.
 2. Open a terminal and check that it works:
 
 ```bash
@@ -20,7 +20,7 @@ node --version
 npm --version
 ```
 
-Both commands should print a version number.
+`node --version` should print `v22.12.0` or higher.
 
 ## First-time setup
 
