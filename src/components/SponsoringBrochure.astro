@@ -1,0 +1,45 @@
+---
+import { Image } from 'astro:assets';
+import { resolveLocale } from '../data/ui-i18n';
+import { sponsoringBrochure } from '../data/sponsoring';
+
+interface Props {
+  lang: string;
+  /** Accessible name for the link (also used as image alt). */
+  label: string;
+  /** Short visible caption under the thumbnail. */
+  caption: string;
+}
+
+const { lang, label, caption } = Astro.props;
+const brochure = sponsoringBrochure(resolveLocale(lang));
+---
+<a
+  href={brochure.href}
+  target="_blank"
+  rel="noopener noreferrer"
+  class="sponsoring-brochure group inline-flex flex-col items-center gap-sm no-underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
+  aria-label={label}
+>
+  <span
+    class="sponsoring-brochure__frame relative block wobbly-rotation-1 stamp-shadow bg-surface-container-lowest border-2 border-outline-variant/50 overflow-hidden motion-safe:transition-transform motion-safe:duration-300 motion-safe:group-hover:-translate-y-1 motion-safe:group-hover:rotate-0"
+  >
+    <Image
+      src={brochure.image}
+      alt=""
+      width={240}
+      densities={[1, 2]}
+      class="block w-40 sm:w-48 h-auto"
+      loading="lazy"
+    />
+    <span
+      class="absolute bottom-2 right-2 font-label text-[0.65rem] tracking-wide uppercase px-2 py-0.5 rounded bg-primary text-on-primary shadow-sm"
+      aria-hidden="true"
+    >
+      PDF
+    </span>
+  </span>
+  <span class="font-label text-label-md text-primary group-hover:underline underline-offset-2">
+    {caption}
+  </span>
+</a>

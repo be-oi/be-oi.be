@@ -3,12 +3,14 @@ import { Image } from 'astro:assets';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Nav from '../../../components/Nav.astro';
 import Footer from '../../../components/Footer.astro';
+import SponsoringBrochure from '../../../components/SponsoringBrochure.astro';
 import {
   memberLogoHeight,
   members,
   supporterLogoHeight,
   supporters,
 } from '../../../data/about';
+import { sponsorsEmail } from '../../../data/sponsoring';
 
 const titlePage = 'font-headline text-headline-xl text-on-surface';
 const titleSection = 'font-headline text-headline-lg text-on-surface';
@@ -85,13 +87,18 @@ const titleSubsection = 'font-headline text-headline-md text-on-surface';
             Sponsors
           </h3>
           <p class="text-body-md font-body text-on-surface-variant mb-md">
-            We hebben momenteel geen sponsors.
-            Geïnteresseerd om deze editie te steunen, of een prijs aan te bieden?
+            Om deze editie te steunen, mail naar
             {' '}
-            <a href="mailto:sponsors@be-oi.be" class="text-primary font-semibold hover:underline">
-              Neem contact op
+            <a href={`mailto:${sponsorsEmail}`} class="text-primary font-semibold hover:underline">
+              {sponsorsEmail}
             </a>
+            — de formules staan in onze brochure:
           </p>
+          <SponsoringBrochure
+            lang="nl"
+            label="Download de sponsoringbrochure (PDF)"
+            caption="Sponsoringbrochure 2026–2027"
+          />
         </div>
       </div>
     </section>

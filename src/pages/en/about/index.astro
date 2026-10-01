@@ -3,12 +3,14 @@ import { Image } from 'astro:assets';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Nav from '../../../components/Nav.astro';
 import Footer from '../../../components/Footer.astro';
+import SponsoringBrochure from '../../../components/SponsoringBrochure.astro';
 import {
   memberLogoHeight,
   members,
   supporterLogoHeight,
   supporters,
 } from '../../../data/about';
+import { sponsorsEmail } from '../../../data/sponsoring';
 
 // Heading scale shared across the page so levels stay distinct.
 // h1 page · h2 section · h3 subsection
@@ -93,13 +95,18 @@ const titleSubsection = 'font-headline text-headline-md text-on-surface';
             Sponsors
           </h3>
           <p class="text-body-md font-body text-on-surface-variant mb-md">
-            We do not currently have sponsors.
-            Interested in supporting this edition, or offering a prize?
+            To support this edition, write to us at
             {' '}
-            <a href="mailto:sponsors@be-oi.be" class="text-primary font-semibold hover:underline">
-              Contact us
+            <a href={`mailto:${sponsorsEmail}`} class="text-primary font-semibold hover:underline">
+              {sponsorsEmail}
             </a>
+            — our packages are spelled out in the brochure:
           </p>
+          <SponsoringBrochure
+            lang="en"
+            label="Download the sponsorship brochure (PDF)"
+            caption="Sponsorship brochure 2026–2027"
+          />
         </div>
       </div>
     </section>
