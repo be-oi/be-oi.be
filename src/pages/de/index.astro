@@ -4,6 +4,7 @@ import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 import ContestTimeline from '../../components/ContestTimeline.astro';
 import StepSection from '../../components/StepSection.astro';
+import ContestPoster from '../../components/ContestPoster.astro';
 import MailingListForm from '../../components/MailingListForm.astro';
 import { getContestSteps } from '../../data/contest-steps';
 
@@ -61,6 +62,27 @@ const contestSteps = getContestSteps('de');
         />
       ))}
     </div>
+
+    <section
+      id="poster"
+      class="scroll-mt-28 relative bg-surface-container-lowest border-y-2 border-outline-variant/30 py-xl px-margin"
+      aria-labelledby="poster-heading"
+    >
+      <div class="max-w-7xl mx-auto text-center">
+        <h2 id="poster-heading" class="font-headline text-headline-lg text-on-surface mb-sm">
+          Häng beOI an die Wand
+        </h2>
+        <p class="text-body-lg font-body text-on-surface-variant max-w-2xl mx-auto mb-lg text-pretty">
+          Lade das Plakat 2026–2027 herunter, drucke es aus und hänge es in der Schule, im&nbsp;Coder&nbsp;Dojo oder überall dort auf, wo neugierige Köpfe zusammenkommen.
+        </p>
+        <ContestPoster
+          lang="de"
+          label="beOI-Plakat 2026–2027 herunterladen (PDF)"
+          cta="Plakat herunterladen"
+          caption="Format A2 · druckfertiges PDF"
+        />
+      </div>
+    </section>
   </main>
   <Footer lang="de" />
 </BaseLayout>

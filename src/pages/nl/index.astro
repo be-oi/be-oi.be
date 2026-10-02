@@ -4,6 +4,7 @@ import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 import ContestTimeline from '../../components/ContestTimeline.astro';
 import StepSection from '../../components/StepSection.astro';
+import ContestPoster from '../../components/ContestPoster.astro';
 import MailingListForm from '../../components/MailingListForm.astro';
 import { getContestSteps } from '../../data/contest-steps';
 
@@ -61,6 +62,27 @@ const contestSteps = getContestSteps('nl');
         />
       ))}
     </div>
+
+    <section
+      id="poster"
+      class="scroll-mt-28 relative bg-surface-container-lowest border-y-2 border-outline-variant/30 py-xl px-margin"
+      aria-labelledby="poster-heading"
+    >
+      <div class="max-w-7xl mx-auto text-center">
+        <h2 id="poster-heading" class="font-headline text-headline-lg text-on-surface mb-sm">
+          Hang beOI overal op
+        </h2>
+        <p class="text-body-lg font-body text-on-surface-variant max-w-2xl mx-auto mb-lg text-pretty">
+          Download de affiche 2026–2027, print ze uit en hang ze op op school, bij een&nbsp;Coder&nbsp;Dojo of eender waar nieuwsgierige geesten samenkomen.
+        </p>
+        <ContestPoster
+          lang="nl"
+          label="Download de beOI-affiche 2026–2027 (PDF)"
+          cta="Download de affiche"
+          caption="Formaat A2 · PDF klaar om te printen"
+        />
+      </div>
+    </section>
   </main>
   <Footer lang="nl" />
 </BaseLayout>

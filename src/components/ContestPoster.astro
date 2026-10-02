@@ -1,0 +1,52 @@
+---
+import { Image } from 'astro:assets';
+import { resolveLocale } from '../data/ui-i18n';
+import { contestPoster } from '../data/posters';
+
+interface Props {
+  lang: string;
+  /** Accessible name for the link (also used as image alt). */
+  label: string;
+  /** Primary CTA text under the preview. */
+  cta: string;
+  /** Short meta line under the CTA (format / year). */
+  caption: string;
+}
+
+const { lang, label, cta, caption } = Astro.props;
+const poster = contestPoster(resolveLocale(lang));
+---
+<a
+  href={poster.href}
+  target="_blank"
+  rel="noopener noreferrer"
+  class="contest-poster group inline-flex flex-col items-center gap-md no-underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
+  aria-label={label}
+>
+  <span
+    class="contest-poster__frame relative block wobbly-rotation-1 stamp-shadow bg-surface-container-lowest border-2 border-outline-variant/50 overflow-hidden motion-safe:transition-transform motion-safe:duration-300 motion-safe:group-hover:-translate-y-1.5 motion-safe:group-hover:rotate-0"
+  >
+    <Image
+      src={poster.image}
+      alt=""
+      width={360}
+      densities={[1, 2]}
+      class="block w-56 sm:w-72 md:w-80 h-auto"
+      loading="lazy"
+    />
+    <span
+      class="absolute bottom-3 right-3 font-label text-xs tracking-wide uppercase px-2.5 py-1 rounded bg-primary text-on-primary"
+      aria-hidden="true"
+    >
+      PDF
+    </span>
+  </span>
+  <span
+    class="inline-flex items-center justify-center min-h-11 font-label text-label-md tracking-wide px-6 py-2.5 rounded-full bg-primary text-on-primary border-2 border-primary motion-safe:transition-colors group-hover:bg-primary/90"
+  >
+    {cta}
+  </span>
+  <span class="font-label text-sm text-on-surface-variant">
+    {caption}
+  </span>
+</a>

@@ -4,6 +4,7 @@ import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 import ContestTimeline from '../../components/ContestTimeline.astro';
 import StepSection from '../../components/StepSection.astro';
+import ContestPoster from '../../components/ContestPoster.astro';
 import MailingListForm from '../../components/MailingListForm.astro';
 import { getContestSteps } from '../../data/contest-steps';
 
@@ -61,6 +62,27 @@ const contestSteps = getContestSteps('en');
         />
       ))}
     </div>
+
+    <section
+      id="poster"
+      class="scroll-mt-28 relative bg-surface-container-lowest border-y-2 border-outline-variant/30 py-xl px-margin"
+      aria-labelledby="poster-heading"
+    >
+      <div class="max-w-7xl mx-auto text-center">
+        <h2 id="poster-heading" class="font-headline text-headline-lg text-on-surface mb-sm">
+          Put beOI on the wall
+        </h2>
+        <p class="text-body-lg font-body text-on-surface-variant max-w-2xl mx-auto mb-lg text-pretty">
+          Download the 2026–2027 poster, print it, and hang it at school, a&nbsp;Coder&nbsp;Dojo, or anywhere curious minds gather.
+        </p>
+        <ContestPoster
+          lang="en"
+          label="Download the beOI 2026–2027 poster (PDF)"
+          cta="Download the poster"
+          caption="A2 format · print-ready PDF"
+        />
+      </div>
+    </section>
   </main>
   <Footer lang="en" />
 </BaseLayout>
