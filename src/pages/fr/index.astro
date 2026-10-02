@@ -78,7 +78,15 @@ const contestSteps = getContestSteps('fr');
           label="Télécharger l’affiche beOI 2026–2027 (PDF)"
           cta="Télécharger l’affiche"
           caption="Format A2 · PDF prêt à imprimer"
-        />
+        >
+          <a
+            slot="secondary"
+            href="/fr/poster/"
+            class="inline-flex items-center justify-center min-h-11 font-label text-label-md tracking-wide px-6 py-2.5 rounded-full bg-surface-container-lowest text-primary border-2 border-primary no-underline hover:bg-primary/5 motion-safe:transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+          >
+            Explication de l’affiche
+          </a>
+        </ContestPoster>
       </div>
     </section>
   </main>

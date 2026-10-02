@@ -80,7 +80,15 @@ const contestSteps = getContestSteps('nl');
           label="Download de beOI-affiche 2026–2027 (PDF)"
           cta="Download de affiche"
           caption="Formaat A2 · PDF klaar om te printen"
-        />
+        >
+          <a
+            slot="secondary"
+            href="/nl/poster/"
+            class="inline-flex items-center justify-center min-h-11 font-label text-label-md tracking-wide px-6 py-2.5 rounded-full bg-surface-container-lowest text-primary border-2 border-primary no-underline hover:bg-primary/5 motion-safe:transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+          >
+            Uitleg bij de affiche
+          </a>
+        </ContestPoster>
       </div>
     </section>
   </main>

@@ -1,0 +1,1096 @@
+---
+/**
+ * Illustrated Königsberg map for the poster explainer.
+ * Without JS: static figure. With JS: try-it-yourself walk.
+ *
+ * All text comes from `getKoenigsbergMapUi(lang)`; geometry is language-independent.
+ * Geometry matches the graph figure on the same page:
+ * A (300,75) north bank, B (190,215) Kneiphof, C (440,215) east island, D (300,355) south bank.
+ */
+import { resolveLocale } from '../data/ui-i18n';
+import {
+  demoWalk,
+  formatTemplate,
+  getKoenigsbergMapUi,
+  mapBridges,
+  mapLandmasses,
+  totalBridges,
+} from '../data/poster-explainer';
+
+interface Props {
+  lang: string;
+}
+
+const locale = resolveLocale(Astro.props.lang);
+const ui = getKoenigsbergMapUi(locale);
+
+const ruleWobble = ['wobbly-rotation-1', 'wobbly-rotation-2', 'wobbly-rotation-3'] as const;
+
+/** Read by the client script (progressive enhancement). */
+const clientData = JSON.stringify({ ui, totalBridges, demoWalk });
+const initialCount = formatTemplate(ui.panel.bridgesCrossed, { n: 0, total: totalBridges });
+---
+
+<div class="koenigsberg" data-koenigsberg data-ui={clientData}>
+  {/* Progressive enhancement: revealed by script */}
+  <div class="panel" data-panel hidden>
+    <div class="status" aria-live="polite" data-status>
+      <p class="status-count" data-count>{initialCount}</p>
+      <p class="status-msg" data-msg>{ui.panel.pickStart}</p>
+    </div>
+    <div class="actions">
+      <button type="button" class="btn btn-secondary" data-undo disabled>{ui.panel.undo}</button>
+      <button type="button" class="btn btn-secondary" data-reset disabled>{ui.panel.reset}</button>
+      <button type="button" class="btn btn-primary" data-demo>{ui.panel.watchAttempt}</button>
+    </div>
+    <p class="teaser" data-teaser hidden>
+      {ui.panel.teaser}
+    </p>
+  </div>
+
+  <div class="map-wrap">
+    <svg
+      viewBox="0 0 600 430"
+      role="img"
+      aria-labelledby="koenigsberg-title koenigsberg-desc"
+      class="map-svg"
+      data-map
+    >
+      <title id="koenigsberg-title">{ui.svgTitle}</title>
+      <desc id="koenigsberg-desc">{ui.svgDesc}</desc>
+
+      <defs>
+        <pattern
+          id="koenigsberg-hatch"
+          patternUnits="userSpaceOnUse"
+          width="8"
+          height="8"
+          patternTransform="rotate(45)"
+        >
+          <line
+            x1="0"
+            y1="0"
+            x2="0"
+            y2="8"
+            stroke="var(--bridge-red)"
+            stroke-width="1.5"
+            opacity="0.55"
+          ></line>
+        </pattern>
+        <filter id="koenigsberg-soft" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-opacity="0.12"></feDropShadow>
+        </filter>
+      </defs>
+
+      {/* Background paper */}
+      <rect width="600" height="430" fill="var(--map-paper)" rx="12"></rect>
+
+      {/* River Pregel — horizontal band with a split around the islands */}
+      <path
+        class="river"
+        d="M0 120
+           C80 100, 140 105, 200 130
+           C240 148, 260 155, 300 155
+           C360 155, 400 140, 460 145
+           C520 150, 560 160, 600 155
+           L600 290
+           C560 300, 520 295, 460 285
+           C400 275, 360 275, 300 275
+           C260 275, 240 282, 200 300
+           C140 325, 80 330, 0 310
+           Z"
+      ></path>
+      {/* Subtle river current lines */}
+      <path
+        class="river-line"
+        d="M20 180 C120 165, 220 175, 300 175 C400 175, 500 185, 580 180"
+        fill="none"
+      ></path>
+      <path
+        class="river-line"
+        d="M20 240 C120 255, 220 245, 300 245 C400 245, 500 235, 580 250"
+        fill="none"
+      ></path>
+
+      {/* North bank A */}
+      <path
+        class="land"
+        data-land="A"
+        d="M20 20
+           C100 8, 200 12, 300 18
+           C420 25, 520 15, 580 22
+           L580 95
+           C500 110, 400 100, 300 95
+           C200 90, 100 100, 20 90
+           Z"
+        filter="url(#koenigsberg-soft)"
+      ></path>
+
+      {/* South bank D */}
+      <path
+        class="land"
+        data-land="D"
+        d="M20 340
+           C100 325, 200 330, 300 335
+           C420 340, 520 330, 580 338
+           L580 410
+           C500 420, 400 415, 300 412
+           C200 408, 100 418, 20 410
+           Z"
+        filter="url(#koenigsberg-soft)"
+      ></path>
+
+      {/* Central island B (Kneiphof) */}
+      <ellipse
+        class="land island"
+        data-land="B"
+        cx="190"
+        cy="215"
+        rx="52"
+        ry="48"
+        filter="url(#koenigsberg-soft)"
+      ></ellipse>
+
+      {/* Eastern island C */}
+      <ellipse
+        class="land island"
+        data-land="C"
+        cx="440"
+        cy="215"
+        rx="48"
+        ry="44"
+        filter="url(#koenigsberg-soft)"
+      ></ellipse>
+
+      {/* Bridges */}
+      {
+        mapBridges.map((br) => (
+          <g
+            class="bridge"
+            data-bridge={br.n}
+            data-a={br.a}
+            data-b={br.b}
+            role="presentation"
+            aria-label={ui.bridgeAria[br.n]}
+          >
+            {/* Wide invisible hit area (≥44px touch target) */}
+            <path class="bridge-hit" d={br.d} fill="none"></path>
+            {/* Hatched deck (poster-style red) */}
+            <path
+              class="bridge-deck"
+              d={br.d}
+              fill="none"
+              stroke="url(#koenigsberg-hatch)"
+            ></path>
+            {/* Outline rails */}
+            <path class="bridge-rail" d={br.d} fill="none"></path>
+            {/* Number badge */}
+            <g class="bridge-badge" transform={`translate(${br.labelX} ${br.labelY})`}>
+              <circle r="14"></circle>
+              <text y="5" text-anchor="middle">{br.n}</text>
+            </g>
+          </g>
+        ))
+      }
+
+      {/* Landmass labels + interactive hotspots */}
+      {
+        mapLandmasses.map((lm) => (
+          <g
+            class="landmass"
+            data-landmass={lm.id}
+            role="presentation"
+          >
+            <circle class="land-hit" cx={lm.cx} cy={lm.cy} r="36"></circle>
+            <circle class="land-badge" cx={lm.cx} cy={lm.cy} r="18"></circle>
+            <text class="land-id" x={lm.cx} y={lm.cy + 6} text-anchor="middle">
+              {lm.id}
+            </text>
+            <text
+              class="land-name"
+              x={lm.labelX}
+              y={lm.labelY}
+              text-anchor={lm.anchor}
+            >
+              {ui.lands[lm.id].label}
+            </text>
+          </g>
+        ))
+      }
+
+      {/* Walker (hidden until start) */}
+      <circle class="walker" data-walker cx="0" cy="0" r="10" visibility="hidden"></circle>
+    </svg>
+  </div>
+
+  <div class="rules-block">
+    <p class="rules-heading" id="koenigsberg-goals-heading">{ui.rules.heading}</p>
+    <ol class="rules" aria-labelledby="koenigsberg-goals-heading">
+      {
+        ui.rules.items.map((r, i) => (
+          <li class:list={['rule', 'stamp-shadow', ruleWobble[i]]}>
+            <span class="rule-step" aria-hidden="true">{i + 1}</span>
+            <span class="rule-icon" aria-hidden="true">{r.icon}</span>
+            <span class="rule-title">{r.title}</span>
+          </li>
+        ))
+      }
+    </ol>
+    <p class="rules-note">{ui.rules.note}</p>
+  </div>
+</div>
+
+<style>
+  .koenigsberg {
+    --bridge-red: #c23b2a;
+    --bridge-red-used: color-mix(in srgb, var(--color-outline) 70%, transparent);
+    --map-paper: var(--color-surface-container-low);
+    --land-fill: #f3e6c8;
+    --land-stroke: color-mix(in srgb, var(--color-tertiary) 55%, #8a6a3a);
+    --river-fill: color-mix(in srgb, var(--color-primary) 22%, #a8c8e8);
+  }
+
+  .map-wrap {
+    background: var(--color-surface-container-low);
+    border: 2px solid color-mix(in srgb, var(--color-outline-variant) 50%, transparent);
+    border-radius: var(--radius);
+    padding: var(--spacing-sm);
+    overflow: hidden;
+  }
+
+  .map-svg {
+    display: block;
+    width: 100%;
+    max-width: 36rem;
+    height: auto;
+    margin-inline: auto;
+    font-family: var(--font-label);
+    touch-action: manipulation;
+  }
+
+  .river {
+    fill: var(--river-fill);
+  }
+
+  .river-line {
+    stroke: color-mix(in srgb, var(--color-primary) 35%, white);
+    stroke-width: 1.5;
+    stroke-dasharray: 6 10;
+    opacity: 0.7;
+  }
+
+  .land {
+    fill: var(--land-fill);
+    stroke: var(--land-stroke);
+    stroke-width: 2;
+    transition: fill 0.2s ease, stroke 0.2s ease;
+  }
+
+  .land.is-current {
+    fill: color-mix(in srgb, var(--color-primary) 12%, var(--land-fill));
+    stroke: var(--color-primary);
+    stroke-width: 2.5;
+  }
+
+  .land.is-start {
+    stroke: var(--color-primary);
+  }
+
+  .land.is-available {
+    cursor: pointer;
+  }
+
+  .land.is-available:hover,
+  .landmass.is-available .land-badge {
+    filter: brightness(1.03);
+  }
+
+  /* Bridges */
+  .bridge-hit {
+    stroke: transparent;
+    stroke-width: 28;
+    stroke-linecap: round;
+    cursor: default;
+  }
+
+  .bridge.is-available .bridge-hit {
+    cursor: pointer;
+  }
+
+  .bridge-deck {
+    stroke-width: 14;
+    stroke-linecap: round;
+    pointer-events: none;
+  }
+
+  .bridge-rail {
+    stroke: var(--bridge-red);
+    stroke-width: 3.5;
+    stroke-linecap: round;
+    pointer-events: none;
+    transition: stroke 0.25s ease, opacity 0.25s ease;
+  }
+
+  .bridge-badge circle {
+    fill: var(--color-surface-container-lowest);
+    stroke: var(--bridge-red);
+    stroke-width: 2;
+    transition: stroke 0.25s ease, fill 0.25s ease;
+  }
+
+  .bridge-badge text {
+    fill: var(--bridge-red);
+    font-weight: 700;
+    font-size: 14px;
+    pointer-events: none;
+    transition: fill 0.25s ease;
+  }
+
+  .bridge.is-used .bridge-rail {
+    stroke: var(--bridge-red-used);
+    stroke-dasharray: 5 4;
+    opacity: 0.55;
+  }
+
+  .bridge.is-used .bridge-deck {
+    opacity: 0.25;
+  }
+
+  .bridge.is-used .bridge-badge circle {
+    stroke: var(--color-outline);
+    fill: var(--color-surface-variant);
+  }
+
+  .bridge.is-used .bridge-badge text {
+    fill: var(--color-on-surface-variant);
+  }
+
+  .bridge.is-available .bridge-rail {
+    stroke-width: 4.5;
+  }
+
+  .bridge.is-available .bridge-badge circle {
+    stroke-width: 2.5;
+    filter: drop-shadow(0 0 0.25rem color-mix(in srgb, var(--bridge-red) 40%, transparent));
+  }
+
+  .bridge.is-available:focus-within .bridge-badge circle,
+  .landmass.is-available:focus-within .land-badge {
+    outline: 3px solid var(--color-primary);
+    outline-offset: 3px;
+  }
+
+  .bridge[aria-disabled='true'] {
+    pointer-events: none;
+  }
+
+  /* Landmass badges */
+  .land-hit {
+    fill: transparent;
+    cursor: default;
+  }
+
+  .landmass.is-available .land-hit {
+    cursor: pointer;
+  }
+
+  .land-badge {
+    fill: var(--color-primary);
+    stroke: var(--color-on-primary);
+    stroke-width: 2;
+    pointer-events: none;
+    transition: fill 0.2s ease, transform 0.2s ease;
+  }
+
+  .landmass.is-current .land-badge {
+    fill: var(--color-tertiary);
+  }
+
+  .land-id {
+    fill: var(--color-on-primary);
+    font-family: var(--font-headline);
+    font-weight: 700;
+    font-size: 18px;
+    pointer-events: none;
+  }
+
+  .land-name {
+    fill: var(--color-on-surface);
+    font-weight: 600;
+    font-size: 13px;
+    pointer-events: none;
+  }
+
+  .walker {
+    fill: var(--color-tertiary);
+    stroke: var(--color-on-tertiary);
+    stroke-width: 2;
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.25));
+    pointer-events: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .walker {
+      transition: none !important;
+    }
+  }
+
+  /* Goals strip */
+  .rules-block {
+    margin-top: var(--spacing-md);
+  }
+
+  .rules-heading {
+    margin: 0 0 0.65rem;
+    text-align: center;
+    font-family: var(--font-headline);
+    font-size: var(--text-headline-md);
+    line-height: var(--text-headline-md--line-height);
+    font-weight: 700;
+    color: var(--color-on-surface);
+    text-wrap: balance;
+  }
+
+  .rules {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-sm);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    counter-reset: none;
+  }
+
+  .rule {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 1rem 0.5rem 0.75rem;
+    text-align: center;
+    background: var(--color-surface-container-lowest);
+    border: 2px solid color-mix(in srgb, var(--color-primary) 28%, var(--color-outline-variant));
+    border-radius: var(--radius);
+  }
+
+  .rule-step {
+    position: absolute;
+    top: 0.4rem;
+    left: 0.45rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.35rem;
+    height: 1.35rem;
+    border-radius: 9999px;
+    background: color-mix(in srgb, var(--color-primary) 12%, transparent);
+    color: var(--color-primary);
+    font-family: var(--font-label);
+    font-size: 0.75rem;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .rule-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.25rem;
+    height: 2.25rem;
+    padding-inline: 0.4rem;
+    border-radius: 9999px;
+    background: var(--color-primary);
+    color: var(--color-on-primary);
+    font-family: var(--font-headline);
+    font-weight: 700;
+    font-size: 0.95rem;
+    line-height: 1;
+  }
+
+  .rule-title {
+    font-family: var(--font-label);
+    font-size: var(--text-label-md);
+    font-weight: 600;
+    letter-spacing: var(--text-label-md--letter-spacing);
+    color: var(--color-on-surface);
+    line-height: 1.3;
+  }
+
+  .rules-note {
+    margin-top: 0.6rem;
+    text-align: center;
+    font-size: var(--text-body-md);
+    color: var(--color-on-surface-variant);
+    font-style: italic;
+  }
+
+  /* Interactive panel — sits above the map */
+  .panel {
+    margin-bottom: var(--spacing-sm);
+    padding: var(--spacing-md);
+    background: color-mix(in srgb, var(--color-primary) 5%, var(--color-surface-container-lowest));
+    border: 2px solid color-mix(in srgb, var(--color-primary) 25%, transparent);
+    border-radius: var(--radius);
+  }
+
+  .panel[hidden] {
+    display: none;
+  }
+
+  .status-count {
+    font-family: var(--font-label);
+    font-size: var(--text-label-md);
+    font-weight: 600;
+    color: var(--color-primary);
+    margin: 0;
+  }
+
+  .status-msg {
+    margin: 0.35rem 0 0;
+    color: var(--color-on-surface);
+    font-size: var(--text-body-md);
+    line-height: 1.5;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: var(--spacing-sm);
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 2.75rem;
+    padding: 0.5rem 1.15rem;
+    border-radius: 9999px;
+    border: 2px solid var(--color-primary);
+    font-family: var(--font-label);
+    font-size: var(--text-label-md);
+    font-weight: 600;
+    letter-spacing: var(--text-label-md--letter-spacing);
+    cursor: pointer;
+    background: transparent;
+    color: var(--color-primary);
+  }
+
+  .btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  .btn-primary {
+    background: var(--color-primary);
+    color: var(--color-on-primary);
+  }
+
+  .btn-primary:hover:not(:disabled) {
+    background: color-mix(in srgb, var(--color-primary) 90%, transparent);
+  }
+
+  .btn-secondary:hover:not(:disabled) {
+    background: color-mix(in srgb, var(--color-primary) 8%, transparent);
+  }
+
+  .teaser {
+    margin: var(--spacing-sm) 0 0;
+    padding-top: var(--spacing-sm);
+    border-top: 1px solid color-mix(in srgb, var(--color-primary) 20%, transparent);
+    font-size: var(--text-body-md);
+    color: var(--color-on-surface-variant);
+    line-height: 1.55;
+  }
+
+  .teaser[hidden] {
+    display: none;
+  }
+
+  @media (max-width: 520px) {
+    .rules {
+      grid-template-columns: 1fr;
+    }
+
+    .rule {
+      flex-direction: row;
+      justify-content: flex-start;
+      text-align: left;
+      padding: 0.65rem 0.85rem 0.65rem 2.4rem;
+    }
+
+    .rule-step {
+      top: 50%;
+      transform: translateY(-50%);
+      left: 0.55rem;
+    }
+
+    .land-name {
+      font-size: 11px;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .btn {
+      transition: background-color 0.2s ease, opacity 0.2s ease;
+    }
+
+    .walker {
+      transition: cx 0.35s ease, cy 0.35s ease;
+    }
+  }
+</style>
+
+<script>
+  type LandId = 'A' | 'B' | 'C' | 'D';
+
+  type MapUi = {
+    lands: Record<LandId, { label: string; spoken: string; on: string }>;
+    panel: {
+      bridgesCrossed: string;
+      pickStart: string;
+      watchAttempt: string;
+      watching: string;
+    };
+    messages: {
+      clickBridge: string;
+      onLand: string;
+      backOnLand: string;
+      crossedBridge: string;
+      undid: string;
+      startingOn: string;
+      watchingSample: string;
+      stuck: string;
+      leftoverOne: string;
+      leftoverMany: string;
+      allCrossedWrongEnd: string;
+      impossibleSuccess: string;
+      startAria: string;
+    };
+  };
+
+  type ClientData = {
+    ui: MapUi;
+    totalBridges: number;
+    demoWalk: { start: LandId; bridges: number[] };
+  };
+
+  type BridgeData = {
+    n: number;
+    a: LandId;
+    b: LandId;
+    el: SVGGElement;
+    path: SVGPathElement;
+  };
+
+  type LandData = {
+    id: LandId;
+    el: SVGGElement;
+    landEl: SVGElement;
+    cx: number;
+    cy: number;
+  };
+
+  /** Replace `{name}` tokens; unknown tokens are left untouched. */
+  function formatTemplate(template: string, vars: Record<string, string | number>): string {
+    return template.replace(/\{(\w+)\}/g, (match, key: string) =>
+      Object.hasOwn(vars, key) ? String(vars[key]) : match,
+    );
+  }
+
+  function reduceMotion(): boolean {
+    return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  }
+
+  function pointAt(path: SVGPathElement, t: number): DOMPoint {
+    const len = path.getTotalLength();
+    return path.getPointAtLength(Math.max(0, Math.min(1, t)) * len);
+  }
+
+  function init(root: HTMLElement) {
+    let data: ClientData;
+    try {
+      data = JSON.parse(root.dataset.ui ?? '') as ClientData;
+    } catch {
+      return;
+    }
+    const { ui, totalBridges: TOTAL, demoWalk: DEMO } = data;
+    const msgs = ui.messages;
+
+    const svgEl = root.querySelector<SVGSVGElement>('[data-map]');
+    const panelEl = root.querySelector<HTMLElement>('[data-panel]');
+    const statusMsgEl = root.querySelector<HTMLElement>('[data-msg]');
+    const statusCountEl = root.querySelector<HTMLElement>('[data-count]');
+    const teaserEl = root.querySelector<HTMLElement>('[data-teaser]');
+    const undoBtnEl = root.querySelector<HTMLButtonElement>('[data-undo]');
+    const resetBtnEl = root.querySelector<HTMLButtonElement>('[data-reset]');
+    const demoBtnEl = root.querySelector<HTMLButtonElement>('[data-demo]');
+    const walkerEl = root.querySelector<SVGCircleElement>('[data-walker]');
+    if (
+      !svgEl ||
+      !panelEl ||
+      !statusMsgEl ||
+      !statusCountEl ||
+      !teaserEl ||
+      !undoBtnEl ||
+      !resetBtnEl ||
+      !demoBtnEl ||
+      !walkerEl
+    ) {
+      return;
+    }
+
+    // Re-bind after the null guard so nested closures see non-null types.
+    const svg = svgEl;
+    const panel = panelEl;
+    const statusMsg = statusMsgEl;
+    const statusCount = statusCountEl;
+    const teaser = teaserEl;
+    const undoBtn = undoBtnEl;
+    const resetBtn = resetBtnEl;
+    const demoBtn = demoBtnEl;
+    const walker = walkerEl;
+
+    panel.hidden = false;
+
+    const on = (id: LandId) => ui.lands[id].on;
+
+    const bridges: BridgeData[] = Array.from(svg.querySelectorAll<SVGGElement>('[data-bridge]')).map(
+      (el) => {
+        const path = el.querySelector<SVGPathElement>('.bridge-rail')!;
+        return {
+          n: Number(el.dataset.bridge),
+          a: el.dataset.a as LandId,
+          b: el.dataset.b as LandId,
+          el,
+          path,
+        };
+      },
+    );
+
+    const landmasses: LandData[] = Array.from(svg.querySelectorAll<SVGGElement>('[data-landmass]')).map(
+      (el) => {
+        const id = el.dataset.landmass as LandId;
+        const landEl = svg.querySelector<SVGElement>(`[data-land="${id}"]`)!;
+        const badge = el.querySelector('circle.land-badge')!;
+        return {
+          id,
+          el,
+          landEl,
+          cx: Number(badge.getAttribute('cx')),
+          cy: Number(badge.getAttribute('cy')),
+        };
+      },
+    );
+
+    const landById = Object.fromEntries(landmasses.map((l) => [l.id, l])) as Record<LandId, LandData>;
+    const bridgeByN = Object.fromEntries(bridges.map((b) => [b.n, b])) as Record<number, BridgeData>;
+
+    let current: LandId | null = null;
+    let start: LandId | null = null;
+    let stack: number[] = [];
+    let replaying = false;
+    let replayTimers: number[] = [];
+
+    function clearReplay() {
+      for (const t of replayTimers) window.clearTimeout(t);
+      replayTimers = [];
+      replaying = false;
+    }
+
+    function usedSet(): Set<number> {
+      return new Set(stack);
+    }
+
+    function otherEnd(br: BridgeData, from: LandId): LandId {
+      return br.a === from ? br.b : br.a;
+    }
+
+    function availableFrom(land: LandId): BridgeData[] {
+      const used = usedSet();
+      return bridges.filter((br) => !used.has(br.n) && (br.a === land || br.b === land));
+    }
+
+    function setMsg(text: string) {
+      statusMsg.textContent = text;
+    }
+
+    function setCount() {
+      statusCount.textContent = formatTemplate(ui.panel.bridgesCrossed, {
+        n: stack.length,
+        total: TOTAL,
+      });
+    }
+
+    function startAriaLabel(id: LandId): string {
+      return formatTemplate(msgs.startAria, { on: on(id) });
+    }
+
+    function placeWalker(x: number, y: number, animate: boolean) {
+      walker.setAttribute('visibility', 'visible');
+      if (!animate || reduceMotion()) {
+        walker.style.transition = 'none';
+        walker.setAttribute('cx', String(x));
+        walker.setAttribute('cy', String(y));
+        // force reflow so later transitions work
+        void walker.getBBox();
+        walker.style.transition = '';
+      } else {
+        walker.setAttribute('cx', String(x));
+        walker.setAttribute('cy', String(y));
+      }
+    }
+
+    function hideWalker() {
+      walker.setAttribute('visibility', 'hidden');
+    }
+
+    function makeInteractive(el: Element, label: string, onActivate: () => void) {
+      el.setAttribute('role', 'button');
+      el.setAttribute('tabindex', '0');
+      el.setAttribute('aria-label', label);
+      el.removeAttribute('aria-disabled');
+      const activate = (e: Event) => {
+        e.preventDefault();
+        onActivate();
+      };
+      el.addEventListener('click', activate);
+      el.addEventListener('keydown', (e) => {
+        const ke = e as KeyboardEvent;
+        if (ke.key === 'Enter' || ke.key === ' ') {
+          ke.preventDefault();
+          onActivate();
+        }
+      });
+    }
+
+    // Wire once. Bridge aria-labels are rendered server-side from `ui.bridgeAria`.
+    for (const lm of landmasses) {
+      makeInteractive(lm.el, startAriaLabel(lm.id), () => pickStart(lm.id));
+    }
+    for (const br of bridges) {
+      makeInteractive(br.el, br.el.getAttribute('aria-label') ?? String(br.n), () =>
+        crossBridge(br.n),
+      );
+    }
+
+    function render() {
+      setCount();
+      const used = usedSet();
+
+      for (const br of bridges) {
+        const isUsed = used.has(br.n);
+        br.el.classList.toggle('is-used', isUsed);
+        const canCross =
+          !replaying &&
+          current !== null &&
+          !isUsed &&
+          (br.a === current || br.b === current);
+        br.el.classList.toggle('is-available', canCross);
+        if (canCross) {
+          br.el.setAttribute('tabindex', '0');
+          br.el.removeAttribute('aria-disabled');
+        } else {
+          br.el.setAttribute('tabindex', '-1');
+          br.el.setAttribute('aria-disabled', 'true');
+        }
+      }
+
+      for (const lm of landmasses) {
+        const picking = current === null && !replaying;
+        lm.el.classList.toggle('is-available', picking);
+        lm.el.classList.toggle('is-current', lm.id === current);
+        lm.landEl.classList.toggle('is-current', lm.id === current);
+        lm.landEl.classList.toggle('is-start', lm.id === start);
+        lm.landEl.classList.toggle('is-available', picking);
+        if (picking) {
+          lm.el.setAttribute('tabindex', '0');
+          lm.el.removeAttribute('aria-disabled');
+          lm.el.setAttribute('aria-label', startAriaLabel(lm.id));
+        } else {
+          lm.el.setAttribute('tabindex', '-1');
+          lm.el.setAttribute('aria-disabled', 'true');
+        }
+      }
+
+      undoBtn.disabled = stack.length === 0 || replaying;
+      resetBtn.disabled = (current === null && stack.length === 0) || replaying;
+      demoBtn.disabled = replaying;
+      demoBtn.textContent = replaying ? ui.panel.watching : ui.panel.watchAttempt;
+    }
+
+    function checkStuck() {
+      if (current === null) return;
+      if (stack.length === TOTAL) {
+        if (current === start) {
+          setMsg(msgs.impossibleSuccess);
+        } else {
+          setMsg(formatTemplate(msgs.allCrossedWrongEnd, { on: on(current) }));
+        }
+        teaser.hidden = false;
+        return;
+      }
+      const avail = availableFrom(current);
+      if (avail.length === 0) {
+        const leftover = bridges.filter((b) => !usedSet().has(b.n)).map((b) => b.n);
+        const left =
+          leftover.length === 1
+            ? formatTemplate(msgs.leftoverOne, { bridge: leftover[0] })
+            : formatTemplate(msgs.leftoverMany, { bridges: leftover.join(', ') });
+        setMsg(formatTemplate(msgs.stuck, { on: on(current), leftover: left }));
+        teaser.hidden = false;
+      }
+    }
+
+    function pickStart(id: LandId) {
+      if (replaying || current !== null) return;
+      current = id;
+      start = id;
+      const lm = landById[id];
+      placeWalker(lm.cx, lm.cy, false);
+      setMsg(`${formatTemplate(msgs.onLand, { on: on(id) })} ${msgs.clickBridge}`);
+      teaser.hidden = true;
+      render();
+    }
+
+    function animateAcross(br: BridgeData, from: LandId, to: LandId, done: () => void) {
+      const dest = landById[to];
+      if (reduceMotion()) {
+        placeWalker(dest.cx, dest.cy, false);
+        done();
+        return;
+      }
+      // Orient path: SVG path may start at either end
+      const p0 = pointAt(br.path, 0);
+      const p1 = pointAt(br.path, 1);
+      const fromLand = landById[from];
+      const d0 = (p0.x - fromLand.cx) ** 2 + (p0.y - fromLand.cy) ** 2;
+      const d1 = (p1.x - fromLand.cx) ** 2 + (p1.y - fromLand.cy) ** 2;
+      const forward = d0 <= d1;
+      const steps = 8;
+      let i = 0;
+      const step = () => {
+        i += 1;
+        const t = forward ? i / steps : 1 - i / steps;
+        const p = pointAt(br.path, t);
+        placeWalker(p.x, p.y, true);
+        if (i < steps) {
+          replayTimers.push(window.setTimeout(step, 40));
+        } else {
+          placeWalker(dest.cx, dest.cy, true);
+          done();
+        }
+      };
+      step();
+    }
+
+    function crossBridge(n: number) {
+      if (replaying || current === null) return;
+      const br = bridgeByN[n];
+      if (!br || usedSet().has(n)) return;
+      if (br.a !== current && br.b !== current) return;
+      const from = current;
+      const to = otherEnd(br, from);
+      stack.push(n);
+      current = to;
+      setMsg(formatTemplate(msgs.crossedBridge, { n, on: on(to) }));
+      teaser.hidden = true;
+      render();
+      animateAcross(br, from, to, () => {
+        checkStuck();
+        render();
+      });
+    }
+
+    function undo() {
+      if (replaying || stack.length === 0 || current === null || start === null) return;
+      const n = stack.pop()!;
+      const br = bridgeByN[n];
+      // Reverse: current is the end we just reached; go back
+      current = otherEnd(br, current);
+      const lm = landById[current];
+      placeWalker(lm.cx, lm.cy, false);
+      teaser.hidden = true;
+      if (stack.length === 0) {
+        setMsg(`${formatTemplate(msgs.backOnLand, { on: on(current) })} ${msgs.clickBridge}`);
+      } else {
+        setMsg(formatTemplate(msgs.undid, { n, on: on(current) }));
+      }
+      render();
+    }
+
+    function reset() {
+      clearReplay();
+      current = null;
+      start = null;
+      stack = [];
+      hideWalker();
+      teaser.hidden = true;
+      setMsg(ui.panel.pickStart);
+      render();
+    }
+
+    function watchAttempt() {
+      if (replaying) return;
+      reset();
+      replaying = true;
+      render();
+      setMsg(msgs.watchingSample);
+
+      const delay = reduceMotion() ? 200 : 550;
+      let t = 0;
+
+      const schedule = (fn: () => void, ms: number) => {
+        t += ms;
+        replayTimers.push(window.setTimeout(fn, t));
+      };
+
+      schedule(() => {
+        current = DEMO.start;
+        start = DEMO.start;
+        const lm = landById[DEMO.start];
+        placeWalker(lm.cx, lm.cy, false);
+        setMsg(formatTemplate(msgs.startingOn, { on: on(DEMO.start) }));
+        render();
+      }, 300);
+
+      for (const n of DEMO.bridges) {
+        schedule(() => {
+          const br = bridgeByN[n];
+          if (!br || current === null) return;
+          const from = current;
+          const to = otherEnd(br, from);
+          stack.push(n);
+          current = to;
+          setMsg(formatTemplate(msgs.crossedBridge, { n, on: on(to) }));
+          render();
+          if (reduceMotion()) {
+            placeWalker(landById[to].cx, landById[to].cy, false);
+          } else {
+            // Show the walker mid-bridge, then on the far landmass
+            const mid = pointAt(br.path, 0.5);
+            placeWalker(mid.x, mid.y, true);
+            replayTimers.push(
+              window.setTimeout(() => placeWalker(landById[to].cx, landById[to].cy, true), delay * 0.45),
+            );
+          }
+        }, delay);
+      }
+
+      schedule(() => {
+        replaying = false;
+        checkStuck();
+        render();
+      }, delay + 100);
+    }
+
+    undoBtn.addEventListener('click', undo);
+    resetBtn.addEventListener('click', reset);
+    demoBtn.addEventListener('click', watchAttempt);
+
+    render();
+  }
+
+  document.querySelectorAll<HTMLElement>('[data-koenigsberg]').forEach(init);
+</script>

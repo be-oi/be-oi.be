@@ -46,13 +46,16 @@ const ogImageURL = image.startsWith('http')
 const isLanguagePicker = pathname === '/' || pathname === '';
 const skipLabel = skipToContentLabel(lang);
 
+// Pages without a default-locale version use their own language as x-default.
+const xDefault = alternateLocales.includes(xDefaultLocale) ? xDefaultLocale : lang;
+
 // Always include this page’s lang and the x-default target among alternates.
-const uniqueLocales = [...new Set<string>([...alternateLocales, lang, xDefaultLocale])];
+const uniqueLocales = [...new Set<string>([...alternateLocales, lang, xDefault])];
 
 // Language picker `/` is x-default; localized pages fall back to the site default locale.
 const xDefaultHref = isLanguagePicker
   ? new URL('/', site).href
-  : new URL(localizePath(xDefaultLocale, pathWithoutLocale), site).href;
+  : new URL(localizePath(xDefault, pathWithoutLocale), site).href;
 ---
 <!doctype html>
 <html lang={lang}>

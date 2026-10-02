@@ -1,0 +1,916 @@
+---
+import { Code } from 'astro:components';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from './Nav.astro';
+import Footer from './Footer.astro';
+import ContestPoster from './ContestPoster.astro';
+import KoenigsbergMap from './KoenigsbergMap.astro';
+import { contentLocales } from '../data/i18n';
+import { resolveLocale } from '../data/ui-i18n';
+import { contestPoster } from '../data/posters';
+import {
+  degreeRows,
+  degreeSum,
+  eulerCode,
+  getPosterExplainerCopy,
+  graphEdges,
+  graphVertices,
+  landCardWobble,
+} from '../data/poster-explainer';
+
+interface Props {
+  lang: string;
+}
+
+const locale = resolveLocale(Astro.props.lang);
+const copy = getPosterExplainerCopy(locale);
+
+const nativeNames = {
+  fr: 'Français',
+  nl: 'Nederlands',
+  en: 'English',
+  de: 'Deutsch',
+} as const;
+
+const otherPosters = contentLocales
+  .filter((l) => l !== locale)
+  .map((l) => ({ lang: l, name: nativeNames[l], href: contestPoster(l).href }));
+---
+<BaseLayout
+  title={copy.meta.title}
+  description={copy.meta.description}
+  lang={locale}
+  alternateLocales={contentLocales}
+>
+  <Nav lang={locale} />
+
+  <main id="main" class="pt-32 pb-0 overflow-x-clip">
+    <div class="bg-surface-container-lowest border-b-2 border-outline-variant/30">
+      <header class="px-margin max-w-5xl mx-auto py-xl grid gap-lg md:grid-cols-[1fr_auto] md:items-center">
+        <div class="text-center md:text-left">
+          <p class="inline-block px-4 py-1 bg-tertiary-container/20 text-tertiary rounded-full font-label text-label-md mb-md wobbly-rotation-1 border border-tertiary/20">
+            {copy.header.eyebrow}
+          </p>
+          <h1 class="font-headline text-headline-xl text-on-surface mb-md text-balance">
+            {copy.header.title}
+          </h1>
+          <p
+            class="text-body-lg font-body text-on-surface-variant mx-auto md:mx-0 max-w-[65ch] text-pretty"
+            set:html={copy.header.introHtml}
+          />
+        </div>
+        <div class="text-center">
+          <ContestPoster
+            lang={locale}
+            label={copy.poster.label}
+            cta={copy.poster.cta}
+            caption={copy.poster.caption}
+            eager
+          />
+          <p class="mt-sm font-label text-sm text-on-surface-variant">
+            {copy.poster.alsoIn}
+            {otherPosters.map(({ lang, name, href }, i) => (
+              <>
+                {i > 0 && ' · '}
+                <a
+                  href={href}
+                  hreflang={lang}
+                  lang={lang}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center min-h-11 text-primary underline underline-offset-2 hover:decoration-2"
+                >
+                  {name}
+                </a>
+              </>
+            ))}
+          </p>
+        </div>
+      </header>
+    </div>
+
+    <article class="explainer">
+      <section id="problem" class="band" aria-labelledby="problem-heading">
+        <div class="band-inner">
+          <h2><span class="step-no" aria-hidden="true">1</span><span id="problem-heading">{copy.problem.heading}</span></h2>
+          <p set:html={copy.problem.introHtml} />
+          <ul>
+            {copy.problem.bridgeList.map((item) => <li>{item}</li>)}
+          </ul>
+
+          <figure class="graph-figure">
+            <KoenigsbergMap lang={locale} />
+            <figcaption>
+              <strong>{copy.problem.figure.label}</strong>{' '}
+              <Fragment set:html={copy.problem.figure.captionHtml} />
+            </figcaption>
+          </figure>
+
+          <p set:html={copy.problem.outroHtml} />
+        </div>
+      </section>
+
+      <section id="answer" class="band band-white" aria-labelledby="answer-heading">
+        <div class="band-inner">
+          <h2>
+            <span class="step-no" aria-hidden="true">2</span>
+            <span id="answer-heading">{copy.answer.heading}</span>
+          </h2>
+          <p set:html={copy.answer.noHtml} />
+          <p set:html={copy.answer.ruleHtml} />
+          <p set:html={copy.answer.evenHtml} />
+          <p set:html={copy.answer.countHtml} />
+          <ul class="land-cards" aria-label={copy.answer.landCardsAria}>
+            {
+              copy.answer.landCards.map((card) => (
+                <li class:list={['land-card', 'stamp-shadow', landCardWobble[card.id]]}>
+                  <span class="land-card-badge" aria-hidden="true">{card.id}</span>
+                  <span class="land-card-body">
+                    <span class="land-card-name">{card.name}</span>
+                    <span class="land-card-count">
+                      <strong>{card.bridges}</strong> {copy.answer.bridgesWord}
+                      {card.bridges % 2 === 1 && (
+                        <span class="land-card-odd">{copy.answer.oddLabel}</span>
+                      )}
+                    </span>
+                    <span class="land-card-leftover">{card.bridges} = {card.leftover}</span>
+                  </span>
+                </li>
+              ))
+            }
+          </ul>
+          <p set:html={copy.answer.conclusionHtml} />
+          <p set:html={copy.answer.olympiadNoteHtml} />
+        </div>
+      </section>
+
+      <details class="danger-zone" id="deep-dive">
+        <summary class="danger-summary">
+          <span class="danger-summary-inner">
+            <span class="danger-label">{copy.dangerZone.label}</span>
+            <span class="danger-title">{copy.dangerZone.title}</span>
+            <span class="danger-subtitle">{copy.dangerZone.subtitle}</span>
+            <span class="danger-chevron" aria-hidden="true"></span>
+          </span>
+        </summary>
+
+        <div class="danger-warning" role="note">
+          <p class="danger-warning-title">
+            <span class="danger-warning-icon" aria-hidden="true">⚠</span>
+            {copy.dangerZone.warningTitle}
+          </p>
+          <p>{copy.dangerZone.warningText}</p>
+          <p>
+            {copy.dangerZone.cpBefore}
+            <a href={copy.competitiveProgrammingHref}>{copy.dangerZone.cpLink}</a>{copy.dangerZone.cpAfter}
+          </p>
+        </div>
+
+      <section id="modelling" class="band band-white" aria-labelledby="modelling-heading">
+        <div class="band-inner">
+          <h2><span class="step-no" aria-hidden="true">3</span><span id="modelling-heading">{copy.modelling.heading}</span></h2>
+          <p set:html={copy.modelling.introHtml} />
+          <p set:html={copy.modelling.graphHtml} />
+
+          <figure class="graph-figure">
+            <svg
+              viewBox="-14 0 628 430"
+              role="img"
+              aria-labelledby="graph-title graph-desc"
+              class="graph-svg"
+            >
+              <title id="graph-title">{copy.modelling.graphFigure.svgTitle}</title>
+              <desc id="graph-desc">{copy.modelling.graphFigure.svgDesc}</desc>
+              <g fill="none" stroke="currentColor" stroke-width="3" class="graph-edges">
+                {graphEdges.map((e) => <path d={e.d} />)}
+              </g>
+              <g class="graph-edge-labels" font-size="17" text-anchor="middle">
+                {graphEdges.map((e) => (
+                  <g>
+                    <circle cx={e.x} cy={e.y} r="15" />
+                    <text x={e.x} y={e.y + 6}>{e.n}</text>
+                  </g>
+                ))}
+              </g>
+              <g class="graph-vertices" text-anchor="middle">
+                {graphVertices.map((v) => (
+                  <g>
+                    <circle cx={v.x} cy={v.y} r="22" />
+                    <text x={v.x} y={v.y + 7} font-size="20" class="graph-vertex-id">{v.id}</text>
+                    <text x={v.lx} y={v.ly} font-size="19" text-anchor={v.anchor} class="graph-vertex-label">{copy.landNames[v.id]}</text>
+                  </g>
+                ))}
+              </g>
+            </svg>
+            <figcaption>
+              <strong>{copy.modelling.graphFigure.label}</strong>{' '}
+              <Fragment set:html={copy.modelling.graphFigure.captionHtml} />
+            </figcaption>
+          </figure>
+
+          <p set:html={copy.modelling.multigraphHtml} />
+        </div>
+      </section>
+
+      <section id="degrees" class="band" aria-labelledby="degrees-heading">
+        <div class="band-inner">
+          <h2><span class="step-no" aria-hidden="true">4</span><span id="degrees-heading">{copy.degrees.heading}</span></h2>
+          <p set:html={copy.degrees.introHtml} />
+
+          <div class="table-wrap">
+            <table>
+              <caption>{copy.degrees.caption}</caption>
+              <thead>
+                <tr>
+                  <th scope="col">{copy.degrees.headers.vertex}</th>
+                  <th scope="col">{copy.degrees.headers.landmass}</th>
+                  <th scope="col">{copy.degrees.headers.bridges}</th>
+                  <th scope="col" class="num">{copy.degrees.headers.degree}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {degreeRows.map((row) => (
+                  <tr>
+                    <th scope="row">{row.vertex}</th>
+                    <td>{copy.landNames[row.vertex]}</td>
+                    <td>{row.bridges}</td>
+                    <td class="num">{row.degree} <span class="parity">{copy.degrees.oddLabel}</span></td>
+                  </tr>
+                ))}
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th scope="row" colspan="3">{copy.degrees.sumLabel}</th>
+                  <td class="num">{degreeSum}</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+
+          <p set:html={copy.degrees.handshakeHtml} />
+          <p class="math-display" set:html={copy.degrees.handshakeMathHtml} />
+          <p set:html={copy.degrees.consequenceHtml} />
+        </div>
+      </section>
+
+      <section id="invariant" class="band band-white" aria-labelledby="invariant-heading">
+        <div class="band-inner">
+          <h2><span class="step-no" aria-hidden="true">5</span><span id="invariant-heading">{copy.invariant.heading}</span></h2>
+          <p set:html={copy.invariant.walkHtml} />
+          <p set:html={copy.invariant.endpointsHtml} />
+
+          <div class="theorem" role="note" aria-labelledby="theorem-heading">
+            <p id="theorem-heading" class="theorem-title">{copy.invariant.theorem.title}</p>
+            <p set:html={copy.invariant.theorem.introHtml} />
+            <ul>
+              <li set:html={copy.invariant.theorem.circuitHtml} />
+              <li set:html={copy.invariant.theorem.pathHtml} />
+            </ul>
+          </div>
+
+          <p set:html={copy.invariant.converseHtml} />
+          <p set:html={copy.invariant.konigsbergHtml} />
+        </div>
+      </section>
+
+      <section id="informatics" class="band" aria-labelledby="informatics-heading">
+        <div class="band-inner">
+          <h2><span class="step-no" aria-hidden="true">6</span><span id="informatics-heading">{copy.informatics.heading}</span></h2>
+          <p set:html={copy.informatics.introHtml} />
+
+          <div class="code-block">
+            <Code code={eulerCode} lang="python" theme="github-light" />
+          </div>
+
+          <p set:html={copy.informatics.complexityHtml} />
+          <p set:html={copy.informatics.listIntroHtml} />
+          <ul>
+            {copy.informatics.items.map((item) => <li set:html={item} />)}
+          </ul>
+        </div>
+      </section>
+
+      <section id="exercise" class="band band-white" aria-labelledby="exercise-heading">
+        <div class="band-inner">
+          <h2><span class="step-no" aria-hidden="true">7</span><span id="exercise-heading">{copy.exercise.heading}</span></h2>
+          <div class="exercise">
+            <p set:html={copy.exercise.mainHtml} />
+            <p set:html={copy.exercise.followUpHtml} />
+          </div>
+        </div>
+      </section>
+      </details>
+
+      <section id="olympiad" class="band" aria-labelledby="olympiad-heading">
+        <div class="band-inner text-center">
+          <h2 id="olympiad-heading" class="justify-center">{copy.olympiad.heading}</h2>
+          <p class="mx-auto" set:html={copy.olympiad.reasoningHtml} />
+          <p class="mx-auto" set:html={copy.olympiad.datesHtml} />
+          <div class="cta-row">
+            <a href={copy.homeHref} class="cta-primary">{copy.olympiad.homeCta}</a>
+            <a
+              href={copy.labHref}
+              class="cta-secondary"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {copy.olympiad.labCta}<span class="sr-only">{copy.labOpensNewTab}</span>
+            </a>
+          </div>
+        </div>
+      </section>
+    </article>
+  </main>
+  <Footer lang={locale} />
+</BaseLayout>
+
+<style>
+  .band {
+    padding: var(--spacing-lg) var(--spacing-margin);
+  }
+
+  .band-white {
+    background: var(--color-surface-container-lowest);
+    border-block: 2px solid color-mix(in srgb, var(--color-outline-variant) 30%, transparent);
+  }
+
+  .band-inner {
+    max-width: 40rem;
+    margin-inline: auto;
+    font-family: var(--font-body);
+    font-size: var(--text-body-lg);
+    line-height: 1.65;
+    color: var(--color-on-surface-variant);
+  }
+
+  .band-inner > * + * {
+    margin-top: 1rem;
+  }
+
+  .band-inner :where(strong) {
+    color: var(--color-on-surface);
+    font-weight: 600;
+  }
+
+  .band-inner a:not(.cta-primary, .cta-secondary) {
+    color: var(--color-primary);
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+  }
+
+  h2 {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    font-family: var(--font-headline);
+    font-size: var(--text-headline-lg);
+    line-height: var(--text-headline-lg--line-height);
+    font-weight: 700;
+    color: var(--color-on-surface);
+    margin-bottom: var(--spacing-md);
+    text-wrap: balance;
+  }
+
+  .step-no {
+    flex: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 9999px;
+    background: var(--color-primary);
+    color: var(--color-on-primary);
+    font-family: var(--font-label);
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 1;
+  }
+
+  .band-inner ul:not(.land-cards) {
+    list-style: disc;
+    padding-left: 1.5rem;
+  }
+
+  .band-inner ul:not(.land-cards) li + li {
+    margin-top: 0.5rem;
+  }
+
+  .band-inner ul:not(.land-cards) li::marker {
+    color: var(--color-primary);
+  }
+
+  /* Simple answer: landmass count cards */
+  .land-cards {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-sm);
+    margin-block: var(--spacing-md) !important;
+  }
+
+  .land-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.85rem 0.9rem;
+    background: var(--color-surface-container-lowest);
+    border: 2px solid color-mix(in srgb, var(--color-outline-variant) 50%, transparent);
+    border-radius: var(--radius);
+    margin: 0 !important;
+  }
+
+  .land-card-badge {
+    flex: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 9999px;
+    background: var(--color-primary);
+    color: var(--color-on-primary);
+    font-family: var(--font-headline);
+    font-weight: 700;
+    font-size: 1.125rem;
+    line-height: 1;
+  }
+
+  .land-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    min-width: 0;
+  }
+
+  .land-card-name {
+    font-family: var(--font-label);
+    font-size: var(--text-label-md);
+    font-weight: 600;
+    letter-spacing: var(--text-label-md--letter-spacing);
+    color: var(--color-on-surface);
+  }
+
+  .land-card-count {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: var(--text-body-md);
+    color: var(--color-on-surface);
+  }
+
+  .land-card-odd {
+    display: inline-block;
+    padding: 0.1rem 0.45rem;
+    border-radius: 9999px;
+    background: color-mix(in srgb, var(--color-tertiary) 15%, transparent);
+    color: var(--color-tertiary);
+    font-family: var(--font-label);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .land-card-leftover {
+    font-size: 0.875rem;
+    color: var(--color-on-surface-variant);
+  }
+
+  /* Danger zone */
+  .danger-zone {
+    margin-block: var(--spacing-lg);
+  }
+
+  /* Keep graph-theory content collapsed even if the UA stylesheet is overridden. */
+  .danger-zone:not([open]) > :not(summary) {
+    display: none;
+  }
+
+  .danger-zone > summary {
+    list-style: none;
+    cursor: pointer;
+  }
+
+  .danger-zone > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .danger-summary {
+    display: block;
+    max-width: 40rem;
+    margin-inline: auto;
+    padding: 4px;
+    border-radius: calc(var(--radius) + 4px);
+    background: repeating-linear-gradient(
+      -45deg,
+      #1a1a1a,
+      #1a1a1a 10px,
+      #f5c518 10px,
+      #f5c518 20px
+    );
+  }
+
+  .danger-summary-inner {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.35rem;
+    padding: 1.1rem 3rem 1.1rem 1.25rem;
+    background: var(--color-surface-container-lowest);
+    border-radius: var(--radius);
+    color: var(--color-on-surface);
+  }
+
+  .danger-label {
+    display: inline-block;
+    padding: 0.15rem 0.55rem;
+    border-radius: 9999px;
+    background: #1a1a1a;
+    color: #f5c518;
+    font-family: var(--font-label);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .danger-title {
+    font-family: var(--font-headline);
+    font-size: var(--text-headline-md);
+    line-height: var(--text-headline-md--line-height);
+    font-weight: 700;
+    text-wrap: balance;
+  }
+
+  .danger-subtitle {
+    font-family: var(--font-body);
+    font-size: var(--text-body-md);
+    color: var(--color-on-surface-variant);
+  }
+
+  .danger-chevron {
+    position: absolute;
+    right: 1.1rem;
+    top: 50%;
+    width: 0.65rem;
+    height: 0.65rem;
+    border-right: 2.5px solid var(--color-on-surface);
+    border-bottom: 2.5px solid var(--color-on-surface);
+    transform: translateY(-70%) rotate(45deg);
+  }
+
+  .danger-zone[open] .danger-chevron {
+    transform: translateY(-30%) rotate(225deg);
+  }
+
+  .danger-summary:hover .danger-summary-inner {
+    background: color-mix(in srgb, var(--color-tertiary-container) 18%, var(--color-surface-container-lowest));
+  }
+
+  .danger-summary:focus-visible {
+    outline: 3px solid var(--color-primary);
+    outline-offset: 3px;
+  }
+
+  .danger-warning {
+    max-width: 40rem;
+    margin: var(--spacing-md) auto var(--spacing-lg);
+    padding: var(--spacing-md);
+    background: color-mix(in srgb, var(--color-tertiary-container) 18%, var(--color-surface-container-lowest));
+    border: 2px solid color-mix(in srgb, var(--color-tertiary) 35%, transparent);
+    border-radius: var(--radius);
+    font-family: var(--font-body);
+    font-size: var(--text-body-md);
+    line-height: 1.55;
+    color: var(--color-on-surface);
+  }
+
+  .danger-warning > * + * {
+    margin-top: 0.65rem;
+  }
+
+  .danger-warning-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-headline);
+    font-size: var(--text-headline-md);
+    font-weight: 700;
+    color: var(--color-tertiary);
+    margin: 0;
+  }
+
+  .danger-warning-icon {
+    font-size: 1.25rem;
+    line-height: 1;
+  }
+
+  .danger-warning a {
+    color: var(--color-primary);
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+    font-weight: 600;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .danger-chevron {
+      transition: transform 0.2s ease;
+    }
+
+    .danger-summary:hover {
+      transform: rotate(-0.4deg);
+    }
+
+    .danger-summary {
+      transition: transform 0.2s ease;
+    }
+  }
+
+  var {
+    font-style: italic;
+    color: var(--color-on-surface);
+  }
+
+  .nowrap {
+    white-space: nowrap;
+  }
+
+  /* Figure */
+  .graph-figure {
+    margin-block: var(--spacing-md);
+    padding: var(--spacing-md);
+    background: var(--color-surface-container-low);
+    border: 2px solid color-mix(in srgb, var(--color-outline-variant) 50%, transparent);
+    border-radius: var(--radius);
+  }
+
+  .graph-svg {
+    display: block;
+    width: 100%;
+    max-width: 30rem;
+    height: auto;
+    margin-inline: auto;
+    font-family: var(--font-label);
+  }
+
+  .graph-edges {
+    color: var(--color-on-surface-variant);
+  }
+
+  .graph-edge-labels circle {
+    fill: var(--color-surface-container-lowest);
+    stroke: var(--color-outline);
+    stroke-width: 1.5;
+  }
+
+  .graph-edge-labels text {
+    fill: var(--color-on-surface);
+    font-weight: 600;
+  }
+
+  .graph-vertices circle {
+    fill: var(--color-primary);
+  }
+
+  .graph-vertex-id {
+    fill: var(--color-on-primary);
+    font-family: var(--font-headline);
+    font-weight: 700;
+  }
+
+  .graph-vertex-label {
+    fill: var(--color-on-surface);
+    font-weight: 600;
+  }
+
+  figcaption {
+    margin-top: var(--spacing-sm);
+    font-size: var(--text-body-md);
+    line-height: 1.55;
+    color: var(--color-on-surface-variant);
+  }
+
+  /* Table */
+  .table-wrap {
+    overflow-x: auto;
+    background: var(--color-surface-container-lowest);
+    border: 2px solid color-mix(in srgb, var(--color-outline-variant) 50%, transparent);
+    border-radius: var(--radius);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--text-body-md);
+    line-height: 1.4;
+  }
+
+  caption {
+    padding: 0.75rem 1rem 0;
+    text-align: left;
+    font-family: var(--font-label);
+    font-size: var(--text-label-md);
+    font-weight: 600;
+    letter-spacing: var(--text-label-md--letter-spacing);
+    color: var(--color-on-surface-variant);
+  }
+
+  th,
+  td {
+    padding: 0.6rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid color-mix(in srgb, var(--color-outline-variant) 70%, transparent);
+  }
+
+  thead th {
+    font-family: var(--font-label);
+    font-size: var(--text-label-md);
+    font-weight: 600;
+    letter-spacing: var(--text-label-md--letter-spacing);
+    color: var(--color-on-surface);
+  }
+
+  tbody th {
+    font-family: var(--font-headline);
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+
+  tfoot th,
+  tfoot td {
+    border-bottom: 0;
+    font-weight: 600;
+    color: var(--color-on-surface);
+  }
+
+  .num {
+    text-align: right;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .parity {
+    color: var(--color-on-surface-variant);
+    font-size: 0.875em;
+  }
+
+  .math-display {
+    text-align: center;
+    color: var(--color-on-surface);
+  }
+
+  /* Theorem */
+  .theorem {
+    margin-block: var(--spacing-md);
+    padding: var(--spacing-md);
+    background: color-mix(in srgb, var(--color-primary) 5%, var(--color-surface-container-lowest));
+    border: 2px solid color-mix(in srgb, var(--color-primary) 30%, transparent);
+    border-radius: var(--radius);
+    color: var(--color-on-surface);
+  }
+
+  .theorem > * + * {
+    margin-top: 0.75rem;
+  }
+
+  .theorem-title {
+    font-family: var(--font-headline);
+    font-size: var(--text-headline-md);
+    line-height: var(--text-headline-md--line-height);
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+
+  /* Code */
+  .code-block :global(pre) {
+    padding: 1rem 1.25rem;
+    border: 2px solid color-mix(in srgb, var(--color-outline-variant) 50%, transparent);
+    border-radius: var(--radius);
+    font-family: ui-monospace, 'SFMono-Regular', Menlo, Consolas, 'Liberation Mono', monospace;
+    font-size: 0.875rem;
+    line-height: 1.6;
+  }
+
+  /* Exercise */
+  .exercise {
+    padding: var(--spacing-md);
+    background: color-mix(in srgb, var(--color-tertiary-container) 12%, var(--color-surface-container-lowest));
+    border: 2px solid color-mix(in srgb, var(--color-tertiary) 25%, transparent);
+    border-radius: var(--radius);
+    color: var(--color-on-surface);
+  }
+
+  .exercise > * + * {
+    margin-top: 0.75rem;
+  }
+
+  /* Call to action */
+  .cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-md);
+  }
+
+  .cta-primary,
+  .cta-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 2.75rem;
+    padding: 0.625rem 1.5rem;
+    border: 2px solid var(--color-primary);
+    border-radius: 9999px;
+    font-family: var(--font-label);
+    font-size: var(--text-label-md);
+    font-weight: 600;
+    letter-spacing: var(--text-label-md--letter-spacing);
+    line-height: var(--text-label-md--line-height);
+    text-decoration: none;
+  }
+
+  .cta-primary {
+    background: var(--color-primary);
+    color: var(--color-on-primary);
+  }
+
+  .cta-primary:hover {
+    background: color-mix(in srgb, var(--color-primary) 90%, transparent);
+  }
+
+  .cta-secondary {
+    border-color: color-mix(in srgb, var(--color-primary) 30%, transparent);
+    background: color-mix(in srgb, var(--color-primary) 5%, transparent);
+    color: var(--color-primary);
+  }
+
+  .cta-secondary:hover {
+    background: color-mix(in srgb, var(--color-primary) 10%, transparent);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .cta-primary,
+    .cta-secondary {
+      transition: background-color 0.2s ease;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .land-cards {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .band {
+      padding-inline: 1.25rem;
+    }
+
+    h2 {
+      font-size: var(--text-headline-md);
+      line-height: var(--text-headline-md--line-height);
+    }
+
+    .danger-title {
+      font-size: var(--text-headline-md);
+      line-height: var(--text-headline-md--line-height);
+    }
+
+    .graph-figure,
+    .theorem,
+    .exercise,
+    .danger-warning {
+      padding: 1rem;
+    }
+
+    th,
+    td {
+      padding: 0.5rem 0.6rem;
+    }
+
+    caption {
+      padding: 0.75rem 0.6rem 0;
+    }
+  }
+</style>
+
+<script>
+  function openDangerZoneForHash() {
+    const zone = document.getElementById('deep-dive');
+    if (!(zone instanceof HTMLDetailsElement)) return;
+    const hash = window.location.hash.slice(1);
+    if (!hash) return;
+    const target = document.getElementById(hash);
+    if (target && zone.contains(target)) {
+      zone.open = true;
+    }
+  }
+
+  openDangerZoneForHash();
+  window.addEventListener('hashchange', openDangerZoneForHash);
+</script>
