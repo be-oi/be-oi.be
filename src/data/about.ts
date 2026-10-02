@@ -21,6 +21,8 @@ export type LogoLink = {
   name: string;
   href: string;
   image: ImageMetadata;
+  /** Manual visual-weight correction; defaults to 1. */
+  scale?: number;
 };
 
 /** Institutional support shown on the About page (not the full legacy sponsor list). */
@@ -69,17 +71,44 @@ export const members: LogoLink[] = [
 ];
 
 /**
- * Upper bound (px) on the emitted logo height: twice the rendered height, so
- * high-DPI screens stay sharp. Sources shorter than this are kept as-is rather
- * than upscaled — several logos are already only a few dozen pixels tall.
+ * Upper bound (px) on the emitted supporter logo height: twice the rendered
+ * height, so high-DPI screens stay sharp. Sources shorter than this are kept
+ * as-is rather than upscaled.
  */
 const supporterLogoMaxHeight = 128;
-const memberLogoMaxHeight = 112;
+
+/**
+ * Member logos use equal-visual-area sizing. Height scales as
+ * `base * r^(-k)` where `r = width/height`. k = 0.5 gives equal bounding-box
+ * area; k = 0 is equal height. Clamp keeps extreme ratios readable.
+ */
+const memberLogoAreaExponent = 0.5;
+const memberLogoScaleMin = 0.4;
+const memberLogoScaleMax = 1.25;
+/** CSS base height at sm breakpoint (3.5rem × 1.3 ≈ 4.55rem ≈ 73px). */
+const memberLogoBaseHeightPx = 73;
 
 export function supporterLogoHeight(image: ImageMetadata): number {
   return Math.min(image.height, supporterLogoMaxHeight);
 }
 
-export function memberLogoHeight(image: ImageMetadata): number {
-  return Math.min(image.height, memberLogoMaxHeight);
+function clamp(value: number, min: number, max: number): number {
+  return Math.min(max, Math.max(min, value));
+}
+
+/** Relative height scale so wide/tall/square logos share visual weight. */
+export function memberLogoScale(logo: LogoLink): number {
+  const { width, height } = logo.image;
+  const ratio = width / height;
+  const areaScale = Math.pow(ratio, -memberLogoAreaExponent);
+  return clamp(areaScale, memberLogoScaleMin, memberLogoScaleMax) * (logo.scale ?? 1);
+}
+
+/**
+ * Emitted `<Image height>`: twice the rendered height for sharpness, without
+ * upscaling sources that are already shorter.
+ */
+export function memberLogoRenderHeight(logo: LogoLink): number {
+  const rendered = memberLogoBaseHeightPx * memberLogoScale(logo);
+  return Math.min(logo.image.height, Math.ceil(2 * rendered));
 }

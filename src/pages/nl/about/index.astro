@@ -5,7 +5,8 @@ import Nav from '../../../components/Nav.astro';
 import Footer from '../../../components/Footer.astro';
 import SponsoringBrochure from '../../../components/SponsoringBrochure.astro';
 import {
-  memberLogoHeight,
+  memberLogoRenderHeight,
+  memberLogoScale,
   members,
   supporterLogoHeight,
   supporters,
@@ -168,21 +169,22 @@ const titleSubsection = 'font-headline text-headline-md text-on-surface';
           </p>
         </header>
 
-        <ul class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-md gap-y-md list-none p-0 m-0">
+        <ul class="flex flex-wrap items-center justify-center gap-x-md gap-y-md list-none p-0 m-0">
           {members.map((m) => (
             <li>
               <a
                 href={m.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="group flex items-center justify-center p-sm motion-safe:transition-transform motion-safe:duration-300 motion-safe:hover:-translate-y-0.5"
+                class="group flex items-center justify-center motion-safe:transition-transform motion-safe:duration-300 motion-safe:hover:-translate-y-0.5"
                 title={m.name}
               >
                 <Image
                   src={m.image}
                   alt={m.name}
-                  height={memberLogoHeight(m.image)}
-                  class="h-12 sm:h-14 max-w-full w-auto object-contain transition-opacity group-hover:opacity-85"
+                  height={memberLogoRenderHeight(m)}
+                  style={`--logo-scale:${memberLogoScale(m)}`}
+                  class="h-[calc(3.9rem*var(--logo-scale))] sm:h-[calc(4.55rem*var(--logo-scale))] w-auto object-contain transition-opacity group-hover:opacity-85"
                 />
               </a>
             </li>
