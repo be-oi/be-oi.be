@@ -15,7 +15,7 @@ import uliegeLogo from '../assets/ext-logos/uliege-logo.jpg';
 import umonsLogo from '../assets/ext-logos/umons-logo.png';
 import unamurLogo from '../assets/ext-logos/unamur-logo.png';
 import vlaamsOverheidLogo from '../assets/ext-logos/vlaams-overheid-logo.png';
-import vubLogo from '../assets/ext-logos/vub-logo.jpg';
+import vubLogo from '../assets/ext-logos/vub-logo.png';
 
 export type LogoLink = {
   name: string;
