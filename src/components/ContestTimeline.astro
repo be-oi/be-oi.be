@@ -30,15 +30,16 @@ const TIMELINE_EAGER_COUNT = 3;
   -->
   <div
     class="grid overflow-x-auto md:overflow-x-visible pb-md snap-x snap-mandatory"
-    style="grid-template-columns: minmax(5.5rem,1fr) 1.5rem minmax(5.5rem,1fr) 1.5rem minmax(5.5rem,1fr) minmax(5.5rem,1fr) minmax(5.5rem,1fr) 1.5rem minmax(5.5rem,1fr); grid-template-rows: auto auto auto;"
+    style="grid-template-columns: minmax(5.5rem,1fr) 1.5rem minmax(5.5rem,1fr) 1.5rem minmax(5.5rem,1fr) minmax(5.5rem,1fr) minmax(5.5rem,1fr) 1.5rem minmax(5.5rem,1fr); grid-template-rows: auto auto auto auto;"
   >
     {steps.map((step, index) => {
       const eager = index < TIMELINE_EAGER_COUNT;
+      const timing = step.tags.find((tag) => tag.kind === 'timing');
       return (
         <a
           href={`#${step.id}`}
           class="grid grid-rows-subgrid justify-items-center text-center snap-center min-w-0 motion-safe:transition-transform motion-safe:hover:-translate-y-1"
-          style={`grid-column: ${step.gridColumn}; grid-row: 1 / span 3;`}
+          style={`grid-column: ${step.gridColumn}; grid-row: 1 / span 4;`}
         >
           <div class="relative w-full aspect-[10/13] overflow-visible">
             <div
@@ -66,6 +67,17 @@ const TIMELINE_EAGER_COUNT = 3;
               </>
             ))}
           </p>
+          {timing ? (
+            <span
+              class="mt-1 inline-flex max-w-full items-center justify-center px-2 py-0.5 rounded-full border border-outline-variant bg-surface-container-lowest font-label text-[0.65rem] leading-tight text-on-surface break-words self-start"
+              title={timing.label}
+            >
+              <span class="sr-only">{timing.label}: </span>
+              {timing.value}
+            </span>
+          ) : (
+            <span aria-hidden="true" class="self-start" />
+          )}
         </a>
       );
     })}

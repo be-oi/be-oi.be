@@ -28,7 +28,7 @@ export const contestStepsEn: ContestStep[] = [
       'This is the former qualification round, without the programming tasks. A light-hearted first touch with computational thinking through logic puzzles — no programming, just brain power. Entirely optional: you may skip it; scores never decide who advances. Perfect for younger students and anyone curious about problem-solving.',
     tags: [
       { kind: 'duration', label: 'Duration', value: '45 min' },
-      { kind: 'timing', label: 'Timing', value: 'end-Nov' },
+      { kind: 'timing', label: 'Timing', value: '23/11 → 4/12/26' },
       { kind: 'location', label: 'Location', value: 'School / Home' },
       { kind: 'code', label: 'Code', value: 'None' },
       { kind: 'status', label: 'Status', value: 'Optional' },
@@ -73,7 +73,7 @@ export const contestStepsEn: ContestStep[] = [
       'First actual contest on basic programming challenges. This is where coding really starts to matter. A first real taste of competitive programming.',
     tags: [
       { kind: 'duration', label: 'Duration', value: '2 hours' },
-      { kind: 'timing', label: 'Timing', value: 'March' },
+      { kind: 'timing', label: 'Timing', value: '24/03/27' },
       { kind: 'location', label: 'Location', value: 'School / Regional centers' },
       { kind: 'code', label: 'Code', value: 'Blockly, Python, Java, C++' },
     ],
@@ -95,7 +95,7 @@ export const contestStepsEn: ContestStep[] = [
       'An in-person contest at regional centers across Belgium. Advanced problems test data structures, algorithms, and careful implementation under time pressure. Stand out with your problem-solving and programming skills.',
     tags: [
       { kind: 'duration', label: 'Duration', value: '3 hours' },
-      { kind: 'timing', label: 'Timing', value: 'April' },
+      { kind: 'timing', label: 'Timing', value: '14/04/27' },
       { kind: 'location', label: 'Location', value: 'Regional centers' },
       { kind: 'code', label: 'Code', value: 'Blockly, Python, Java, C++' },
     ],
@@ -117,7 +117,7 @@ export const contestStepsEn: ContestStep[] = [
       'The ultimate national contest with mid-level to very hard problems. Compete with the best Belgian competitors for the national title in your age group.',
     tags: [
       { kind: 'duration', label: 'Duration', value: '2x 3 hours' },
-      { kind: 'timing', label: 'Timing', value: 'May' },
+      { kind: 'timing', label: 'Timing', value: '29/05/27 (TBC)' },
       { kind: 'location', label: 'Location', value: 'National venue' },
       { kind: 'code', label: 'Code', value: 'Python, C++' },
     ],
@@ -138,7 +138,6 @@ export const contestStepsEn: ContestStep[] = [
     description:
       'Top contestants, based on several contests and training over several years, may be selected to represent Belgium at international olympiads such as WEOI, EJOI, EGOI, and IOI.',
     tags: [
-      { kind: 'timing', label: 'Timing', value: 'Around summer' },
       { kind: 'location', label: 'Location', value: 'Around the world' },
       { kind: 'code', label: 'Code', value: 'C++' },
     ],

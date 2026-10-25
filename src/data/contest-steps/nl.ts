@@ -28,7 +28,7 @@ export const contestStepsNl: ContestStep[] = [
       'Dit is de voormalige kwalificatieronde, zonder programmeeropgaven. Een luchtige eerste kennismaking met computationeel denken via logica-raadsels — geen programmeren, enkel hersenkracht. Volledig optioneel: je mag deze ronde overslaan; scores bepalen nooit wie doorgaat. Ideaal voor jongere leerlingen en iedereen die nieuwsgierig is naar probleemoplossen.',
     tags: [
       { kind: 'duration', label: 'Duur', value: '45 min' },
-      { kind: 'timing', label: 'Timing', value: 'eind nov.' },
+      { kind: 'timing', label: 'Timing', value: '23/11 → 4/12/26' },
       { kind: 'location', label: 'Locatie', value: 'School / thuis' },
       { kind: 'code', label: 'Code', value: 'Geen' },
       { kind: 'status', label: 'Status', value: 'Optioneel' },
@@ -73,7 +73,7 @@ export const contestStepsNl: ContestStep[] = [
       'Eerste echte wedstrijd met basis programmeeropgaven. Hier begint programmeren echt te tellen. Een eerste echte kennismaking met competitive programming.',
     tags: [
       { kind: 'duration', label: 'Duur', value: '2 uur' },
-      { kind: 'timing', label: 'Timing', value: 'maart' },
+      { kind: 'timing', label: 'Timing', value: '24/03/27' },
       { kind: 'location', label: 'Locatie', value: 'School / regionale centra' },
       { kind: 'code', label: 'Code', value: 'Blockly, Python, Java, C++' },
     ],
@@ -95,7 +95,7 @@ export const contestStepsNl: ContestStep[] = [
       'Een wedstrijd op locatie in regionale centra door heel België. Moeilijkere opgaven testen datastructuren, algoritmen en zorgvuldige implementatie onder tijdsdruk. Val op met jouw probleemoplossend en programmeervaardigheden.',
     tags: [
       { kind: 'duration', label: 'Duur', value: '3 uur' },
-      { kind: 'timing', label: 'Timing', value: 'april' },
+      { kind: 'timing', label: 'Timing', value: '14/04/27' },
       { kind: 'location', label: 'Locatie', value: 'Regionale centra' },
       { kind: 'code', label: 'Code', value: 'Blockly, Python, Java, C++' },
     ],
@@ -117,7 +117,7 @@ export const contestStepsNl: ContestStep[] = [
       'De ultieme nationale wedstrijd met opgaven van gemiddeld tot zeer moeilijk niveau. Concurreer met de beste Belgische deelnemers om de nationale titel in jouw leeftijdscategorie.',
     tags: [
       { kind: 'duration', label: 'Duur', value: '2× 3 uur' },
-      { kind: 'timing', label: 'Timing', value: 'mei' },
+      { kind: 'timing', label: 'Timing', value: '29/05/27 (TBC)' },
       { kind: 'location', label: 'Locatie', value: 'Nationale locatie' },
       { kind: 'code', label: 'Code', value: 'Python, C++' },
     ],
@@ -138,7 +138,6 @@ export const contestStepsNl: ContestStep[] = [
     description:
       'Topdeelnemers kunnen, op basis van meerdere wedstrijden en training over meerdere jaren, geselecteerd worden om België te vertegenwoordigen op internationale olympiades zoals WEOI, EJOI, EGOI en IOI.',
     tags: [
-      { kind: 'timing', label: 'Timing', value: 'Zomerperiode' },
       { kind: 'location', label: 'Locatie', value: 'Overal ter wereld' },
       { kind: 'code', label: 'Code', value: 'C++' },
     ],

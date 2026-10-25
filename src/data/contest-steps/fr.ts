@@ -28,7 +28,7 @@ export const contestStepsFr: ContestStep[] = [
       'Il s’agit de l’ancienne épreuve de qualification, sans les tâches de programmation. Une première approche ludique de la pensée computationnelle à travers des énigmes logiques — pas de programmation, juste la réflexion. Entièrement facultatif\u00A0: vous pouvez la passer ; les scores ne déterminent jamais qui passe à l’étape suivante. Idéal pour les plus jeunes et toute personne curieuse de la résolution de problèmes.',
     tags: [
       { kind: 'duration', label: 'Durée', value: '45 min' },
-      { kind: 'timing', label: 'Calendrier', value: 'fin nov.' },
+      { kind: 'timing', label: 'Calendrier', value: '23/11 → 4/12/26' },
       { kind: 'location', label: 'Lieu', value: 'École / domicile' },
       { kind: 'code', label: 'Code', value: 'Aucun' },
       { kind: 'status', label: 'Statut', value: 'Facultatif' },
@@ -73,7 +73,7 @@ export const contestStepsFr: ContestStep[] = [
       'Premier vrai concours sur des défis de programmation de base. C’est ici que le code commence vraiment à compter. Une première véritable découverte de la programmation compétitive.',
     tags: [
       { kind: 'duration', label: 'Durée', value: '2 h' },
-      { kind: 'timing', label: 'Calendrier', value: 'mars' },
+      { kind: 'timing', label: 'Calendrier', value: '24/03/27' },
       { kind: 'location', label: 'Lieu', value: 'École / centres régionaux' },
       { kind: 'code', label: 'Code', value: 'Blockly, Python, Java, C++' },
     ],
@@ -95,7 +95,7 @@ export const contestStepsFr: ContestStep[] = [
       'Un concours sur place dans des centres régionaux à travers la Belgique. Des problèmes avancés testent les structures de données, les algorithmes et une implémentation soignée sous pression. Distinguez-vous par vos compétences en résolution de problèmes et en programmation.',
     tags: [
       { kind: 'duration', label: 'Durée', value: '3 h' },
-      { kind: 'timing', label: 'Calendrier', value: 'avril' },
+      { kind: 'timing', label: 'Calendrier', value: '14/04/27' },
       { kind: 'location', label: 'Lieu', value: 'Centres régionaux' },
       { kind: 'code', label: 'Code', value: 'Blockly, Python, Java, C++' },
     ],
@@ -117,7 +117,7 @@ export const contestStepsFr: ContestStep[] = [
       'Le concours national ultime avec des problèmes de niveau intermédiaire à très difficile. Affrontez les meilleurs concurrents belges pour le titre national dans votre catégorie d’âge.',
     tags: [
       { kind: 'duration', label: 'Durée', value: '2× 3 h' },
-      { kind: 'timing', label: 'Calendrier', value: 'mai' },
+      { kind: 'timing', label: 'Calendrier', value: '29/05/27 (TBC)' },
       { kind: 'location', label: 'Lieu', value: 'Lieu national' },
       { kind: 'code', label: 'Code', value: 'Python, C++' },
     ],
@@ -138,7 +138,6 @@ export const contestStepsFr: ContestStep[] = [
     description:
       'Les meilleurs participants, sur base de plusieurs concours et d’une formation sur plusieurs années, peuvent être sélectionnés pour représenter la Belgique lors d’olympiades internationales telles que WEOI, EJOI, EGOI et IOI.',
     tags: [
-      { kind: 'timing', label: 'Calendrier', value: 'Période estivale' },
       { kind: 'location', label: 'Lieu', value: 'Partout dans le monde' },
       { kind: 'code', label: 'Code', value: 'C++' },
     ],
