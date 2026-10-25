@@ -7,7 +7,6 @@ import kuleuvenCwLogo from '../assets/ext-logos/kuleuven-cw-logo.png';
 import thomasmoreLogo from '../assets/ext-logos/thomasmore-logo.svg';
 import uaLogo from '../assets/ext-logos/ua-logo.jpg';
 import uclouvainLogo from '../assets/ext-logos/uclouvain-logo.png';
-import ugentFacwetLogo from '../assets/ext-logos/ugent-facwet.png';
 import ugentLogo from '../assets/ext-logos/ugent-logo.jpg';
 import uhasseltLogo from '../assets/ext-logos/uhasselt-logo.png';
 import ulbLogo from '../assets/ext-logos/ulb-logo.png';
@@ -55,11 +54,6 @@ export const members: LogoLink[] = [
     image: kuleuvenCwLogo,
   },
   { name: 'UMons', href: 'https://web.umons.ac.be/', image: umonsLogo },
-  {
-    name: 'UGent Faculteit Wetenschappen',
-    href: 'https://www.ugent.be/we/',
-    image: ugentFacwetLogo,
-  },
   { name: 'HELMo', href: 'https://www.helmo.be/', image: helmoLogo },
   { name: 'Thomas More', href: 'https://www.thomasmore.be/', image: thomasmoreLogo },
   { name: 'HE2B-ESI', href: 'https://www.heb.be/esi/', image: hebEsiLogo },
