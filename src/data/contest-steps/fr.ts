@@ -117,7 +117,7 @@ export const contestStepsFr: ContestStep[] = [
       'Le concours national ultime avec des problèmes de niveau intermédiaire à très difficile. Affrontez les meilleurs concurrents belges pour le titre national dans votre catégorie d’âge.',
     tags: [
       { kind: 'duration', label: 'Durée', value: '2× 3 h' },
-      { kind: 'timing', label: 'Calendrier', value: '29/05/27 (TBC)' },
+      { kind: 'timing', label: 'Calendrier', value: '29/05/27' },
       { kind: 'location', label: 'Lieu', value: 'Lieu national' },
       { kind: 'code', label: 'Code', value: 'Python, C++' },
     ],

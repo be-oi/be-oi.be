@@ -117,7 +117,7 @@ export const contestStepsDe: ContestStep[] = [
       'Der ultimative nationale Wettbewerb mit mittelschweren bis sehr schweren Aufgaben. Miss dich mit den besten belgischen Teilnehmenden um den nationalen Titel in deiner Altersgruppe.',
     tags: [
       { kind: 'duration', label: 'Dauer', value: '2× 3 Stunden' },
-      { kind: 'timing', label: 'Zeitpunkt', value: '29/05/27 (TBC)' },
+      { kind: 'timing', label: 'Zeitpunkt', value: '29/05/27' },
       { kind: 'location', label: 'Ort', value: 'Nationaler Austragungsort' },
       { kind: 'code', label: 'Code', value: 'Python, C++' },
     ],

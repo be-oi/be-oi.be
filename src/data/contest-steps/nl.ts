@@ -117,7 +117,7 @@ export const contestStepsNl: ContestStep[] = [
       'De ultieme nationale wedstrijd met opgaven van gemiddeld tot zeer moeilijk niveau. Concurreer met de beste Belgische deelnemers om de nationale titel in jouw leeftijdscategorie.',
     tags: [
       { kind: 'duration', label: 'Duur', value: '2× 3 uur' },
-      { kind: 'timing', label: 'Timing', value: '29/05/27 (TBC)' },
+      { kind: 'timing', label: 'Timing', value: '29/05/27' },
       { kind: 'location', label: 'Locatie', value: 'Nationale locatie' },
       { kind: 'code', label: 'Code', value: 'Python, C++' },
     ],
