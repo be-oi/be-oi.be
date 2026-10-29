@@ -73,7 +73,7 @@ export const contestStepsDe: ContestStep[] = [
       'Erster echter Wettbewerb mit grundlegenden Programmieraufgaben. Hier beginnt Programmieren wirklich zu zählen. Ein erster echter Vorgeschmack auf Wettbewerbsprogrammieren.',
     tags: [
       { kind: 'duration', label: 'Dauer', value: '2 Stunden' },
-      { kind: 'timing', label: 'Zeitpunkt', value: '24/03/27' },
+      { kind: 'timing', label: 'Zeitpunkt', value: '17/03 oder 24/03/27' },
       { kind: 'location', label: 'Ort', value: 'Schule / regionale Zentren' },
       { kind: 'code', label: 'Code', value: 'Blockly, Python, Java, C++' },
     ],

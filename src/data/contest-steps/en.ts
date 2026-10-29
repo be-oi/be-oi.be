@@ -73,7 +73,7 @@ export const contestStepsEn: ContestStep[] = [
       'First actual contest on basic programming challenges. This is where coding really starts to matter. A first real taste of competitive programming.',
     tags: [
       { kind: 'duration', label: 'Duration', value: '2 hours' },
-      { kind: 'timing', label: 'Timing', value: '24/03/27' },
+      { kind: 'timing', label: 'Timing', value: '17/03 or 24/03/27' },
       { kind: 'location', label: 'Location', value: 'School / Regional centers' },
       { kind: 'code', label: 'Code', value: 'Blockly, Python, Java, C++' },
     ],

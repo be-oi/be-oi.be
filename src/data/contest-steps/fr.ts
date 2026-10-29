@@ -73,7 +73,7 @@ export const contestStepsFr: ContestStep[] = [
       'Premier vrai concours sur des défis de programmation de base. C’est ici que le code commence vraiment à compter. Une première véritable découverte de la programmation compétitive.',
     tags: [
       { kind: 'duration', label: 'Durée', value: '2 h' },
-      { kind: 'timing', label: 'Calendrier', value: '24/03/27' },
+      { kind: 'timing', label: 'Calendrier', value: '17/03 ou 24/03/27' },
       { kind: 'location', label: 'Lieu', value: 'École / centres régionaux' },
       { kind: 'code', label: 'Code', value: 'Blockly, Python, Java, C++' },
     ],

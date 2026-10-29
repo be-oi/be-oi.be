@@ -73,7 +73,7 @@ export const contestStepsNl: ContestStep[] = [
       'Eerste echte wedstrijd met basis programmeeropgaven. Hier begint programmeren echt te tellen. Een eerste echte kennismaking met competitive programming.',
     tags: [
       { kind: 'duration', label: 'Duur', value: '2 uur' },
-      { kind: 'timing', label: 'Timing', value: '24/03/27' },
+      { kind: 'timing', label: 'Timing', value: '17/03 of 24/03/27' },
       { kind: 'location', label: 'Locatie', value: 'School / regionale centra' },
       { kind: 'code', label: 'Code', value: 'Blockly, Python, Java, C++' },
     ],
