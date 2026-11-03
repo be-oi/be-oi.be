@@ -121,8 +121,8 @@ const navByLocale: Record<Locale, NavStrings> = {
 const mailingListByLocale: Record<Locale, MailingListStrings> = {
   en: {
     sectionAria: 'Mailing list signup',
-    heading: 'Stay informed about the next olympiad',
-    intro: 'Get news about beOI by email.',
+    heading: 'Get news about beOI by email',
+    intro: 'One or two emails a year — mainly to let you know when registration opens.',
     emailLabel: 'Email address',
     emailPlaceholder: 'Email address',
     submit: 'Keep me informed',
@@ -143,8 +143,8 @@ const mailingListByLocale: Record<Locale, MailingListStrings> = {
   },
   fr: {
     sectionAria: 'Inscription à la liste de diffusion',
-    heading: 'Restez informé de la prochaine olympiade',
-    intro: 'Recevez des actualités sur beOI par e-mail.',
+    heading: 'Recevez des actualités sur beOI par e-mail',
+    intro: 'Un ou deux e-mails par an — surtout pour vous prévenir de l’ouverture des inscriptions.',
     emailLabel: 'Adresse e-mail',
     emailPlaceholder: 'Adresse e-mail',
     submit: 'Tenez-moi informé',
@@ -166,8 +166,8 @@ const mailingListByLocale: Record<Locale, MailingListStrings> = {
   },
   nl: {
     sectionAria: 'Aanmelding mailinglijst',
-    heading: 'Blijf op de hoogte van de volgende olympiade',
-    intro: 'Ontvang nieuws over beOI per e-mail.',
+    heading: 'Ontvang nieuws over beOI per e-mail',
+    intro: 'Eén of twee e-mails per jaar — vooral om je te laten weten wanneer de inschrijvingen openen.',
     emailLabel: 'E-mailadres',
     emailPlaceholder: 'E-mailadres',
     submit: 'Houd mij op de hoogte',
@@ -189,8 +189,8 @@ const mailingListByLocale: Record<Locale, MailingListStrings> = {
   },
   de: {
     sectionAria: 'Anmeldung zur Mailingliste',
-    heading: 'Bleib über die nächste Olympiade informiert',
-    intro: 'Erhalte Neuigkeiten über beOI per E-Mail.',
+    heading: 'Erhalte Neuigkeiten über beOI per E-Mail',
+    intro: 'Ein oder zwei E-Mails pro Jahr — vor allem, um dich zu informieren, wenn die Anmeldung öffnet.',
     emailLabel: 'E-Mail-Adresse',
     emailPlaceholder: 'E-Mail-Adresse',
     submit: 'Halte mich auf dem Laufenden',

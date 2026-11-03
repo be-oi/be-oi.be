@@ -17,24 +17,26 @@ const primaryLinkClass =
   'inline-flex items-center justify-center min-h-11 font-label text-label-md tracking-wide px-8 py-2.5 rounded-full bg-primary text-on-primary border-2 border-primary no-underline motion-safe:transition-colors hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary';
 ---
 <section
-  class="my-xl text-center"
+  class="relative bg-surface-container-lowest border-y-2 border-outline-variant/30 py-xl px-margin mb-xl text-center"
   aria-label={strings.sectionAria}
   data-registration-window
 >
-  <div data-registration-open class="w-full">
-    <a href={contestPlatformUrl} class={primaryLinkClass}>
-      {openLabel}
-    </a>
-    {/* Avoid max-w-xl: in this theme it maps to --spacing-xl (80px), not a reading width. */}
-    <p class="mt-sm mb-0 w-full text-body-md font-body text-on-surface-variant">
-      {strings.openSupport}
+  <div class="max-w-7xl mx-auto">
+    <div data-registration-open class="w-full">
+      <a href={contestPlatformUrl} class={primaryLinkClass}>
+        {openLabel}
+      </a>
+      {/* Avoid max-w-xl: in this theme it maps to --spacing-xl (80px), not a reading width. */}
+      <p class="mt-sm mb-0 w-full text-body-md font-body text-on-surface-variant">
+        {strings.openSupport}
+      </p>
+    </div>
+    <p
+      data-registration-closed
+      hidden
+      class="text-body-lg font-body text-on-surface max-w-2xl mx-auto m-0"
+    >
+      {closedStatement}
     </p>
   </div>
-  <p
-    data-registration-closed
-    hidden
-    class="text-body-lg font-body text-on-surface max-w-2xl mx-auto m-0"
-  >
-    {closedStatement}
-  </p>
 </section>
