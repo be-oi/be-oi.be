@@ -343,7 +343,7 @@ const contestRegistrationByLocale: Record<Locale, ContestRegistrationStrings> = 
   },
   fr: {
     sectionAria: 'Inscription au concours',
-    openLabel: 'S’inscrire à beOI {edition}',
+    openLabel: 'S’inscrire à la beOI {edition}',
     openSupport: 'Épreuve logique et Qualifications — à l’école ou à domicile.',
     closedStatement: 'Les inscriptions sont closes. Les Qualifications se sont terminées le {endDate}.',
   },
