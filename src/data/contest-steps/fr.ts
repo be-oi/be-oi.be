@@ -50,7 +50,7 @@ export const contestStepsFr: ContestStep[] = [
     description:
       'Trois épreuves en ligne indépendantes que vous pouvez passer quand vous le souhaitez, une par mois. Chacune vérifie simplement les notions de base pour votre catégorie d’âge — des connaissances dont vous aurez besoin aux étapes suivantes. Réussir une seule épreuve suffit pour se qualifier. Profitez de chaque épreuve pour apprendre. Il n’y a pas de classement\u00A0: il faut atteindre un score cible pour avancer.',
     tags: [
-      { kind: 'duration', label: 'Durée', value: 'À venir' },
+      { kind: 'duration', label: 'Durée', value: '40 min' },
       { kind: 'timing', label: 'Calendrier', value: 'déc, janv, fév' },
       { kind: 'location', label: 'Lieu', value: 'École ou domicile' },
       { kind: 'code', label: 'Code', value: 'Blockly, Python' },

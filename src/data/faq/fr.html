@@ -103,12 +103,29 @@
 
   <details>
     <summary>Mes élèves doivent-ils s'inscrire sur votre site&nbsp;?</summary>
-    <p>Non. L'inscription des élèves est faite par l'école. Plus de détails suivront.</p>
+    <div data-registration-window>
+      <p data-registration-open>
+        Non. Pas sur ce site. L'école inscrit ses élèves sur la
+        <a href="{{contestPlatformUrl}}">plateforme de concours</a>.
+        Pour un participant à domicile, un parent ou un tuteur l'inscrit sur cette même plateforme.
+      </p>
+      <p data-registration-closed hidden>
+        Les inscriptions sont closes. Les Qualifications se sont terminées le {{registrationEndDate}}.
+      </p>
+    </div>
   </details>
 
   <details>
     <summary>Comment inscrire mon école&nbsp;?</summary>
-    <p>Plus de détails suivront.</p>
+    <div data-registration-window>
+      <p data-registration-open>
+        Sur la <a href="{{contestPlatformUrl}}">plateforme de concours</a>.
+        Une seule inscription couvre vos élèves pour l'épreuve logique et les Qualifications.
+      </p>
+      <p data-registration-closed hidden>
+        Les inscriptions sont closes. Les Qualifications se sont terminées le {{registrationEndDate}}.
+      </p>
+    </div>
   </details>
 
   <details>

@@ -25,6 +25,7 @@ Do **not** introduce a server runtime, SSR adapters, or a CMS unless explicitly 
 npm install          # install dependencies
 npm run dev          # local dev server (http://localhost:4321)
 npm run check        # Astro + TypeScript diagnostics
+npm test             # Node built-in test runner (src/**/*.test.ts)
 npm run build        # write static output to dist/
 npm run preview      # preview dist/ locally
 ```
@@ -98,3 +99,17 @@ aws cloudfront create-invalidation --distribution-id E1HFWB6I0WMJ8D --paths "/*"
 
 - Porting content from the legacy Middleman site (`beoi.be-oi.be`) unless asked.
 - Styling frameworks, analytics, or contest-state logic unless requested.
+
+## Agent skills
+
+### Issue tracker
+
+Issues and specs live as markdown files in `.scratch/`. See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+Five roles: `needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`. See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Single-context: one root `GLOSSARY.md` and `docs/adr/`. See `docs/agents/domain.md`.

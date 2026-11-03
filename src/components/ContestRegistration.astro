@@ -1,0 +1,40 @@
+---
+import { getRegistrationWindow } from '../data/registration-window';
+import { contestRegistrationStrings, resolveLocale } from '../data/ui-i18n';
+
+interface Props {
+  lang: string;
+}
+
+const { lang } = Astro.props;
+const locale = resolveLocale(lang);
+const { contestPlatformUrl, editionLabel, endDateLabel } = getRegistrationWindow(locale);
+const strings = contestRegistrationStrings(lang);
+const openLabel = strings.openLabel.replace('{edition}', editionLabel);
+const closedStatement = strings.closedStatement.replace('{endDate}', endDateLabel);
+
+const primaryLinkClass =
+  'inline-flex items-center justify-center min-h-11 font-label text-label-md tracking-wide px-8 py-2.5 rounded-full bg-primary text-on-primary border-2 border-primary no-underline motion-safe:transition-colors hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary';
+---
+<section
+  class="my-xl text-center"
+  aria-label={strings.sectionAria}
+  data-registration-window
+>
+  <div data-registration-open class="w-full">
+    <a href={contestPlatformUrl} class={primaryLinkClass}>
+      {openLabel}
+    </a>
+    {/* Avoid max-w-xl: in this theme it maps to --spacing-xl (80px), not a reading width. */}
+    <p class="mt-sm mb-0 w-full text-body-md font-body text-on-surface-variant">
+      {strings.openSupport}
+    </p>
+  </div>
+  <p
+    data-registration-closed
+    hidden
+    class="text-body-lg font-body text-on-surface max-w-2xl mx-auto m-0"
+  >
+    {closedStatement}
+  </p>
+</section>

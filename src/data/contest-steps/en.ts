@@ -50,7 +50,7 @@ export const contestStepsEn: ContestStep[] = [
     description:
       'Three independent online rounds you can take whenever you want, one per month. Each one simply checks basic concepts for your age group — knowledge you will need in the next stages. Passing a single round is enough to qualify. Use every round as a chance to learn. There is no ranking: you need a target score to advance.',
     tags: [
-      { kind: 'duration', label: 'Duration', value: 'Coming soon' },
+      { kind: 'duration', label: 'Duration', value: '40 min' },
       { kind: 'timing', label: 'Timing', value: 'Dec, Jan, Feb' },
       { kind: 'location', label: 'Location', value: 'School or Home' },
       { kind: 'code', label: 'Code', value: 'Blockly, Python' },

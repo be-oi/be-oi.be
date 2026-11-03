@@ -8,6 +8,7 @@ import {
   xDefaultLocale,
 } from '../data/i18n';
 import { skipToContentLabel } from '../data/ui-i18n';
+import RegistrationWindowGate from '../components/RegistrationWindowGate.astro';
 /* Critical fonts: discover early so they are not blocked on CSS parse. */
 import fontBody400 from '@fontsource/be-vietnam-pro/files/be-vietnam-pro-latin-400-normal.woff2?url';
 import fontHeadline700 from '@fontsource/plus-jakarta-sans/files/plus-jakarta-sans-latin-700-normal.woff2?url';
@@ -107,5 +108,6 @@ const xDefaultHref = isLanguagePicker
   <body class="bg-background text-on-background font-body text-body-md craft-paper overflow-x-hidden">
     <a class="skip-link" href="#main">{skipLabel}</a>
     <slot />
+    <RegistrationWindowGate />
   </body>
 </html>
