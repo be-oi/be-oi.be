@@ -21,18 +21,19 @@ const primaryLinkClass =
   aria-label={strings.sectionAria}
   data-registration-window
 >
-  <div data-registration-open>
+  <div data-registration-open class="w-full">
     <a href={contestPlatformUrl} class={primaryLinkClass}>
       {openLabel}
     </a>
-    <p class="mt-sm mb-0 text-body-md font-body text-on-surface-variant max-w-xl mx-auto text-pretty">
+    {/* Avoid max-w-xl: in this theme it maps to --spacing-xl (80px), not a reading width. */}
+    <p class="mt-sm mb-0 w-full text-body-md font-body text-on-surface-variant">
       {strings.openSupport}
     </p>
   </div>
   <p
     data-registration-closed
     hidden
-    class="text-body-lg font-body text-on-surface max-w-2xl mx-auto text-pretty m-0"
+    class="text-body-lg font-body text-on-surface max-w-2xl mx-auto m-0"
   >
     {closedStatement}
   </p>
