@@ -102,12 +102,29 @@
 
   <details>
     <summary>Do my pupils need to register on your website?</summary>
-    <p>No. Pupils are registered by the school. More details will follow.</p>
+    <div data-registration-window>
+      <p data-registration-open>
+        No. Not on this website. The school registers its pupils on the
+        <a href="{{contestPlatformUrl}}">contest platform</a>.
+        For a participant taking part from home, a parent or guardian registers them on that same platform.
+      </p>
+      <p data-registration-closed hidden>
+        Registration is closed. The Qualification Rounds ended on {{registrationEndDate}}.
+      </p>
+    </div>
   </details>
 
   <details>
     <summary>How do I register my school?</summary>
-    <p>More details will follow.</p>
+    <div data-registration-window>
+      <p data-registration-open>
+        On the <a href="{{contestPlatformUrl}}">contest platform</a>.
+        One registration covers your pupils for the Brain Teaser Round and the Qualification Rounds.
+      </p>
+      <p data-registration-closed hidden>
+        Registration is closed. The Qualification Rounds ended on {{registrationEndDate}}.
+      </p>
+    </div>
   </details>
 
   <details>

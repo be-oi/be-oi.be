@@ -1,4 +1,5 @@
 import type { Locale } from '../i18n';
+import { expandRegistrationTokens } from '../registration-window';
 import de from './de.html?raw';
 import en from './en.html?raw';
 import fr from './fr.html?raw';
@@ -45,5 +46,5 @@ export function expandFaqTokens(html: string, now = new Date()): string {
 }
 
 export function getFaqHtml(locale: Locale, now = new Date()): string {
-  return expandFaqTokens(faqHtmlByLocale[locale], now);
+  return expandRegistrationTokens(expandFaqTokens(faqHtmlByLocale[locale], now), locale);
 }

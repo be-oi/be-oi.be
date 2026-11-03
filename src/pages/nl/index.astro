@@ -6,6 +6,7 @@ import ContestTimeline from '../../components/ContestTimeline.astro';
 import StepSection from '../../components/StepSection.astro';
 import ContestPoster from '../../components/ContestPoster.astro';
 import MailingListForm from '../../components/MailingListForm.astro';
+import ContestRegistration from '../../components/ContestRegistration.astro';
 import { getContestSteps } from '../../data/contest-steps';
 
 const contestSteps = getContestSteps('nl');
@@ -38,6 +39,8 @@ const contestSteps = getContestSteps('nl');
       </section>
 
       <ContestTimeline steps={contestSteps} ariaLabel="Tijdlijn van het wedstrijdtraject" />
+
+      <ContestRegistration lang="nl" />
 
       <MailingListForm lang="nl" />
     </div>
